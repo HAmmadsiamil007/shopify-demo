@@ -1,5 +1,10 @@
 # PHANTOM Task 03 — Design Activation Walkthrough Implementation Plan
 
+> **EXECUTED 2026-08-16 (commits `a5da4ab..40c3952`, pushed to `shopify-demo`).**
+> **Post-execution correction pass:** `docs/superpowers/corrections/2026-08-16-phantom-task03-correction-pass.md`
+> (scope audit in `build.mjs`, import-map cleanup, section metadata, source placeholders, contract updates).
+> Task 03 proves activation with a temporary toggle; Task 04 converts it into the modular AETHER section system.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Prove the Task 01 blueprint's external-design activation pipeline end-to-end with a fictional `demo` design ("Aurora Studio"), with zero visual change on the default theme.

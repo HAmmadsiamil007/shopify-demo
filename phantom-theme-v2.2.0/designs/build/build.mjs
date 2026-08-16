@@ -17,6 +17,7 @@ import { PurgeCSS } from 'purgecss'
 import { promises as fs } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { auditScope, stripDeadRootRules } from './audit-scope.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const DESIGNS_ROOT = path.resolve(__dirname, '..')
@@ -90,7 +91,15 @@ async function main() {
     }
   })
 
-  const css = purged[0].css
+  const css = stripDeadRootRules(purged[0].css)
+
+  const scopeIssues = auditScope(css)
+  if (scopeIssues.length) {
+    console.error(`[client-build] SCOPE AUDIT FAILED — ${scopeIssues.length} unscoped selector(s):`)
+    for (const s of scopeIssues.slice(0, 20)) console.error(`  - ${s}`)
+    process.exit(1)
+  }
+
   const prev = await fs.readFile(outFile, 'utf8').catch(() => '')
   const growth = prev ? (css.length - prev.length) / prev.length : 0
 

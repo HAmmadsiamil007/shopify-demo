@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="750" viewBox="0 0 600 750" role="img" aria-labelledby="t">
+  <title id="t">Linen throw — Aurora Studio placeholder</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e5dfd4"/>
+      <stop offset="0.5" stop-color="#f4efe6"/>
+      <stop offset="1" stop-color="#cddacf"/>
+    </linearGradient>
+    <linearGradient id="fabric" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0" stop-color="#d9cbb4"/>
+      <stop offset="1" stop-color="#b7a88e"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="750" fill="url(#bg)"/>
+  <path d="M150 260 Q300 180 450 260 L470 620 Q300 700 130 620 Z" fill="url(#fabric)" opacity="0.92"/>
+  <path d="M160 300 Q300 226 440 300" fill="none" stroke="#c4b394" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+  <path d="M140 380 Q300 306 460 380" fill="none" stroke="#c4b394" stroke-width="6" stroke-linecap="round" opacity="0.55"/>
+  <path d="M135 460 Q300 386 465 460" fill="none" stroke="#c4b394" stroke-width="6" stroke-linecap="round" opacity="0.4"/>
+</svg>

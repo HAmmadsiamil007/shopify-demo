@@ -21,16 +21,16 @@ Every client design renders inside exactly one scope root:
 
 ### 1.2 Authoring rules (hard rules, linted)
 
-| Rule | Applies to |
-|---|---|
-| All client CSS selectors prefixed with `.ph-client` (or nested under it in source) | CSS |
-| Never write `:root`, `body`, `html`, or bare element selectors | CSS |
-| Never set `!important` outside component-specific state overrides | CSS |
-| Never exceed z-index 10000 (PHANTOM ceiling is 10001) | CSS |
-| Raw Bootstrap classes never appear unscoped in the theme | CSS/build |
-| Never re-bundle AOS, Flickity, PhotoSwipe (already in `phantom-vendor.js`) | build |
-| All JS hooks use `data-ph-*` attributes inside the scope | JS |
-| Client JS never attaches global listeners without cleanup | JS |
+**Two layers, two rule sets.** The frozen design source and the production client CSS are different artifacts with different rules:
+
+| Layer | File | May use | Must not use |
+|---|---|---|---|
+| **Design source** (design-time) | `designs/{slug}/source/*.html` | `:root`, `body`, bare element selectors, any CSS the designer wants | nothing — it is a static mockup, never shipped |
+| **Production client CSS** (shipped) | `assets/client-{slug}.css.liquid` | `.ph-client--{slug}` selectors, `html.js .ph-client--{slug}` reveal guards, scoped `@media` | `:root`, `body`, `html`, bare element selectors, unscoped Bootstrap classes, `!important` outside component state, z-index > 10000 |
+
+The build pipeline (contract §1.7) is the transformation between the two: it must **remove or scope every
+design-time global** so the shipped artifact contains no global selectors. `designs/build/audit-scope.mjs`
+enforces this automatically on every build (`node build.mjs --slug {slug}` fails on unscoped selectors).
 
 ### 1.3 Token bridge
 
@@ -71,10 +71,27 @@ Because the scope owns its responsive behavior, the two scales never interact. R
 
 Bootstrap is a design-time tool only. Production ships `client-{slug}.css` built by `designs/build/build.mjs`:
 
-1. Sass-compile **only the Bootstrap modules used** by the design (module list in `designs/build/scss/client.scss`).
-2. **Namespace every selector** under `.ph-client` (compile with the scope wrapper).
-3. **Purge** unused CSS against `source/**/*.html` (PurgeCSS).
-4. Minify + output to `production/client-{slug}.css`, which becomes `assets/client-{slug}.css.liquid`.
+1. Sass-compile **only the Bootstrap modules used** by the design (module list in `designs/build/scss/client.scss`), nested inside the scope wrapper.
+2. **Scope-audit every emitted selector** (`designs/build/audit-scope.mjs`): each selector must reference `.ph-client--{slug}`; `@media`/`@supports` bodies are recursed, `@keyframes` bodies skipped. Build fails on any unscoped selector.
+3. **Strip dead rules** the wrapper cannot express (Bootstrap's `:root { --bs-* }` nested under the scope can never match and is removed).
+4. **Purge** unused CSS against `source/**/*.html` (PurgeCSS).
+5. Output to `production/client-{slug}.css`, which becomes `assets/client-{slug}.css.liquid`.
+
+The nested-`@import` strategy is **proven for the Task 03 demo subset only** (containers/grid/buttons/utilities).
+A design that needs more of Bootstrap (modals, offcanvas, carousels, forms) must either (a) verify the
+audit still passes and extend `audit-scope.mjs` if the emitted selectors escape the wrapper, or (b) switch
+to the compile-then-scope postprocessor pattern (compile Bootstrap unscoped, then prefix every selector —
+documented evolution for Task 04+; not required for v1).
+
+### 1.8 Default-path regression definition
+
+"Default theme renders exactly as today" is defined as **no regression** — not byte-identical HTML:
+
+- No visual change, no functional change, no asset-loading change, no CSS/JS change, no performance change
+  when the design toggle is `none` or the design files are absent.
+- `layout/theme.liquid` / `snippets/theme-import-map.liquid` diffs must be additive-only or conditional-only.
+- `templates/index.json` and all global CSS/JS assets must be untouched by client-design work.
+- Byte-level HTML differences (whitespace, settings defaults) are acceptable and expected.
 
 ---
 
@@ -118,7 +135,11 @@ class ClientDesign {
 ### 2.4 Module placement
 
 - Template shell: `designs/_template/js/client-design.js`.
-- On activation: copy to `assets/client-{slug}.js` and register in `snippets/theme-import-map.liquid` (matches the existing `ui-*` ES-module precedent).
+- On activation: copy to `assets/client-{slug}.js` and load directly from `layout/theme.liquid`:
+  `<script type="module" src="{{ 'client-' | append: slug | append: '.js' | asset_url }}">`.
+- **Import-map registration is NOT required** for a standalone module that imports nothing (Task 03 demo).
+  Add a `client-{slug}` entry to `snippets/theme-import-map.liquid` only when the module (or a Task 04+
+  AETHER section module) actually imports a shared `ui-*`/`theme-*` module through the map.
 - One global registry entry: `window.ClientDesign`.
 
 ---

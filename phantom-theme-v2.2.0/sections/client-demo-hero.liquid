@@ -4,7 +4,7 @@ Renders the demo design hero (Aurora Studio) — client-demo activation walkthro
 {% section 'client-demo-hero' %}
 {% endcomment %}
 
-<div class="ph-client__hero" data-section-type="client-demo-hero" data-section-id="{{ section.id }}">
+<div class="ph-client__hero" data-ph-section="demo" data-ph-component="hero" data-section-type="client-demo-hero" data-section-id="{{ section.id }}">
   <div class="container">
     <p class="ph-client__hero-eyebrow">{{ section.settings.title }}</p>
     {%- if section.settings.image != blank -%}

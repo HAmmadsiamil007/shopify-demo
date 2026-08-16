@@ -10,6 +10,11 @@
  *
  * Zero visual change: this file is only loaded when ph_active_design = demo.
  * No vendor libraries (demo); the vendor-{slug} slot stays documented.
+ *
+ * Lifecycle scope note: Task 03 proves the init/destroy/refresh contract with
+ * a native IntersectionObserver implementation only. Vendor-library lifecycle
+ * integration (GSAP/Swiper/Lenis/Three) is exercised in Task 04+; the
+ * destroy() API above is shaped so those libraries can be torn down cleanly.
  */
 (function () {
   'use strict'
@@ -137,7 +142,13 @@
       this.root.addEventListener(EVENTS.cartUpdated, this._bound.onCartUpdated, { signal })
     }
 
-    _unbindLifecycle() {}
+    _unbindLifecycle() {
+      // No explicit work: every listener in _bindLifecycle is bound with
+      // { signal: this.abort.signal }. destroy() calls this.abort.abort(),
+      // which removes all of them atomically — so this method stays a
+      // documented no-op. Library-specific teardown (GSAP contexts, Swiper
+      // instances, Lenis) lands here in Task 04+.
+    }
 
     _onSectionLoad(e) {
       const el = e.target && e.target.closest ? e.target.closest(SECTION_SELECTOR) || e.target : e.target

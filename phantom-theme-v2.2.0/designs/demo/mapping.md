@@ -26,3 +26,22 @@
 - Client breakpoints (576/768/992/1200/1400) apply inside `.ph-client--demo` only (contract §1.5).
 - Reused PHANTOM commerce snippets: `product.price`, `ui-badge` (contract: client owns grid markup, PHANTOM owns commerce data).
 - Every element above resolves to an existing section/snippet or is declared NEW (the 3 `client-demo-*` sections — added to the theme in Task 4).
+
+## Token substitution (intentional design-system integration)
+
+The frozen source declares a hard-coded Aurora palette (`--aurora-*`: `#f7f4ee`, `#2b2620`, `#3f6b4f`, …).
+The production build deliberately does NOT reproduce those hex values: it bridges semantically equal
+tokens to PHANTOM's `--ph-color*` family (`--demo-accent: var(--ph-colorBtnPrimary)`, …). This is an
+intentional integration decision (contract §1.3): the merchant's PHANTOM theme settings drive the demo
+design's colors. Visual QA must therefore compare *structure, spacing, typography, and layout* between
+source and Shopify render — exact color values are expected to differ and are controlled by theme settings.
+
+## Future data surface (adapter must not block; NOT built in Task 03)
+
+The adapter architecture already permits — without Task 03 changes — later use of:
+
+- `product.selected_or_first_available_variant` (quick-add / variant selection)
+- `product.vendor`, `product.handle`
+- variant-level data (`variant.id`, inventory, metafields)
+
+Quick-add and variant selection are explicitly out of scope for Task 03 and belong to AETHER v2+.

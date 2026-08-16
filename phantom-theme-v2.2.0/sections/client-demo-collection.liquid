@@ -5,7 +5,7 @@ PHANTOM commerce data (product.price + ui-badge snippets).
 {% section 'client-demo-collection' %}
 {% endcomment %}
 
-<div class="ph-client__collection" data-section-type="client-demo-collection" data-section-id="{{ section.id }}">
+<div class="ph-client__collection" data-ph-section="demo" data-ph-component="collection" data-section-type="client-demo-collection" data-section-id="{{ section.id }}">
   <div class="container">
     <h2 class="ph-client__collection-title ph-client__reveal">{{ section.settings.heading }}</h2>
     {%- assign demo_collection = section.settings.collection -%}

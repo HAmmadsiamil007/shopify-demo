@@ -26,11 +26,17 @@
 | Check | Result |
 |---|---|
 | theme-check (274 files) | 0 offenses |
-| build check (`node build.mjs --slug demo --check`) | OK — 9.2 KB (< 60 KB) |
+| build check (`node build.mjs --slug demo --check`) | OK — 9.0 KB (< 60 KB) |
+| Selector-scoping audit (`audit-scope.mjs`, wired into `build.mjs`) | 0 unscoped selectors — every rule references `.ph-client--demo` |
+| Dead-rule strip (Bootstrap nested `:root`) | applied — asset 9413 → 9213 bytes |
 | CSS contract audit (`:root` / `^body` / `!important` / z-index ≥ 5 digits) | all clean |
 | Scroll-reveal rules in shipped CSS | `html.js .ph-client--demo .ph-client__reveal(.is-visible)` present |
 | Dynamic-data fields in collection section | title, url, featured_image, price, compare_at_price, available — all present |
-| Default-path regression (git diff) | `templates/index.json`, `theme.css.liquid`, `theme.js` untouched; only conditional wiring in layout/import-map/config/locales |
+| Default-path regression (git diff) | `templates/index.json`, `theme.css.liquid`, `theme.js` untouched; only conditional wiring in layout/config/locales |
 | Locale key completeness (en/de/es/fr/it/pt-BR/pt-PT) | all schema keys present |
+| External dependencies in source | removed — local SVG placeholders (`designs/demo/source/assets/`) |
 
 Live-store render QA is the remaining manual gate (documented above).
+
+---
+*Updated by the Task 03 correction pass (2026-08-16) — record: `docs/superpowers/corrections/2026-08-16-phantom-task03-correction-pass.md`.*
