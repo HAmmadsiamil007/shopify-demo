@@ -321,6 +321,15 @@
   font-size: 0.85rem;
   margin: 32px 0 0;
 }
+html.js .ph-client--demo .ph-client__reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+html.js .ph-client--demo .ph-client__reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
 @media (prefers-reduced-motion: reduce) {
   .ph-client--demo .ph-client__reveal {
     opacity: 1;

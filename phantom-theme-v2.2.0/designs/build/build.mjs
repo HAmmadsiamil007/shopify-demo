@@ -85,7 +85,7 @@ async function main() {
     ),
     css: [{ raw: sassResult.css }],
     safelist: {
-      standard: [/^ph-client/, /^data-ph-/],
+      standard: [/^ph-client/, /^data-ph-/, /^html\.js/, /^js$/],
       deep: [/is-visible/, /is-hidden/, /is-active/, /is-open/]
     }
   })
