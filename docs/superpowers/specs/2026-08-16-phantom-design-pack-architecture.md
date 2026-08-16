@@ -1,7 +1,7 @@
 # PHANTOM Design Pack Architecture
 
 - **Date:** 2026-08-16
-- **Status:** Approved — specification (awaiting user review)
+- **Status:** Approved + hardened (5 amendments + terminology, 2026-08-16) — specification (awaiting user authorization for Wave 0)
 - **Supersedes:** `2026-08-16-aether-section-library-design.md` (draft, never implemented) — its 6-section scope is absorbed as AETHER Wave 1 of this architecture
 - **Theme:** PHANTOM v2.3.0 (OS 2.0) — `phantom-theme-v2.2.0/`
 - **Repo policy:** origin = `shopify-demo` (branch `main`); `shopify-phantom-` is FROZEN
@@ -10,12 +10,36 @@
 
 ## 0. Executive summary
 
-PHANTOM is split into two conceptual layers:
+PHANTOM is split into **three conceptual layers** (terminology, binding):
 
-1. **PHANTOM CORE** — commerce engine + theme runtime + shared UI kit. **Design-agnostic. Never redesigned for a pack.**
-2. **DESIGN PACK RUNTIME** — a generic, registry-driven mechanism (`active_design_pack`) that activates one **Design Pack** at a time as the *default* design system.
+```
+                         PHANTOM
+                            │
+          ┌─────────────────┼─────────────────┐
+          │                 │                 │
+       CORE            PHANTOM LIBRARY    DESIGN PACK RUNTIME
+          │                 │                 │
+      Commerce          Existing          active_design_pack
+      Shopify           sections                │
+      Runtime           snippets                │
+      Adapters          blocks           ┌──────┼──────┐
+      Settings          templates        AETHER  NOVA  LUXE
+          │                 │              │
+          └─────────────────┼──────────────┘
+                            │
+                       THEME EDITOR
+                            │
+                Any combination of sections
+                            │
+                            ▼
+                       STOREFRONT
+```
 
-A **Design Pack** (AETHER today; NOVA, LUXE, CLIENT-X tomorrow) is a coherent visual frontend system: its own sections, CSS, JS, tokens, settings, templates and locales. Packs are replaceable without touching PHANTOM Core.
+1. **PHANTOM CORE** — commerce engine + theme runtime + shared UI kit + settings pipeline. **Design-agnostic. Never redesigned for a pack.**
+2. **PHANTOM LIBRARY** — the existing PHANTOM sections, snippets, blocks and templates (the shipped OS 2.0 design layer). Stays available forever as merchant-selectable components. Not pack-owned.
+3. **DESIGN PACK RUNTIME** — a generic, registry-driven mechanism (`active_design_pack`) that activates one **Design Pack** at a time as the *default* design system.
+
+A **Design Pack** (AETHER today; NOVA, LUXE, CLIENT-X tomorrow) is a coherent visual frontend system: its own sections, CSS, JS, tokens, settings, templates and locales. Packs are replaceable without modifying PHANTOM Core (amendment 6).
 
 **The key rule (explicit):**
 
@@ -40,12 +64,14 @@ A **Design Pack** (AETHER today; NOVA, LUXE, CLIENT-X tomorrow) is a coherent vi
                            │
                  ┌─────────┴─────────┐
                  │                   │
-           AETHER sections      PHANTOM sections
+           AETHER sections      PHANTOM LIBRARY sections
                  │                   │
                  └─────────┬─────────┘
                            ↓
                     FINAL STOREFRONT
 ```
+
+**Terminology (binding):** PHANTOM is never described as "Core + a default design layer". The three layers are **PHANTOM CORE** / **PHANTOM LIBRARY** / **DESIGN PACK RUNTIME** (+ **ACTIVE DESIGN PACK** for the currently selected pack).
 
 ### The 17 architecture invariants (binding)
 
@@ -112,7 +138,7 @@ Every claim below was verified directly against the repository. Corrections to p
 
 ## 2. Classification (ownership map)
 
-Classification key: **CORE** = design-agnostic commerce/runtime (never pack-owned); **PHANTOM DESIGN** = default OS 2.0 design layer (stays available; not pack-owned); **GLOBAL INFRA** = shared infrastructure (never pack-owned, packs integrate with it); **PACK** = owned by a Design Pack; **CLIENT LAYER** = Task 03 demo stack (precedent for pack CSS/JS discipline); **LEGACY** = dead/stub.
+Classification key: **CORE** = design-agnostic commerce/runtime (never pack-owned); **PHANTOM LIBRARY** = existing OS 2.0 design layer (stays available; not pack-owned); **GLOBAL INFRA** = shared infrastructure (never pack-owned, packs integrate with it); **PACK** = owned by a Design Pack; **CLIENT LAYER** = Task 03 demo stack (precedent for pack CSS/JS discipline); **LEGACY** = dead/stub.
 
 | Component | Location | Responsibility | Owner | Reusable? | Design-specific? | Commerce-critical? | Safe to replace? |
 |---|---|---|---|---|---|---|---|
@@ -121,10 +147,10 @@ Classification key: **CORE** = design-agnostic commerce/runtime (never pack-owne
 | `phantom-vendor.js`, `lazy-load.min.js`, `ext-inview.js` | `assets/` | vendor + is-land lazy | CORE | yes | no | yes | no |
 | `css-variables.liquid` (54 `--ph-color*`) | `snippets/` | settings→token bridge | CORE | yes | no | yes | no |
 | `ph-design-tokens.css.liquid` (`--ph-space/-z/-elevation…`) | `assets/` | token scales + z budget | CORE | yes | no | yes | no |
-| `ph-motion/loader/skeleton/transitions.*` | `assets/`, `snippets/` | PHANTOM motion/preloader | PHANTOM DESIGN | yes | yes | no | replaceable by pack (opt-out via settings) |
+| `ph-motion/loader/skeleton/transitions.*` | `assets/`, `snippets/` | PHANTOM motion/preloader | PHANTOM LIBRARY | yes | yes | no | replaceable by pack (opt-out via settings) |
 | `main-*`, `featured-*`, `collection-*`, `product-*` templates & snippets, `pdp-*`, `form.product*`, `product-grid-item`, `cart-item`, `cart-drawer`, `collection-grid-filters-form`, `pagination`, `variant-*`, `quantity-input`, `quick-shop-modal`, `ui-*` kit, `layout.*`, `style.*` | `sections/` `snippets/` | commerce adapters + UI kit | CORE | yes | no | yes | no |
 | `header`, `announcement`, `footer`, `footer-promotions`, `newsletter-popup`, `age-verification-popup`, `offers-drawer`, `password-header`, `giftcard-header`, `apps`, `header-*`/`footer-*`/`drawer-*` snippets | `sections/` `snippets/` `sections/*.json` | theme chrome + groups | CORE | yes | part | yes | no |
-| `slideshow`, `rich-text`, `promo-grid`, `text-and-image`, `text-columns`, `text-with-icons`, `hero-video`, `featured-video`, `background-image-text`, `background-video-text`, `image-compare`, `hotspots`, `logo-list`, `map`, `scrolling-*`, `testimonials`, `faq`, `countdown`, `quiz`, `newsletter`, `contact-form`, `featured-collections`, `blog-*`, `article-template`, `advanced-content`, `urgency-bar`, `free-shipping-bar`, `size-guide`, `main-page*` | `sections/` | PHANTOM marketing/content sections | PHANTOM DESIGN | yes | no | **no — stay available** (merchant may choose them) |
+| `slideshow`, `rich-text`, `promo-grid`, `text-and-image`, `text-columns`, `text-with-icons`, `hero-video`, `featured-video`, `background-image-text`, `background-video-text`, `image-compare`, `hotspots`, `logo-list`, `map`, `scrolling-*`, `testimonials`, `faq`, `countdown`, `quiz`, `newsletter`, `contact-form`, `featured-collections`, `blog-*`, `article-template`, `advanced-content`, `urgency-bar`, `free-shipping-bar`, `size-guide`, `main-page*` | `sections/` | PHANTOM marketing/content sections | PHANTOM LIBRARY | yes | no | **no — stay available** (merchant may choose them) |
 | `main-product-high-variant` + `blocks/_ph-pdp-*` | `sections/` `blocks/` | flex PDP (OS 2.0 content_for) | CORE | yes | part | yes | no |
 | `client-demo-*` sections, `client-demo.css.liquid`, `client-demo.js`, `designs/` pipeline + contracts | `sections/` `assets/` `designs/` `templates/page.demo.json` | Task 03 proof stack | CLIENT LAYER | yes (precedent) | yes | no | **migrate** into pack resolver as legacy-compat entry `demo` |
 | `ph_active_design` setting | `config/settings_schema.json` | client-design toggle | CLIENT LAYER | — | — | no | **replaced** by `active_design_pack` (see §5) |
@@ -233,6 +259,12 @@ Liquid constraint: the resolver implements `pack_id`/`asset_base`/`status`/`vers
 {%- assign dp_enabled = dp_status[dp_index] != 'legacy' and dp_status[dp_index] == 'active' -%}
 ```
 
+**Registry integrity gate (mandatory — amendment 2).** Registry entries are **positional**: every `dp_*` list must have the identical length. A mismatch means the registry is corrupted and must fail QA rather than silently resolving incorrectly. Enforced in T1:
+
+- **Static check (human + script):** a tiny Node script `designs/build/check-registry.mjs` (alongside the proven `audit-scope.mjs`) parses `design-pack-resolver.liquid`, extracts the `dp_*` lists, and fails unless `packs == assets == versions == statuses` counts and `dp_packs[0] == 'aether'` (the guaranteed fallback).
+- **Runtime behavior on corruption:** if index resolution would read past the end of a list, the resolver falls back to `aether` (index 0, always valid) — never an empty/broken asset tag.
+- **QA gate:** `check-registry` is part of the Wave 0 QA command set; CI-free environment runs it manually per commit.
+
 **Resolution rules (explicit):**
 
 | Condition | Result |
@@ -281,6 +313,7 @@ aether_dark_light                                     (select: dark|light)
 aether_motion_enable                                  (checkbox)
 ```
 
+- **Pack-owned settings (explicit — amendment 5):** a pack's settings group is owned by that pack alone and is **not a universal schema** future packs must inherit. AETHER's `aether_primary/aether_radius/aether_motion_enable` do not imply NOVA ships the same controls; NOVA may ship `nova_accent/nova_header_style/nova_product_card_style/nova_motion_intensity` or anything else its approved design needs. The generic runtime only resolves the **active** pack; it never assumes a pack's settings shape. Each pack's CSS reads only its own `{{ settings.{pack}_* }}` keys, so heterogeneous pack settings cannot leak or collide.
 - **Brand-level only:** colors/fonts/radius/motion/dark-light. Spacing scales, timing curves, elevation, shadows = fixed art-direction tokens in CSS (settings must not destroy art direction).
 - **Harmonize adapter:** per-section `harmonize` checkbox → section root maps semantic tokens to `--ph-color*` via CSS (proven Task 03 pattern). Explicit, documented, opt-in.
 - **Locale keys:** new `design_pack_*` + `aether_*` key families in **all 7 locales** (+ `.schema.json` label keys for settings groups/sections). theme-check `MatchingTranslations` is a QA gate.
@@ -311,7 +344,21 @@ aether_motion_enable                                  (checkbox)
 | customers/* | classic Liquid templates — AETHER versions replace content in place (Liquid, not JSON sections) | — | git history (no archive copies; pure Liquid files are versioned) |
 | gift_card / cart.ajax | untouched | — | — |
 
-**Promotion procedure (documented in `docs/design-packs/registry.md`):** pack ships `*.{pack}.json` alternates → client/merchant approves → composition is copied to the base template name → `active_design_pack` flipped. Base template = "currently promoted design"; pack does not own PHANTOM's identity. No PHANTOM template is destroyed; nothing is hidden from the editor.
+**Promotion & rollback contract (mandatory — amendment 3).** Promotion is a **deterministic procedure**, never "copy and flip":
+
+```
+PRE-PROMOTION SNAPSHOT  →  VALIDATE  →  PROMOTE  →  REGRESSION  →  COMMIT
+```
+
+1. **Snapshot:** before any base-template change, the current base composition is archived verbatim (PHANTOM bases → `*.phantom.json`; a pack's own promoted base → `{base}.{pack}.backup.json` committed alongside).
+2. **Validate:** theme-check 0 offenses on the staged tree; `check-registry` green; pack QA gates green.
+3. **Promote:** copy `{base}.{pack}.json` composition → base template name; flip `active_design_pack` (settings_data default preset).
+4. **Regression:** screenshots at 1440/992/768/390 vs the pack's frozen visual source; mixed-composition smoke test (pack + PHANTOM sections on one template); `demo` legacy proof.
+5. **Commit:** promotion lands as its own commit (never mixed with unrelated changes).
+
+**Rollback (deterministic):** restore the base composition from its archive (`restore index.phantom.json` for PHANTOM bases; `{base}.{pack}.backup.json` for a previously promoted pack) and revert the `active_design_pack` value in the same commit. No manual re-composition ever.
+
+The procedure is documented once in `docs/design-packs/registry.md` and reused for every client (Client A → AETHER, Client B → NOVA, …).
 
 ---
 
@@ -341,7 +388,7 @@ All user-facing strings via `{{ 'aether.*' | t }}` + 7 locales.
 
 ```
 CLIENT → "premium fashion store" → external frontend (HTML/Bootstrap/vendor CSS/
-theme CSS/GSAP/Three/Lenis/Swiper/animations) → client approves → FREEZE DESIGN
+theme CSS/GSAP/Three/Lenis/Swiper/animations) → client approves → 🔒 DESIGN FREEZE
 → component manifest (frontend/frontend + data-phantom-* vocabulary) →
 static/dynamic classification → map component → section/block/snippet/template/
 adapter → preserve DOM/design intent → replace static data with Liquid →
@@ -349,6 +396,13 @@ add {% schema %} → scope CSS (pack namespace, audit gate) → scope JS (pack
 runtime, event bus) → lifecycle handling → Theme Editor test → commerce test →
 visual regression (screenshots vs frozen source) → promote to default
 ```
+
+**DESIGN FREEZE (mandatory gate — amendment 4).** After client approval and before any conversion work, the approved visual design is frozen:
+
+- The frozen artifact is the external frontend itself (committed reference copy) + the component manifest.
+- **After freeze, conversion must preserve the approved visual design** (hierarchy, layout, spacing, typography, imagery, component structure, responsive behavior, interaction, animation intent). The converter is forbidden from "improving"/redesigning during Liquid conversion.
+- Changes after freeze require a new client approval + a freeze revision; the revision is documented in the pack's `mapping.md`.
+- Rationale: prevents the classic failure "the Shopify version doesn't look like the approved frontend".
 
 - The external frontend is the **visual source of truth** (frozen: `frontend/frontend/`, committed to repo as reference — currently untracked; decision to commit it is part of Wave 0).
 - Design-time libraries (GSAP/Three/Lenis/Swiper/Bootstrap) are development tools; production ships only capabilities the approved design requires (invariant: performance budget, §12).
@@ -397,6 +451,7 @@ visual regression (screenshots vs frozen source) → promote to default
 | 16 | pack JS syntax error | regression | controllers dead | theme-check + manual console gate | QA gate | PHANTOM JS unaffected (isolated) | fix + re-verify |
 | 17 | locale missing key | pack added key in 1 locale only | translation fallback EN | `MatchingTranslations` gate | 7-locale key checklist | EN fallback | add keys |
 | 18 | checkout/cart mismatch | `cart:updated` missed | stale badge | event contract | listen `cart:updated` on pack JS | re-fetch cart | reload |
+| 19 | registry desync | parallel `dp_*` lists differ in length | wrong pack assets / broken tags | `check-registry.mjs` gate + runtime index-guard | positional lists + integrity gate (amendment 2) | fallback `aether` | fix lists, re-run gate |
 
 ---
 
@@ -424,7 +479,7 @@ visual regression (screenshots vs frozen source) → promote to default
 | Commerce | identical — `product.price`, `form.product`, `cart:updated`, `{% form %}`, `@app` adapters reused by NOVA | PHANTOM Core, Shopify behavior, app blocks |
 | Locales | `nova_*` keys (7 languages) | `aether_*`, `client_*`, PHANTOM keys |
 
-**Conclusion:** PHANTOM Core (commerce engine, runtime, UI kit, chrome, groups, settings pipeline) remains byte-stable across the swap; only pack-owned files change. Coexistence, editor, checkout and apps are unaffected. ✓
+**Conclusion:** PHANTOM Core (commerce engine, runtime, UI kit, chrome, groups, settings pipeline) remains **implementation-stable and does not require modification when replacing a design pack** (amendment 1). The repository changes only where pack-owned files and promoted compositions live (pack assets/sections/settings/locales/templates, header/footer group compositions, `settings_data` defaults). Coexistence, editor, checkout and apps are unaffected. ✓
 
 ---
 
@@ -435,13 +490,13 @@ This spec is **architecture only**. No AETHER sections are built here. Implement
 - **Wave 0 — Pack infrastructure (the "platform"):**
   1. Commit `frontend/frontend/` as frozen visual source of truth (+ `.gitignore` note) — decision from correction pass stands.
   2. Delete legacy stubs (`media-text.liquid`, `newsletter-section.liquid`, `phantom-dark-mode.js`, `effects.js`, `three-scenes.js`) — theme-check re-run.
-  3. `snippets/design-pack-resolver.liquid` (registry + resolution rules §4).
+  3. `snippets/design-pack-resolver.liquid` (registry + resolution rules §4) + `designs/build/check-registry.mjs` (integrity gate: equal list lengths, `dp_packs[0] == 'aether'`).
   4. Settings: new "Design Packs" group (`active_design_pack`) + `aether_*` token group + locale label keys (7 locales + schema variants); migrate `ph_active_design` → resolver (legacy entries `demo`/`none`); settings_data defaults.
   5. `theme.liquid`: replace `client-` conditional with resolver-driven pack loading.
   6. AETHER skeleton: minimal valid `assets/aether.css.liquid` + `assets/aether.js.liquid` (tokens + no-op runtime) so `aether` is loadable; registry `status: active`.
   7. Template archives: `index.phantom.json` + `*.phantom.json` for every base template AETHER will replace (content = current PHANTOM compositions, verbatim).
   8. Docs: `docs/design-packs/registry.md`, `docs/design-packs/design-pack-contract.md`, `docs/design-packs/conversion-contract.md`, `docs/design-packs/failure-register.md` (materialized from this spec); `docs/aether/manifest.md` skeleton; mark v1 AETHER spec superseded.
-  9. QA gate: theme-check 0 offenses; default path unchanged when `active_design_pack = aether` but skeleton CSS/JS present (no DOM mutation, no console errors); `demo` still renders (legacy proof); resolver fallback tests (invalid id, blank).
+  9. QA gate: theme-check 0 offenses; default path unchanged when `active_design_pack = aether` but skeleton CSS/JS present (no DOM mutation, no console errors); `demo` still renders (legacy proof); resolver fallback tests (invalid id, blank); registry integrity gate green.
 - **Wave 1 — AETHER sections (commerce core):** `aether-hero`, `aether-featured-products`, `aether-collection-grid`, `aether-product`, `aether-cart-items`, chrome (`aether-announcement-bar`, `aether-header`, `aether-footer`) into header/footer groups as alternates; base `product.json`/`collection.json` + AETHER `index.json`; locales; mapping.md; fidelity screenshots.
 - **Wave 2 — AETHER content:** blog/article, page sections (hero/rich-text/faq/team/testimonials/contact/newsletter/promo), 404, search, legal pages.
 - **Wave 3 — AETHER accounts & extras:** customers templates (login/register/account/addresses, classic Liquid), password, wishlist (localStorage), final QA + promotion docs.
@@ -467,7 +522,7 @@ This spec is **architecture only**. No AETHER sections are built here. Implement
 
 ### Wave 1 starting task (exact)
 
-> **T1: Implement `snippets/design-pack-resolver.liquid` + settings group "Design Packs" + migrate `theme.liquid` loader + `settings_data` default `active_design_pack: "aether"`; commit with QA (theme-check 0 offenses, demo legacy proof, fallback unit checks).**
+> **T1 (narrow boundary — no AETHER visual sections, no template promotion, no frontend conversion):** Implement `snippets/design-pack-resolver.liquid` + `designs/build/check-registry.mjs` + settings group "Design Packs" + migrate `theme.liquid` loader + `settings_data` default `active_design_pack: "aether"` + legacy `demo` compatibility; commit with QA (theme-check 0 offenses, registry integrity green, demo legacy proof, fallback unit checks).
 
 (Then T2: AETHER skeleton assets; T3: template archives; T4: docs; T5: AETHER chrome sections into groups…)
 
@@ -483,8 +538,9 @@ This spec is **architecture only**. No AETHER sections are built here. Implement
 6. All PHANTOM sections/snippets/blocks/templates untouched (git diff proof) except explicit archive copies.
 7. All 7 locales carry `design_pack_*` + `aether_*` keys; `MatchingTranslations` clean.
 8. Scope audit gate green for any pack CSS (adapted `audit-scope.mjs`).
-9. theme-check: 0 offenses (274+ files).
-10. Spec reviewed by user; Wave 1 plan written; no AETHER sections implemented before user authorization.
+9. Registry integrity gate green (`check-registry.mjs`: equal list lengths, `dp_packs[0] == 'aether'`).
+10. theme-check: 0 offenses (274+ files).
+11. Spec reviewed by user; Wave 0 plan written; no AETHER sections implemented before user authorization.
 
 ---
 
@@ -493,10 +549,10 @@ This spec is **architecture only**. No AETHER sections are built here. Implement
 ```
 ARCHITECTURE STATUS:    READY / NOT READY
 AETHER:                 DESIGN PACK (first/default)
-PHANTOM:                CORE (+ default design layer, untouched)
+PHANTOM:                CORE / PHANTOM LIBRARY / DESIGN PACK RUNTIME (three-layer)
 DEFAULT DESIGN:         aether
-REPLACEMENT MODEL:      active_design_pack resolver + template promotion
+REPLACEMENT MODEL:      active_design_pack resolver + template promotion/rollback contract
 COEXISTENCE:            PASS (verified §7/§14)
-EXTERNAL FRONTEND CONVERSION: READY (contract §10)
+EXTERNAL FRONTEND CONVERSION: READY (contract §10, DESIGN FREEZE gate)
 NEXT TASK:              Wave 0 T1 — resolver + settings + loader migration
 ```
