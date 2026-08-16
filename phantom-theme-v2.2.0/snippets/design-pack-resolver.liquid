@@ -1,0 +1,48 @@
+{% comment %}
+  Design Pack Runtime — active design pack resolver (single registration point).
+  PHANTOM Core contract: consumers read ONLY dp_active / dp_asset / dp_enabled.
+  Never add pack-name conditionals here or in theme.liquid — extend the four
+  positional lists below (same index across all four). check-registry.mjs gates
+  integrity; the first entry is always the production default (aether).
+  Statuses: active = assets load | legacy = compatibility entry (none) | draft = reserved.
+{% endcomment %}
+
+{%- assign dp_packs = 'aether|demo|none' | split: '|' -%}
+{%- assign dp_assets = 'aether|client-demo|none' | split: '|' -%}
+{%- assign dp_versions = '1.0.0|1.0.0|0.0.0' | split: '|' -%}
+{%- assign dp_statuses = 'active|active|legacy' | split: '|' -%}
+
+{%- assign dp_found = false -%}
+{%- assign dp_index = 0 -%}
+{%- assign dp_enabled = false -%}
+{%- assign dp_active = dp_packs[0] -%}
+{%- assign dp_asset = dp_assets[0] -%}
+
+{%- if settings.active_design_pack != blank -%}
+  {%- assign dp_requested = settings.active_design_pack | strip | downcase -%}
+{%- else -%}
+  {%- assign dp_requested = dp_packs[0] -%}
+{%- endif -%}
+
+{%- for dp_entry in dp_packs -%}
+  {%- if dp_entry == dp_requested -%}
+    {%- assign dp_found = true -%}
+    {%- assign dp_index = forloop.index0 -%}
+    {%- assign dp_active = dp_packs[dp_index] -%}
+    {%- assign dp_asset = dp_assets[dp_index] -%}
+    {%- if dp_statuses[dp_index] == 'active' -%}
+      {%- assign dp_enabled = true -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- comment -%}
+  Fallback contract: unknown id -> safe fallback to the production default
+  (dp_packs[0]). A found-but-legacy entry (none) resolves to asset 'none' with
+  dp_enabled=false, so nothing loads — preserved Task 03 behavior.
+{%- endcomment -%}
+{%- unless dp_found -%}
+  {%- assign dp_active = dp_packs[0] -%}
+  {%- assign dp_asset = dp_assets[0] -%}
+  {%- assign dp_enabled = true -%}
+{%- endunless -%}
