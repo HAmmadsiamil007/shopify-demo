@@ -3329,6 +3329,37 @@
             "presets": {
                 "name": "Free Shipping Bar"
             }
+        },
+        "client_demo_hero": {
+            "name": "Demo — hero",
+            "settings": {
+                "title": { "label": "Eyebrow" },
+                "image": { "label": "Image" },
+                "headline": { "label": "Headline" },
+                "subtitle": { "label": "Subtitle" },
+                "cta_label": { "label": "CTA label" },
+                "cta_url": { "label": "CTA link" }
+            },
+            "presets": { "name": "Demo hero" }
+        },
+        "client_demo_collection": {
+            "name": "Demo collection",
+            "settings": {
+                "collection": { "label": "Collection" },
+                "heading": { "label": "Heading" },
+                "limit": { "label": "Products to show" },
+                "show_badges": { "label": "Show sale badges" }
+            },
+            "presets": { "name": "Demo featured collection" }
+        },
+        "client_demo_footer": {
+            "name": "Demo — footer",
+            "settings": {
+                "brand_text": { "label": "Brand text" },
+                "footer_text": { "label": "Footer text" },
+                "menu": { "label": "Menu" }
+            },
+            "presets": { "name": "Demo footer" }
         }
     },
     "settings_schema": {
@@ -4060,6 +4091,18 @@
                         "luxury": {
                             "label": "PHANTOM Luxury"
                         }
+                    }
+                }
+            }
+        },
+        "ph_designs": {
+            "name": "Client designs",
+            "settings": {
+                "ph_active_design": {
+                    "label": "Active client design",
+                    "options": {
+                        "none": { "label": "None (default PHANTOM)" },
+                        "demo": { "label": "Demo — Aurora Studio" }
                     }
                 }
             }

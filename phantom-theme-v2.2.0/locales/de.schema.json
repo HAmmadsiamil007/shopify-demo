@@ -3329,6 +3329,37 @@
       "presets": {
         "name": "Free Shipping Bar"
       }
+    },
+    "client_demo_hero": {
+      "name": "Demo — Hero",
+      "settings": {
+        "title": { "label": "Oberzeile" },
+        "image": { "label": "Bild" },
+        "headline": { "label": "Überschrift" },
+        "subtitle": { "label": "Untertitel" },
+        "cta_label": { "label": "CTA-Text" },
+        "cta_url": { "label": "CTA-Link" }
+      },
+      "presets": { "name": "Demo-Hero" }
+    },
+    "client_demo_collection": {
+      "name": "Demo — Kollektion",
+      "settings": {
+        "collection": { "label": "Kollektion" },
+        "heading": { "label": "Überschrift" },
+        "limit": { "label": "Anzuzeigende Produkte" },
+        "show_badges": { "label": "Verkaufsabzeichen anzeigen" }
+      },
+      "presets": { "name": "Demo-Kollektion" }
+    },
+    "client_demo_footer": {
+      "name": "Demo — Fußzeile",
+      "settings": {
+        "brand_text": { "label": "Markentext" },
+        "footer_text": { "label": "Fußzeilentext" },
+        "menu": { "label": "Menü" }
+      },
+      "presets": { "name": "Demo-Fußzeile" }
     }
   },
   "settings_schema": {
@@ -4066,6 +4097,18 @@
             "luxury": {
               "label": "PHANTOM Luxury"
             }
+          }
+        }
+      }
+    },
+    "ph_designs": {
+      "name": "Client-Designs",
+      "settings": {
+        "ph_active_design": {
+          "label": "Aktives Client-Design",
+          "options": {
+            "none": { "label": "Keine (Standard PHANTOM)" },
+            "demo": { "label": "Demo — Aurora Studio" }
           }
         }
       }

@@ -1256,5 +1256,20 @@
         ]
       }
     ]
+  },
+  {
+    "name": "t:settings_schema.ph_designs.name",
+    "settings": [
+      {
+        "type": "select",
+        "id": "ph_active_design",
+        "label": "t:settings_schema.ph_designs.settings.ph_active_design.label",
+        "default": "none",
+        "options": [
+          { "value": "none", "label": "t:settings_schema.ph_designs.settings.ph_active_design.options.none.label" },
+          { "value": "demo", "label": "t:settings_schema.ph_designs.settings.ph_active_design.options.demo.label" }
+        ]
+      }
+    ]
   }
 ]

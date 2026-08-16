@@ -1,6 +1,9 @@
 <script type="importmap">
 {
   "imports": {
+    {%- if settings.ph_active_design != 'none' -%}
+    "client-{{ settings.ph_active_design }}": "{{ 'client-' | append: settings.ph_active_design | append: '.js' | asset_url }}",
+    {%- endif -%}
     "ui-base-media": "{{ 'ui-base-media.js' | asset_url }}",
     "ui-image.parallax": "{{ 'ui-image-parallax.js' | asset_url }}",
     "ui-model": "{{ 'ui-model.js' | asset_url }}",

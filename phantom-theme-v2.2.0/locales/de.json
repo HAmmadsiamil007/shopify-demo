@@ -254,6 +254,10 @@
       "presets": {
         "name": "Kostenloser Versand-Balken"
       }
+    },
+    "client_demo_collection": {
+      "empty": "Wählen Sie eine Sammlung in den Abschnittseinstellungen.",
+      "sale_badge": "Reduziert"
     }
   },
   "blogs": {

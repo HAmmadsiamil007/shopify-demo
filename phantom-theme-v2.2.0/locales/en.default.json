@@ -254,6 +254,10 @@
             "presets": {
                 "name": "Free Shipping Bar"
             }
+        },
+        "client_demo_collection": {
+            "empty": "Choose a collection in the section settings.",
+            "sale_badge": "Sale"
         }
     },
     "blogs": {

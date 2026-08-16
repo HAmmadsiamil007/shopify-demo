@@ -254,6 +254,10 @@
       "presets": {
         "name": "Barra de Portes Grátis"
       }
+    },
+    "client_demo_collection": {
+      "empty": "Escolha uma coleção nas definições da secção.",
+      "sale_badge": "Venda"
     }
   },
   "blogs": {

@@ -254,6 +254,10 @@
       "presets": {
         "name": "Barre de livraison gratuite"
       }
+    },
+    "client_demo_collection": {
+      "empty": "Choisissez une collection dans les paramètres de la section.",
+      "sale_badge": "Réduit"
     }
   },
   "blogs": {

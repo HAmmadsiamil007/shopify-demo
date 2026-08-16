@@ -254,6 +254,10 @@
       "presets": {
         "name": "Barra de Frete Grátis"
       }
+    },
+    "client_demo_collection": {
+      "empty": "Escolha uma coleção nas configurações da seção.",
+      "sale_badge": "Venda"
     }
   },
   "blogs": {

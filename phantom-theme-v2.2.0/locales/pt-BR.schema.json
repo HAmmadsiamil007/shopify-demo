@@ -3329,6 +3329,37 @@
       "presets": {
         "name": "Barra de Frete Grátis"
       }
+    },
+    "client_demo_hero": {
+      "name": "",
+      "settings": {
+        "title": { "label": "" },
+        "image": { "label": "" },
+        "headline": { "label": "" },
+        "subtitle": { "label": "" },
+        "cta_label": { "label": "" },
+        "cta_url": { "label": "" }
+      },
+      "presets": { "name": "" }
+    },
+    "client_demo_collection": {
+      "name": "",
+      "settings": {
+        "collection": { "label": "" },
+        "heading": { "label": "" },
+        "limit": { "label": "" },
+        "show_badges": { "label": "" }
+      },
+      "presets": { "name": "" }
+    },
+    "client_demo_footer": {
+      "name": "",
+      "settings": {
+        "brand_text": { "label": "" },
+        "footer_text": { "label": "" },
+        "menu": { "label": "" }
+      },
+      "presets": { "name": "" }
     }
   },
   "settings_schema": {
@@ -4066,6 +4097,18 @@
             "luxury": {
               "label": "PHANTOM Luxury"
             }
+          }
+        }
+      }
+    },
+    "ph_designs": {
+      "name": "",
+      "settings": {
+        "ph_active_design": {
+          "label": "",
+          "options": {
+            "none": { "label": "" },
+            "demo": { "label": "Demo — Aurora Studio" }
           }
         }
       }

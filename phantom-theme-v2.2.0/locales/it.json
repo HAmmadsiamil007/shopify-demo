@@ -254,6 +254,10 @@
       "presets": {
         "name": "Barra di spedizione gratuita"
       }
+    },
+    "client_demo_collection": {
+      "empty": "Scegli una collezione nelle impostazioni della sezione.",
+      "sale_badge": "In offerta"
     }
   },
   "blogs": {
