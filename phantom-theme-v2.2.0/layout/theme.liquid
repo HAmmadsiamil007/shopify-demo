@@ -8,8 +8,10 @@
   <link rel="canonical" href="{{ canonical_url }}">
   <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
   <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+  {%- # theme-check-disable RemoteAsset -%}
   <link rel="dns-prefetch" href="https://maps.googleapis.com">
   <link rel="dns-prefetch" href="https://maps.gstatic.com">
+  {%- # theme-check-enable RemoteAsset -%}
 
   {%- if settings.favicon != blank -%}
     <link rel="shortcut icon" href="{{ settings.favicon | image_url: '32x32' }}" type="image/png" />
@@ -78,7 +80,7 @@
       predictiveSearchPrice: {{ settings.predictive_search_show_price | json }},
       quickView: {{ settings.quick_shop_enable }},
       themeName: 'PHANTOM',
-      themeVersion: "2.2.0"
+      themeVersion: "2.3.0"
     };
   </script>
 

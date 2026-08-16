@@ -178,17 +178,7 @@ class SkeletonManager {
     setTimeout(() => {
       el.setAttribute('hidden', '')
       el.classList.remove('is-hidden')
-      this._triggerEntrance(el)
     }, 150)
-  }
-
-  _triggerEntrance(el) {
-    const section = el.closest('[data-section-type]')
-    if (!section) return
-    const content = section.querySelector('[data-ph-entrance]') || section
-    if (window.phMotion && typeof window.phMotion.animate === 'function') {
-      window.phMotion.animate(content)
-    }
   }
 
   _pauseAll() {

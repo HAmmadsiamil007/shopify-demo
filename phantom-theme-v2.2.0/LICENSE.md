@@ -1,6 +1,6 @@
 ﻿# PHANTOM Theme License
 
-**PHANTOM Theme v2.2.0**
+**PHANTOM Theme v2.3.0**
 **Copyright © PHANTOM Themes**
 
 ## Grant of License

@@ -46,7 +46,7 @@
     {% if product.selected_or_first_available_variant.image != blank %}
       {% assign is_active = true %}
       {% capture image_content %}
-        {{ product.selected_or_first_available_variant.image | image_url: width: 2400 | image_tag:  alt: media.alt }}
+        {{ product.selected_or_first_available_variant.image | image_url: width: 2400 | image_tag:  alt: product.selected_or_first_available_variant.image.alt }}
       {% endcapture %}
 
       <div class="media-gallery__slide media-gallery__slide--active" data-media-id="{{ product.selected_or_first_available_variant.image.id }}" data-media-type="image">

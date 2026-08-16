@@ -1,3 +1,5 @@
+{%- # theme-check-disable ValidScopedCSSClass -%}
+{%- # ValidScopedCSSClass: 'hide' is intentionally global (defined in theme.css.liquid); shared JS toggle class -%}
 {% comment %}
   Renders a media element for the product gallery.
   Media types include: image, video, external_video and model.
@@ -147,7 +149,7 @@
             <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-play" viewBox="18.24 17.35 24.52 28.3"><path fill="#323232" d="M22.1 19.151v25.5l20.4-13.489-20.4-12.011z"/></svg>
           </button>
 
-          {% comment %}
+{% comment %}
             Hidden video element that gets placed in the video modal
           {% endcomment %}
           <video

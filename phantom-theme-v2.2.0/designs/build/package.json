@@ -1,0 +1,16 @@
+{
+  "name": "phantom-client-build",
+  "private": true,
+  "version": "1.0.0",
+  "description": "PHANTOM client-design build pipeline: scoped Bootstrap compile + purge (Task 02 scaffold)",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "build:check": "node build.mjs --check"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "purgecss": "^6.0.0",
+    "sass": "^1.77.0"
+  }
+}
