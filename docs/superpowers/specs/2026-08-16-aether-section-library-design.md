@@ -1,5 +1,7 @@
 # AETHER Section Library — Design
 
+> **SUPERSEDED (2026-08-16):** replaced by `docs/superpowers/specs/2026-08-16-phantom-design-pack-architecture.md` (approved). AETHER is now the first **Design Pack** inside PHANTOM's generic pack architecture; this v1 6-section scope is absorbed as AETHER Wave 1. Kept for reference only.
+
 - **Date:** 2026-08-16
 - **Status:** Draft (pending user verification)
 - **Theme:** PHANTOM v2.3.0 (OS 2.0) — `phantom-theme-v2.2.0/`

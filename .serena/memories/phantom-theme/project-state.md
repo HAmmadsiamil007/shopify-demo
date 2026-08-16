@@ -3,7 +3,16 @@
 Theme: PHANTOM v2.3.0 (OS 2.0), rebranded from Impulse v8.2.0 by Archetype Themes.
 Path: `C:\Users\hamma\Downloads\phantom\phantom-theme\phantom-theme-v2.2.0\`
 
-## Current status: Task 03 COMPLETE + correction pass (2026-08-16, committed)
+## Current status: Task 03 COMPLETE + correction pass + Design Pack architecture (spec, no build yet)
+
+### Design Pack Architecture (2026-08-16 — SPEC APPROVED BY USER, NOT YET IMPLEMENTED)
+Spec: `docs/superpowers/specs/2026-08-16-phantom-design-pack-architecture.md` (20 deliverables: audit, classification, pack contract, resolver, CSS/JS isolation, tokens, templates, data contract, conversion contract, failure matrix, NOVA scenario, files/risks/order/DoD).
+- PHANTOM = design-agnostic CORE; AETHER = first/default DESIGN PACK (replaceable by NOVA/LUXE/client packs without touching Core); `active_design_pack` = generic resolver (snippet `design-pack-resolver.liquid`, single registration point); default = aether; demo/none = legacy entries (Task 03 stack preserved).
+- Key rule: active pack changes DEFAULT design (assets/templates/tokens), NEVER section availability. Mixing AETHER + PHANTOM sections = first-class OS 2.0.
+- Forensic corrections: 7 locales NOT 8; NO base product.json/collection.json (AETHER creates additively); theme.css.liquid 717KB static; theme.js owns lifecycle (pack JS subscribes, never replaces); Task 03 loader = resolver seed.
+- Waves: W0 pack infra (resolver/settings/loader/archives/skeleton/docs) → W1 AETHER commerce core → W2 content/blog → W3 accounts. NO sections built yet; Wave 0 T1 = resolver + settings + loader migration. DoD: theme-check 0 offenses, fallback tests, demo legacy proof.
+- Superseded: 2026-08-16-aether-section-library-design.md (v1 draft, absorbed as AETHER Wave 1).
+- STOP rule: user must review spec + authorize before any implementation.
 
 ### Task 03 correction pass (2026-08-16 — post-execution external review, committed)
 Record: `docs/superpowers/corrections/2026-08-16-phantom-task03-correction-pass.md` (finding-by-finding disposition).
