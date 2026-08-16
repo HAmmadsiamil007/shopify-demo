@@ -1,0 +1,230 @@
+// PHANTOM client-design production CSS — designs/demo (Aurora Studio)
+// --------------------------------------------------------------
+// COMPILE RULE (contract §1.7): Bootstrap is design-time only. Only the
+// modules used by the source are imported, and every selector is
+// namespaced under .ph-client--demo by this wrapper. No :root, no body,
+// no bare element selectors (contract §1.2). z-index ≤ 10000, no
+// !important (contract §1.4).
+
+.ph-client--demo {
+  // z-index budget (contract §1.4)
+  --demo-z-sticky: 5000;
+  --demo-z-drawer: 9000;
+  --demo-z-modal: 9050;
+  --demo-z-toast: 9500;
+  --demo-z-3d: 9700;
+
+  // Bootstrap modules actually used by the design (in dependency order)
+  @import "bootstrap/scss/functions";
+  @import "bootstrap/scss/variables";
+  @import "bootstrap/scss/maps";
+  @import "bootstrap/scss/mixins";
+  @import "bootstrap/scss/containers";
+  @import "bootstrap/scss/grid";
+  @import "bootstrap/scss/buttons";
+  @import "bootstrap/scss/utilities";
+
+  // Design tokens — token bridge to PHANTOM where semantically equal
+  // (contract §1.3): PHANTOM --ph-color* is the single source of truth.
+  --demo-bg: var(--ph-colorBody);
+  --demo-text: var(--ph-colorTextBody);
+  --demo-muted: color-mix(in srgb, var(--ph-colorTextBody) 62%, var(--ph-colorBody));
+  --demo-accent: var(--ph-colorBtnPrimary);
+  --demo-accent-text: var(--ph-colorBtnPrimaryText);
+  --demo-card-bg: var(--ph-colorBody);
+  --demo-border: var(--ph-colorBorders);
+  --demo-sale: var(--ph-colorSaleTag);
+  --demo-sale-text: var(--ph-colorSaleTagText);
+
+  // Design CSS (all authoring stays inside this scope — hard rule)
+  .ph-client__hero {
+    padding: 96px 0 72px;
+    text-align: center;
+  }
+
+  .ph-client__hero-eyebrow {
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    color: var(--demo-muted);
+    margin-bottom: 16px;
+  }
+
+  .ph-client__hero-title {
+    font-size: 3.25rem;
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .ph-client__hero-subtitle {
+    font-size: 1.15rem;
+    color: var(--demo-muted);
+    max-width: 560px;
+    margin: 0 auto 28px;
+  }
+
+  .ph-client__hero-placeholder {
+    height: 300px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    background: linear-gradient(120deg, #d8cfc0 0%, #f0e9dd 45%, #c9d8cc 100%);
+  }
+
+  .ph-client__collection {
+    padding: 0 0 80px;
+  }
+
+  .ph-client__collection-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 40px;
+  }
+
+  .ph-client__card {
+    background: var(--demo-card-bg);
+    border: 1px solid var(--demo-border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+    height: 100%;
+  }
+
+  .ph-client__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(43, 38, 32, 0.12);
+  }
+
+  .ph-client__card-media {
+    aspect-ratio: 4 / 5;
+    background: #efe9de;
+  }
+
+  .ph-client__card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ph-client__card-body {
+    padding: 16px 18px 20px;
+  }
+
+  .ph-client__card-title {
+    font-size: 1.05rem;
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+
+  .ph-client__card-title a {
+    color: var(--demo-text);
+    text-decoration: none;
+  }
+
+  .ph-client__card-title a:hover {
+    color: var(--demo-accent);
+  }
+
+  .ph-client__card-price {
+    color: var(--demo-muted);
+  }
+
+  .ph-client__badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--demo-sale);
+    color: var(--demo-sale-text);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 999px;
+  }
+
+  .ph-client__card-soldout {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(247, 244, 238, 0.82);
+    color: var(--demo-text);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+  }
+
+  // Bootstrap button restyled to the design's look (still .btn.btn-primary)
+  .btn-primary {
+    background: var(--demo-accent);
+    border-color: var(--demo-accent);
+    border-radius: 999px;
+    padding: 12px 32px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.82rem;
+  }
+
+  .btn-primary:hover,
+  .btn-primary:focus {
+    background: color-mix(in srgb, var(--demo-accent) 82%, #000);
+    border-color: color-mix(in srgb, var(--demo-accent) 82%, #000);
+  }
+
+  .ph-client__footer {
+    border-top: 1px solid var(--demo-border);
+    padding: 48px 0 24px;
+  }
+
+  .ph-client__footer-brand {
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+  }
+
+  .ph-client__footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .ph-client__footer-links a {
+    color: var(--demo-muted);
+    text-decoration: none;
+  }
+
+  .ph-client__footer-links a:hover {
+    color: var(--demo-accent);
+  }
+
+  .ph-client__footer-copy {
+    text-align: center;
+    color: var(--demo-muted);
+    font-size: 0.85rem;
+    margin: 32px 0 0;
+  }
+
+  // Scroll reveal — hidden only when JS is present (a11y: content never
+  // invisible without JS; reduced motion kills the transition).
+  html.js & .ph-client__reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  html.js & .ph-client__reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ph-client__reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+}
