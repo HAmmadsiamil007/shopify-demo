@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "hero": {
+      "type": "client-demo-hero",
+      "settings": {}
+    },
+    "collection": {
+      "type": "client-demo-collection",
+      "settings": {}
+    },
+    "footer": {
+      "type": "client-demo-footer",
+      "settings": {}
+    }
+  },
+  "order": ["hero", "collection", "footer"]
+}

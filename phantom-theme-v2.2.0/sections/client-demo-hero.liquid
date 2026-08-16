@@ -1,0 +1,76 @@
+{% comment %}
+Renders the demo design hero (Aurora Studio) — client-demo activation walkthrough.
+@example
+{% section 'client-demo-hero' %}
+{% endcomment %}
+
+<div class="ph-client__hero" data-section-type="client-demo-hero" data-section-id="{{ section.id }}">
+  <div class="container">
+    <p class="ph-client__hero-eyebrow">{{ section.settings.title }}</p>
+    {%- if section.settings.image != blank -%}
+      <img
+        src="{{ section.settings.image | image_url: width: 1600 }}"
+        alt="{{ section.settings.image.alt | escape }}"
+        width="1600"
+        height="{{ 1600 | divided_by: section.settings.image.aspect_ratio | round }}"
+        loading="eager">
+    {%- else -%}
+      <div class="ph-client__hero-placeholder" aria-hidden="true"></div>
+    {%- endif -%}
+    <h1 class="ph-client__hero-title ph-client__reveal">{{ section.settings.headline }}</h1>
+    {%- if section.settings.subtitle != blank -%}
+      <p class="ph-client__hero-subtitle ph-client__reveal">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+    {%- if section.settings.cta_label != blank and section.settings.cta_url != blank -%}
+      <a class="btn btn-primary ph-client__reveal" href="{{ section.settings.cta_url }}">{{ section.settings.cta_label }}</a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.client_demo_hero.name",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.client_demo_hero.settings.title.label",
+      "default": "Aurora Studio"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.client_demo_hero.settings.image.label"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "t:sections.client_demo_hero.settings.headline.label",
+      "default": "Objects for the slow home"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "t:sections.client_demo_hero.settings.subtitle.label",
+      "default": "Considered ceramics, linen and light — made in small batches."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "t:sections.client_demo_hero.settings.cta_label.label",
+      "default": "Shop the collection"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "t:sections.client_demo_hero.settings.cta_url.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.client_demo_hero.presets.name"
+    }
+  ]
+}
+{% endschema %}

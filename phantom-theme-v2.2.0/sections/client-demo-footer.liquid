@@ -1,0 +1,60 @@
+{% comment %}
+Renders the demo design footer — brand text, menu links, footer text, copyright.
+@example
+{% section 'client-demo-footer' %}
+{% endcomment %}
+
+<footer class="ph-client__footer" data-section-type="client-demo-footer" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-12 col-md-4">
+        <p class="ph-client__footer-brand">{{ section.settings.brand_text }}</p>
+        <p>{{ section.settings.footer_text }}</p>
+      </div>
+      <div class="col-12 col-md-4">
+        {%- assign demo_menu = section.settings.menu -%}
+        {%- if demo_menu != blank -%}
+          <ul class="ph-client__footer-links">
+            {%- for link in demo_menu.links -%}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+      <div class="col-12 col-md-4">
+        <p class="ph-client__footer-copy">© {{ 'now' | date: '%Y' }} {{ shop.name }}</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "t:sections.client_demo_footer.name",
+  "tag": "footer",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "brand_text",
+      "label": "t:sections.client_demo_footer.settings.brand_text.label",
+      "default": "Aurora Studio"
+    },
+    {
+      "type": "textarea",
+      "id": "footer_text",
+      "label": "t:sections.client_demo_footer.settings.footer_text.label",
+      "default": "Small-batch goods, made slowly."
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "t:sections.client_demo_footer.settings.menu.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.client_demo_footer.presets.name"
+    }
+  ]
+}
+{% endschema %}
