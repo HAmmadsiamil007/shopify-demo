@@ -1,3 +1,4 @@
+{%- # theme-check-disable UnusedAssign -%}
 {% comment %}
   Design Pack Runtime — active design pack resolver (single registration point).
   PHANTOM Core contract: consumers read ONLY dp_active / dp_asset / dp_enabled.
@@ -5,6 +6,8 @@
   positional lists below (same index across all four). check-registry.mjs gates
   integrity; the first entry is always the production default (aether).
   Statuses: active = assets load | legacy = compatibility entry (none) | draft = reserved.
+  UnusedAssign suppressed: dp_* outputs are consumed by theme.liquid via include
+  (include shares scope with the parent; render does not).
 {% endcomment %}
 
 {%- assign dp_packs = 'aether|demo|none' | split: '|' -%}
