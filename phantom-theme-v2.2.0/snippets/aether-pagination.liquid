@@ -1,0 +1,55 @@
+{% comment %}
+  AETHER pagination (plan Task 7 Step 2) — frozen shop.html:315-329
+  (prev / numeric pages / next, chevron icons). Takes the paginate object.
+
+  D-notes:
+  - Frozen page numbers are inert spans; AETHER pages link via paginate.parts
+    (Shopify constraint), prev/next disabled at boundaries.
+  - FontAwesome chevrons replaced with inline SVGs (no FA in theme).
+{% endcomment %}
+
+{%- liquid
+  assign parts = paginate.parts
+-%}
+
+<nav class="aether-shop-pagination" aria-label="{{ 'aether.collection_grid.pagination' | t }}">
+  {%- if paginate.previous != nil -%}
+    <a class="aether-pagination-btn aether-pagination-prev" href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t }}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </a>
+  {%- else -%}
+    <span class="aether-pagination-btn aether-pagination-prev" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </span>
+  {%- endif -%}
+
+  <div class="aether-pagination-pages">
+    {%- for part in parts -%}
+      {%- if part.is_link -%}
+        <a class="aether-pagination-page" href="{{ part.url }}">{{ part.title | escape }}</a>
+      {%- elsif part.title == paginate.current_page -%}
+        <span class="aether-pagination-page active" aria-current="page">{{ part.title | escape }}</span>
+      {%- else -%}
+        <span class="aether-pagination-page" aria-hidden="true">{{ part.title | escape }}</span>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  {%- if paginate.next != nil -%}
+    <a class="aether-pagination-btn aether-pagination-next" href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t }}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </a>
+  {%- else -%}
+    <span class="aether-pagination-btn aether-pagination-next" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </span>
+  {%- endif -%}
+</nav>

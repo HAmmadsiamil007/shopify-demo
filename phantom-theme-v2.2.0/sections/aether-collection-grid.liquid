@@ -1,0 +1,147 @@
+{% comment %}
+  AETHER collection grid (plan Task 7 Step 1) — frozen shop.html:207-329
+  (page hero + filter pills + 3-col shop grid + pagination). Renders the
+  aether-product-card simple variant (no actions/rating/tagline) exactly like
+  the frozen shop cards.
+
+  D-notes:
+  - Frozen filter bar is a static demo (All/Men/Women/...); AETHER renders
+    pills from the filter_menu link_list, active = current collection.
+  - Frozen has no sort control; AETHER adds a minimal sort select when
+    enable_sort is on (PHANTOM collection-grid sort convention, D4).
+  - Frozen has no empty state; AETHER shows muted copy (collections.general.
+    no_matches), D-doc.
+  - Frozen page-hero carries fog layers; AETHER page hero is gradient only
+    (fog reserved for the hero slider), D-doc.
+{% endcomment %}
+
+{%- liquid
+  assign filter_menu = linklists[section.settings.filter_menu]
+  assign sort_by = collection.sort_by
+  assign default_sort_by = collection.default_sort_by
+  assign sort_options = collection.sort_options
+-%}
+
+<section
+  class="aether-collection-grid"
+  data-section-type="aether-collection-grid"
+  data-aether-motion-enabled="{{ settings.aether_motion_enable }}"
+>
+  {%- if section.settings.show_page_hero -%}
+    <div class="aether-page-hero">
+      <div class="aether-container">
+        <span class="aether-section-label">{{ 'aether.collection_grid.label' | t }}</span>
+        <h1 class="aether-page-hero-title">{{ collection.title | escape }}</h1>
+        {%- if collection.description != blank -%}
+          <p class="aether-page-hero-subtitle">{{ collection.description | escape }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if filter_menu != blank and filter_menu.links.size > 0 -%}
+    <div class="aether-filter-bar">
+      <div class="aether-container">
+        <div class="aether-filter-buttons">
+          {%- for link in filter_menu.links -%}
+            {%- liquid
+              assign is_active = false
+              if link.url == collection.url
+                assign is_active = true
+              elsif link.object != blank and link.object.handle == collection.handle
+                assign is_active = true
+              endif
+            -%}
+            <a href="{{ link.url }}" class="aether-filter-btn{% if is_active %} active{% endif %}">
+              {{ link.title | escape }}
+            </a>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="aether-shop-grid-section">
+    <div class="aether-container">
+      {%- if section.settings.enable_sort -%}
+        <div class="aether-shop-toolbar">
+          <label for="AetherSortBy" class="visually-hidden">{{ 'collections.sorting.title' | t }}</label>
+          <select
+            id="AetherSortBy"
+            class="aether-sort"
+            name="SortBy"
+            data-default-sortby="{{ default_sort_by }}"
+          >
+            {%- assign sort_by = sort_by | default: default_sort_by -%}
+            <option value="{{ default_sort_by }}"{% if sort_by == default_sort_by %} selected="selected"{% endif %}>{{ 'collections.sorting.title' | t }}</option>
+            {%- for option in sort_options -%}
+              <option value="{{ option.value }}"{% if option.value == sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>
+            {%- endfor -%}
+          </select>
+        </div>
+      {%- endif -%}
+
+      {%- paginate collection.products by section.settings.per_page -%}
+        {%- if collection.products.size > 0 -%}
+          <div class="aether-shop-grid" data-aether-reveal-group style="grid-template-columns: repeat({{ section.settings.per_row }}, 1fr)">
+            {%- for product in collection.products -%}
+              {%- render 'aether-product-card', product: product, variant: 'simple', per_row: section.settings.per_row, collection: collection -%}
+            {%- endfor -%}
+          </div>
+          {%- render 'aether-pagination', paginate: paginate -%}
+        {%- else -%}
+          <div class="aether-shop-empty">{{ 'collections.general.no_matches' | t }}</div>
+        {%- endif -%}
+      {%- endpaginate -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "t:sections.aether-collection-grid.name",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_page_hero",
+        "default": true,
+        "label": "t:sections.aether-collection-grid.settings.show_page_hero.label"
+      },
+      {
+        "type": "link_list",
+        "id": "filter_menu",
+        "label": "t:sections.aether-collection-grid.settings.filter_menu.label",
+        "info": "t:sections.aether-collection-grid.settings.filter_menu.info"
+      },
+      {
+        "type": "range",
+        "id": "per_page",
+        "min": 6,
+        "max": 24,
+        "step": 1,
+        "default": 12,
+        "label": "t:sections.aether-collection-grid.settings.per_page.label"
+      },
+      {
+        "type": "range",
+        "id": "per_row",
+        "min": 2,
+        "max": 4,
+        "step": 1,
+        "default": 3,
+        "label": "t:sections.aether-collection-grid.settings.per_row.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_sort",
+        "default": true,
+        "label": "t:sections.aether-collection-grid.settings.enable_sort.label"
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.aether-collection-grid.presets.default.name"
+      }
+    ]
+  }
+{% endschema %}

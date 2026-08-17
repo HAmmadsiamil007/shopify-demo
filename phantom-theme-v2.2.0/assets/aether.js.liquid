@@ -565,6 +565,40 @@ import { loadScript, loadCSS } from 'theme-resource-loader'
     }
   }
 
+  CONTROLLERS['aether-collection-grid'] = {
+    init(el) {
+      this._el = el
+      this._clear()
+      // Sort select -> ?sort_by= (PHANTOM theme.Collection.onSortChange
+      // precedent, theme.js:6442-6449). Navigation is server-rendered so the
+      // controller only rebinds after section refresh.
+      this._sortSelect = el.querySelector('.aether-sort')
+      if (this._sortSelect) {
+        this._onSortChange = () => {
+          var params = new URLSearchParams(window.location.search)
+          params.set('sort_by', this._sortSelect.value)
+          params.delete('page')
+          window.location.search = params.toString()
+        }
+        this._sortSelect.addEventListener('change', this._onSortChange)
+      }
+    },
+    destroy() {
+      this._clear()
+    },
+    refresh() {
+      this.init(this._el)
+    },
+    _clear() {
+      if (this._sortSelect && this._onSortChange) {
+        this._sortSelect.removeEventListener('change', this._onSortChange)
+      }
+      this._sortSelect = null
+      this._onSortChange = null
+      this._el = null
+    }
+  }
+
   window.AetherRuntime = window.AetherRuntime || AetherRuntime
 
   window.addEventListener(EVENTS.themeReady, function () {

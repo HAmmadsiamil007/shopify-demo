@@ -579,16 +579,18 @@
     }
 ,
     "aether": {
-        "featured_products": {
-            "empty": "No products available in this collection yet."
+        "footer": {
+            "all_rights_reserved": "All Rights Reserved.",
+            "privacy": "Privacy",
+            "social_heading": "Social media links",
+            "terms": "Terms"
+        },
+        "collection_grid": {
+            "label": "Collection",
+            "pagination": "Pagination"
         },
         "header": {
             "shop_now": "Shop Now"
-        },
-        "hero": {
-            "next": "Next slide",
-            "prev": "Previous slide",
-            "scroll_hint": "Scroll to explore"
         },
         "product_card": {
             "bestseller": "Bestseller",
@@ -598,11 +600,13 @@
             "rating_label": "Rated {{ value }} out of 5, based on {{ count }} reviews",
             "wishlist": "Add to wishlist"
         },
-        "footer": {
-            "all_rights_reserved": "All Rights Reserved.",
-            "privacy": "Privacy",
-            "social_heading": "Social media links",
-            "terms": "Terms"
+        "hero": {
+            "next": "Next slide",
+            "prev": "Previous slide",
+            "scroll_hint": "Scroll to explore"
+        },
+        "featured_products": {
+            "empty": "No products available in this collection yet."
         }
     }
 }

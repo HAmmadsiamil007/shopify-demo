@@ -1810,3 +1810,265 @@
     font-size: 1.5rem;
   }
 }
+
+@media (max-width: 360px) {
+  .aether-hero-headline {
+    font-size: 1.5rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TASK 7 — COLLECTION GRID (frozen shop.html + style.css)
+   Page hero: style.css:1921-1944; filter bar: 2038-2069; shop grid:
+   2071-2081; pagination: 3948-4011; responsive.css: 211-218, 235-237,
+   615-633, 704-717, 1025-1038, 1114-1129, 1182-1190.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Page hero */
+.aether-page-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 200px 0 100px;
+  background: linear-gradient(180deg, rgba(9, 9, 9, 0.55) 0%, var(--aether-bg) 100%);
+  text-align: center;
+}
+
+.aether-page-hero-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  color: var(--aether-text);
+}
+
+.aether-page-hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--aether-muted);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Filter bar */
+.aether-filter-bar {
+  padding: 30px 0;
+  background-color: var(--aether-bg);
+  border-bottom: 1px solid var(--aether-surface);
+}
+
+.aether-filter-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.aether-filter-btn {
+  padding: 10px 24px;
+  background: transparent;
+  border: 1px solid var(--aether-surface);
+  color: var(--aether-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.aether-filter-btn:hover,
+.aether-filter-btn.active {
+  border-color: var(--aether-accent);
+  color: var(--aether-accent);
+}
+
+/* Shop section */
+.aether-shop-grid-section {
+  padding: 100px 0;
+  background-color: var(--aether-bg);
+}
+
+.aether-shop-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+}
+
+.aether-sort {
+  padding: 10px 24px;
+  background: transparent;
+  border: 1px solid var(--aether-surface);
+  color: var(--aether-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.aether-sort:hover {
+  border-color: var(--aether-accent);
+  color: var(--aether-accent);
+}
+
+.aether-sort option {
+  background-color: var(--aether-bg);
+  color: var(--aether-text);
+}
+
+.aether-shop-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+/* Empty state (frozen none — D-doc) */
+.aether-shop-empty {
+  padding: 80px 0;
+  text-align: center;
+  color: var(--aether-muted);
+  font-size: 1rem;
+}
+
+/* Pagination */
+.aether-shop-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 60px 0 20px;
+}
+
+.aether-pagination-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--aether-surface);
+  color: var(--aether-muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+a.aether-pagination-btn:hover {
+  border-color: var(--aether-accent);
+  color: var(--aether-accent);
+}
+
+.aether-pagination-btn[aria-hidden='true'] {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.aether-pagination-pages {
+  display: flex;
+  gap: 8px;
+}
+
+.aether-pagination-page {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: var(--aether-muted);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+a.aether-pagination-page:hover {
+  border-color: var(--aether-accent);
+  color: var(--aether-accent);
+}
+
+.aether-pagination-page.active {
+  background: var(--aether-accent);
+  color: var(--aether-bg);
+  border-color: var(--aether-accent);
+  font-weight: 700;
+}
+
+/* Responsive (frozen responsive.css) */
+@media (max-width: 1024px) {
+  .aether-page-hero {
+    padding: 140px 0 60px;
+  }
+
+  .aether-shop-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .aether-page-hero-title {
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+  }
+
+  .aether-page-hero-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .aether-shop-grid-section {
+    padding: 70px 0;
+  }
+
+  .aether-shop-grid {
+    gap: 16px;
+  }
+
+  .aether-filter-buttons {
+    gap: 8px;
+  }
+
+  .aether-filter-btn {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .aether-shop-pagination {
+    gap: 10px;
+    padding: 40px 0 10px;
+  }
+
+  .aether-pagination-page {
+    width: 38px;
+    height: 38px;
+    font-size: 0.8rem;
+  }
+
+  .aether-pagination-btn {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+@media (max-width: 480px) {
+  .aether-page-hero {
+    padding: 120px 0 40px;
+  }
+
+  .aether-page-hero-title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .aether-page-hero-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .aether-shop-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .aether-filter-btn {
+    padding: 7px 12px;
+    font-size: 0.75rem;
+  }
+}

@@ -171,6 +171,32 @@
         }
       }
     },
+    "aether-collection-grid": {
+      "name": "Griglia prodotti (AETHER)",
+      "settings": {
+        "show_page_hero": {
+          "label": "Mostra hero di pagina"
+        },
+        "filter_menu": {
+          "label": "Menu filtri",
+          "info": "I link vengono mostrati come pillole di filtro; la collezione corrente viene evidenziata"
+        },
+        "per_page": {
+          "label": "Prodotti per pagina"
+        },
+        "per_row": {
+          "label": "Prodotti per riga"
+        },
+        "enable_sort": {
+          "label": "Abilita ordinamento"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Griglia prodotti"
+        }
+      }
+    },
     "aether-hero": {
       "name": "Hero (AETHER)",
       "settings": {

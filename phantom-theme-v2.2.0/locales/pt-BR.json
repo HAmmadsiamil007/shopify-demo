@@ -579,16 +579,18 @@
   }
 ,
     "aether": {
-        "featured_products": {
-            "empty": "Nenhum produto disponível nesta coleção ainda."
+        "footer": {
+            "all_rights_reserved": "Todos os direitos reservados.",
+            "privacy": "Privacidade",
+            "social_heading": "Links de redes sociais",
+            "terms": "Termos"
+        },
+        "collection_grid": {
+            "label": "Coleção",
+            "pagination": "Paginação"
         },
         "header": {
             "shop_now": "Compre agora"
-        },
-        "hero": {
-            "next": "Próximo slide",
-            "prev": "Slide anterior",
-            "scroll_hint": "Role para explorar"
         },
         "product_card": {
             "bestseller": "Mais vendido",
@@ -598,11 +600,13 @@
             "rating_label": "Avaliado com {{ value }} de 5, com base em {{ count }} avaliações",
             "wishlist": "Adicionar à lista de desejos"
         },
-        "footer": {
-            "all_rights_reserved": "Todos os direitos reservados.",
-            "privacy": "Privacidade",
-            "social_heading": "Links de redes sociais",
-            "terms": "Termos"
+        "hero": {
+            "next": "Próximo slide",
+            "prev": "Slide anterior",
+            "scroll_hint": "Role para explorar"
+        },
+        "featured_products": {
+            "empty": "Nenhum produto disponível nesta coleção ainda."
         }
     }
 }
