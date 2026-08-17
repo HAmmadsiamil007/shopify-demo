@@ -3333,33 +3333,65 @@
     "client_demo_hero": {
       "name": "",
       "settings": {
-        "title": { "label": "" },
-        "image": { "label": "" },
-        "headline": { "label": "" },
-        "subtitle": { "label": "" },
-        "cta_label": { "label": "" },
-        "cta_url": { "label": "" }
+        "title": {
+          "label": ""
+        },
+        "image": {
+          "label": ""
+        },
+        "headline": {
+          "label": ""
+        },
+        "subtitle": {
+          "label": ""
+        },
+        "cta_label": {
+          "label": ""
+        },
+        "cta_url": {
+          "label": ""
+        }
       },
-      "presets": { "name": "" }
+      "presets": {
+        "name": ""
+      }
     },
     "client_demo_collection": {
       "name": "",
       "settings": {
-        "collection": { "label": "" },
-        "heading": { "label": "" },
-        "limit": { "label": "" },
-        "show_badges": { "label": "" }
+        "collection": {
+          "label": ""
+        },
+        "heading": {
+          "label": ""
+        },
+        "limit": {
+          "label": ""
+        },
+        "show_badges": {
+          "label": ""
+        }
       },
-      "presets": { "name": "" }
+      "presets": {
+        "name": ""
+      }
     },
     "client_demo_footer": {
       "name": "",
       "settings": {
-        "brand_text": { "label": "" },
-        "footer_text": { "label": "" },
-        "menu": { "label": "" }
+        "brand_text": {
+          "label": ""
+        },
+        "footer_text": {
+          "label": ""
+        },
+        "menu": {
+          "label": ""
+        }
       },
-      "presets": { "name": "" }
+      "presets": {
+        "name": ""
+      }
     }
   },
   "settings_schema": {
@@ -4101,19 +4133,80 @@
         }
       }
     },
-    "ph_designs": {
-      "name": "",
+    "common": {},
+    "design_pack": {
+      "name": "Design Packs",
+      "paragraph": "Select the active design pack. PHANTOM Core, PHANTOM Library and the Design Pack Runtime stay available; the active pack only changes the default design.",
       "settings": {
-        "ph_active_design": {
-          "label": "",
+        "active_design_pack": {
+          "label": "Active design pack",
           "options": {
-            "none": { "label": "" },
-            "demo": { "label": "Demo — Aurora Studio" }
+            "aether": {
+              "label": "AETHER (default)"
+            },
+            "demo": {
+              "label": "Demo - Aurora Studio (legacy)"
+            },
+            "none": {
+              "label": "None (legacy)"
+            }
           }
         }
       }
     },
-    "common": {}
+    "aether": {
+      "name": "AETHER - Design Pack",
+      "paragraph": "Pack-owned design tokens for the AETHER design pack. These settings belong to AETHER only; other design packs ship their own.",
+      "settings": {
+        "aether_primary": {
+          "label": "Primary color"
+        },
+        "aether_accent": {
+          "label": "Accent color"
+        },
+        "aether_bg": {
+          "label": "Background color"
+        },
+        "aether_surface": {
+          "label": "Surface color"
+        },
+        "aether_text": {
+          "label": "Text color"
+        },
+        "aether_muted": {
+          "label": "Muted text color"
+        },
+        "aether_border": {
+          "label": "Border color"
+        },
+        "aether_sale": {
+          "label": "Sale color"
+        },
+        "aether_heading_font": {
+          "label": "Heading font"
+        },
+        "aether_body_font": {
+          "label": "Body font"
+        },
+        "aether_radius": {
+          "label": "Corner radius"
+        },
+        "aether_dark_light": {
+          "label": "Color scheme",
+          "options": {
+            "dark": {
+              "label": "Dark (Void)"
+            },
+            "light": {
+              "label": "Light"
+            }
+          }
+        },
+        "aether_motion_enable": {
+          "label": "Enable motion"
+        }
+      }
+    }
   },
   "locales": {
     "general": {

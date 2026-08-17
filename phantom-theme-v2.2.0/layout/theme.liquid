@@ -34,8 +34,10 @@
   {{ 'ph-loader.css' | asset_url | stylesheet_tag }}
   {{ 'ph-transitions.css' | asset_url | stylesheet_tag }}
   {{ 'ph-design-tokens.css' | asset_url | stylesheet_tag }}
-  {%- if settings.ph_active_design != 'none' -%}
-    {{ 'client-' | append: settings.ph_active_design | append: '.css' | asset_url | stylesheet_tag }}
+  {%- render 'design-pack-resolver' -%}
+
+  {%- if dp_enabled -%}
+    {{ dp_asset | append: '.css.liquid' | asset_url | stylesheet_tag }}
   {%- endif -%}
   {%- render 'css-variables' -%}
 
@@ -367,8 +369,8 @@
 
   <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
 
-  {%- if settings.ph_active_design != 'none' -%}
-    <script type="module" src="{{ 'client-' | append: settings.ph_active_design | append: '.js' | asset_url }}"></script>
+  {%- if dp_enabled -%}
+    <script type="module" src="{{ dp_asset | append: '.js.liquid' | asset_url }}"></script>
   {%- endif -%}
 
   {%- if request.page_type contains 'customers/' -%}
@@ -381,7 +383,7 @@
   {% endif %}
 </head>
 
-<body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if request.path == '/challenge' %} template-challenge{% endif %}" data-center-text="{{ settings.type_body_align_text }}" data-button_style="{{ settings.button_style }}" data-type_header_capitalize="{{ settings.type_header_capitalize }}" data-type_headers_align_text="{{ settings.type_headers_align_text }}" data-type_product_capitalize="{{ settings.type_product_capitalize }}" data-swatch_style="{{ settings.swatch_style }}"{%- if settings.ph_active_design != 'none' %} ph-client ph-client--{{ settings.ph_active_design }} data-ph-design="{{ settings.ph_active_design }}"{%- endif %} {% if settings.disable_animations %}data-disable-animations="true"{% endif %}>
+<body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if request.path == '/challenge' %} template-challenge{% endif %}" data-center-text="{{ settings.type_body_align_text }}" data-button_style="{{ settings.button_style }}" data-type_header_capitalize="{{ settings.type_header_capitalize }}" data-type_headers_align_text="{{ settings.type_headers_align_text }}" data-type_product_capitalize="{{ settings.type_product_capitalize }}" data-swatch_style="{{ settings.swatch_style }}"{%- if dp_enabled %} ph-client ph-client--{{ dp_active }} data-ph-design="{{ dp_active }}"{%- endif %} {% if settings.disable_animations %}data-disable-animations="true"{% endif %}>
 
   {%- render 'ph-loader' -%}
 

@@ -1258,17 +1258,117 @@
     ]
   },
   {
-    "name": "t:settings_schema.ph_designs.name",
+    "name": "t:settings_schema.design_pack.name",
     "settings": [
       {
+        "type": "paragraph",
+        "content": "t:settings_schema.design_pack.paragraph"
+      },
+      {
         "type": "select",
-        "id": "ph_active_design",
-        "label": "t:settings_schema.ph_designs.settings.ph_active_design.label",
-        "default": "none",
+        "id": "active_design_pack",
+        "label": "t:settings_schema.design_pack.settings.active_design_pack.label",
+        "default": "aether",
         "options": [
-          { "value": "none", "label": "t:settings_schema.ph_designs.settings.ph_active_design.options.none.label" },
-          { "value": "demo", "label": "t:settings_schema.ph_designs.settings.ph_active_design.options.demo.label" }
+          { "value": "aether", "label": "t:settings_schema.design_pack.settings.active_design_pack.options.aether.label" },
+          { "value": "demo", "label": "t:settings_schema.design_pack.settings.active_design_pack.options.demo.label" },
+          { "value": "none", "label": "t:settings_schema.design_pack.settings.active_design_pack.options.none.label" }
         ]
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.aether.name",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:settings_schema.aether.paragraph"
+      },
+      {
+        "type": "color",
+        "id": "aether_primary",
+        "label": "t:settings_schema.aether.settings.aether_primary.label",
+        "default": "#D4A574"
+      },
+      {
+        "type": "color",
+        "id": "aether_accent",
+        "label": "t:settings_schema.aether.settings.aether_accent.label",
+        "default": "#C8956C"
+      },
+      {
+        "type": "color",
+        "id": "aether_bg",
+        "label": "t:settings_schema.aether.settings.aether_bg.label",
+        "default": "#09090B"
+      },
+      {
+        "type": "color",
+        "id": "aether_surface",
+        "label": "t:settings_schema.aether.settings.aether_surface.label",
+        "default": "#1A1A1A"
+      },
+      {
+        "type": "color",
+        "id": "aether_text",
+        "label": "t:settings_schema.aether.settings.aether_text.label",
+        "default": "#F2F2F2"
+      },
+      {
+        "type": "color",
+        "id": "aether_muted",
+        "label": "t:settings_schema.aether.settings.aether_muted.label",
+        "default": "#9C9C9C"
+      },
+      {
+        "type": "color",
+        "id": "aether_border",
+        "label": "t:settings_schema.aether.settings.aether_border.label",
+        "default": "#2A2A2A"
+      },
+      {
+        "type": "color",
+        "id": "aether_sale",
+        "label": "t:settings_schema.aether.settings.aether_sale.label",
+        "default": "#E74C3C"
+      },
+      {
+        "type": "font_picker",
+        "id": "aether_heading_font",
+        "label": "t:settings_schema.aether.settings.aether_heading_font.label",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "aether_body_font",
+        "label": "t:settings_schema.aether.settings.aether_body_font.label",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "range",
+        "id": "aether_radius",
+        "min": 0,
+        "max": 32,
+        "step": 1,
+        "unit": "px",
+        "label": "t:settings_schema.aether.settings.aether_radius.label",
+        "default": 12
+      },
+      {
+        "type": "select",
+        "id": "aether_dark_light",
+        "label": "t:settings_schema.aether.settings.aether_dark_light.label",
+        "default": "dark",
+        "options": [
+          { "value": "dark", "label": "t:settings_schema.aether.settings.aether_dark_light.options.dark.label" },
+          { "value": "light", "label": "t:settings_schema.aether.settings.aether_dark_light.options.light.label" }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "aether_motion_enable",
+        "label": "t:settings_schema.aether.settings.aether_motion_enable.label",
+        "default": true
       }
     ]
   }

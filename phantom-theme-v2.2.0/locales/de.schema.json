@@ -3333,33 +3333,65 @@
     "client_demo_hero": {
       "name": "Demo — Hero",
       "settings": {
-        "title": { "label": "Oberzeile" },
-        "image": { "label": "Bild" },
-        "headline": { "label": "Überschrift" },
-        "subtitle": { "label": "Untertitel" },
-        "cta_label": { "label": "CTA-Text" },
-        "cta_url": { "label": "CTA-Link" }
+        "title": {
+          "label": "Oberzeile"
+        },
+        "image": {
+          "label": "Bild"
+        },
+        "headline": {
+          "label": "Überschrift"
+        },
+        "subtitle": {
+          "label": "Untertitel"
+        },
+        "cta_label": {
+          "label": "CTA-Text"
+        },
+        "cta_url": {
+          "label": "CTA-Link"
+        }
       },
-      "presets": { "name": "Demo-Hero" }
+      "presets": {
+        "name": "Demo-Hero"
+      }
     },
     "client_demo_collection": {
       "name": "Demo — Kollektion",
       "settings": {
-        "collection": { "label": "Kollektion" },
-        "heading": { "label": "Überschrift" },
-        "limit": { "label": "Anzuzeigende Produkte" },
-        "show_badges": { "label": "Verkaufsabzeichen anzeigen" }
+        "collection": {
+          "label": "Kollektion"
+        },
+        "heading": {
+          "label": "Überschrift"
+        },
+        "limit": {
+          "label": "Anzuzeigende Produkte"
+        },
+        "show_badges": {
+          "label": "Verkaufsabzeichen anzeigen"
+        }
       },
-      "presets": { "name": "Demo-Kollektion" }
+      "presets": {
+        "name": "Demo-Kollektion"
+      }
     },
     "client_demo_footer": {
       "name": "Demo — Fußzeile",
       "settings": {
-        "brand_text": { "label": "Markentext" },
-        "footer_text": { "label": "Fußzeilentext" },
-        "menu": { "label": "Menü" }
+        "brand_text": {
+          "label": "Markentext"
+        },
+        "footer_text": {
+          "label": "Fußzeilentext"
+        },
+        "menu": {
+          "label": "Menü"
+        }
       },
-      "presets": { "name": "Demo-Fußzeile" }
+      "presets": {
+        "name": "Demo-Fußzeile"
+      }
     }
   },
   "settings_schema": {
@@ -4101,15 +4133,76 @@
         }
       }
     },
-    "ph_designs": {
-      "name": "Client-Designs",
+    "design_pack": {
+      "name": "Design Packs",
+      "paragraph": "Select the active design pack. PHANTOM Core, PHANTOM Library and the Design Pack Runtime stay available; the active pack only changes the default design.",
       "settings": {
-        "ph_active_design": {
-          "label": "Aktives Client-Design",
+        "active_design_pack": {
+          "label": "Active design pack",
           "options": {
-            "none": { "label": "Keine (Standard PHANTOM)" },
-            "demo": { "label": "Demo — Aurora Studio" }
+            "aether": {
+              "label": "AETHER (default)"
+            },
+            "demo": {
+              "label": "Demo - Aurora Studio (legacy)"
+            },
+            "none": {
+              "label": "None (legacy)"
+            }
           }
+        }
+      }
+    },
+    "aether": {
+      "name": "AETHER - Design Pack",
+      "paragraph": "Pack-owned design tokens for the AETHER design pack. These settings belong to AETHER only; other design packs ship their own.",
+      "settings": {
+        "aether_primary": {
+          "label": "Primary color"
+        },
+        "aether_accent": {
+          "label": "Accent color"
+        },
+        "aether_bg": {
+          "label": "Background color"
+        },
+        "aether_surface": {
+          "label": "Surface color"
+        },
+        "aether_text": {
+          "label": "Text color"
+        },
+        "aether_muted": {
+          "label": "Muted text color"
+        },
+        "aether_border": {
+          "label": "Border color"
+        },
+        "aether_sale": {
+          "label": "Sale color"
+        },
+        "aether_heading_font": {
+          "label": "Heading font"
+        },
+        "aether_body_font": {
+          "label": "Body font"
+        },
+        "aether_radius": {
+          "label": "Corner radius"
+        },
+        "aether_dark_light": {
+          "label": "Color scheme",
+          "options": {
+            "dark": {
+              "label": "Dark (Void)"
+            },
+            "light": {
+              "label": "Light"
+            }
+          }
+        },
+        "aether_motion_enable": {
+          "label": "Enable motion"
         }
       }
     }
