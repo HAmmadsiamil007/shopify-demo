@@ -1,0 +1,64 @@
+<footer class="aether-footer ph-client ph-client--aether" data-section-type="aether-footer">
+  <div class="aether-footer__inner">
+    {%- if section.settings.menu != blank -%}
+      <nav class="aether-footer__nav" aria-label="{{ 'general.drawers.navigation' | t }}">
+        <ul>
+          {%- for link in section.settings.menu.links -%}
+            <li>
+              <a href="{{ link.url }}">{{ link.title | escape }}</a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+
+    {%- if section.settings.show_payment_icons -%}
+      {%- unless shop.enabled_payment_types == empty -%}
+        <div class="aether-footer__payments">
+          {%- for type in shop.enabled_payment_types -%}
+            {{ type | payment_type_svg_tag: class: 'aether-footer__payment-icon' }}
+          {%- endfor -%}
+        </div>
+      {%- endunless -%}
+    {%- endif -%}
+
+    {%- if section.settings.copyright_text != blank -%}
+      <p class="aether-footer__copyright">{{ section.settings.copyright_text | escape }}</p>
+    {%- else -%}
+      <p class="aether-footer__copyright">© {{ 'now' | date: '%Y' }} {{ shop.name | escape }}</p>
+    {%- endif -%}
+  </div>
+</footer>
+
+{% schema %}
+  {
+    "name": "t:sections.aether-footer.name",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "t:sections.aether-footer.settings.menu.label",
+        "default": "footer"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_payment_icons",
+        "label": "t:sections.aether-footer.settings.show_payment_icons.label",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "copyright_text",
+        "label": "t:sections.aether-footer.settings.copyright_text.label"
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.aether-footer.presets.default.name"
+      }
+    ],
+    "disabled_on": {
+      "groups": ["footer"]
+    }
+  }
+{% endschema %}

@@ -1,9 +1,10 @@
 {%- # theme-check-disable UnusedAssign -%}
 {% comment %}
   Design Pack Runtime — active design pack resolver (single registration point).
-  PHANTOM Core contract: consumers read ONLY dp_active / dp_asset / dp_enabled.
-  Never add pack-name conditionals here or in theme.liquid — extend the four
-  positional lists below (same index across all four). check-registry.mjs gates
+  PHANTOM Core contract: consumers read ONLY dp_active / dp_asset / dp_enabled /
+  dp_header_group / dp_footer_group / dp_popup_group.
+  Never add pack-name conditionals here or in theme.liquid — extend the seven
+  positional lists below (same index across all). check-registry.mjs gates
   integrity; the first entry is always the production default (aether).
   Statuses: active = assets load | legacy = compatibility entry (none) | draft = reserved.
   UnusedAssign suppressed: dp_* outputs are consumed by theme.liquid via include
@@ -14,6 +15,9 @@
 {%- assign dp_assets = 'aether|client-demo|none' | split: '|' -%}
 {%- assign dp_versions = '1.0.0|1.0.0|0.0.0' | split: '|' -%}
 {%- assign dp_statuses = 'active|active|legacy' | split: '|' -%}
+{%- assign dp_header_groups = 'header-group.aether|header-group|header-group' | split: '|' -%}
+{%- assign dp_footer_groups = 'footer-group.aether|footer-group|footer-group' | split: '|' -%}
+{%- assign dp_popup_groups = 'popup-group.aether|popup-group|popup-group' | split: '|' -%}
 
 {%- assign dp_found = false -%}
 {%- assign dp_index = 0 -%}
@@ -49,3 +53,12 @@
   {%- assign dp_asset = dp_assets[0] -%}
   {%- assign dp_enabled = true -%}
 {%- endunless -%}
+
+{%- comment -%}
+  Chrome group resolution (T5): the active pack's group compositions are the
+  {base}.{pack}.json alternates; all other packs render PHANTOM chrome groups.
+  Handles stay positional with dp_index — same integrity contract as assets.
+{%- endcomment -%}
+{%- assign dp_header_group = dp_header_groups[dp_index] -%}
+{%- assign dp_footer_group = dp_footer_groups[dp_index] -%}
+{%- assign dp_popup_group = dp_popup_groups[dp_index] -%}

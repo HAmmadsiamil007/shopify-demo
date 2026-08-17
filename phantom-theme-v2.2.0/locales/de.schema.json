@@ -8,10 +8,70 @@
       "products": "Produkte",
       "storytelling": "Storytelling"
     },
-    "header-group": {
-      "name": "Kopfgruppe"
+    "aether-announcement-bar": {
+      "name": "AnkÃ¼ndigungsleiste (AETHER)",
+      "settings": {
+        "text": {
+          "label": "Text"
+        },
+        "link": {
+          "label": "Link"
+        },
+        "link_text": {
+          "label": "Link-Beschriftung"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Standard"
+        }
+      }
     },
-    "footer-group": {
+    "aether-header": {
+      "name": "Kopfzeile (AETHER)",
+      "settings": {
+        "logo_text": {
+          "label": "Logo-Text",
+          "info": "Leer lassen, um den Shop-Namen zu verwenden"
+        },
+        "menu": {
+          "label": "MenÃ¼"
+        },
+        "show_search": {
+          "label": "Suchsymbol anzeigen"
+        },
+        "show_cart": {
+          "label": "Warenkorbsymbol anzeigen"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Standard"
+        }
+      }
+    },
+    "aether-footer": {
+      "name": "FuÃŸzeile (AETHER)",
+      "settings": {
+        "menu": {
+          "label": "MenÃ¼"
+        },
+        "show_payment_icons": {
+          "label": "Zahlungssymbole anzeigen"
+        },
+        "copyright_text": {
+          "label": "Urheberrechtstext"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Standard"
+        }
+      }
+    },
+    "aether-popup-group": {
+      "name": "Pop-ups (AETHER)"
+    },    "footer-group": {
       "name": "FuÃƒÅ¸gruppe"
     },
     "popup-group": {

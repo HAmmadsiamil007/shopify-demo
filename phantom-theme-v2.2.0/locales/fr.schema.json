@@ -8,10 +8,70 @@
       "products": "Produits",
       "storytelling": "Storytelling"
     },
-    "header-group": {
-      "name": "Groupe d'en-tÃƒÂªte"
+    "aether-announcement-bar": {
+      "name": "Barre d'annonce (AETHER)",
+      "settings": {
+        "text": {
+          "label": "Texte"
+        },
+        "link": {
+          "label": "Link"
+        },
+        "link_text": {
+          "label": "LibellÃ© du lien"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Par dÃ©faut"
+        }
+      }
     },
-    "footer-group": {
+    "aether-header": {
+      "name": "En-tÃªte (AETHER)",
+      "settings": {
+        "logo_text": {
+          "label": "Texte du logo",
+          "info": "Laissez vide pour utiliser le nom de la boutique"
+        },
+        "menu": {
+          "label": "Menu"
+        },
+        "show_search": {
+          "label": "Afficher l'icÃ´ne de recherche"
+        },
+        "show_cart": {
+          "label": "Afficher l'icÃ´ne du panier"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Par dÃ©faut"
+        }
+      }
+    },
+    "aether-footer": {
+      "name": "Pied de page (AETHER)",
+      "settings": {
+        "menu": {
+          "label": "Menu"
+        },
+        "show_payment_icons": {
+          "label": "Afficher les icÃ´nes de paiement"
+        },
+        "copyright_text": {
+          "label": "Texte des droits d'auteur"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Par dÃ©faut"
+        }
+      }
+    },
+    "aether-popup-group": {
+      "name": "FenÃªtres contextuelles (AETHER)"
+    },    "footer-group": {
       "name": "Groupe de pied de page"
     },
     "popup-group": {

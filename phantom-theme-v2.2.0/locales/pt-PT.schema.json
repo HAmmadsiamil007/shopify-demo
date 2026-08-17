@@ -8,10 +8,70 @@
       "products": "Products",
       "storytelling": "Storytelling"
     },
-    "header-group": {
-      "name": "Header group"
+    "aether-announcement-bar": {
+      "name": "Barra de anÃºncios (AETHER)",
+      "settings": {
+        "text": {
+          "label": "Texto"
+        },
+        "link": {
+          "label": "Link"
+        },
+        "link_text": {
+          "label": "Etiqueta do link"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "PadrÃ£o"
+        }
+      }
     },
-    "footer-group": {
+    "aether-header": {
+      "name": "CabeÃ§alho (AETHER)",
+      "settings": {
+        "logo_text": {
+          "label": "Texto do logotipo",
+          "info": "Deixe em branco para usar o nome da loja"
+        },
+        "menu": {
+          "label": "Menu"
+        },
+        "show_search": {
+          "label": "Mostrar Ã­cone de pesquisa"
+        },
+        "show_cart": {
+          "label": "Mostrar Ã­cone do carrinho"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "PadrÃ£o"
+        }
+      }
+    },
+    "aether-footer": {
+      "name": "RodapÃ© (AETHER)",
+      "settings": {
+        "menu": {
+          "label": "Menu"
+        },
+        "show_payment_icons": {
+          "label": "Mostrar Ã­cones de pagamento"
+        },
+        "copyright_text": {
+          "label": "Texto de direitos autorais"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "PadrÃ£o"
+        }
+      }
+    },
+    "aether-popup-group": {
+      "name": "Pop-ups (AETHER)"
+    },    "footer-group": {
       "name": "Footer group"
     },
     "popup-group": {

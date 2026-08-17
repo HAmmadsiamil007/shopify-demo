@@ -400,14 +400,18 @@
   <div id="PageContainer" class="page-container">
     <div class="transition-body">
 
-    {%- sections 'header-group' -%}
-    {%- sections 'popup-group' -%}
+    {%- # theme-check-disable UndefinedObject -%}
+    {%- sections dp_header_group -%}
+    {%- sections dp_popup_group -%}
+    {%- # theme-check-enable UndefinedObject -%}
 
       <main class="main-content" id="MainContent">
         {{ content_for_layout }}
       </main>
 
-    {%- sections 'footer-group' -%}
+    {%- # theme-check-disable UndefinedObject -%}
+    {%- sections dp_footer_group -%}
+    {%- # theme-check-enable UndefinedObject -%}
 
     </div>
   </div>

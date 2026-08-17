@@ -37,21 +37,35 @@ if (lists.dp_packs) {
 
 const resolve = (requested) => {
   const req = String(requested ?? '').trim().toLowerCase();
-  const fallback = { active: lists.dp_packs[0], asset: lists.dp_assets[0], enabled: true };
+  const fallback = {
+    active: lists.dp_packs[0],
+    asset: lists.dp_assets[0],
+    enabled: true,
+    header_group: lists.dp_header_groups[0],
+    footer_group: lists.dp_footer_groups[0],
+    popup_group: lists.dp_popup_groups[0],
+  };
   if (req === '' || req === 'blank') return fallback;
   const i = lists.dp_packs.indexOf(req);
   if (i === -1) return fallback;
   if (lists.dp_statuses[i] !== 'active') return { active: req, asset: 'none', enabled: false };
-  return { active: lists.dp_packs[i], asset: lists.dp_assets[i], enabled: true };
+  return {
+    active: lists.dp_packs[i],
+    asset: lists.dp_assets[i],
+    enabled: true,
+    header_group: lists.dp_header_groups[i],
+    footer_group: lists.dp_footer_groups[i],
+    popup_group: lists.dp_popup_groups[i],
+  };
 };
 
 const cases = [
-  ['blank fallback', 'blank', { active: 'aether', asset: 'aether', enabled: true }],
-  ['missing fallback', null, { active: 'aether', asset: 'aether', enabled: true }],
-  ['invalid fallback', 'bogus', { active: 'aether', asset: 'aether', enabled: true }],
-  ['case-insensitive', 'AETHER', { active: 'aether', asset: 'aether', enabled: true }],
-  ['aether default path', 'aether', { active: 'aether', asset: 'aether', enabled: true }],
-  ['legacy demo path', 'demo', { active: 'demo', asset: 'client-demo', enabled: true }],
+  ['blank fallback', 'blank', { active: 'aether', asset: 'aether', enabled: true, header_group: 'header-group.aether', footer_group: 'footer-group.aether', popup_group: 'popup-group.aether' }],
+  ['missing fallback', null, { active: 'aether', asset: 'aether', enabled: true, header_group: 'header-group.aether', footer_group: 'footer-group.aether', popup_group: 'popup-group.aether' }],
+  ['invalid fallback', 'bogus', { active: 'aether', asset: 'aether', enabled: true, header_group: 'header-group.aether', footer_group: 'footer-group.aether', popup_group: 'popup-group.aether' }],
+  ['case-insensitive', 'AETHER', { active: 'aether', asset: 'aether', enabled: true, header_group: 'header-group.aether', footer_group: 'footer-group.aether', popup_group: 'popup-group.aether' }],
+  ['aether default path', 'aether', { active: 'aether', asset: 'aether', enabled: true, header_group: 'header-group.aether', footer_group: 'footer-group.aether', popup_group: 'popup-group.aether' }],
+  ['legacy demo path', 'demo', { active: 'demo', asset: 'client-demo', enabled: true, header_group: 'header-group', footer_group: 'footer-group', popup_group: 'popup-group' }],
   ['legacy none path', 'none', { active: 'none', asset: 'none', enabled: false }],
 ];
 for (const [name, input, want] of cases) {
@@ -74,6 +88,16 @@ if (lists.dp_statuses) {
       } else {
         check(`asset exists ${lists.dp_assets[i]}.${ext}`, false, 'missing active-pack asset');
       }
+    }
+  });
+}
+
+if (lists.dp_header_groups) {
+  lists.dp_packs.forEach((pack, i) => {
+    for (const group of ['dp_header_groups', 'dp_footer_groups', 'dp_popup_groups']) {
+      const handle = lists[group][i];
+      const file = path.join(themeRoot, 'sections', `${handle}.json`);
+      check(`group exists ${pack} -> ${handle}.json`, fs.existsSync(file), file);
     }
   });
 }

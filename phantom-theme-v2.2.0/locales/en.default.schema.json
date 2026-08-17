@@ -8,10 +8,70 @@
       "products": "Products",
       "storytelling": "Storytelling"
     },
-    "header-group": {
-      "name": "Header group"
+    "aether-announcement-bar": {
+      "name": "Announcement bar (AETHER)",
+      "settings": {
+        "text": {
+          "label": "Text"
+        },
+        "link": {
+          "label": "Link"
+        },
+        "link_text": {
+          "label": "Link label"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Default"
+        }
+      }
     },
-    "footer-group": {
+    "aether-header": {
+      "name": "Header (AETHER)",
+      "settings": {
+        "logo_text": {
+          "label": "Logo text",
+          "info": "Leave blank to use the store name"
+        },
+        "menu": {
+          "label": "Menu"
+        },
+        "show_search": {
+          "label": "Show search icon"
+        },
+        "show_cart": {
+          "label": "Show cart icon"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Default"
+        }
+      }
+    },
+    "aether-footer": {
+      "name": "Footer (AETHER)",
+      "settings": {
+        "menu": {
+          "label": "Menu"
+        },
+        "show_payment_icons": {
+          "label": "Show payment icons"
+        },
+        "copyright_text": {
+          "label": "Copyright text"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Default"
+        }
+      }
+    },
+    "aether-popup-group": {
+      "name": "Popups (AETHER)"
+    },    "footer-group": {
       "name": "Footer group"
     },
     "popup-group": {

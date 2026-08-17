@@ -1,0 +1,11 @@
+{
+  "type": "footer",
+  "name": "t:sections.aether-footer.name",
+  "sections": {
+    "aether-footer": {
+      "type": "aether-footer",
+      "settings": {}
+    }
+  },
+  "order": ["aether-footer"]
+}

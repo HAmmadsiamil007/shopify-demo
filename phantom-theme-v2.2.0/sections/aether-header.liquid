@@ -1,0 +1,72 @@
+<header class="aether-header ph-client ph-client--aether" data-section-type="aether-header">
+  <div class="aether-header__bar">
+    <a class="aether-header__logo" href="{{ routes.root_url }}">
+      {%- if section.settings.logo_text != blank -%}
+        {{ section.settings.logo_text | escape }}
+      {%- else -%}
+        {{ shop.name | escape }}
+      {%- endif -%}
+    </a>
+
+    {%- if section.settings.menu != blank -%}
+      <nav class="aether-header__nav" aria-label="{{ 'general.drawers.navigation' | t }}">
+        <ul>
+          {%- for link in section.settings.menu.links -%}
+            <li>
+              <a href="{{ link.url }}">{{ link.title | escape }}</a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+
+    <div class="aether-header__actions">
+      {%- if section.settings.show_search -%}
+        <a href="{{ routes.search_url }}">{{ 'general.search.submit' | t }}</a>
+      {%- endif -%}
+      {%- if section.settings.show_cart -%}
+        <a href="{{ routes.cart_url }}">{{ 'cart.general.title' | t }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</header>
+
+{% schema %}
+  {
+    "name": "t:sections.aether-header.name",
+    "settings": [
+      {
+        "type": "text",
+        "id": "logo_text",
+        "label": "t:sections.aether-header.settings.logo_text.label",
+        "info": "t:sections.aether-header.settings.logo_text.info"
+      },
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "t:sections.aether-header.settings.menu.label",
+        "default": "main-menu"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_search",
+        "label": "t:sections.aether-header.settings.show_search.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_cart",
+        "label": "t:sections.aether-header.settings.show_cart.label",
+        "default": true
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.aether-header.presets.default.name"
+      }
+    ],
+    "disabled_on": {
+      "groups": ["header"]
+    }
+  }
+{% endschema %}

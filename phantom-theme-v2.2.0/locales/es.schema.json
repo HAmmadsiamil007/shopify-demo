@@ -8,10 +8,70 @@
       "products": "Productos",
       "storytelling": "Storytelling"
     },
-    "header-group": {
-      "name": "Grupo de encabezado"
+    "aether-announcement-bar": {
+      "name": "Barra de anuncios (AETHER)",
+      "settings": {
+        "text": {
+          "label": "Texto"
+        },
+        "link": {
+          "label": "Link"
+        },
+        "link_text": {
+          "label": "Etiqueta del enlace"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Predeterminado"
+        }
+      }
     },
-    "footer-group": {
+    "aether-header": {
+      "name": "Encabezado (AETHER)",
+      "settings": {
+        "logo_text": {
+          "label": "Texto del logotipo",
+          "info": "DÃ©jalo en blanco para usar el nombre de la tienda"
+        },
+        "menu": {
+          "label": "MenÃº"
+        },
+        "show_search": {
+          "label": "Mostrar icono de bÃºsqueda"
+        },
+        "show_cart": {
+          "label": "Mostrar icono del carrito"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Predeterminado"
+        }
+      }
+    },
+    "aether-footer": {
+      "name": "Pie de pÃ¡gina (AETHER)",
+      "settings": {
+        "menu": {
+          "label": "MenÃº"
+        },
+        "show_payment_icons": {
+          "label": "Mostrar iconos de pago"
+        },
+        "copyright_text": {
+          "label": "Texto de derechos de autor"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Predeterminado"
+        }
+      }
+    },
+    "aether-popup-group": {
+      "name": "Ventanas emergentes (AETHER)"
+    },    "footer-group": {
       "name": "Grupo de pie de pÃƒÂ¡gina"
     },
     "popup-group": {

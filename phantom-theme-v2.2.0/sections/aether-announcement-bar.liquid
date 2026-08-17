@@ -1,0 +1,44 @@
+<div class="aether-announcement-bar ph-client ph-client--aether" data-section-type="aether-announcement-bar">
+  {%- if section.settings.link != blank -%}
+    <a href="{{ section.settings.link }}"{% if section.settings.link_text != blank %} aria-label="{{ section.settings.link_text | escape }}"{% endif %}>
+      <span>{{ section.settings.text }}</span>
+      {%- if section.settings.link_text != blank -%}
+        <span>{{ section.settings.link_text }}</span>
+      {%- endif -%}
+    </a>
+  {%- else -%}
+    <p>{{ section.settings.text }}</p>
+  {%- endif -%}
+</div>
+
+{% schema %}
+  {
+    "name": "t:sections.aether-announcement-bar.name",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "text",
+        "label": "t:sections.aether-announcement-bar.settings.text.label",
+        "default": "Free shipping on orders over $100"
+      },
+      {
+        "type": "url",
+        "id": "link",
+        "label": "t:sections.aether-announcement-bar.settings.link.label"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "t:sections.aether-announcement-bar.settings.link_text.label"
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.aether-announcement-bar.presets.default.name"
+      }
+    ],
+    "disabled_on": {
+      "groups": ["header"]
+    }
+  }
+{% endschema %}

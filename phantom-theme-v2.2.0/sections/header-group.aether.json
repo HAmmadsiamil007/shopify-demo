@@ -1,0 +1,17 @@
+{
+  "type": "header",
+  "name": "t:sections.aether-header.name",
+  "sections": {
+    "aether-announcement": {
+      "type": "aether-announcement-bar",
+      "settings": {
+        "text": "Free shipping on orders over $100"
+      }
+    },
+    "aether-header": {
+      "type": "aether-header",
+      "settings": {}
+    }
+  },
+  "order": ["aether-announcement", "aether-header"]
+}
