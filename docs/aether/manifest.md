@@ -29,9 +29,9 @@ Registered = shipped (Wave milestone). `data-section-type` must match `{pack}-{c
 | Collection grid | `aether-collection-grid` | 1 | planned | dynamic | `product-grid-item`, `pagination` |
 | Product page | `aether-product` | 1 | planned | dynamic | `product.price`, `form.product`, `@app` |
 | Cart items | `aether-cart-items` | 1 | planned | dynamic | `cart`, `cart:updated` |
-| Announcement bar | `aether-announcement-bar` | 1 | planned | static | chrome (header-group) |
-| Header | `aether-header` | 1 | planned | dynamic | chrome (header-group) |
-| Footer | `aether-footer` | 1 | planned | dynamic | chrome (footer-group) |
+| Announcement bar | `aether-announcement-bar` | 1 | skeleton — shipped W0 T5 | static | chrome (header-group) |
+| Header | `aether-header` | 1 | skeleton — shipped W0 T5 | dynamic | chrome (header-group) |
+| Footer | `aether-footer` | 1 | skeleton — shipped W0 T5 | dynamic | chrome (footer-group) |
 | Editorial / promo | `aether-promo` | 2 | planned | static | `ui-image` |
 | Testimonials | `aether-testimonials` | 2 | planned | static | — |
 | FAQ | `aether-faq` | 2 | planned | static | accordion a11y |
