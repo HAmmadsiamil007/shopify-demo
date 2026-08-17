@@ -1,0 +1,104 @@
+/**
+ * AETHER — Design Pack runtime skeleton (Wave 0 T2)
+ * =================================================
+ * PHANTOM Core contract — JS lifecycle (§3.5, invariant 12):
+ *   - Subscribes to the EXISTING PHANTOM event bus (phantom:ready,
+ *     shopify:section:load/unload/select/deselect, shopify:block:select/
+ *     deselect, cart:updated) — never re-implements it.
+ *   - Executes no work unless >=1 [data-section-type^="aether-"] exists.
+ *   - theme.js owns the lifecycle; this runtime is additive only.
+ *   - Controller registry contract: AetherRuntime.controllers = {
+ *       'aether-hero': { init(el, opts), destroy(el), refresh(el) }, ...
+ *     } — Wave 1 fills it; the skeleton ships the shape + mount/unmount loop.
+ *   - Wave 1 respects prefers-reduced-motion and data-disable-animations
+ *     everywhere; animations never gate commerce.
+ */
+(function () {
+  'use strict'
+
+  var SLUG = 'aether'
+  var SECTION_SELECTOR = '[data-section-type^="' + SLUG + '-"]'
+
+  var EVENTS = {
+    themeReady: 'phantom:ready',
+    sectionLoad: 'shopify:section:load',
+    sectionUnload: 'shopify:section:unload'
+  }
+
+  class AetherRuntime {
+    constructor() {
+      this.controllers = {}
+      this.mounted = new Map()
+      this.initialized = false
+      this._abort = new AbortController()
+    }
+
+    init() {
+      if (this.initialized) return this
+      var scope = document.querySelector('.ph-client--' + SLUG)
+      if (!scope) return this
+      var sections = scope.querySelectorAll(SECTION_SELECTOR)
+      if (!sections.length) return this
+
+      this._bind()
+      this._scan(sections)
+      this.initialized = true
+      return this
+    }
+
+    destroy() {
+      this._abort.abort()
+      this._unmountAll()
+      this.initialized = false
+    }
+
+    _bind() {
+      var signal = this._abort.signal
+      document.addEventListener(EVENTS.sectionLoad, this._onSectionLoad.bind(this), { signal })
+      document.addEventListener(EVENTS.sectionUnload, this._onSectionUnload.bind(this), { signal })
+    }
+
+    _scan(nodes) {
+      nodes.forEach(function (el) { this._mount(el) }.bind(this))
+    }
+
+    _mount(el) {
+      var ctor = this.controllers[el.getAttribute('data-section-type')]
+      if (!ctor || el.dataset.aetherMounted) return
+      el.dataset.aetherMounted = 'true'
+      this.mounted.set(el, ctor.init ? ctor.init(el) : null)
+    }
+
+    _unmount(el) {
+      var ctor = this.controllers[el.getAttribute('data-section-type')]
+      if (el.dataset.aetherMounted && ctor && ctor.destroy) ctor.destroy(el)
+      delete el.dataset.aetherMounted
+      this.mounted.delete(el)
+    }
+
+    _unmountAll() {
+      this.mounted.forEach(function (_, el) { this._unmount(el) }.bind(this))
+    }
+
+    _onSectionLoad(e) {
+      var el = e.target && e.target.closest ? e.target.closest(SECTION_SELECTOR) || e.target : e.target
+      if (el && el.matches && el.matches(SECTION_SELECTOR)) this._mount(el)
+    }
+
+    _onSectionUnload(e) {
+      var el = e.target && e.target.closest ? e.target.closest(SECTION_SELECTOR) || e.target : e.target
+      if (el) this._unmount(el)
+    }
+  }
+
+  window.AetherRuntime = window.AetherRuntime || AetherRuntime
+
+  window.addEventListener(EVENTS.themeReady, function () {
+    var runtime = window.__aetherRuntime
+    if (!runtime) {
+      runtime = new AetherRuntime()
+      window.__aetherRuntime = runtime
+    }
+    runtime.init()
+  }, { once: true })
+})()

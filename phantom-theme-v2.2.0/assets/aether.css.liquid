@@ -1,0 +1,25 @@
+{%- comment -%}
+  AETHER — Design Pack token scope (Wave 0 T2 skeleton).
+  PHANTOM Core contract (§3.4): zero visual rules by design — tokens only.
+  Tokens consume settings.aether_* (Design Packs settings group, schema
+  defaults verified against the frozen frontend, 22 pages). Wave 1 ships the
+  visual rules; every rule must reference .ph-client--aether or a .aether-*
+  class (designs/build/audit-scope.mjs gate, pack prefix).
+{%- endcomment -%}
+.ph-client--aether {
+  --aether-primary: {{ settings.aether_primary | default: '#D4A574' }};
+  --aether-accent: {{ settings.aether_accent | default: '#C8956C' }};
+  --aether-bg: {{ settings.aether_bg | default: '#09090B' }};
+  --aether-surface: {{ settings.aether_surface | default: '#1A1A1A' }};
+  --aether-text: {{ settings.aether_text | default: '#F2F2F2' }};
+  --aether-muted: {{ settings.aether_muted | default: '#9C9C9C' }};
+  --aether-border: {{ settings.aether_border | default: '#2A2A2A' }};
+  --aether-sale: {{ settings.aether_sale | default: '#E74C3C' }};
+  --aether-radius: {{ settings.aether_radius | default: 12 }}px;
+  --aether-scheme: {{ settings.aether_dark_light | default: 'dark' }};
+  --aether-z-sticky: 5000;
+  --aether-z-drawer: 9000;
+  --aether-z-modal: 9050;
+  --aether-z-toast: 9500;
+  --aether-z-3d: 9700;
+}
