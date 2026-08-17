@@ -1,10 +1,15 @@
 {%- comment -%}
-  AETHER — Design Pack token scope (Wave 0 T2 skeleton).
-  PHANTOM Core contract (§3.4): zero visual rules by design — tokens only.
-  Tokens consume settings.aether_* (Design Packs settings group, schema
-  defaults verified against the frozen frontend, 22 pages). Wave 1 ships the
-  visual rules; every rule must reference .ph-client--aether or a .aether-*
-  class (designs/build/audit-scope.mjs gate, pack prefix).
+  AETHER — Design Pack token + chrome stylesheet (Wave 0 T2 skeleton + Wave 1 T2
+  announcement bar).
+  PHANTOM Core contract (§3.4): tokens consume settings.aether_* (Design Packs
+  settings group, schema defaults verified against the frozen frontend, 22 pages).
+  Wave 1 ships the visual rules; every rule must reference .ph-client--aether or
+  a .aether-* class (designs/build/audit-scope.mjs gate, pack prefix). Zero :root,
+  zero bare-element overrides, z-index within the pack budget (≤ 10000, reuse the
+  5000/9000/9050/9500/9700 scale).
+  Frozen references: tokens style.css:1-42; announcement style.css:394-424;
+  mobile responsive.css:288+ (announcement rules only — header/mobile-header rules
+  are Task 3's scope).
 {%- endcomment -%}
 .ph-client--aether {
   --aether-primary: {{ settings.aether_primary | default: '#D4A574' }};
@@ -17,9 +22,90 @@
   --aether-sale: {{ settings.aether_sale | default: '#E74C3C' }};
   --aether-radius: {{ settings.aether_radius | default: 12 }}px;
   --aether-scheme: {{ settings.aether_dark_light | default: 'dark' }};
+  --aether-announcement-height: 40px;
+  --aether-z-announcement: 5100;
   --aether-z-sticky: 5000;
   --aether-z-drawer: 9000;
   --aether-z-modal: 9050;
   --aether-z-toast: 9500;
   --aether-z-3d: 9700;
+}
+
+/* ── Announcement bar (frozen style.css:394-424) ──────────────
+   Single style everywhere: translucent dark chrome (frozen default;
+   the transparent .home-page variant is dropped per plan Step 2 —
+   D-list record; visual impact: same bar on every page, acceptable). */
+.aether-announcement-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--aether-announcement-height);
+  background: rgba(9, 9, 11, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--aether-z-announcement);
+}
+
+.aether-announcement-bar .announcement-content {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--aether-text);
+  opacity: 1;
+}
+
+.aether-announcement-bar .announcement-content .separator {
+  margin: 0 15px;
+  opacity: 0.5;
+}
+
+.aether-announcement-bar .aether-mobile-announcement {
+  display: none;
+}
+
+/* ── Mobile announcement rotation (frozen responsive.css:288+,
+   mobile-announcement rules 365-392) ──────────────────────────
+   Deviation (recorded): frozen hides the whole .announcement-bar
+   and shows the rotation texts inside the .mobile-header row
+   (Task 3). The pack owns the rotation strip in the announcement
+   section; only the desktop content is hidden, the strip rotates
+   above the mobile header. */
+@media (max-width: 768px) {
+  .aether-announcement-bar--mobile-rotation .announcement-content {
+    display: none;
+  }
+
+  .aether-announcement-bar--mobile-rotation .aether-mobile-announcement {
+    display: block;
+    width: 100%;
+    height: 20px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .aether-announcement-bar--mobile-rotation .aether-mobile-announcement-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--aether-text);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    white-space: nowrap;
+  }
+
+  .aether-announcement-bar--mobile-rotation .aether-mobile-announcement-text.active {
+    opacity: 1;
+  }
 }

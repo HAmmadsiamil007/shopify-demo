@@ -11,14 +11,32 @@
     "aether-announcement-bar": {
       "name": "Barra annunci (AETHER)",
       "settings": {
-        "text": {
-          "label": "Testo"
-        },
-        "link": {
-          "label": "Link"
-        },
-        "link_text": {
-          "label": "Etichetta del link"
+        "show_mobile_rotation": {
+          "label": "Ruota i messaggi su mobile"
+        }
+      },
+      "blocks": {
+        "message": {
+          "name": "Messaggio",
+          "settings": {
+            "icon": {
+              "label": "Icona",
+              "options": {
+                "fa-truck": {
+                  "label": "Camion"
+                },
+                "fa-bolt": {
+                  "label": "Fulmine"
+                },
+                "fa-undo": {
+                  "label": "Annulla"
+                }
+              }
+            },
+            "text": {
+              "label": "Testo"
+            }
+          }
         }
       },
       "presets": {

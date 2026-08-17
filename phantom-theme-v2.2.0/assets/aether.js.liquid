@@ -31,6 +31,10 @@ import { loadScript, loadCSS } from 'theme-resource-loader'
   var SLUG = 'aether'
   var SECTION_SELECTOR = '[data-section-type^="' + SLUG + '-"]'
 
+  // Shared controller registry — controllers register at module scope so the
+  // registry survives runtime re-instantiation; _mount looks up by section type.
+  var CONTROLLERS = {}
+
   var EVENTS = {
     themeReady: 'phantom:ready',
     sectionLoad: 'shopify:section:load',
@@ -44,7 +48,7 @@ import { loadScript, loadCSS } from 'theme-resource-loader'
 
   class AetherRuntime {
     constructor() {
-      this.controllers = {}
+      this.controllers = CONTROLLERS
       this.mounted = new Map()
       this.initialized = false
       this._root = null
@@ -169,6 +173,11 @@ import { loadScript, loadCSS } from 'theme-resource-loader'
     }
 
     _motionEnabled() {
+      // settings.aether_motion_enable gate: when a [data-aether-motion-enabled]
+      // element exists in the pack scope, its value ('true'/'false') gates
+      // motion — the announcement section renders it on its root (Task 2).
+      var gate = (this._root || document).querySelector('[data-aether-motion-enabled]')
+      if (gate && gate.getAttribute('data-aether-motion-enabled') !== 'true') return false
       return !document.documentElement.matches('.no-motion, .aether-no-motion') &&
         window.matchMedia('(prefers-reduced-motion: no-preference)').matches &&
         document.body.dataset.disableAnimations !== 'true' &&
@@ -202,6 +211,48 @@ import { loadScript, loadCSS } from 'theme-resource-loader'
         this._libraries.lenis = true
         if (window.AetherMotion) window.AetherMotion.initLenis(this._motionEnabled())
       }
+    }
+  }
+
+  // ── Controllers ───────────────────────────────────────────────────────────
+  // Mounted via _mount(el): init receives the section root; the controller
+  // stores it as this._el (refresh re-inits from it). Idempotent — destroy
+  // clears timers; refresh never double-starts.
+  CONTROLLERS['aether-announcement-bar'] = {
+    init(el) {
+      this._el = el
+      this._stopRotation()
+      this._idx = 0
+      this._items = [...el.querySelectorAll('.aether-mobile-announcement-text')]
+      if (this._items.length > 1) {
+        this._items[0].classList.add('active')
+        if (!this._motionEnabled()) return
+        this._timer = setInterval(() => {
+          this._items.forEach((t, i) => t.classList.toggle('active', i === this._idx))
+          this._idx = (this._idx + 1) % this._items.length
+        }, 5000)
+      }
+    },
+    destroy() {
+      this._stopRotation()
+    },
+    refresh() {
+      this.init(this._el)
+    },
+    _stopRotation() {
+      if (this._timer) {
+        clearInterval(this._timer)
+        this._timer = null
+      }
+    },
+    _motionEnabled() {
+      // Section-level settings.aether_motion_enable gate (attr rendered by the
+      // section root), then the runtime global gates (reduced motion, design
+      // mode, body data-disable-animations).
+      var attr = this._el && this._el.getAttribute('data-aether-motion-enabled')
+      if (attr !== null && attr !== 'true') return false
+      var runtime = window.__aetherRuntime
+      return !runtime || typeof runtime._motionEnabled !== 'function' || runtime._motionEnabled()
     }
   }
 
