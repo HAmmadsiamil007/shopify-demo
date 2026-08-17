@@ -102,6 +102,125 @@ if (lists.dp_header_groups) {
   });
 }
 
+// ── AETHER WAVE 1 INVENTORY: every aether-* section file must exist ────────
+// NOTE: intentionally FAILS mid-wave for sections not yet created (Tasks 5-9);
+// full green = Wave 1 end (Task 13 Step 5). Budget + vendor-asset checks below
+// must be green once Task 1 lands.
+const aetherSections = ['aether-announcement-bar','aether-header','aether-footer','aether-hero','aether-featured-products','aether-collection-grid','aether-product','aether-cart-items'];
+for (const name of aetherSections) {
+  const p = path.join(themeRoot, 'sections', name + '.liquid');
+  check(`aether section exists ${name}.liquid`, fs.existsSync(p), p);
+}
+
+// ── AETHER BUDGET + PER-PAGE MEASUREMENT helpers ────────────────────────────
+const THEME_DIR = themeRoot;
+
+const stripLiquidAndComments = (src) =>
+  src
+    .replace(/{%[\s\S]*?%}/g, '') // liquid tags (incl. whitespace control)
+    .replace(/<!--[\s\S]*?-->/g, ''); // html comments
+
+const stylesheetBytes = (filePath) => {
+  if (!fs.existsSync(filePath)) return 0;
+  const src = fs.readFileSync(filePath, 'utf8');
+  const blocks = src.match(/{%\s*stylesheet\s*%}([\s\S]*?){%\s*endstylesheet\s*%}/g) || [];
+  let bytes = 0;
+  for (const block of blocks) bytes += Buffer.byteLength(stripLiquidAndComments(block), 'utf8');
+  return bytes;
+};
+
+// BUDGET HARD CEILING: aether.css.liquid + ALL aether-* section {% stylesheet %}
+// blocks (raw bytes, excludes liquid tags + html comments) — FAIL if > 60000.
+const computeAetherCssBudget = async (dir) => {
+  const base = path.join(dir, 'assets', 'aether.css.liquid');
+  const baseBytes = fs.existsSync(base)
+    ? Buffer.byteLength(stripLiquidAndComments(fs.readFileSync(base, 'utf8')), 'utf8')
+    : 0;
+  const sectionDir = path.join(dir, 'sections');
+  let sectionsBytes = 0;
+  if (fs.existsSync(sectionDir)) {
+    const aetherFiles = fs.readdirSync(sectionDir)
+      .filter((f) => f.startsWith('aether-') && f.endsWith('.liquid'));
+    for (const f of aetherFiles) sectionsBytes += stylesheetBytes(path.join(sectionDir, f));
+  }
+  const bytes = baseBytes + sectionsBytes;
+  return { ok: bytes <= 60000, bytes, baseBytes, sectionsBytes };
+};
+
+// PER-PAGE MEASUREMENT (informational — no hard page limits yet): actual
+// payload per template = aether.css.liquid + stylesheet blocks of only the
+// sections the template loads (incl. header/footer groups) + aether-swiper.min.css
+// on slider pages. Recorded in docs/aether/fidelity-report.md at Wave 1 close.
+const resolveTemplateSections = (dir, templateFile) => {
+  const types = [];
+  const visit = (file, seen) => {
+    if (!fs.existsSync(file) || seen.has(file)) return;
+    seen.add(file);
+    let json;
+    try {
+      json = JSON.parse(fs.readFileSync(file, 'utf8'));
+    } catch {
+      return;
+    }
+    if (!json.sections) return;
+    for (const type of Object.keys(json.sections)) {
+      const alt = path.join(dir, 'sections', type + '.aether.json');
+      const plain = path.join(dir, 'sections', type + '.json');
+      const liquid = path.join(dir, 'sections', type + '.liquid');
+      if (fs.existsSync(alt)) { types.push(type); visit(alt, seen); }
+      else if (fs.existsSync(plain)) { types.push(type); visit(plain, seen); }
+      else if (fs.existsSync(liquid)) types.push(type);
+    }
+  };
+  visit(path.join(dir, 'templates', templateFile), new Set());
+  return types;
+};
+
+const computeAetherPageCssBudgets = (dir) => {
+  const pages = {
+    home: 'index.aether.json',
+    collection: 'collection.aether.json',
+    product: 'product.aether.json',
+    cart: 'cart.aether.json',
+  };
+  const baseFile = path.join(dir, 'assets', 'aether.css.liquid');
+  const baseBytes = fs.existsSync(baseFile)
+    ? Buffer.byteLength(stripLiquidAndComments(fs.readFileSync(baseFile, 'utf8')), 'utf8')
+    : 0;
+  const swiperCssFile = path.join(dir, 'assets', 'aether-swiper.min.css');
+  const swiperCssBytes = fs.existsSync(swiperCssFile) ? fs.statSync(swiperCssFile).size : 0;
+  const out = {};
+  for (const [key, file] of Object.entries(pages)) {
+    const tpl = path.join(dir, 'templates', file);
+    if (!fs.existsSync(tpl)) {
+      out[key] = { bytes: null, note: `template ${file} not created yet (later wave task)` };
+      continue;
+    }
+    const types = resolveTemplateSections(dir, file);
+    let bytes = baseBytes;
+    for (const type of types) bytes += stylesheetBytes(path.join(dir, 'sections', type + '.liquid'));
+    if (types.includes('aether-hero')) bytes += swiperCssBytes;
+    out[key] = { bytes, sections: types };
+  }
+  return out;
+};
+
+const budgetBytes = await computeAetherCssBudget(THEME_DIR);
+check('BUDGET aether css pack ceiling <= 60000 B', budgetBytes.ok,
+  `${budgetBytes.bytes} B (base ${budgetBytes.baseBytes} B + aether section stylesheets ${budgetBytes.sectionsBytes} B)`);
+
+const pageBudgets = computeAetherPageCssBudgets(THEME_DIR);
+console.log('PAGE BUDGETS (informational — no hard limits; recorded in docs/aether/fidelity-report.md at Wave 1 close):');
+for (const [key, b] of Object.entries(pageBudgets)) {
+  if (b.bytes === null) console.log(`PAGE BUDGET ${key}: n/a — ${b.note}`);
+  else console.log(`PAGE BUDGET ${key}: ${b.bytes} B (sections: ${b.sections.join(', ')})`);
+}
+
+// ── AETHER VENDOR ASSETS exist ──────────────────────────────────────────────
+for (const f of ['aether-swiper.min.js','aether-swiper.min.css','aether-gsap.min.js','aether-lenis.min.js','aether-motion.js','aether-product.js']) {
+  check(`aether asset exists ${f}`, fs.existsSync(path.join(THEME_DIR, 'assets', f)), '');
+}
+
 const ok = results.length > 0 && results.every((r) => r.ok);
 console.log(`\nREGISTRY: ${ok ? 'PASS' : 'FAIL'}`);
 process.exit(ok ? 0 : 1);

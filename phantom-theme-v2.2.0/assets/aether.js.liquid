@@ -1,6 +1,6 @@
 /**
- * AETHER — Design Pack runtime skeleton (Wave 0 T2)
- * =================================================
+ * AETHER — Design Pack runtime (Wave 0 T2 skeleton + Wave 1 T1 extension)
+ * ======================================================================
  * PHANTOM Core contract — JS lifecycle (§3.5, invariant 12):
  *   - Subscribes to the EXISTING PHANTOM event bus (phantom:ready,
  *     shopify:section:load/unload/select/deselect, shopify:block:select/
@@ -12,7 +12,19 @@
  *     } — Wave 1 fills it; the skeleton ships the shape + mount/unmount loop.
  *   - Wave 1 respects prefers-reduced-motion and data-disable-animations
  *     everywhere; animations never gate commerce.
+ *   - Vendor contract (Task 1 Step 0, VERIFIED): reuses PHANTOM
+ *     `theme-resource-loader` (import-map key -> assets/theme-resource-loader.js)
+ *     named exports `loadScript(src, globalObjectName)` and `loadCSS(href)` —
+ *     same import shape ui-video.js uses. Vendored libs are LOADED ON DEMAND
+ *     only (Swiper when a slider exists, GSAP when motion elements exist,
+ *     Lenis when motion enabled) — vendoring != loading.
+ *   - Motion contract (Task 1 Step 4): this file is the ONLY loader of
+ *     assets/aether-motion.js; exposes the single global `window.AetherMotion`
+ *     (module singleton: init/refresh/destroy/initLenis/pause/resume).
+ *     Controllers + aether-product.js consume ONLY window.AetherMotion.
  */
+import { loadScript, loadCSS } from 'theme-resource-loader'
+
 (function () {
   'use strict'
 
@@ -22,7 +34,12 @@
   var EVENTS = {
     themeReady: 'phantom:ready',
     sectionLoad: 'shopify:section:load',
-    sectionUnload: 'shopify:section:unload'
+    sectionUnload: 'shopify:section:unload',
+    sectionSelect: 'shopify:section:select',
+    sectionDeselect: 'shopify:section:deselect',
+    blockSelect: 'shopify:block:select',
+    blockDeselect: 'shopify:block:deselect',
+    cartUpdated: 'cart:updated'
   }
 
   class AetherRuntime {
@@ -30,23 +47,35 @@
       this.controllers = {}
       this.mounted = new Map()
       this.initialized = false
+      this._root = null
+      this._libraries = { swiper: false, gsap: false, scrollTrigger: false, lenis: false }
       this._abort = new AbortController()
     }
 
-    init() {
+    async init() {
       if (this.initialized) return this
       var scope = document.querySelector('.ph-client--' + SLUG)
       if (!scope) return this
       var sections = scope.querySelectorAll(SECTION_SELECTOR)
       if (!sections.length) return this
 
+      this._root = scope
+      this._setMotionFlag()
+      try {
+        await this._loadVendors()
+      } catch (err) {
+        // Vendor failures never gate commerce — sections mount regardless.
+        console.warn('AETHER: vendor load failed — continuing without motion/slider libs', err)
+      }
       this._bind()
       this._scan(sections)
+      this._bindCartCount()
       this.initialized = true
       return this
     }
 
     destroy() {
+      if (window.AetherMotion && this._root) window.AetherMotion.destroy(this._root)
       this._abort.abort()
       this._unmountAll()
       this.initialized = false
@@ -56,6 +85,11 @@
       var signal = this._abort.signal
       document.addEventListener(EVENTS.sectionLoad, this._onSectionLoad.bind(this), { signal })
       document.addEventListener(EVENTS.sectionUnload, this._onSectionUnload.bind(this), { signal })
+      document.addEventListener(EVENTS.sectionSelect, this._onSectionSelect.bind(this), { signal })
+      document.addEventListener(EVENTS.sectionDeselect, this._onSectionDeselect.bind(this), { signal })
+      document.addEventListener(EVENTS.blockSelect, this._onBlockSelect.bind(this), { signal })
+      document.addEventListener(EVENTS.blockDeselect, this._onBlockDeselect.bind(this), { signal })
+      document.addEventListener(EVENTS.cartUpdated, this._onCartUpdated.bind(this), { signal })
     }
 
     _scan(nodes) {
@@ -82,12 +116,92 @@
 
     _onSectionLoad(e) {
       var el = e.target && e.target.closest ? e.target.closest(SECTION_SELECTOR) || e.target : e.target
-      if (el && el.matches && el.matches(SECTION_SELECTOR)) this._mount(el)
+      if (el && el.matches && el.matches(SECTION_SELECTOR)) {
+        this._mount(el)
+        if (window.AetherMotion) window.AetherMotion.refresh(el)
+        this._updateCartCount()
+      }
     }
 
     _onSectionUnload(e) {
       var el = e.target && e.target.closest ? e.target.closest(SECTION_SELECTOR) || e.target : e.target
-      if (el) this._unmount(el)
+      if (el) {
+        if (window.AetherMotion) window.AetherMotion.destroy(el)
+        this._unmount(el)
+      }
+    }
+
+    // Mirror client-demo.js.liquid:163-171 — pause/resume motion in editor.
+    _onSectionSelect() {
+      if (window.AetherMotion) window.AetherMotion.pause()
+    }
+
+    _onSectionDeselect() {
+      if (window.AetherMotion) window.AetherMotion.resume()
+    }
+
+    // Editor awareness stubs — block select/deselect carry no AETHER behavior.
+    _onBlockSelect() { /* no-op */ }
+
+    _onBlockDeselect() { /* no-op */ }
+
+    _onCartUpdated() {
+      this._updateCartCount()
+    }
+
+    _bindCartCount() {
+      this._updateCartCount()
+    }
+
+    _updateCartCount() {
+      fetch('/cart.js')
+        .then(function (r) { return r.json() })
+        .then(function (cart) {
+          document.querySelectorAll('.aether-cart-count').forEach(function (el) {
+            el.textContent = cart.item_count
+          })
+        })
+        .catch(function () { /* cart fetch is non-critical */ })
+    }
+
+    _setMotionFlag() {
+      document.documentElement.dataset.aetherMotion = this._motionEnabled() ? '1' : '0'
+    }
+
+    _motionEnabled() {
+      return !document.documentElement.matches('.no-motion, .aether-no-motion') &&
+        window.matchMedia('(prefers-reduced-motion: no-preference)').matches &&
+        document.body.dataset.disableAnimations !== 'true' &&
+        !(window.Shopify && Shopify.designMode)
+    }
+
+    async _loadVendors() {
+      // Loader = PHANTOM theme-resource-loader (verified Task 1 Step 0):
+      // named exports loadScript(src, globalName) / loadCSS(href).
+      var needs = {
+        swiper: !!this._root.querySelector('.aether-swiper, .aether-hero, .aether-gallery-main, .aether-related'),
+        gsap: this._motionEnabled() && !!this._root.querySelector('[data-aether-motion], .aether-reveal, .aether-tilt, .aether-magnetic, [data-aether-parallax]')
+      }
+      if (needs.swiper && !this._libraries.swiper) {
+        await loadCSS('{{ "aether-swiper.min.css" | asset_url }}')
+        await loadScript('{{ "aether-swiper.min.js" | asset_url }}', 'Swiper')
+        this._libraries.swiper = true
+      }
+      if (needs.gsap && !this._libraries.gsap) {
+        await loadScript('{{ "aether-gsap.min.js" | asset_url }}', 'gsap')
+        this._libraries.gsap = true
+        this._libraries.scrollTrigger = true
+      }
+      if (this._motionEnabled() && !window.AetherMotion) {
+        var mod = await import('{{ "aether-motion.js" | asset_url }}')
+        window.AetherMotion = window.AetherMotion || mod.AetherMotion
+        window.AetherMotion.init(this._root)
+      }
+      if (this._motionEnabled() && !this._libraries.lenis) {
+        await loadScript('{{ "aether-lenis.min.js" | asset_url }}', 'Lenis')
+        this._libraries.lenis = true
+        if (window.AetherMotion) window.AetherMotion.initLenis(this._motionEnabled())
+      }
     }
   }
 
