@@ -52,7 +52,7 @@ import { loadScript, loadCSS } from 'theme-resource-loader'
       this.mounted = new Map()
       this.initialized = false
       this._root = null
-      this._libraries = { swiper: false, gsap: false, scrollTrigger: false, lenis: false }
+      this._libraries = { swiper: false, gsap: false, scrollTrigger: false, lenis: false, fonts: false }
       this._abort = new AbortController()
     }
 
@@ -187,6 +187,13 @@ import { loadScript, loadCSS } from 'theme-resource-loader'
     async _loadVendors() {
       // Loader = PHANTOM theme-resource-loader (verified Task 1 Step 0):
       // named exports loadScript(src, globalName) / loadCSS(href).
+      // D8: AETHER heading/body fonts (Cabinet Grotesk + Satoshi, same Google
+      // Fonts link the frozen pages use). Loaded once per pack activation;
+      // the tokens --aether-font-heading/--aether-font-body consume the families.
+      if (!this._libraries.fonts) {
+        await loadCSS('https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800&family=Satoshi:wght@400;500;700&display=swap')
+        this._libraries.fonts = true
+      }
       var needs = {
         swiper: !!this._root.querySelector('.aether-swiper, .aether-hero, .aether-gallery-main, .aether-related'),
         gsap: this._motionEnabled() && !!this._root.querySelector('[data-aether-motion], .aether-reveal, .aether-tilt, .aether-magnetic, [data-aether-parallax]')
@@ -596,6 +603,43 @@ import { loadScript, loadCSS } from 'theme-resource-loader'
       this._sortSelect = null
       this._onSortChange = null
       this._el = null
+    }
+  }
+
+  CONTROLLERS['aether-product'] = {
+    init(el) {
+      this._el = el
+      // Passthrough: aether-product.js is a section-local module (loaded via
+      // the section's own module script tag). The runtime controller
+      // only bootstraps the module's init on the section scope; all lifecycle
+      // (gallery, variants, qty, sticky bar, accordion, modal, related) lives
+      // inside AetherProduct (assets/aether-product.js).
+      var boot = () => {
+        if (window.AetherProduct && el.isConnected) {
+          window.AetherProduct.init(el)
+          return true
+        }
+        return false
+      }
+      if (!boot()) {
+        // Module script may still be loading on editor section injection;
+        // retry until phantom:ready or the next lifecycle event lands.
+        var tries = 0
+        this._timer = setInterval(() => {
+          tries += 1
+          if (boot() || tries > 20) clearInterval(this._timer)
+        }, 250)
+      }
+    },
+    destroy(el) {
+      if (this._timer) clearInterval(this._timer)
+      this._timer = null
+      if (el && window.AetherProduct) window.AetherProduct.destroy(el)
+      this._el = null
+    },
+    refresh(el) {
+      this.destroy(this._el || el)
+      this.init(el || this._el)
     }
   }
 

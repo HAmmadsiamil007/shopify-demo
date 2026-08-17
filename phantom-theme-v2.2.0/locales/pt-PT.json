@@ -579,6 +579,18 @@
   }
 ,
     "aether": {
+        "product": {
+            "based_on": "Com base em {{ count }} avaliações",
+            "breadcrumb_shop": "Loja",
+            "close_size_guide": "Fechar guia de tamanhos",
+            "decrease_qty": "Diminuir quantidade",
+            "increase_qty": "Aumentar quantidade",
+            "reviews": "avaliações",
+            "select_size": "Selecionar tamanho",
+            "size_guide": "Guia de tamanhos",
+            "size_guide_tip": "Meça o seu pé do calcanhar à ponta e compare o pé mais comprido com a tabela abaixo. Se estiver entre dois tamanhos, recomendamos escolher o maior.",
+            "zoom_image": "Ampliar imagem"
+        },
         "footer": {
             "all_rights_reserved": "Todos os direitos reservados.",
             "privacy": "Privacidade",

@@ -579,6 +579,18 @@
   }
 ,
     "aether": {
+        "product": {
+            "based_on": "Basé sur {{ count }} avis",
+            "breadcrumb_shop": "Boutique",
+            "close_size_guide": "Fermer le guide des tailles",
+            "decrease_qty": "Diminuer la quantité",
+            "increase_qty": "Augmenter la quantité",
+            "reviews": "avis",
+            "select_size": "Sélectionner la taille",
+            "size_guide": "Guide des tailles",
+            "size_guide_tip": "Mesurez votre pied du talon à l'orteil et faites correspondre le pied le plus long au tableau ci-dessous. Entre deux tailles, nous recommandons de prendre la taille au-dessus.",
+            "zoom_image": "Agrandir l'image"
+        },
         "footer": {
             "all_rights_reserved": "Tous droits réservés.",
             "privacy": "Confidentialité",

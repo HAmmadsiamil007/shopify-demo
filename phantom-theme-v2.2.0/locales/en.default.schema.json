@@ -306,6 +306,202 @@
         }
       }
     },
+    "aether-product": {
+    "name": "AETHER Product",
+    "settings": {
+      "gallery_layout": {
+        "label": "Gallery layout",
+        "options": {
+          "thumbs": "Main image with thumbnails",
+          "none": "Main image only"
+        }
+      },
+      "gallery_zoom": {
+        "label": "Enable gallery zoom lens"
+      },
+      "enable_sticky_bar": {
+        "label": "Enable sticky add to cart bar"
+      },
+      "related_count": {
+        "label": "Related products to show"
+      },
+      "show_reviews_summary": {
+        "label": "Show static reviews summary"
+      }
+    },
+    "blocks": {
+      "price": {
+        "name": "Price"
+      },
+      "variant_picker": {
+        "name": "Variant Picker",
+        "settings": {
+          "enable_color_swatches": {
+            "label": "Show color swatches for color options"
+          }
+        }
+      },
+      "buy_buttons": {
+        "name": "Buy Buttons"
+      },
+      "description": {
+        "name": "Description"
+      },
+      "inventory_status": {
+        "name": "Inventory Status"
+      },
+      "sales_point": {
+        "name": "Sales Point",
+        "settings": {
+          "icon": {
+            "label": "Icon",
+            "options": {
+              "checkmark": "Checkmark",
+              "gift": "Gift",
+              "globe": "Globe",
+              "heart": "Heart",
+              "leaf": "Leaf",
+              "lock": "Lock",
+              "package": "Package",
+              "phone": "Phone",
+              "ribbon": "Ribbon",
+              "shield": "Shield",
+              "tag": "Tag",
+              "truck": "Truck"
+            }
+          },
+          "text": {
+            "label": "Text"
+          }
+        }
+      },
+      "size_chart": {
+        "name": "Size Chart"
+      },
+      "tab": {
+        "name": "Tab",
+        "settings": {
+          "title": {
+            "label": "Title"
+          },
+          "content": {
+            "label": "Content"
+          },
+          "page": {
+            "label": "Page"
+          }
+        }
+      },
+      "share": {
+        "name": "Share"
+      },
+      "trust_row": {
+        "name": "Trust Row",
+        "settings": {
+          "heading": {
+            "label": "Heading"
+          }
+        }
+      },
+      "trust_item": {
+        "name": "Trust Item",
+        "settings": {
+          "icon": {
+            "label": "Icon",
+            "options": {
+              "truck": "Truck",
+              "undo": "Undo",
+              "shield": "Shield",
+              "checkmark": "Checkmark",
+              "gift": "Gift",
+              "heart": "Heart",
+              "leaf": "Leaf",
+              "lock": "Lock",
+              "package": "Package",
+              "tag": "Tag"
+            }
+          },
+          "title": {
+            "label": "Title"
+          }
+        }
+      },
+      "specs_accordion": {
+        "name": "Specs Accordion",
+        "settings": {
+          "specs_heading": {
+            "label": "Heading"
+          }
+        }
+      },
+      "spec_item": {
+        "name": "Spec Item",
+        "settings": {
+          "icon": {
+            "label": "Icon",
+            "options": {
+              "layers": "Layers",
+              "ruler": "Ruler",
+              "gauge": "Gauge",
+              "sparkles": "Sparkles",
+              "droplet": "Droplet",
+              "box": "Box",
+              "truck": "Truck",
+              "shield": "Shield"
+            }
+          },
+          "title": {
+            "label": "Title"
+          },
+          "content": {
+            "label": "Content"
+          },
+          "default_open": {
+            "label": "Open by default"
+          }
+        }
+      },
+      "reviews_summary": {
+        "name": "Reviews Summary",
+        "settings": {
+          "heading": {
+            "label": "Heading"
+          },
+          "score": {
+            "label": "Score"
+          },
+          "bar_5_count": {
+            "label": "5 star count"
+          },
+          "bar_4_count": {
+            "label": "4 star count"
+          },
+          "bar_3_count": {
+            "label": "3 star count"
+          },
+          "bar_2_count": {
+            "label": "2 star count"
+          },
+          "bar_1_count": {
+            "label": "1 star count"
+          }
+        }
+      },
+      "related_products": {
+        "name": "Related Products",
+        "settings": {
+          "heading": {
+            "label": "Heading"
+          }
+        }
+      }
+    },
+    "presets": {
+      "default": {
+        "name": "AETHER Product"
+      }
+    }
+  },
     "aether-popup-group": {
       "name": "Popups (AETHER)"
     },    "footer-group": {

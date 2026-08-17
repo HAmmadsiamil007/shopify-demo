@@ -1,0 +1,1137 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+
+  # Generic option engine (amendment 5): option groups render for EVERY
+  # option in option order; variant matching is by option POSITION, never
+  # hard-coded names. Presentation heuristic on name only (swatches vs tiles).
+  assign swatch_trigger = 'products.general.color_swatch_trigger' | t | downcase
+  assign size_trigger = 'products.general.size_trigger' | t | downcase
+  assign size_option_index = -1
+  unless product.has_only_default_variant
+    for option in product.options_with_values
+      assign downcased_option = option.name | downcase
+      if downcased_option contains size_trigger
+        assign size_option_index = forloop.index0
+        break
+      endif
+    endfor
+  endunless
+
+  # Size chart block presence drives the frozen size-guide link + modal.
+  assign has_size_chart = false
+  for block in section.blocks
+    if block.type == 'size_chart'
+      assign has_size_chart = true
+    endif
+  endfor
+  assign connect_to_sizechart = false
+  if has_size_chart and size_option_index >= 0
+    assign connect_to_sizechart = true
+  endif
+
+  # Badge (aether-product-card precedence, line 32-85): custom label wins,
+  # then sale / sold-out / bestseller / new / limited.
+  assign badge_text = ''
+  if product.metafields.theme.label != blank
+    assign badge_text = product.metafields.theme.label.value
+  elsif product.tags contains '_label_'
+    for tag in product.tags
+      if tag contains '_label_'
+        assign tag_starts_with = tag | slice: 0
+        if tag_starts_with == '_'
+          assign badge_text = tag | replace: '_label_', ''
+        endif
+      endif
+    endfor
+  endif
+  if badge_text == ''
+    if current_variant.available == false
+      assign badge_text = 'products.product.sold_out' | t
+    elsif current_variant.compare_at_price > current_variant.price
+      assign badge_text = 'products.general.sale' | t
+    elsif product.tags contains 'bestseller'
+      assign badge_text = 'aether.product_card.bestseller' | t
+    elsif product.tags contains 'new'
+      assign badge_text = 'aether.product_card.new' | t
+    elsif product.tags contains 'limited'
+      assign badge_text = 'aether.product_card.limited' | t
+    endif
+  endif
+
+  # Rating (D-rating): row omitted unless the Reviews app exposed data.
+  assign rating_count = product.metafields.reviews.rating_count.value | default: 0
+  assign rating_value = product.metafields.reviews.rating.value | default: ''
+  assign show_rating = false
+  if rating_count != blank and rating_count > 0 and rating_value != blank and rating_value != ''
+    assign show_rating = true
+  endif
+
+  assign related_collection = product.collections.first
+  assign related_count = section.settings.related_count | default: 4
+-%}
+
+<section
+  class="aether-product"
+  data-section-type="aether-product"
+  data-aether-motion-enabled="{{ settings.aether_motion_enable }}"
+  data-aether-size-option="{{ size_option_index }}"
+  data-aether-product-title="{{ product.title | escape }}"
+  data-aether-add-text="{{ 'products.product.add_to_cart' | t | escape }}"
+  data-aether-soldout-text="{{ 'products.product.sold_out' | t | escape }}"
+>
+  {% comment %} ── Breadcrumb (frozen product-detail.html:209-221) ── {% endcomment %}
+  <div class="aether-container pd-breadcrumb">
+    <nav aria-label="{{ 'general.breadcrumbs.home' | t }}">
+      <a href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t }}</a>
+      <span class="pd-breadcrumb-sep" aria-hidden="true">/</span>
+      <a href="{{ routes.all_products_collection_url }}">{{ 'aether.product.breadcrumb_shop' | t }}</a>
+      <span class="pd-breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="pd-breadcrumb-current">{{ product.title | escape }}</span>
+    </nav>
+  </div>
+
+  {% comment %} ── Hero / grid (frozen 224-370) ── {% endcomment %}
+  <div class="aether-container pd-hero">
+    <div class="pd-grid">
+      <div class="pd-gallery">
+        <div class="pd-gallery-main" data-aether-zoom>
+          {%- if product.media.size > 0 -%}
+            <div class="swiper pd-gallery-swiper" data-aether-gallery-main>
+              <div class="swiper-wrapper">
+                {%- for media in product.media -%}
+                  <div class="swiper-slide" data-aether-media-id="{{ media.id }}">
+                    {%- case media.media_type -%}
+                      {%- when 'image' -%}
+                        {{ media | image_url: width: 1200 | image_tag: loading: 'lazy', alt: media.alt | escape }}
+                      {%- when 'video' -%}
+                        {{ media | video_tag: controls: true, muted: true, loop: true, image_size: '1200x' }}
+                      {%- else -%}
+                        {{ media | media_tag: image_size: '1200x' }}
+                    {%- endcase -%}
+                  </div>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'pd-gallery-placeholder' }}
+          {%- endif -%}
+
+          {%- if section.settings.gallery_zoom and product.media.size > 0 -%}
+            <button
+              type="button"
+              class="pd-gallery-zoom"
+              data-aether-zoom-toggle
+              aria-label="{{ 'aether.product.zoom_image' | t }}"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+            </button>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.gallery_layout == 'thumbs' and product.media.size > 1 -%}
+          <div class="pd-gallery-thumbs">
+            <div class="swiper pd-gallery-thumbs-swiper" data-aether-gallery-thumbs>
+              <div class="swiper-wrapper">
+                {%- for media in product.media -%}
+                  <div class="swiper-slide">
+                    {{ media.preview_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: media.alt | escape }}
+                  </div>
+                {%- endfor -%}
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="pd-info">
+        <div class="pd-info-inner">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'price' -%}
+                <div {{ block.shopify_attributes }}>
+                  {%- if badge_text != '' -%}
+                    <span class="pd-badge">{{ badge_text }}</span>
+                  {%- endif -%}
+                  <h1 class="pd-title">{{ product.title | escape }}</h1>
+                  <p class="pd-price">
+                    <span data-aether-price>{{ current_variant.price | money }}</span>
+                    {%- if current_variant.compare_at_price > current_variant.price -%}
+                      <s class="pd-compare-at" data-aether-compare-at>{{ current_variant.compare_at_price | money }}</s>
+                    {%- endif -%}
+                  </p>
+                  {%- if show_rating -%}
+                    <div class="pd-rating" role="img" aria-label="{{ 'aether.product_card.rating_label' | t: value: rating_value, count: rating_count }}">
+                      <span class="pd-stars">
+                        {%- assign rating_num = rating_value | plus: 0 -%}
+                        {%- for i in (1..5) -%}
+                          {%- assign star_full = i | times: 1.0 -%}
+                          {%- assign star_half = star_full | minus: 0.5 -%}
+                          {%- if rating_num >= star_full -%}
+                            <svg class="pd-star pd-star--full" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                          {%- elsif rating_num >= star_half -%}
+                            <svg class="pd-star pd-star--half" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/><path d="M12 2v15.27L5.82 21l1.64-7.03L2 9.24l7.19-.61L12 2z" fill="rgba(200,149,108,0.35)"/></svg>
+                          {%- else -%}
+                            <svg class="pd-star pd-star--empty" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </span>
+                      <span class="pd-rating-text">{{ rating_value }} — {{ rating_count }} {{ 'aether.product.reviews' | t }}</span>
+                    </div>
+                  {%- endif -%}
+                </div>
+
+              {%- when 'variant_picker' -%}
+                {%- unless product.has_only_default_variant -%}
+                  <div {{ block.shopify_attributes }}>
+                    {%- for option in product.options_with_values -%}
+                      {%- liquid
+                        assign option_index = forloop.index0
+                        assign is_color = false
+                        if block.settings.enable_color_swatches
+                          assign downcased_option = option.name | downcase
+                          if downcased_option contains swatch_trigger
+                            assign is_color = true
+                          elsif swatch_trigger == 'color' and downcased_option contains 'colour'
+                            assign is_color = true
+                          endif
+                        endif
+                      -%}
+                      <div class="pd-option-group" data-aether-option-group data-aether-option-index="{{ option_index }}">
+                        <div class="pd-option-header">
+                          <label class="pd-option-label">{{ option.name }} — <span data-aether-option-value>{{ current_variant.options[option_index] }}</span></label>
+                          {%- if connect_to_sizechart and option_index == size_option_index -%}
+                            <button type="button" class="pd-size-guide-link" data-aether-open-size-guide>{{ 'aether.product.size_guide' | t }}</button>
+                          {%- endif -%}
+                        </div>
+                        <div class="{% if is_color %}pd-color-options{% else %}pd-size-grid{% endif %}" role="group" aria-label="{{ option.name | escape }}">
+                          {%- for value in option.values -%}
+                            {%- liquid
+                              assign is_selected = false
+                              if current_variant.options[option_index] == value
+                                assign is_selected = true
+                              endif
+                              assign swatch_color = ''
+                              if value.swatch.color
+                                assign swatch_color = value.swatch.color
+                              endif
+                            -%}
+                            <button
+                              type="button"
+                              class="{% if is_color %}pd-color-btn{% else %}pd-size-btn{% endif %}{% if is_selected %} active{% endif %}{% if is_color and swatch_color == '' %} pd-color-btn--empty{% endif %}"
+                              data-aether-value="{{ value | escape }}"
+                              {% if is_color and swatch_color != '' %}style="background-color: {{ swatch_color }};"{% endif %}
+                              {% if is_color %}aria-label="{{ value | escape }}"{% endif %}
+                            >
+                              {%- unless is_color -%}{{ value }}{%- endunless -%}
+                            </button>
+                          {%- endfor -%}
+                        </div>
+                      </div>
+                    {%- endfor -%}
+                  </div>
+                {%- endunless -%}
+
+              {%- when 'buy_buttons' -%}
+                <div {{ block.shopify_attributes }}>
+                  <div class="pd-option-group">
+                    <label class="pd-option-label">{{ 'products.product.quantity' | t }}</label>
+                    <div class="pd-qty">
+                      <button type="button" class="pd-qty-btn" data-aether-qty-btn="-1" aria-label="{{ 'aether.product.decrease_qty' | t }}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
+                      </button>
+                      <span class="pd-qty-value" data-aether-qty-value>1</span>
+                      <button type="button" class="pd-qty-btn" data-aether-qty-btn="1" aria-label="{{ 'aether.product.increase_qty' | t }}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                      </button>
+                    </div>
+                  </div>
+
+                  {%- capture product_form_stack -%}
+                    <input type="hidden" name="quantity" value="1" data-aether-qty-input>
+                    <button
+                      type="submit"
+                      name="add"
+                      class="aether-btn aether-btn-primary pd-add-to-cart"
+                      data-aether-atc
+                      {%- unless current_variant.available %} disabled{% endunless %}
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                      <span data-aether-atc-label>{%- if current_variant.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}</span>
+                      <span data-aether-atc-price class="pd-atc-price">{{ current_variant.price | money }}</span>
+                    </button>
+                  {%- endcapture -%}
+
+                  <div class="pd-actions">
+                    {%- liquid
+                      assign aether_form_id = 'AetherProductForm-' | append: section.id
+                    -%}
+                    {%- render 'form.product', product: product, id: aether_form_id, slot: product_form_stack -%}
+                    <a href="{{ routes.root_url }}pages/wishlist" class="pd-wishlist-btn" aria-label="{{ 'aether.product_card.wishlist' | t }}">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    </a>
+                  </div>
+                </div>
+
+              {%- when 'description' -%}
+                <div {{ block.shopify_attributes }}>
+                  {%- unless product.empty? -%}
+                    <p class="pd-description">{{ product.description }}</p>
+                  {%- endunless -%}
+                </div>
+
+              {%- when 'inventory_status' -%}
+                <div {{ block.shopify_attributes }}>
+                  {%- render 'product-inventory', product: product, current_variant: current_variant, block: block -%}
+                </div>
+
+              {%- when 'sales_point' -%}
+                {%- unless block.settings.text == blank -%}
+                  <div {{ block.shopify_attributes }}>
+                    <ul class="sales-points">
+                      <li class="sales-point">
+                        <span class="icon-and-text">
+                          {%- case block.settings.icon -%}
+                            {%- when 'checkmark' -%}
+                              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-circle-checkmark" viewBox="0 0 64 64"><path d="M52.68 24.48A22 22 0 1 1 47 15.93"/><path d="m21 32 8.5 8.5L57 13"/></svg>
+                            {%- when 'gift' -%}
+                              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-gift" viewBox="0 0 64 64"><path d="M9 20.23h46v8.68H9zm4.34 8.68h36.89v24.3H13.34zm14.48-8.25v32.98m8.09-32.76v32.98M20.52 11.43a3.73 3.73 0 0 0-.74 2.87 4.57 4.57 0 0 0 .8 2.27C22 18.09 25.15 20 32 20.23a12 12 0 0 0-2.43-7 7.52 7.52 0 0 0-5.66-3.12 4 4 0 0 0-3.39 1.32Z"/><path d="M43.37 11.43a3.73 3.73 0 0 1 .74 2.87 4.48 4.48 0 0 1-.8 2.27c-1.42 1.52-4.57 3.41-11.42 3.66a12.08 12.08 0 0 1 2.43-7A7.56 7.56 0 0 1 40 10.14a4 4 0 0 1 3.37 1.29Z"/></svg>
+                            {%- when 'globe' -%}
+                              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-globe" viewBox="0 0 64 64"><circle cx="32" cy="32" r="22"/><path d="M13 21h38M10 32h44M13 43h38M32 10c-12 8-12 37 0 44m0-44c12 8 12 37 0 44"/></svg>
+                            {%- when 'heart' -%}
+                              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-heart" viewBox="0 0 64 64"><path d="M51.27 15.05a13 13 0 0 0-18.44 0l-.83.83-.83-.83a13 13 0 0 0-18.44 18.44l.83.83L32 52.77l18.44-18.45.83-.83a13 13 0 0 0 0-18.44Z"/></svg>
+                            {%- when 'leaf' -%}
+                              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-leaf" viewBox="0 0 64 64"><defs><style>.a{stroke-miterlimit:10}</style></defs><path class="a" d="M52 11 13 50m22-37v15h16"/><path class="a" d="M52 11c6 24-16.72 47.29-33 32C7 22 29 10 52 11Z"/></svg>
+                            {%- when 'lock' -%}
+                              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-lock" viewBox="0 0 64 64"><path d="M19.45 23.6v-3.2c0-7 5.89-11.75 12.55-11.75 7.21 0 12.55 5.49 12.55 11.75v3.2M10 23.6h44v31.75H10zm22 13.87v7.47"/><circle cx="32" cy="35.87" r="1.6"/></svg>
+                            {%- when 'package' -%}
+                              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-package" viewBox="0 0 64 64"><path d="M32 54.52 10 41.95v-19.9L32 9.48l22 12.57v19.9L32 54.52z"/><path d="M32 54.52v-19.9l22-12.57M32 34.62 10 22.05m31.7-7.03L21 28.33v8.38"/></svg>
+                            {%- when 'phone' -%}
+                              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-phone" viewBox="0 0 64 64"><path d="m18.4 9.65 10.2 10.2-6.32 6.32c2.1 7 6.89 12.46 15.55 15.55l6.32-6.32 10.2 10.2-8.75 8.75C25.71 50.3 13.83 38.21 9.65 18.4Z"/></svg>
+                            {%- when 'ribbon' -%}
+                              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-ribbon" viewBox="0 0 64 64"><path d="m28.57 42.31-8.36 13.07-2.6-7.17-7.61.65 8.35-13.07a17.05 17.05 0 0 0 8.12 5.94 17.3 17.3 0 0 0 1.74.5ZM54 48.86l-7.61-.65-2.61 7.17-8.36-13.07.37-.08a16.4 16.4 0 0 0 1.73-.5 17 17 0 0 0 8.12-5.93Z"/><path d="M49 25.64a16.79 16.79 0 0 1-3.14 9.85 3.55 3.55 0 0 1-.23.31 17 17 0 0 1-8.12 5.93 16.4 16.4 0 0 1-1.73.5l-.37.08a16.74 16.74 0 0 1-3.42.35 16.91 16.91 0 0 1-3.43-.35l-.36-.08a17.3 17.3 0 0 1-1.74-.5 17.05 17.05 0 0 1-8.12-5.94c-.07-.09-.15-.19-.22-.3A16.86 16.86 0 0 1 15 25.64a17 17 0 0 1 34 0Z"/><path d="m36.09 27.78.96 5.63L32 30.75l-5.05 2.66.96-5.63-4.09-3.98 5.65-.82L32 17.86l2.53 5.12 5.64.82-4.08 3.98z"/></svg>
+                            {%- when 'shield' -%}
+                              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-shield" viewBox="0 0 64 64"><path d="M21.18 31.69 28.54 39l15.91-15.88"/><path d="M53 12.54v15.24a31.41 31.41 0 0 1-3.7 14.95A25.46 25.46 0 0 1 32 56a25.46 25.46 0 0 1-17.3-13.27A31.41 31.41 0 0 1 11 27.78V12.54C24.88 13.67 32 8 32 8s7.12 5.67 21 4.54Z"/></svg>
+                            {%- when 'tag' -%}
+                              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-tag" viewBox="0 0 64 64"><path d="m46.69 10.34-10.55.07-25.8 25.8 17.45 17.45 25.8-25.8.07-10.55-6.97-6.97z"/><circle cx="43.95" cy="20.05" r="3.53"/><path d="M14.4 32.15 31.85 49.6"/></svg>
+                            {%- when 'truck' -%}
+                              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-truck" viewBox="0 0 64 64"><defs><style>.a{stroke-miterlimit:10}</style></defs><path class="a" d="M16.5 43.22H6.88V16.5h33.14v26.72H23.94m21.48 0h-5.4V30.4h17.1v12.82h-4.23m4.23-12.82-6.41-8.56H40.02"/><circle class="a" cx="20.24" cy="43.76" r="3.74"/><path class="a" d="M45.42 43.23a3.82 3.82 0 1 1 0 .37v-.37"/></svg>
+                          {%- endcase -%}
+                          <span>{{ block.settings.text }}</span>
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                {%- endunless -%}
+
+              {%- when 'size_chart' -%}
+                {%- if connect_to_sizechart == false -%}
+                  <div {{ block.shopify_attributes }}>
+                    <button type="button" class="pd-size-guide-link" data-aether-open-size-guide>{{ 'aether.product.size_guide' | t }}</button>
+                  </div>
+                {%- endif -%}
+
+              {%- when 'tab' -%}
+                {%- liquid
+                  assign tab_id = block.id | append: product.id
+                  assign tab_content = block.settings.content
+                  if block.settings.page != blank
+                    assign tab_content = tab_content | append: block.settings.page.content
+                  endif
+                -%}
+                {%- unless tab_content == blank and block.settings.title == blank -%}
+                  <div {{ block.shopify_attributes }}>
+                    {%- render 'tab', id: tab_id, title: block.settings.title, content: tab_content -%}
+                  </div>
+                {%- endunless -%}
+
+              {%- when 'share' -%}
+                <div {{ block.shopify_attributes }}>
+                  {%- render 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product -%}
+                </div>
+
+              {%- when 'trust_row' -%}
+                {%- liquid
+                  assign trust_items = section.blocks | where: 'type', 'trust_item'
+                -%}
+                {%- if block.settings.heading != blank or trust_items.size > 0 -%}
+                  <div {{ block.shopify_attributes }}>
+                    {%- unless block.settings.heading == blank -%}
+                      <h3 class="pd-trust-heading">{{ block.settings.heading }}</h3>
+                    {%- endunless -%}
+                    <div class="pd-trust">
+                      {%- for trust in trust_items -%}
+                        {%- unless trust.settings.title == blank -%}
+                          <div class="pd-trust-item">
+                            {%- render 'aether-product-icon', icon: trust.settings.icon -%}
+                            <span>{{ trust.settings.title }}</span>
+                          </div>
+                        {%- endunless -%}
+                      {%- endfor -%}
+                    </div>
+                  </div>
+                {%- endif -%}
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% comment %} ── Sticky Add to Cart Bar (frozen 373-405) ── {% endcomment %}
+  {%- if section.settings.enable_sticky_bar -%}
+    <div class="pd-sticky-bar" data-aether-sticky-bar>
+      <div class="aether-container">
+        <div class="pd-sticky-inner">
+          <div class="pd-sticky-product">
+            {%- if product.featured_media != blank -%}
+              {{ product.featured_media.preview_image | image_url: width: 96 | image_tag: loading: 'lazy', class: 'pd-sticky-img', data_aether_sticky_img: '', alt: product.title | escape }}
+            {%- endif -%}
+            <div>
+              <span class="pd-sticky-name" data-aether-sticky-name>{{ product.title | escape }}</span>
+              <span class="pd-sticky-price" data-aether-sticky-price>{{ current_variant.price | money }}</span>
+            </div>
+          </div>
+          <div class="pd-sticky-actions">
+            {%- if size_option_index >= 0 -%}
+              {%- assign size_option = product.options_with_values[size_option_index] -%}
+              <div class="pd-sticky-sizes">
+                <select class="pd-sticky-size-select" data-aether-sticky-size aria-label="{{ 'aether.product.select_size' | t }}">
+                  {%- for value in size_option.values -%}
+                    <option value="{{ value | escape }}" {% if current_variant.options[size_option_index] == value %}selected{% endif %}>{{ value }}</option>
+                  {%- endfor -%}
+                </select>
+              </div>
+            {%- endif -%}
+            <button
+              type="button"
+              class="aether-btn aether-btn-primary pd-sticky-add"
+              data-aether-sticky-atc
+              {%- unless current_variant.available %} disabled{% endunless %}
+            >
+              {{ 'products.product.add_to_cart' | t }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {% comment %} ── Tech Specs Accordion (frozen 408-451) ── {% endcomment %}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'specs_accordion' -%}
+      <section class="pd-specs" {{ block.shopify_attributes }}>
+        <div class="aether-container">
+          {%- unless block.settings.specs_heading == blank -%}
+            <h2 class="pd-section-title">{{ block.settings.specs_heading }}</h2>
+            <div class="pd-gold-line"></div>
+          {%- endunless -%}
+          <div class="pd-accordion" data-aether-accordion>
+            {%- liquid
+              assign spec_items = section.blocks | where: 'type', 'spec_item'
+            -%}
+            {%- for spec in spec_items -%}
+              <div class="pd-accordion-item{% if spec.settings.default_open %} active{% endif %}">
+                <button type="button" class="pd-accordion-header" aria-expanded="{% if spec.settings.default_open %}true{% else %}false{% endif %}">
+                  <span>
+                    {%- render 'aether-product-icon', icon: spec.settings.icon -%}
+                    {{ spec.settings.title }}
+                  </span>
+                  <svg class="pd-accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="pd-accordion-body"{% if spec.settings.default_open %} style="max-height: 400px;"{% endif %}>
+                  <p>{{ spec.settings.content }}</p>
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+  {%- endfor -%}
+
+  {% comment %} ── Customer Reviews (frozen 454-551): static summary +
+     @app slot when both present; @app alone renders on its own. ── {% endcomment %}
+  {%- liquid
+    assign has_summary = false
+    for probe in section.blocks
+      if probe.type == 'reviews_summary'
+        assign has_summary = true
+      endif
+    endfor
+  -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'reviews_summary' and section.settings.show_reviews_summary -%}
+      {%- liquid
+        assign s5 = block.settings.bar_5_count | default: '100' | plus: 0
+        assign s4 = block.settings.bar_4_count | default: '19' | plus: 0
+        assign s3 = block.settings.bar_3_count | default: '6' | plus: 0
+        assign s2 = block.settings.bar_2_count | default: '2' | plus: 0
+        assign s1 = block.settings.bar_1_count | default: '1' | plus: 0
+        assign s_total = s5 | plus: s4 | plus: s3 | plus: s2 | plus: s1 | at_least: 1
+        assign w5 = s5 | times: 100.0 | divided_by: s_total
+        assign w4 = s4 | times: 100.0 | divided_by: s_total
+        assign w3 = s3 | times: 100.0 | divided_by: s_total
+        assign w2 = s2 | times: 100.0 | divided_by: s_total
+        assign w1 = s1 | times: 100.0 | divided_by: s_total
+      -%}
+      <section class="pd-reviews" {{ block.shopify_attributes }}>
+        <div class="aether-container">
+          {%- unless block.settings.heading == blank -%}
+            <h2 class="pd-section-title">{{ block.settings.heading }}</h2>
+            <div class="pd-gold-line"></div>
+          {%- endunless -%}
+          <div class="pd-reviews-grid">
+            <div class="pd-reviews-summary">
+              <div class="pd-reviews-score">
+                <span class="pd-score-number">{{ block.settings.score }}</span>
+                <div class="pd-score-stars">
+                  {%- assign score_num = block.settings.score | plus: 0 -%}
+                  {%- for i in (1..5) -%}
+                    {%- assign star_full = i | times: 1.0 -%}
+                    {%- assign star_half = star_full | minus: 0.5 -%}
+                    {%- if score_num >= star_full -%}
+                      <svg class="pd-star pd-star--full" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    {%- elsif score_num >= star_half -%}
+                      <svg class="pd-star pd-star--half" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/><path d="M12 2v15.27L5.82 21l1.64-7.03L2 9.24l7.19-.61L12 2z" fill="rgba(200,149,108,0.35)"/></svg>
+                    {%- else -%}
+                      <svg class="pd-star pd-star--empty" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+                <span class="pd-score-count">{{ 'aether.product.based_on' | t: count: s_total }}</span>
+              </div>
+              <div class="pd-reviews-bars">
+                <div class="pd-bar-row"><span>5 <svg class="pd-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span><div class="pd-bar-track"><div class="pd-bar-fill" style="width: {{ w5 }}%;"></div></div><span>{{ s5 }}</span></div>
+                <div class="pd-bar-row"><span>4 <svg class="pd-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span><div class="pd-bar-track"><div class="pd-bar-fill" style="width: {{ w4 }}%;"></div></div><span>{{ s4 }}</span></div>
+                <div class="pd-bar-row"><span>3 <svg class="pd-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span><div class="pd-bar-track"><div class="pd-bar-fill" style="width: {{ w3 }}%;"></div></div><span>{{ s3 }}</span></div>
+                <div class="pd-bar-row"><span>2 <svg class="pd-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span><div class="pd-bar-track"><div class="pd-bar-fill" style="width: {{ w2 }}%;"></div></div><span>{{ s2 }}</span></div>
+                <div class="pd-bar-row"><span>1 <svg class="pd-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span><div class="pd-bar-track"><div class="pd-bar-fill" style="width: {{ w1 }}%;"></div></div><span>{{ s1 }}</span></div>
+              </div>
+            </div>
+            <div class="pd-reviews-list">
+              {%- for app_block in section.blocks -%}
+                {%- if app_block.type == '@app' -%}
+                  {%- render app_block -%}
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        </div>
+      </section>
+    {%- elsif block.type == '@app' and has_summary == false -%}
+      {%- render block -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {% comment %} ── Related Products swiper (frozen 554-611) ── {% endcomment %}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'related_products' -%}
+      {%- liquid
+        assign related_products = blank
+        if related_collection != blank
+          assign related_products = related_collection.products
+        endif
+      -%}
+      <section class="pd-related" {{ block.shopify_attributes }}>
+        <div class="aether-container">
+          {%- unless block.settings.heading == blank -%}
+            <h2 class="pd-section-title">{{ block.settings.heading }}</h2>
+            <div class="pd-gold-line"></div>
+          {%- endunless -%}
+          <div class="swiper pd-related-swiper" data-aether-related-swiper>
+            <div class="swiper-wrapper">
+              {%- assign shown = 0 -%}
+              {%- if related_products != blank -%}
+                {%- for rel_product in related_products -%}
+                  {%- if rel_product.id == product.id -%}{%- continue -%}{%- endif -%}
+                  {%- if shown >= related_count -%}{%- break -%}{%- endif -%}
+                  <div class="swiper-slide">
+                    {%- render 'aether-product-card', product: rel_product, variant: 'simple', per_row: 4 -%}
+                  </div>
+                  {%- assign shown = shown | plus: 1 -%}
+                {%- endfor -%}
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+  {%- endfor -%}
+
+  {% comment %} ── Size Guide Modal (frozen 714-750) ── {% endcomment %}
+  {%- if has_size_chart -%}
+    <div class="pd-modal-overlay" data-aether-size-modal>
+      <div class="pd-modal" role="dialog" aria-modal="true" aria-label="{{ 'aether.product.size_guide' | t }}">
+        <button type="button" class="pd-modal-close" data-aether-close-size-guide aria-label="{{ 'aether.product.close_size_guide' | t }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <h3 class="pd-modal-title">{{ 'aether.product.size_guide' | t }}</h3>
+        <p class="pd-modal-subtitle">{{ product.title | escape }}</p>
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'size_chart' -%}
+            {%- if block.settings.page != blank -%}
+              <div class="pd-modal-page">{{ block.settings.page.content }}</div>
+            {%- else -%}
+              <div class="pd-size-table-wrap">
+                <table class="pd-size-table">
+                  <thead>
+                    <tr>
+                      <th>US</th>
+                      <th>EU</th>
+                      <th>UK</th>
+                      <th>CM</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>7</td><td>40</td><td>6</td><td>25.0</td></tr>
+                    <tr><td>7.5</td><td>40.5</td><td>6.5</td><td>25.5</td></tr>
+                    <tr><td>8</td><td>41</td><td>7</td><td>26.0</td></tr>
+                    <tr><td>8.5</td><td>42</td><td>7.5</td><td>26.5</td></tr>
+                    <tr><td>9</td><td>42.5</td><td>8</td><td>27.0</td></tr>
+                    <tr><td>9.5</td><td>43</td><td>8.5</td><td>27.5</td></tr>
+                    <tr><td>10</td><td>44</td><td>9</td><td>28.0</td></tr>
+                    <tr><td>10.5</td><td>44.5</td><td>9.5</td><td>28.5</td></tr>
+                    <tr><td>11</td><td>45</td><td>10</td><td>29.0</td></tr>
+                    <tr><td>11.5</td><td>45.5</td><td>10.5</td><td>29.5</td></tr>
+                    <tr><td>12</td><td>46</td><td>11</td><td>30.0</td></tr>
+                    <tr><td>13</td><td>48</td><td>12</td><td>31.0</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="pd-modal-tip">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 10h18"/></svg>
+                <p>{{ 'aether.product.size_guide_tip' | t }}</p>
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  <textarea class="aether-hide" aria-hidden="true" data-aether-variant-json>{{ product.variants | json | escape }}</textarea>
+  <textarea class="aether-hide" aria-hidden="true" data-aether-current-variant-json>{{ product.selected_or_first_available_variant | json | escape }}</textarea>
+
+  <script src="{{ 'aether-product.js' | asset_url }}" type="module" defer></script>
+</section>
+
+{% schema %}{
+  "name": "t:sections.aether-product.name",
+  "settings": [
+    {
+      "type": "select",
+      "id": "gallery_layout",
+      "label": "t:sections.aether-product.settings.gallery_layout.label",
+      "default": "thumbs",
+      "options": [
+        {
+          "value": "thumbs",
+          "label": "t:sections.aether-product.settings.gallery_layout.options.thumbs"
+        },
+        {
+          "value": "none",
+          "label": "t:sections.aether-product.settings.gallery_layout.options.none"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "gallery_zoom",
+      "label": "t:sections.aether-product.settings.gallery_zoom.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky_bar",
+      "label": "t:sections.aether-product.settings.enable_sticky_bar.label",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "related_count",
+      "label": "t:sections.aether-product.settings.related_count.label",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviews_summary",
+      "label": "t:sections.aether-product.settings.show_reviews_summary.label",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "price",
+      "name": "t:sections.aether-product.blocks.price.name",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "variant_picker",
+      "name": "t:sections.aether-product.blocks.variant_picker.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "enable_color_swatches",
+          "label": "t:sections.aether-product.blocks.variant_picker.settings.enable_color_swatches.label",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "t:sections.aether-product.blocks.buy_buttons.name",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "description",
+      "name": "t:sections.aether-product.blocks.description.name",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "inventory_status",
+      "name": "t:sections.aether-product.blocks.inventory_status.name",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "sales_point",
+      "name": "t:sections.aether-product.blocks.sales_point.name",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:sections.aether-product.blocks.sales_point.settings.icon.label",
+          "default": "checkmark",
+          "options": [
+            {
+              "value": "checkmark",
+              "label": "t:sections.aether-product.blocks.sales_point.settings.icon.options.checkmark"
+            },
+            {
+              "value": "gift",
+              "label": "t:sections.aether-product.blocks.sales_point.settings.icon.options.gift"
+            },
+            {
+              "value": "globe",
+              "label": "t:sections.aether-product.blocks.sales_point.settings.icon.options.globe"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.aether-product.blocks.sales_point.settings.icon.options.heart"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.aether-product.blocks.sales_point.settings.icon.options.leaf"
+            },
+            {
+              "value": "lock",
+              "label": "t:sections.aether-product.blocks.sales_point.settings.icon.options.lock"
+            },
+            {
+              "value": "package",
+              "label": "t:sections.aether-product.blocks.sales_point.settings.icon.options.package"
+            },
+            {
+              "value": "phone",
+              "label": "t:sections.aether-product.blocks.sales_point.settings.icon.options.phone"
+            },
+            {
+              "value": "ribbon",
+              "label": "t:sections.aether-product.blocks.sales_point.settings.icon.options.ribbon"
+            },
+            {
+              "value": "shield",
+              "label": "t:sections.aether-product.blocks.sales_point.settings.icon.options.shield"
+            },
+            {
+              "value": "tag",
+              "label": "t:sections.aether-product.blocks.sales_point.settings.icon.options.tag"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.aether-product.blocks.sales_point.settings.icon.options.truck"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "t:sections.aether-product.blocks.sales_point.settings.text.label",
+          "default": "Free shipping on orders over $200"
+        }
+      ]
+    },
+    {
+      "type": "size_chart",
+      "name": "t:sections.aether-product.blocks.size_chart.name",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "tab",
+      "name": "t:sections.aether-product.blocks.tab.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.aether-product.blocks.tab.settings.title.label",
+          "default": "Shipping & Returns"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "t:sections.aether-product.blocks.tab.settings.content.label",
+          "default": "<p>Use collapsible tabs for more detailed information that will help customers make a purchasing decision.</p><p>Ex: Shipping and return policies, size guides, and other common questions.</p>"
+        },
+        {
+          "type": "page",
+          "id": "page",
+          "label": "t:sections.aether-product.blocks.tab.settings.page.label"
+        }
+      ]
+    },
+    {
+      "type": "share",
+      "name": "t:sections.aether-product.blocks.share.name",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "trust_row",
+      "name": "t:sections.aether-product.blocks.trust_row.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.aether-product.blocks.trust_row.settings.heading.label",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "type": "trust_item",
+      "name": "t:sections.aether-product.blocks.trust_item.name",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:sections.aether-product.blocks.trust_item.settings.icon.label",
+          "default": "truck",
+          "options": [
+            {
+              "value": "truck",
+              "label": "t:sections.aether-product.blocks.trust_item.settings.icon.options.truck"
+            },
+            {
+              "value": "undo",
+              "label": "t:sections.aether-product.blocks.trust_item.settings.icon.options.undo"
+            },
+            {
+              "value": "shield",
+              "label": "t:sections.aether-product.blocks.trust_item.settings.icon.options.shield"
+            },
+            {
+              "value": "checkmark",
+              "label": "t:sections.aether-product.blocks.trust_item.settings.icon.options.checkmark"
+            },
+            {
+              "value": "gift",
+              "label": "t:sections.aether-product.blocks.trust_item.settings.icon.options.gift"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.aether-product.blocks.trust_item.settings.icon.options.heart"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.aether-product.blocks.trust_item.settings.icon.options.leaf"
+            },
+            {
+              "value": "lock",
+              "label": "t:sections.aether-product.blocks.trust_item.settings.icon.options.lock"
+            },
+            {
+              "value": "package",
+              "label": "t:sections.aether-product.blocks.trust_item.settings.icon.options.package"
+            },
+            {
+              "value": "tag",
+              "label": "t:sections.aether-product.blocks.trust_item.settings.icon.options.tag"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.aether-product.blocks.trust_item.settings.title.label",
+          "default": "Free shipping over $200"
+        }
+      ]
+    },
+    {
+      "type": "specs_accordion",
+      "name": "t:sections.aether-product.blocks.specs_accordion.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "specs_heading",
+          "label": "t:sections.aether-product.blocks.specs_accordion.settings.specs_heading.label",
+          "default": "Tech Specs"
+        }
+      ]
+    },
+    {
+      "type": "spec_item",
+      "name": "t:sections.aether-product.blocks.spec_item.name",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:sections.aether-product.blocks.spec_item.settings.icon.label",
+          "default": "layers",
+          "options": [
+            {
+              "value": "layers",
+              "label": "t:sections.aether-product.blocks.spec_item.settings.icon.options.layers"
+            },
+            {
+              "value": "ruler",
+              "label": "t:sections.aether-product.blocks.spec_item.settings.icon.options.ruler"
+            },
+            {
+              "value": "gauge",
+              "label": "t:sections.aether-product.blocks.spec_item.settings.icon.options.gauge"
+            },
+            {
+              "value": "sparkles",
+              "label": "t:sections.aether-product.blocks.spec_item.settings.icon.options.sparkles"
+            },
+            {
+              "value": "droplet",
+              "label": "t:sections.aether-product.blocks.spec_item.settings.icon.options.droplet"
+            },
+            {
+              "value": "box",
+              "label": "t:sections.aether-product.blocks.spec_item.settings.icon.options.box"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.aether-product.blocks.spec_item.settings.icon.options.truck"
+            },
+            {
+              "value": "shield",
+              "label": "t:sections.aether-product.blocks.spec_item.settings.icon.options.shield"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.aether-product.blocks.spec_item.settings.title.label",
+          "default": "Materials"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "t:sections.aether-product.blocks.spec_item.settings.content.label",
+          "default": "<p>Engineered mesh upper with DWR water-resistant treatment. Full-length carbon fiber plate for explosive energy return. Void Air cushioning midsole. High-abrasion rubber outsole with multi-directional traction pattern.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "default_open",
+          "label": "t:sections.aether-product.blocks.spec_item.settings.default_open.label",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    },
+    {
+      "type": "reviews_summary",
+      "name": "t:sections.aether-product.blocks.reviews_summary.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.aether-product.blocks.reviews_summary.settings.heading.label",
+          "default": "Customer Reviews"
+        },
+        {
+          "type": "text",
+          "id": "score",
+          "label": "t:sections.aether-product.blocks.reviews_summary.settings.score.label",
+          "default": "4.8"
+        },
+        {
+          "type": "text",
+          "id": "bar_5_count",
+          "label": "t:sections.aether-product.blocks.reviews_summary.settings.bar_5_count.label",
+          "default": "100"
+        },
+        {
+          "type": "text",
+          "id": "bar_4_count",
+          "label": "t:sections.aether-product.blocks.reviews_summary.settings.bar_4_count.label",
+          "default": "19"
+        },
+        {
+          "type": "text",
+          "id": "bar_3_count",
+          "label": "t:sections.aether-product.blocks.reviews_summary.settings.bar_3_count.label",
+          "default": "6"
+        },
+        {
+          "type": "text",
+          "id": "bar_2_count",
+          "label": "t:sections.aether-product.blocks.reviews_summary.settings.bar_2_count.label",
+          "default": "2"
+        },
+        {
+          "type": "text",
+          "id": "bar_1_count",
+          "label": "t:sections.aether-product.blocks.reviews_summary.settings.bar_1_count.label",
+          "default": "1"
+        }
+      ]
+    },
+    {
+      "type": "related_products",
+      "name": "t:sections.aether-product.blocks.related_products.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.aether-product.blocks.related_products.settings.heading.label",
+          "default": "You May Also Like"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.aether-product.presets.default.name",
+      "blocks": [
+        {
+          "type": "price"
+        },
+        {
+          "type": "variant_picker",
+          "settings": {
+            "enable_color_swatches": true
+          }
+        },
+        {
+          "type": "buy_buttons"
+        },
+        {
+          "type": "description"
+        },
+        {
+          "type": "trust_row"
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon": "truck",
+            "title": "Free Shipping over $200"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon": "undo",
+            "title": "30-Day Free Returns"
+          }
+        },
+        {
+          "type": "trust_item",
+          "settings": {
+            "icon": "shield",
+            "title": "2-Year Warranty"
+          }
+        },
+        {
+          "type": "specs_accordion",
+          "settings": {
+            "specs_heading": "Tech Specs"
+          }
+        },
+        {
+          "type": "spec_item",
+          "settings": {
+            "icon": "layers",
+            "title": "Materials",
+            "default_open": true,
+            "content": "<p>Engineered mesh upper with DWR water-resistant treatment. Full-length carbon fiber plate for explosive energy return. Void Air cushioning midsole (40mm stack height). High-abrasion rubber outsole with multi-directional traction pattern.</p>"
+          }
+        },
+        {
+          "type": "spec_item",
+          "settings": {
+            "icon": "ruler",
+            "title": "Fit & Sizing",
+            "content": "<p>True to size with medium width. Features an adaptive lacing system for micro-adjust fit throughout your run. Heel-to-toe drop: 8mm. Recommended for neutral runners and those who need mild stability.</p>"
+          }
+        },
+        {
+          "type": "spec_item",
+          "settings": {
+            "icon": "gauge",
+            "title": "Performance",
+            "content": "<p>Weight: 245g (Men's US 10). Carbon fiber plate provides 15% more energy return vs traditional foam. Void Air cushioning maintains performance across temperatures. Breathability rating: 8/10.</p>"
+          }
+        },
+        {
+          "type": "spec_item",
+          "settings": {
+            "icon": "sparkles",
+            "title": "Care",
+            "content": "<p>Spot clean with mild soap and lukewarm water. Air dry at room temperature — do not use direct heat. Do not machine wash or tumble dry. Remove insoles after wet runs. Store in a cool, dry place away from direct sunlight.</p>"
+          }
+        },
+        {
+          "type": "reviews_summary",
+          "settings": {
+            "heading": "Customer Reviews",
+            "score": "4.8",
+            "bar_5_count": "100",
+            "bar_4_count": "19",
+            "bar_3_count": "6",
+            "bar_2_count": "2",
+            "bar_1_count": "1"
+          }
+        },
+        {
+          "type": "@app"
+        },
+        {
+          "type": "related_products",
+          "settings": {
+            "heading": "You May Also Like"
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  }
+}{% endschema %}

@@ -1,0 +1,43 @@
+{%- comment -%}
+  Renders a single stroke SVG icon for the AETHER product section
+  (trust row + specs accordion icons).
+
+  @param {string} icon - Icon name: truck, undo, shield, checkmark, gift,
+    heart, leaf, lock, package, tag, layers, ruler, gauge, sparkles,
+    droplet, box. Unknown names render nothing.
+{%- endcomment -%}
+
+{%- case icon -%}
+  {%- when 'truck' -%}
+    <svg aria-hidden="true" focusable="false" role="presentation" class="aether-product-icon" viewBox="0 0 64 64"><defs><style>.a{stroke-miterlimit:10}</style></defs><path class="a" d="M16.5 43.22H6.88V16.5h33.14v26.72H23.94m21.48 0h-5.4V30.4h17.1v12.82h-4.23m4.23-12.82-6.41-8.56H40.02"/><circle class="a" cx="20.24" cy="43.76" r="3.74"/><path class="a" d="M45.42 43.23a3.82 3.82 0 1 1 0 .37v-.37"/></svg>
+  {%- when 'undo' -%}
+    <svg aria-hidden="true" focusable="false" role="presentation" class="aether-product-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
+  {%- when 'shield' -%}
+    <svg aria-hidden="true" focusable="false" role="presentation" class="aether-product-icon" viewBox="0 0 64 64"><path d="M21.18 31.69 28.54 39l15.91-15.88"/><path d="M53 12.54v15.24a31.41 31.41 0 0 1-3.7 14.95A25.46 25.46 0 0 1 32 56a25.46 25.46 0 0 1-17.3-13.27A31.41 31.41 0 0 1 11 27.78V12.54C24.88 13.67 32 8 32 8s7.12 5.67 21 4.54Z"/></svg>
+  {%- when 'checkmark' -%}
+    <svg aria-hidden="true" focusable="false" role="presentation" class="aether-product-icon" viewBox="0 0 64 64"><path d="M52.68 24.48A22 22 0 1 1 47 15.93"/><path d="m21 32 8.5 8.5L57 13"/></svg>
+  {%- when 'gift' -%}
+    <svg aria-hidden="true" focusable="false" role="presentation" class="aether-product-icon" viewBox="0 0 64 64"><path d="M9 20.23h46v8.68H9zm4.34 8.68h36.89v24.3H13.34zm14.48-8.25v32.98m8.09-32.76v32.98M20.52 11.43a3.73 3.73 0 0 0-.74 2.87 4.57 4.57 0 0 0 .8 2.27C22 18.09 25.15 20 32 20.23a12 12 0 0 0-2.43-7 7.52 7.52 0 0 0-5.66-3.12 4 4 0 0 0-3.39 1.32Z"/><path d="M43.37 11.43a3.73 3.73 0 0 1 .74 2.87 4.48 4.48 0 0 1-.8 2.27c-1.42 1.52-4.57 3.41-11.42 3.66a12.08 12.08 0 0 1 2.43-7A7.56 7.56 0 0 1 40 10.14a4 4 0 0 1 3.37 1.29Z"/></svg>
+  {%- when 'heart' -%}
+    <svg aria-hidden="true" focusable="false" role="presentation" class="aether-product-icon" viewBox="0 0 64 64"><path d="M51.27 15.05a13 13 0 0 0-18.44 0l-.83.83-.83-.83a13 13 0 0 0-18.44 18.44l.83.83L32 52.77l18.44-18.45.83-.83a13 13 0 0 0 0-18.44Z"/></svg>
+  {%- when 'leaf' -%}
+    <svg aria-hidden="true" focusable="false" role="presentation" class="aether-product-icon" viewBox="0 0 64 64"><defs><style>.a{stroke-miterlimit:10}</style></defs><path class="a" d="M52 11 13 50m22-37v15h16"/><path class="a" d="M52 11c6 24-16.72 47.29-33 32C7 22 29 10 52 11Z"/></svg>
+  {%- when 'lock' -%}
+    <svg aria-hidden="true" focusable="false" role="presentation" class="aether-product-icon" viewBox="0 0 64 64"><path d="M19.45 23.6v-3.2c0-7 5.89-11.75 12.55-11.75 7.21 0 12.55 5.49 12.55 11.75v3.2M10 23.6h44v31.75H10zm22 13.87v7.47"/><circle cx="32" cy="35.87" r="1.6"/></svg>
+  {%- when 'package' -%}
+    <svg aria-hidden="true" focusable="false" role="presentation" class="aether-product-icon" viewBox="0 0 64 64"><path d="M32 54.52 10 41.95v-19.9L32 9.48l22 12.57v19.9L32 54.52z"/><path d="M32 54.52v-19.9l22-12.57M32 34.62 10 22.05m31.7-7.03L21 28.33v8.38"/></svg>
+  {%- when 'tag' -%}
+    <svg aria-hidden="true" focusable="false" role="presentation" class="aether-product-icon" viewBox="0 0 64 64"><path d="m46.69 10.34-10.55.07-25.8 25.8 17.45 17.45 25.8-25.8.07-10.55-6.97-6.97z"/><circle cx="43.95" cy="20.05" r="3.53"/><path d="M14.4 32.15 31.85 49.6"/></svg>
+  {%- when 'layers' -%}
+    <svg aria-hidden="true" focusable="false" role="presentation" class="aether-product-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+  {%- when 'ruler' -%}
+    <svg aria-hidden="true" focusable="false" role="presentation" class="aether-product-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 8.7L8.7 21.3a1 1 0 0 1-1.4 0l-4.6-4.6a1 1 0 0 1 0-1.4L15.3 2.7a1 1 0 0 1 1.4 0l4.6 4.6a1 1 0 0 1 0 1.4z"/><path d="M7.5 10.5l2 2M10.5 7.5l2 2M13.5 4.5l2 2M4.5 13.5l2 2"/></svg>
+  {%- when 'gauge' -%}
+    <svg aria-hidden="true" focusable="false" role="presentation" class="aether-product-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15l3.5-3.5"/><path d="M20.3 18a10 10 0 1 0-16.6 0"/><circle cx="12" cy="15" r="1" fill="currentColor"/></svg>
+  {%- when 'sparkles' -%}
+    <svg aria-hidden="true" focusable="false" role="presentation" class="aether-product-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15z"/></svg>
+  {%- when 'droplet' -%}
+    <svg aria-hidden="true" focusable="false" role="presentation" class="aether-product-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7S6 9.5 6 14a6 6 0 0 0 12 0c0-4.5-6-11.3-6-11.3z"/></svg>
+  {%- when 'box' -%}
+    <svg aria-hidden="true" focusable="false" role="presentation" class="aether-product-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>
+{%- endcase -%}

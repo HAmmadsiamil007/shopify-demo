@@ -306,6 +306,202 @@
         }
       }
     },
+    "aether-product": {
+    "name": "AETHER Produkt",
+    "settings": {
+      "gallery_layout": {
+        "label": "Galerie-Layout",
+        "options": {
+          "thumbs": "Hauptbild mit Miniaturansichten",
+          "none": "Nur Hauptbild"
+        }
+      },
+      "gallery_zoom": {
+        "label": "Galerie-Zoomlupe aktivieren"
+      },
+      "enable_sticky_bar": {
+        "label": "Sticky-Leiste \"In den Warenkorb\" aktivieren"
+      },
+      "related_count": {
+        "label": "Anzuzeigende ähnliche Produkte"
+      },
+      "show_reviews_summary": {
+        "label": "Statische Bewertungsübersicht anzeigen"
+      }
+    },
+    "blocks": {
+      "price": {
+        "name": "Preis"
+      },
+      "variant_picker": {
+        "name": "Variantenauswahl",
+        "settings": {
+          "enable_color_swatches": {
+            "label": "Farbfelder für Farboptionen anzeigen"
+          }
+        }
+      },
+      "buy_buttons": {
+        "name": "Kauf-Buttons"
+      },
+      "description": {
+        "name": "Beschreibung"
+      },
+      "inventory_status": {
+        "name": "Lagerbestandsstatus"
+      },
+      "sales_point": {
+        "name": "Verkaufsargument",
+        "settings": {
+          "icon": {
+            "label": "Symbol",
+            "options": {
+              "checkmark": "Häkchen",
+              "gift": "Geschenk",
+              "globe": "Globus",
+              "heart": "Herz",
+              "leaf": "Blatt",
+              "lock": "Schloss",
+              "package": "Paket",
+              "phone": "Telefon",
+              "ribbon": "Band",
+              "shield": "Schild",
+              "tag": "Etikett",
+              "truck": "Lkw"
+            }
+          },
+          "text": {
+            "label": "Text"
+          }
+        }
+      },
+      "size_chart": {
+        "name": "Größentabelle"
+      },
+      "tab": {
+        "name": "Registerkarte",
+        "settings": {
+          "title": {
+            "label": "Titel"
+          },
+          "content": {
+            "label": "Inhalt"
+          },
+          "page": {
+            "label": "Seite"
+          }
+        }
+      },
+      "share": {
+        "name": "Teilen"
+      },
+      "trust_row": {
+        "name": "Vertrauenszeile",
+        "settings": {
+          "heading": {
+            "label": "Überschrift"
+          }
+        }
+      },
+      "trust_item": {
+        "name": "Vertrauenselement",
+        "settings": {
+          "icon": {
+            "label": "Symbol",
+            "options": {
+              "truck": "Lkw",
+              "undo": "Rückgängig",
+              "shield": "Schild",
+              "checkmark": "Häkchen",
+              "gift": "Geschenk",
+              "heart": "Herz",
+              "leaf": "Blatt",
+              "lock": "Schloss",
+              "package": "Paket",
+              "tag": "Etikett"
+            }
+          },
+          "title": {
+            "label": "Titel"
+          }
+        }
+      },
+      "specs_accordion": {
+        "name": "Technische Daten (Akkordeon)",
+        "settings": {
+          "specs_heading": {
+            "label": "Überschrift"
+          }
+        }
+      },
+      "spec_item": {
+        "name": "Datenpunkt",
+        "settings": {
+          "icon": {
+            "label": "Symbol",
+            "options": {
+              "layers": "Ebenen",
+              "ruler": "Lineal",
+              "gauge": "Messgerät",
+              "sparkles": "Funkeln",
+              "droplet": "Tropfen",
+              "box": "Karton",
+              "truck": "Lkw",
+              "shield": "Schild"
+            }
+          },
+          "title": {
+            "label": "Titel"
+          },
+          "content": {
+            "label": "Inhalt"
+          },
+          "default_open": {
+            "label": "Standardmäßig geöffnet"
+          }
+        }
+      },
+      "reviews_summary": {
+        "name": "Bewertungsübersicht",
+        "settings": {
+          "heading": {
+            "label": "Überschrift"
+          },
+          "score": {
+            "label": "Bewertung"
+          },
+          "bar_5_count": {
+            "label": "Anzahl 5 Sterne"
+          },
+          "bar_4_count": {
+            "label": "Anzahl 4 Sterne"
+          },
+          "bar_3_count": {
+            "label": "Anzahl 3 Sterne"
+          },
+          "bar_2_count": {
+            "label": "Anzahl 2 Sterne"
+          },
+          "bar_1_count": {
+            "label": "Anzahl 1 Stern"
+          }
+        }
+      },
+      "related_products": {
+        "name": "Ähnliche Produkte",
+        "settings": {
+          "heading": {
+            "label": "Überschrift"
+          }
+        }
+      }
+    },
+    "presets": {
+      "default": {
+        "name": "AETHER Produkt"
+      }
+    }
+  },
     "aether-popup-group": {
       "name": "Pop-ups (AETHER)"
     },    "footer-group": {

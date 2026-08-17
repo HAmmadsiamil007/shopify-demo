@@ -306,6 +306,202 @@
         }
       }
     },
+    "aether-product": {
+    "name": "Produit AETHER",
+    "settings": {
+      "gallery_layout": {
+        "label": "Disposition de la galerie",
+        "options": {
+          "thumbs": "Image principale avec vignettes",
+          "none": "Image principale uniquement"
+        }
+      },
+      "gallery_zoom": {
+        "label": "Activer la loupe de zoom de la galerie"
+      },
+      "enable_sticky_bar": {
+        "label": "Activer la barre d'ajout au panier fixe"
+      },
+      "related_count": {
+        "label": "Produits associés à afficher"
+      },
+      "show_reviews_summary": {
+        "label": "Afficher le résumé statique des avis"
+      }
+    },
+    "blocks": {
+      "price": {
+        "name": "Prix"
+      },
+      "variant_picker": {
+        "name": "Sélecteur de variantes",
+        "settings": {
+          "enable_color_swatches": {
+            "label": "Afficher les échantillons de couleur pour les options de couleur"
+          }
+        }
+      },
+      "buy_buttons": {
+        "name": "Boutons d'achat"
+      },
+      "description": {
+        "name": "Description"
+      },
+      "inventory_status": {
+        "name": "État du stock"
+      },
+      "sales_point": {
+        "name": "Argument de vente",
+        "settings": {
+          "icon": {
+            "label": "Icône",
+            "options": {
+              "checkmark": "Coche",
+              "gift": "Cadeau",
+              "globe": "Globe",
+              "heart": "Cœur",
+              "leaf": "Feuille",
+              "lock": "Cadenas",
+              "package": "Colis",
+              "phone": "Téléphone",
+              "ribbon": "Ruban",
+              "shield": "Bouclier",
+              "tag": "Étiquette",
+              "truck": "Camion"
+            }
+          },
+          "text": {
+            "label": "Texte"
+          }
+        }
+      },
+      "size_chart": {
+        "name": "Guide des tailles"
+      },
+      "tab": {
+        "name": "Onglet",
+        "settings": {
+          "title": {
+            "label": "Titre"
+          },
+          "content": {
+            "label": "Contenu"
+          },
+          "page": {
+            "label": "Page"
+          }
+        }
+      },
+      "share": {
+        "name": "Partager"
+      },
+      "trust_row": {
+        "name": "Ligne de confiance",
+        "settings": {
+          "heading": {
+            "label": "Titre"
+          }
+        }
+      },
+      "trust_item": {
+        "name": "Élément de confiance",
+        "settings": {
+          "icon": {
+            "label": "Icône",
+            "options": {
+              "truck": "Camion",
+              "undo": "Annuler",
+              "shield": "Bouclier",
+              "checkmark": "Coche",
+              "gift": "Cadeau",
+              "heart": "Cœur",
+              "leaf": "Feuille",
+              "lock": "Cadenas",
+              "package": "Colis",
+              "tag": "Étiquette"
+            }
+          },
+          "title": {
+            "label": "Titre"
+          }
+        }
+      },
+      "specs_accordion": {
+        "name": "Spécifications (accordéon)",
+        "settings": {
+          "specs_heading": {
+            "label": "Titre"
+          }
+        }
+      },
+      "spec_item": {
+        "name": "Élément de spécification",
+        "settings": {
+          "icon": {
+            "label": "Icône",
+            "options": {
+              "layers": "Calques",
+              "ruler": "Règle",
+              "gauge": "Jauge",
+              "sparkles": "Étincelles",
+              "droplet": "Goutte",
+              "box": "Boîte",
+              "truck": "Camion",
+              "shield": "Bouclier"
+            }
+          },
+          "title": {
+            "label": "Titre"
+          },
+          "content": {
+            "label": "Contenu"
+          },
+          "default_open": {
+            "label": "Ouvert par défaut"
+          }
+        }
+      },
+      "reviews_summary": {
+        "name": "Résumé des avis",
+        "settings": {
+          "heading": {
+            "label": "Titre"
+          },
+          "score": {
+            "label": "Note"
+          },
+          "bar_5_count": {
+            "label": "Nombre de 5 étoiles"
+          },
+          "bar_4_count": {
+            "label": "Nombre de 4 étoiles"
+          },
+          "bar_3_count": {
+            "label": "Nombre de 3 étoiles"
+          },
+          "bar_2_count": {
+            "label": "Nombre de 2 étoiles"
+          },
+          "bar_1_count": {
+            "label": "Nombre de 1 étoile"
+          }
+        }
+      },
+      "related_products": {
+        "name": "Produits associés",
+        "settings": {
+          "heading": {
+            "label": "Titre"
+          }
+        }
+      }
+    },
+    "presets": {
+      "default": {
+        "name": "Produit AETHER"
+      }
+    }
+  },
     "aether-popup-group": {
       "name": "Fenêtres contextuelles (AETHER)"
     },    "footer-group": {

@@ -306,6 +306,202 @@
         }
       }
     },
+    "aether-product": {
+    "name": "Prodotto AETHER",
+    "settings": {
+      "gallery_layout": {
+        "label": "Layout galleria",
+        "options": {
+          "thumbs": "Immagine principale con miniature",
+          "none": "Solo immagine principale"
+        }
+      },
+      "gallery_zoom": {
+        "label": "Abilita lente di ingrandimento galleria"
+      },
+      "enable_sticky_bar": {
+        "label": "Abilita barra fissa aggiungi al carrello"
+      },
+      "related_count": {
+        "label": "Prodotti correlati da mostrare"
+      },
+      "show_reviews_summary": {
+        "label": "Mostra riepilogo recensioni statico"
+      }
+    },
+    "blocks": {
+      "price": {
+        "name": "Prezzo"
+      },
+      "variant_picker": {
+        "name": "Selettore varianti",
+        "settings": {
+          "enable_color_swatches": {
+            "label": "Mostra campioni colore per le opzioni di colore"
+          }
+        }
+      },
+      "buy_buttons": {
+        "name": "Pulsanti di acquisto"
+      },
+      "description": {
+        "name": "Descrizione"
+      },
+      "inventory_status": {
+        "name": "Stato inventario"
+      },
+      "sales_point": {
+        "name": "Punto vendita",
+        "settings": {
+          "icon": {
+            "label": "Icona",
+            "options": {
+              "checkmark": "Spunta",
+              "gift": "Regalo",
+              "globe": "Globo",
+              "heart": "Cuore",
+              "leaf": "Foglia",
+              "lock": "Lucchetto",
+              "package": "Pacco",
+              "phone": "Telefono",
+              "ribbon": "Nastro",
+              "shield": "Scudo",
+              "tag": "Etichetta",
+              "truck": "Camion"
+            }
+          },
+          "text": {
+            "label": "Testo"
+          }
+        }
+      },
+      "size_chart": {
+        "name": "Guida alle taglie"
+      },
+      "tab": {
+        "name": "Scheda",
+        "settings": {
+          "title": {
+            "label": "Titolo"
+          },
+          "content": {
+            "label": "Contenuto"
+          },
+          "page": {
+            "label": "Pagina"
+          }
+        }
+      },
+      "share": {
+        "name": "Condividi"
+      },
+      "trust_row": {
+        "name": "Riga di fiducia",
+        "settings": {
+          "heading": {
+            "label": "Intestazione"
+          }
+        }
+      },
+      "trust_item": {
+        "name": "Elemento di fiducia",
+        "settings": {
+          "icon": {
+            "label": "Icona",
+            "options": {
+              "truck": "Camion",
+              "undo": "Annulla",
+              "shield": "Scudo",
+              "checkmark": "Spunta",
+              "gift": "Regalo",
+              "heart": "Cuore",
+              "leaf": "Foglia",
+              "lock": "Lucchetto",
+              "package": "Pacco",
+              "tag": "Etichetta"
+            }
+          },
+          "title": {
+            "label": "Titolo"
+          }
+        }
+      },
+      "specs_accordion": {
+        "name": "Specifiche (a fisarmonica)",
+        "settings": {
+          "specs_heading": {
+            "label": "Intestazione"
+          }
+        }
+      },
+      "spec_item": {
+        "name": "Voce di specifica",
+        "settings": {
+          "icon": {
+            "label": "Icona",
+            "options": {
+              "layers": "Livelli",
+              "ruler": "Righello",
+              "gauge": "Indicatore",
+              "sparkles": "Scintille",
+              "droplet": "Goccia",
+              "box": "Scatola",
+              "truck": "Camion",
+              "shield": "Scudo"
+            }
+          },
+          "title": {
+            "label": "Titolo"
+          },
+          "content": {
+            "label": "Contenuto"
+          },
+          "default_open": {
+            "label": "Aperto per impostazione predefinita"
+          }
+        }
+      },
+      "reviews_summary": {
+        "name": "Riepilogo recensioni",
+        "settings": {
+          "heading": {
+            "label": "Intestazione"
+          },
+          "score": {
+            "label": "Punteggio"
+          },
+          "bar_5_count": {
+            "label": "Numero di 5 stelle"
+          },
+          "bar_4_count": {
+            "label": "Numero di 4 stelle"
+          },
+          "bar_3_count": {
+            "label": "Numero di 3 stelle"
+          },
+          "bar_2_count": {
+            "label": "Numero di 2 stelle"
+          },
+          "bar_1_count": {
+            "label": "Numero di 1 stella"
+          }
+        }
+      },
+      "related_products": {
+        "name": "Prodotti correlati",
+        "settings": {
+          "heading": {
+            "label": "Intestazione"
+          }
+        }
+      }
+    },
+    "presets": {
+      "default": {
+        "name": "Prodotto AETHER"
+      }
+    }
+  },
     "aether-popup-group": {
       "name": "Popup (AETHER)"
     },    "footer-group": {
