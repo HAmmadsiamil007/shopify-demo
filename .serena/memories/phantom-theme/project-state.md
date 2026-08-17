@@ -3,7 +3,17 @@
 Theme: PHANTOM v2.3.0 (OS 2.0), rebranded from Impulse v8.2.0 by Archetype Themes.
 Path: `C:\Users\hamma\Downloads\phantom\phantom-theme\phantom-theme-v2.2.0\`
 
-## Current status: Task 03 COMPLETE + correction pass + Design Pack architecture (spec, no build yet)
+## Current status: Design Pack Wave 0 T1 COMPLETE (resolver + settings + loader migration + QA, NOT pushed)
+
+### Design Pack Wave 0 T1 (2026-08-17 — COMPLETE, committed, NOT pushed)
+Plan: `docs/superpowers/plans/2026-08-16-phantom-design-pack-wave0.md` (untracked, working file).
+Commits on main (5 ahead of origin, DO NOT push without user OK):
+- b89280e — Task 1+2: `snippets/design-pack-resolver.liquid` (generic registry dp_packs/dp_assets/dp_versions/dp_statuses, active_design_pack resolution, aether/demo/none) + `designs/build/check-registry.mjs` integrity gate (15 checks).
+- 8efdd45 — Task 3+4+5: settings (Design Packs group + aether_* token group, active_design_pack default aether, ph_active_design removed from settings_data), locales x7 (design_pack.* + aether.*, ph_designs removed), theme.liquid resolver-driven loader (CSS/JS/body scope, zero pack-name conditionals), client-demo.js → client-demo.js.liquid rename (100% identical).
+- ca71bb5 — QA fix: **render → include** (CRITICAL: `{% render %}` has an isolated scope — dp_* assigns are invisible to theme.liquid at runtime; `include` shares scope). Scoped theme-check-disable comments (DeprecatedTag, UndefinedObject, UnusedAssign) per repo convention.
+QA results: theme-check 276 files 0 offenses; REGISTRY: PASS (15/15); demo build --check OK 9.0 KB; zero pack-name literals in theme.liquid; untouched-file audit clean (sections/templates/assets/theme.js/theme.css.liquid/phantom-vendor.js untouched).
+Plan deviation to record: Task 5 used `render` in the plan; corrected to `include` at execution (Liquid render scope isolation). check-registry.mjs unaffected (parses resolver assigns).
+NEXT: Wave 0 T2 — AETHER skeleton assets (aether.css.liquid ≤60KB token scope, aether.js.liquid ≤40KB stub) — NOT authorized, requires user sign-off. Then T3 template archives, T4 docs materialization, T5 chrome.
 
 ### Design Pack Architecture (2026-08-16 — SPEC APPROVED BY USER, NOT YET IMPLEMENTED)
 Spec: `docs/superpowers/specs/2026-08-16-phantom-design-pack-architecture.md` (20 deliverables: audit, classification, pack contract, resolver, CSS/JS isolation, tokens, templates, data contract, conversion contract, failure matrix, NOVA scenario, files/risks/order/DoD).
