@@ -171,6 +171,80 @@
         }
       }
     },
+    "aether-hero": {
+      "name": "Hero (AETHER)",
+      "settings": {
+        "section_height": {
+          "label": "Altura de la sección",
+          "options": {
+            "full": "Pantalla completa (100vh, mín. 700px)",
+            "700": "700px",
+            "600": "600px",
+            "500": "500px"
+          }
+        },
+        "autoplay": {
+          "label": "Reproducción automática"
+        },
+        "autoplay_speed": {
+          "label": "Velocidad de reproducción automática (segundos)"
+        },
+        "show_nav": {
+          "label": "Mostrar navegación"
+        },
+        "show_scroll_indicator": {
+          "label": "Mostrar indicador de desplazamiento"
+        },
+        "enable_fog": {
+          "label": "Activar efecto de niebla"
+        },
+        "parallax_speed": {
+          "label": "Velocidad de paralaje"
+        }
+      },
+      "blocks": {
+        "slide": {
+          "name": "Diapositiva",
+          "settings": {
+            "image": {
+              "label": "Imagen"
+            },
+            "image_overlay": {
+              "label": "Opacidad de la superposición de imagen"
+            },
+            "headline": {
+              "label": "Titular"
+            },
+            "accent_text": {
+              "label": "Texto de acento"
+            },
+            "subline": {
+              "label": "Subtítulo"
+            },
+            "cta_text": {
+              "label": "Texto del botón principal"
+            },
+            "cta_link": {
+              "label": "Enlace del botón principal"
+            },
+            "cta2_text": {
+              "label": "Texto del botón secundario"
+            },
+            "cta2_link": {
+              "label": "Enlace del botón secundario"
+            },
+            "alt_text": {
+              "label": "Texto alternativo de la imagen"
+            }
+          }
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Hero"
+        }
+      }
+    },
     "aether-featured-products": {
       "name": "Destacados (AETHER)",
       "settings": {

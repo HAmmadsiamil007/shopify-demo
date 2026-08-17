@@ -171,6 +171,80 @@
         }
       }
     },
+    "aether-hero": {
+      "name": "Hero (AETHER)",
+      "settings": {
+        "section_height": {
+          "label": "Altezza sezione",
+          "options": {
+            "full": "Schermo intero (100vh, min 700px)",
+            "700": "700px",
+            "600": "600px",
+            "500": "500px"
+          }
+        },
+        "autoplay": {
+          "label": "Riproduzione automatica"
+        },
+        "autoplay_speed": {
+          "label": "Velocità di riproduzione automatica (secondi)"
+        },
+        "show_nav": {
+          "label": "Mostra navigazione"
+        },
+        "show_scroll_indicator": {
+          "label": "Mostra indicatore di scorrimento"
+        },
+        "enable_fog": {
+          "label": "Attiva effetto nebbia"
+        },
+        "parallax_speed": {
+          "label": "Velocità parallasse"
+        }
+      },
+      "blocks": {
+        "slide": {
+          "name": "Diapositiva",
+          "settings": {
+            "image": {
+              "label": "Immagine"
+            },
+            "image_overlay": {
+              "label": "Opacità sovrapposizione immagine"
+            },
+            "headline": {
+              "label": "Titolo"
+            },
+            "accent_text": {
+              "label": "Testo di accento"
+            },
+            "subline": {
+              "label": "Sottotitolo"
+            },
+            "cta_text": {
+              "label": "Testo pulsante principale"
+            },
+            "cta_link": {
+              "label": "Link pulsante principale"
+            },
+            "cta2_text": {
+              "label": "Testo pulsante secondario"
+            },
+            "cta2_link": {
+              "label": "Link pulsante secondario"
+            },
+            "alt_text": {
+              "label": "Testo alternativo dell'immagine"
+            }
+          }
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Hero"
+        }
+      }
+    },
     "aether-featured-products": {
       "name": "In evidenza (AETHER)",
       "settings": {

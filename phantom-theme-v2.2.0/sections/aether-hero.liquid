@@ -1,0 +1,300 @@
+{% comment %}
+  AETHER hero slider (plan Task 6) — frozen index.html:234-323 (hero-slider,
+  fog layers, swiper slides, nav, counter, progress, scroll indicator) +
+  style.css:683-886. Swiper 11 is loaded on demand by the runtime when
+  `.aether-hero` is present (_loadVendors). Slide entrance parallax uses
+  data-swiper-parallax on text elements (frozen -200/-300/-400); bg parallax
+  uses data-aether-parallax (motion module) instead of the frozen inline GSAP
+  (D-note: motion-toggle + reduced-motion compliant).
+
+  D-notes:
+  - Frozen inline GSAP bg parallax (y: 80, scrub 1.5) replaced by
+    data-aether-parallax via the motion module (respects the motion toggle).
+  - Counter / progress / scroll fade implemented in the controller; entrance
+    animations per slide handled by Swiper parallax (no GSAP entrance presets).
+{% endcomment %}
+
+<section
+  class="aether-hero aether-hero--{{ section.settings.section_height }}"
+  data-section-type="aether-hero"
+  data-aether-autoplay="{{ section.settings.autoplay }}"
+  data-aether-autoplay-speed="{{ section.settings.autoplay_speed }}"
+  data-aether-slide-count="{{ section.blocks.size }}"
+  data-aether-motion-enabled="{{ settings.aether_motion_enable }}"
+  {% if section.settings.show_nav %}data-aether-show-nav="true"{% endif %}
+  {% if section.settings.show_scroll_indicator %}data-aether-show-scroll="true"{% endif %}
+>
+  {%- if section.settings.enable_fog -%}
+    <div class="aether-hero-fog" aria-hidden="true">
+      <div id="aether-hl_01" class="aether-hf-fog">
+        <div class="aether-hf-img"></div>
+        <div class="aether-hf-img"></div>
+      </div>
+      <div id="aether-hl_02" class="aether-hf-fog">
+        <div class="aether-hf-img"></div>
+        <div class="aether-hf-img"></div>
+      </div>
+      <div id="aether-hl_03" class="aether-hf-fog">
+        <div class="aether-hf-img"></div>
+        <div class="aether-hf-img"></div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="aether-hero-swiper swiper">
+    <div class="swiper-wrapper">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'slide' -%}
+          <div class="swiper-slide aether-hero-slide" {{ block.shopify_attributes }}>
+            <div class="aether-hero-slide-bg">
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 1800 }}"
+                  srcset="{{ block.settings.image | image_url: width: 1000 }} 1000w, {{ block.settings.image | image_url: width: 1400 }} 1400w, {{ block.settings.image | image_url: width: 1800 }} 1800w, {{ block.settings.image | image_url: width: 2400 }} 2400w"
+                  sizes="100vw"
+                  alt="{{ block.settings.alt_text | default: block.settings.headline | escape }}"
+                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                  data-aether-parallax
+                  data-aether-parallax-speed="{{ section.settings.parallax_speed }}"
+                >
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'aether-hero-slide-bg__placeholder' }}
+              {%- endif -%}
+              <div class="aether-hero-slide-overlay" style="opacity: {{ block.settings.image_overlay }}"></div>
+            </div>
+
+            <div class="aether-container aether-hero-slide-content">
+              <div class="aether-hero-slide-text">
+                <h1 class="aether-hero-headline" data-swiper-parallax="-200">
+                  {{ block.settings.headline | escape }}<br>
+                  {%- if block.settings.accent_text != blank -%}
+                    <span class="aether-hero-headline-accent">{{ block.settings.accent_text | escape }}</span>
+                  {%- endif -%}
+                </h1>
+                {%- if block.settings.subline != blank -%}
+                  <p class="aether-hero-subline" data-swiper-parallax="-300">{{ block.settings.subline | escape }}</p>
+                {%- endif -%}
+                <div class="aether-hero-cta-group" data-swiper-parallax="-400">
+                  {%- if block.settings.cta_text != blank -%}
+                    <a href="{{ block.settings.cta_link | default: routes.all_products_collection_url }}" class="aether-btn aether-btn-primary aether-btn-lg" data-aether-magnetic="0.12">{{ block.settings.cta_text | escape }}</a>
+                  {%- endif -%}
+                  {%- if block.settings.cta2_text != blank -%}
+                    <a href="{{ block.settings.cta2_link | default: routes.all_products_collection_url }}" class="aether-btn aether-btn-outline aether-btn-lg" data-aether-magnetic="0.12">{{ block.settings.cta2_text | escape }}</a>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.show_nav -%}
+      <div class="aether-hero-nav">
+        <button class="aether-hero-nav-btn aether-hero-nav-prev" data-aether-magnetic="0.12" type="button" aria-label="{{ 'aether.hero.prev' | t }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+          </svg>
+        </button>
+        <div class="aether-hero-slide-counter">
+          <span class="aether-hero-current-slide">01</span> / <span class="aether-hero-total-slides">{%- if section.blocks.size < 10 -%}0{{ section.blocks.size }}{%- else -%}{{ section.blocks.size }}{%- endif -%}</span>
+        </div>
+        <button class="aether-hero-nav-btn aether-hero-nav-next" data-aether-magnetic="0.12" type="button" aria-label="{{ 'aether.hero.next' | t }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </button>
+      </div>
+      <div class="aether-hero-progress" aria-hidden="true"></div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.show_scroll_indicator -%}
+    <div class="aether-hero-scroll-indicator">
+      <div class="aether-hero-mouse" aria-hidden="true">
+        <div class="aether-hero-wheel"></div>
+      </div>
+      <p>{{ 'aether.hero.scroll_hint' | t }}</p>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+  {
+    "name": "t:sections.aether-hero.name",
+    "settings": [
+      {
+        "type": "select",
+        "id": "section_height",
+        "label": "t:sections.aether-hero.settings.section_height.label",
+        "options": [
+          { "value": "full", "label": "t:sections.aether-hero.settings.section_height.options.full" },
+          { "value": "700", "label": "t:sections.aether-hero.settings.section_height.options.700" },
+          { "value": "600", "label": "t:sections.aether-hero.settings.section_height.options.600" },
+          { "value": "500", "label": "t:sections.aether-hero.settings.section_height.options.500" }
+        ],
+        "default": "full"
+      },
+      {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "t:sections.aether-hero.settings.autoplay.label",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "autoplay_speed",
+        "min": 3,
+        "max": 10,
+        "step": 1,
+        "default": 6,
+        "label": "t:sections.aether-hero.settings.autoplay_speed.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_nav",
+        "label": "t:sections.aether-hero.settings.show_nav.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_scroll_indicator",
+        "label": "t:sections.aether-hero.settings.show_scroll_indicator.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_fog",
+        "label": "t:sections.aether-hero.settings.enable_fog.label",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "parallax_speed",
+        "min": 0.1,
+        "max": 0.5,
+        "step": 0.1,
+        "default": 0.2,
+        "label": "t:sections.aether-hero.settings.parallax_speed.label"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "slide",
+        "name": "t:sections.aether-hero.blocks.slide.name",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "t:sections.aether-hero.blocks.slide.settings.image.label"
+          },
+          {
+            "type": "range",
+            "id": "image_overlay",
+            "min": 0,
+            "max": 1,
+            "step": 0.1,
+            "default": 0.85,
+            "label": "t:sections.aether-hero.blocks.slide.settings.image_overlay.label"
+          },
+          {
+            "type": "text",
+            "id": "headline",
+            "label": "t:sections.aether-hero.blocks.slide.settings.headline.label",
+            "default": "AETHER"
+          },
+          {
+            "type": "text",
+            "id": "accent_text",
+            "label": "t:sections.aether-hero.blocks.slide.settings.accent_text.label",
+            "default": "Void Runner"
+          },
+          {
+            "type": "textarea",
+            "id": "subline",
+            "label": "t:sections.aether-hero.blocks.slide.settings.subline.label",
+            "default": "Born from the silence between stars. Carbon-fiber exoskeleton meets adaptive cushioning that learns your stride. The benchmark has been reset."
+          },
+          {
+            "type": "text",
+            "id": "cta_text",
+            "label": "t:sections.aether-hero.blocks.slide.settings.cta_text.label",
+            "default": "Shop Now — $449"
+          },
+          {
+            "type": "url",
+            "id": "cta_link",
+            "label": "t:sections.aether-hero.blocks.slide.settings.cta_link.label",
+            "default": "/collections/all"
+          },
+          {
+            "type": "text",
+            "id": "cta2_text",
+            "label": "t:sections.aether-hero.blocks.slide.settings.cta2_text.label",
+            "default": "Explore Tech"
+          },
+          {
+            "type": "url",
+            "id": "cta2_link",
+            "label": "t:sections.aether-hero.blocks.slide.settings.cta2_link.label",
+            "default": "/collections/all"
+          },
+          {
+            "type": "text",
+            "id": "alt_text",
+            "label": "t:sections.aether-hero.blocks.slide.settings.alt_text.label"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.aether-hero.presets.default.name",
+        "category": "t:sections.categories.products",
+        "blocks": [
+          {
+            "type": "slide",
+            "settings": {
+              "headline": "AETHER",
+              "accent_text": "Void Runner",
+              "subline": "Born from the silence between stars. Carbon-fiber exoskeleton meets adaptive cushioning that learns your stride. The benchmark has been reset.",
+              "cta_text": "Shop Now — $449",
+              "cta_link": "/collections/all",
+              "cta2_text": "Explore Tech",
+              "cta2_link": "/collections/all",
+              "alt_text": "AETHER Void Runner"
+            }
+          },
+          {
+            "type": "slide",
+            "settings": {
+              "headline": "Cloud",
+              "accent_text": "Stride",
+              "subline": "Float above the pavement. Zero-gravity foam compounds deliver infinite energy return with every step. Running has never felt this light.",
+              "cta_text": "Shop Collection",
+              "cta_link": "/collections/all",
+              "cta2_text": "Our Story",
+              "cta2_link": "/collections/all",
+              "alt_text": "AETHER Cloud Stride"
+            }
+          },
+          {
+            "type": "slide",
+            "settings": {
+              "headline": "Midnight",
+              "accent_text": "Edition",
+              "subline": "Darkness refined. A stealth-black silhouette with phosphorescent accents that ignite after sunset. Only 2,500 pairs exist. Once they are gone, the night reclaims them.",
+              "cta_text": "Get Yours",
+              "cta_link": "/collections/all",
+              "cta2_text": "View Details",
+              "cta2_link": "/collections/all",
+              "alt_text": "AETHER Midnight Edition"
+            }
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -171,6 +171,80 @@
         }
       }
     },
+    "aether-hero": {
+      "name": "Hero (AETHER)",
+      "settings": {
+        "section_height": {
+          "label": "Section height",
+          "options": {
+            "full": "Full screen (100vh, min 700px)",
+            "700": "700px",
+            "600": "600px",
+            "500": "500px"
+          }
+        },
+        "autoplay": {
+          "label": "Autoplay"
+        },
+        "autoplay_speed": {
+          "label": "Autoplay speed (seconds)"
+        },
+        "show_nav": {
+          "label": "Show navigation"
+        },
+        "show_scroll_indicator": {
+          "label": "Show scroll indicator"
+        },
+        "enable_fog": {
+          "label": "Enable fog effect"
+        },
+        "parallax_speed": {
+          "label": "Parallax speed"
+        }
+      },
+      "blocks": {
+        "slide": {
+          "name": "Slide",
+          "settings": {
+            "image": {
+              "label": "Image"
+            },
+            "image_overlay": {
+              "label": "Image overlay opacity"
+            },
+            "headline": {
+              "label": "Headline"
+            },
+            "accent_text": {
+              "label": "Accent text"
+            },
+            "subline": {
+              "label": "Subline"
+            },
+            "cta_text": {
+              "label": "Primary button text"
+            },
+            "cta_link": {
+              "label": "Primary button link"
+            },
+            "cta2_text": {
+              "label": "Secondary button text"
+            },
+            "cta2_link": {
+              "label": "Secondary button link"
+            },
+            "alt_text": {
+              "label": "Image alt text"
+            }
+          }
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Hero"
+        }
+      }
+    },
     "aether-featured-products": {
       "name": "Featured (AETHER)",
       "settings": {

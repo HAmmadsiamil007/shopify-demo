@@ -579,11 +579,16 @@
   }
 ,
     "aether": {
+        "featured_products": {
+            "empty": "Nessun prodotto disponibile in questa collezione."
+        },
         "header": {
             "shop_now": "Acquista ora"
         },
-        "featured_products": {
-            "empty": "Nessun prodotto disponibile in questa collezione."
+        "hero": {
+            "next": "Diapositiva successiva",
+            "prev": "Diapositiva precedente",
+            "scroll_hint": "Scorri per esplorare"
         },
         "product_card": {
             "bestseller": "Più venduto",

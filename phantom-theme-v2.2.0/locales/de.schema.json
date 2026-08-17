@@ -171,6 +171,80 @@
         }
       }
     },
+    "aether-hero": {
+      "name": "Hero (AETHER)",
+      "settings": {
+        "section_height": {
+          "label": "Abschnittshöhe",
+          "options": {
+            "full": "Vollbild (100vh, min. 700px)",
+            "700": "700px",
+            "600": "600px",
+            "500": "500px"
+          }
+        },
+        "autoplay": {
+          "label": "Autoplay"
+        },
+        "autoplay_speed": {
+          "label": "Autoplay-Geschwindigkeit (Sekunden)"
+        },
+        "show_nav": {
+          "label": "Navigation anzeigen"
+        },
+        "show_scroll_indicator": {
+          "label": "Scroll-Indikator anzeigen"
+        },
+        "enable_fog": {
+          "label": "Nebeleffekt aktivieren"
+        },
+        "parallax_speed": {
+          "label": "Parallax-Geschwindigkeit"
+        }
+      },
+      "blocks": {
+        "slide": {
+          "name": "Folie",
+          "settings": {
+            "image": {
+              "label": "Bild"
+            },
+            "image_overlay": {
+              "label": "Bild-Overlay-Deckkraft"
+            },
+            "headline": {
+              "label": "Überschrift"
+            },
+            "accent_text": {
+              "label": "Akzenttext"
+            },
+            "subline": {
+              "label": "Unterzeile"
+            },
+            "cta_text": {
+              "label": "Text der primären Schaltfläche"
+            },
+            "cta_link": {
+              "label": "Link der primären Schaltfläche"
+            },
+            "cta2_text": {
+              "label": "Text der sekundären Schaltfläche"
+            },
+            "cta2_link": {
+              "label": "Link der sekundären Schaltfläche"
+            },
+            "alt_text": {
+              "label": "Alternativtext des Bildes"
+            }
+          }
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Hero"
+        }
+      }
+    },
     "aether-featured-products": {
       "name": "Ausgewählte (AETHER)",
       "settings": {

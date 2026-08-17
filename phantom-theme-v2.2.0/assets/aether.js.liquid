@@ -471,6 +471,100 @@ import { loadScript, loadCSS } from 'theme-resource-loader'
     }
   }
 
+  CONTROLLERS['aether-hero'] = {
+    init(el) {
+      this._el = el
+      this._clear()
+      var swiperEl = el.querySelector('.aether-hero-swiper')
+      if (!swiperEl || !window.Swiper) return
+
+      var autoplayOn = el.getAttribute('data-aether-autoplay') === 'true'
+      var autoplayDelay = (parseFloat(el.getAttribute('data-aether-autoplay-speed')) || 6) * 1000
+
+      this._swiper = new Swiper(swiperEl, {
+        loop: true,
+        speed: 1200,
+        parallax: true,
+        effect: 'fade',
+        fadeEffect: { crossFade: true },
+        autoplay: autoplayOn
+          ? { delay: autoplayDelay, disableOnInteraction: false }
+          : false,
+        on: {
+          slideChange: (s) => {
+            var counter = el.querySelector('.aether-hero-current-slide')
+            if (counter) counter.textContent = String(s.realIndex + 1).padStart(2, '0')
+          }
+        }
+      })
+
+      // Progress bar (frozen .hero-slider-progress): autoplayTimeLeft -> --progress.
+      if (autoplayOn && this._swiper.autoplay) {
+        this._onTimeUpdate = (s, timeLeft) => {
+          var pct = Math.min(100, Math.max(0, (1 - timeLeft / autoplayDelay) * 100))
+          el.style.setProperty('--progress', pct + '%')
+        }
+        this._swiper.autoplay.on('timeUpdate', this._onTimeUpdate)
+      }
+
+      // Prev / next (frozen .hero-nav-btn)
+      var prevBtn = el.querySelector('.aether-hero-nav-prev')
+      var nextBtn = el.querySelector('.aether-hero-nav-next')
+      if (prevBtn) prevBtn.addEventListener('click', () => this._swiper.slidePrev())
+      if (nextBtn) nextBtn.addEventListener('click', () => this._swiper.slideNext())
+
+      // Scroll fade-out of content + scroll indicator (animations.js:446-465)
+      if (this._motionEnabled() && window.gsap && window.ScrollTrigger) {
+        var heroContent = el.querySelector('.aether-hero-slide-content')
+        if (heroContent) {
+          gsap.to(heroContent, {
+            y: -60, opacity: 0, ease: 'none',
+            scrollTrigger: {
+              trigger: el, start: 'top top', end: '60% top', scrub: 1
+            }
+          })
+        }
+        var scrollIndicator = el.querySelector('.aether-hero-scroll-indicator')
+        if (scrollIndicator) {
+          gsap.to(scrollIndicator, {
+            opacity: 0, y: -20, ease: 'none',
+            scrollTrigger: {
+              trigger: el, start: '10% top', end: '30% top', scrub: 1
+            }
+          })
+        }
+      }
+    },
+    destroy() {
+      this._clear()
+    },
+    refresh() {
+      this.init(this._el)
+    },
+    _clear() {
+      if (this._swiper) {
+        if (this._swiper.autoplay && this._onTimeUpdate) {
+          this._swiper.autoplay.off('timeUpdate', this._onTimeUpdate)
+        }
+        this._swiper.destroy(true, true)
+        this._swiper = null
+        this._onTimeUpdate = null
+      }
+      if (this._el && window.ScrollTrigger) {
+        window.ScrollTrigger.getAll().forEach((st) => {
+          if (st.trigger === this._el) st.kill()
+        })
+      }
+      this._el = null
+    },
+    _motionEnabled() {
+      var attr = this._el && this._el.getAttribute('data-aether-motion-enabled')
+      if (attr !== null && attr !== 'true') return false
+      var runtime = window.__aetherRuntime
+      return !runtime || typeof runtime._motionEnabled !== 'function' || runtime._motionEnabled()
+    }
+  }
+
   window.AetherRuntime = window.AetherRuntime || AetherRuntime
 
   window.addEventListener(EVENTS.themeReady, function () {

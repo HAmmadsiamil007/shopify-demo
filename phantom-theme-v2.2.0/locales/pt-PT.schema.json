@@ -171,6 +171,80 @@
         }
       }
     },
+    "aether-hero": {
+      "name": "Hero (AETHER)",
+      "settings": {
+        "section_height": {
+          "label": "Altura da secção",
+          "options": {
+            "full": "Ecrã inteiro (100vh, mín. 700px)",
+            "700": "700px",
+            "600": "600px",
+            "500": "500px"
+          }
+        },
+        "autoplay": {
+          "label": "Reprodução automática"
+        },
+        "autoplay_speed": {
+          "label": "Velocidade da reprodução automática (segundos)"
+        },
+        "show_nav": {
+          "label": "Mostrar navegação"
+        },
+        "show_scroll_indicator": {
+          "label": "Mostrar indicador de deslocamento"
+        },
+        "enable_fog": {
+          "label": "Ativar efeito de nevoeiro"
+        },
+        "parallax_speed": {
+          "label": "Velocidade do parallax"
+        }
+      },
+      "blocks": {
+        "slide": {
+          "name": "Diapositivo",
+          "settings": {
+            "image": {
+              "label": "Imagem"
+            },
+            "image_overlay": {
+              "label": "Opacidade da sobreposição da imagem"
+            },
+            "headline": {
+              "label": "Título"
+            },
+            "accent_text": {
+              "label": "Texto de destaque"
+            },
+            "subline": {
+              "label": "Subtítulo"
+            },
+            "cta_text": {
+              "label": "Texto do botão principal"
+            },
+            "cta_link": {
+              "label": "Link do botão principal"
+            },
+            "cta2_text": {
+              "label": "Texto do botão secundário"
+            },
+            "cta2_link": {
+              "label": "Link do botão secundário"
+            },
+            "alt_text": {
+              "label": "Texto alternativo da imagem"
+            }
+          }
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Hero"
+        }
+      }
+    },
     "aether-featured-products": {
       "name": "Em destaque (AETHER)",
       "settings": {

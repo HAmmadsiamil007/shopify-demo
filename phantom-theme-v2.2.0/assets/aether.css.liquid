@@ -1401,3 +1401,412 @@
     font-size: 0.75rem;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   AETHER — Hero slider (plan Task 6 Step 2)
+   Frozen refs: style.css:683-886 (slider, slide, overlay, content, headline,
+   subline, cta group, nav, counter, progress, scroll indicator), 219-304
+   (fog layers), 135-216 (fog keyframes); responsive.css:7-15 (1920 headline
+   7rem), 44-52 (1440 5.5rem), 197-209 (≤1024), 1076-1112 (≤576),
+   1324-1335 (≤480), 1412-1417 (≤360).
+   ─────────────────────────────────────────────────────────────────── */
+
+/* Shared container (hero content; also used by other aether sections) */
+.aether-container {
+  width: 100%;
+  max-width: var(--aether-container-max);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.aether-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  overflow: hidden;
+}
+
+.aether-hero--700 { height: 700px; min-height: 0; }
+.aether-hero--600 { height: 600px; min-height: 0; }
+.aether-hero--500 { height: 500px; min-height: 0; }
+
+.aether-hero-swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.aether-hero-slide {
+  position: relative;
+  height: 100%;
+}
+
+.aether-hero-slide-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.aether-hero-slide-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.aether-hero-slide-bg__placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--aether-bg) 0%, var(--aether-surface) 50%, #1a1a1f 100%);
+}
+
+.aether-hero-slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(9, 9, 11, 0.85) 0%,
+    rgba(9, 9, 11, 0.5) 40%,
+    rgba(9, 9, 11, 0.3) 100%
+  );
+}
+
+.aether-hero-slide-content {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-top: calc(var(--aether-announcement-height) + var(--aether-header-height) + 60px);
+  padding-bottom: 100px;
+}
+
+.aether-hero-slide-text {
+  max-width: 650px;
+}
+
+.aether-hero-headline {
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin-bottom: 20px;
+  color: var(--aether-text);
+}
+
+.aether-hero-headline-accent {
+  color: var(--aether-accent);
+  display: block;
+}
+
+.aether-hero-subline {
+  font-size: 1.1rem;
+  color: var(--aether-muted);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 480px;
+}
+
+.aether-hero-cta-group {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.aether-hero-nav {
+  position: absolute;
+  bottom: 80px;
+  right: 40px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.aether-hero-nav-btn {
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--aether-text);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.aether-hero-nav-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.aether-hero-nav-btn:hover {
+  border-color: var(--aether-accent);
+  color: var(--aether-accent);
+  background: rgba(200, 149, 108, 0.1);
+}
+
+.aether-hero-slide-counter {
+  font-size: 0.9rem;
+  color: var(--aether-muted);
+  letter-spacing: 0.1em;
+}
+
+.aether-hero-current-slide {
+  color: var(--aether-accent);
+  font-weight: 700;
+}
+
+.aether-hero-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 10;
+}
+
+.aether-hero-progress::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: var(--progress, 0%);
+  background: var(--aether-accent);
+  transition: none;
+}
+
+/* Scroll indicator (frozen .scroll-indicator 844-890) */
+.aether-hero-scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 10;
+  opacity: 0;
+  animation: aetherFadeInUp 1s ease 2s forwards;
+}
+
+.aether-hero-mouse {
+  width: 24px;
+  height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  margin: 0 auto 8px;
+  position: relative;
+}
+
+.aether-hero-wheel {
+  width: 4px;
+  height: 8px;
+  background-color: var(--aether-accent);
+  border-radius: 2px;
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: aetherScrollWheel 1.5s infinite;
+}
+
+.aether-hero-scroll-indicator p {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@keyframes aetherScrollWheel {
+  0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(12px); }
+}
+
+@keyframes aetherFadeInUp {
+  to { opacity: 1; }
+}
+
+/* Hero fog (frozen 219-304 + keyframes 135-216) */
+.aether-hero-fog {
+  position: absolute;
+  inset: 0;
+  width: 200%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  will-change: transform, opacity;
+}
+
+.aether-hf-fog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.aether-hero-fog #aether-hl_01,
+.aether-hero-fog #aether-hl_02,
+.aether-hero-fog #aether-hl_03 {
+  height: 100%;
+  position: absolute;
+  width: 200%;
+}
+
+.aether-hero-fog .aether-hf-img {
+  float: left;
+  height: 100%;
+  width: 50%;
+}
+
+.aether-hero-fog #aether-hl_01 {
+  filter: blur(2px) grayscale(0.1) saturate(1.2) sepia(0.1);
+  -webkit-animation: aetherHf01Opacity 8s linear infinite, aetherFogMove 12s linear infinite;
+  animation: aetherHf01Opacity 8s linear infinite, aetherFogMove 12s linear infinite;
+}
+
+.aether-hero-fog #aether-hl_01 .aether-hf-img {
+  background: url('{{ "fog1.png" | asset_url }}') center center / cover no-repeat transparent;
+}
+
+.aether-hero-fog #aether-hl_02,
+.aether-hero-fog #aether-hl_03 {
+  filter: blur(2px) grayscale(0.1) saturate(1.2) sepia(0.1);
+  -webkit-animation: aetherHf02Opacity 16s linear infinite, aetherFogMove 10s linear infinite;
+  animation: aetherHf02Opacity 16s linear infinite, aetherFogMove 10s linear infinite;
+}
+
+.aether-hero-fog #aether-hl_02 .aether-hf-img,
+.aether-hero-fog #aether-hl_03 .aether-hf-img {
+  background: url('{{ "fog2.png" | asset_url }}') center center / cover no-repeat transparent;
+}
+
+@keyframes aetherHf01Opacity {
+  0% { opacity: 0.45; }
+  22% { opacity: 0.85; }
+  40% { opacity: 0.55; }
+  58% { opacity: 0.75; }
+  80% { opacity: 0.5; }
+  100% { opacity: 0.45; }
+}
+
+@keyframes aetherHf02Opacity {
+  0% { opacity: 0.7; }
+  25% { opacity: 0.35; }
+  50% { opacity: 0.25; }
+  80% { opacity: 0.5; }
+  100% { opacity: 0.7; }
+}
+
+@keyframes aetherFogMove {
+  0% { left: 0; }
+  100% { left: -100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aether-hero-fog { display: none; }
+}
+
+@media only screen and (max-width: 767px) {
+  .aether-hero-fog { opacity: 0.5; }
+  .aether-hero-fog .aether-hf-img { width: 100%; }
+  .aether-hero-fog #aether-hl_01 {
+    animation: aetherHf01Opacity 8s linear infinite, aetherFogMove 15s linear infinite;
+  }
+  .aether-hero-fog #aether-hl_02,
+  .aether-hero-fog #aether-hl_03 {
+    animation: aetherHf02Opacity 16s linear infinite, aetherFogMove 13s linear infinite;
+  }
+}
+
+/* Responsive (frozen responsive.css) */
+@media (min-width: 1920px) {
+  .aether-hero-headline {
+    font-size: 7rem;
+  }
+
+  .aether-hero-subline {
+    font-size: 1.3rem;
+  }
+}
+
+@media (min-width: 1440px) and (max-width: 1919px) {
+  .aether-hero-headline {
+    font-size: 5.5rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .aether-hero-slide-content {
+    padding-top: 130px;
+    padding-bottom: 80px;
+  }
+
+  .aether-hero-headline {
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+  }
+
+  .aether-hero-nav {
+    right: 20px;
+    bottom: 80px;
+  }
+}
+
+@media (max-width: 576px) {
+  .aether-hero-slide-content {
+    padding-top: 120px;
+    padding-bottom: 60px;
+  }
+
+  .aether-hero-headline {
+    font-size: clamp(1.8rem, 8vw, 2.8rem);
+    margin-bottom: 16px;
+  }
+
+  .aether-hero-subline {
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+  }
+
+  .aether-hero-cta-group .aether-btn {
+    padding: 14px 24px;
+    font-size: 0.85rem;
+  }
+
+  .aether-hero-nav {
+    right: 12px;
+    bottom: 40px;
+    gap: 10px;
+  }
+
+  .aether-hero-nav-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .aether-hero-headline {
+    font-size: clamp(1.6rem, 9vw, 2.4rem);
+  }
+
+  .aether-hero-subline {
+    font-size: 0.8rem;
+  }
+
+  .aether-hero-cta-group .aether-btn {
+    padding: 12px 20px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .aether-hero-headline {
+    font-size: 1.5rem;
+  }
+}

@@ -171,6 +171,80 @@
         }
       }
     },
+    "aether-hero": {
+      "name": "Hero (AETHER)",
+      "settings": {
+        "section_height": {
+          "label": "Hauteur de la section",
+          "options": {
+            "full": "Plein écran (100vh, min 700px)",
+            "700": "700px",
+            "600": "600px",
+            "500": "500px"
+          }
+        },
+        "autoplay": {
+          "label": "Lecture automatique"
+        },
+        "autoplay_speed": {
+          "label": "Vitesse de lecture automatique (secondes)"
+        },
+        "show_nav": {
+          "label": "Afficher la navigation"
+        },
+        "show_scroll_indicator": {
+          "label": "Afficher l'indicateur de défilement"
+        },
+        "enable_fog": {
+          "label": "Activer l'effet de brouillard"
+        },
+        "parallax_speed": {
+          "label": "Vitesse du parallaxe"
+        }
+      },
+      "blocks": {
+        "slide": {
+          "name": "Diapositive",
+          "settings": {
+            "image": {
+              "label": "Image"
+            },
+            "image_overlay": {
+              "label": "Opacité de la superposition"
+            },
+            "headline": {
+              "label": "Titre"
+            },
+            "accent_text": {
+              "label": "Texte d'accent"
+            },
+            "subline": {
+              "label": "Sous-titre"
+            },
+            "cta_text": {
+              "label": "Texte du bouton principal"
+            },
+            "cta_link": {
+              "label": "Lien du bouton principal"
+            },
+            "cta2_text": {
+              "label": "Texte du bouton secondaire"
+            },
+            "cta2_link": {
+              "label": "Lien du bouton secondaire"
+            },
+            "alt_text": {
+              "label": "Texte alternatif de l'image"
+            }
+          }
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Hero"
+        }
+      }
+    },
     "aether-featured-products": {
       "name": "En vedette (AETHER)",
       "settings": {
