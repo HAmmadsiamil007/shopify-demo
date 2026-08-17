@@ -171,6 +171,41 @@
         }
       }
     },
+    "aether-featured-products": {
+      "name": "Destacados (AETHER)",
+      "settings": {
+        "label": {
+          "label": "Etiqueta"
+        },
+        "title": {
+          "label": "Título"
+        },
+        "subtitle": {
+          "label": "Subtítulo"
+        },
+        "collection": {
+          "label": "Colección"
+        },
+        "per_row": {
+          "label": "Productos por fila"
+        },
+        "rows": {
+          "label": "Filas"
+        },
+        "view_all_label": {
+          "label": "Etiqueta Ver todo",
+          "info": "Déjalo vacío para ocultar el botón"
+        },
+        "view_all_link": {
+          "label": "Enlace Ver todo"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Productos destacados"
+        }
+      }
+    },
     "aether-popup-group": {
       "name": "Ventanas emergentes (AETHER)"
     },    "footer-group": {

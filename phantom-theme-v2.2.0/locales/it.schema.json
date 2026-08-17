@@ -171,6 +171,41 @@
         }
       }
     },
+    "aether-featured-products": {
+      "name": "In evidenza (AETHER)",
+      "settings": {
+        "label": {
+          "label": "Etichetta"
+        },
+        "title": {
+          "label": "Titolo"
+        },
+        "subtitle": {
+          "label": "Sottotitolo"
+        },
+        "collection": {
+          "label": "Collezione"
+        },
+        "per_row": {
+          "label": "Prodotti per riga"
+        },
+        "rows": {
+          "label": "Righe"
+        },
+        "view_all_label": {
+          "label": "Etichetta Mostra tutto",
+          "info": "Lascia vuoto per nascondere il pulsante"
+        },
+        "view_all_link": {
+          "label": "Link Mostra tutto"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Prodotti in evidenza"
+        }
+      }
+    },
     "aether-popup-group": {
       "name": "Popup (AETHER)"
     },    "footer-group": {

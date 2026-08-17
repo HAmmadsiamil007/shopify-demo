@@ -1,0 +1,130 @@
+{% comment %}
+  AETHER featured products (plan Task 5 Step 3) — frozen index.html:390-515
+  (bestsellers section: section header + 4-col products grid + view-all CTA).
+  Product query: collections[section.settings.collection].products limited to
+  per_row × rows. Empty state (no collection selected / no products): section
+  header + muted copy (frozen has none — D-list record).
+
+  D-notes:
+  - Frozen CTA links to /shop.html; AETHER default links to /collections/all
+    (view_all_link setting).
+  - view_all_label blank hides the CTA.
+{% endcomment %}
+
+{%- liquid
+  assign collection_handle = section.settings.collection
+  assign products_limit = section.settings.per_row | times: section.settings.rows
+  assign featured_collection = collections[collection_handle]
+-%}
+
+<section
+  class="aether-featured-products"
+  data-section-type="aether-featured-products"
+  data-aether-motion-enabled="{{ settings.aether_motion_enable }}"
+>
+  <div class="aether-featured-products__container">
+    {%- render 'aether-section-header', label: section.settings.label, title: section.settings.title, subtitle: section.settings.subtitle -%}
+
+    {%- if featured_collection != blank and featured_collection.products.size > 0 -%}
+      <div class="aether-products-grid" data-aether-reveal-group>
+        {%- for product in featured_collection.products limit: products_limit -%}
+          {%- render 'aether-product-card', product: product, variant: 'rich', per_row: section.settings.per_row, collection: featured_collection -%}
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.view_all_label != blank -%}
+        <div class="aether-section-cta" data-aether-reveal>
+          <a href="{{ section.settings.view_all_link | default: routes.all_products_collection_url }}" class="aether-btn aether-btn-lg aether-btn-outline" data-aether-magnetic="0.12">
+            {{ section.settings.view_all_label | escape }}
+            <svg class="aether-section-cta__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      <p class="aether-featured-products__empty">{{ 'aether.featured_products.empty' | t }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "t:sections.aether-featured-products.name",
+    "settings": [
+      {
+        "type": "text",
+        "id": "label",
+        "label": "t:sections.aether-featured-products.settings.label.label",
+        "default": "Bestsellers"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "t:sections.aether-featured-products.settings.title.label",
+        "default": "Most Loved"
+      },
+      {
+        "type": "textarea",
+        "id": "subtitle",
+        "label": "t:sections.aether-featured-products.settings.subtitle.label",
+        "default": "The shoes everyone's talking about. Tried, tested, and obsessed over."
+      },
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "t:sections.aether-featured-products.settings.collection.label",
+        "default": "main"
+      },
+      {
+        "type": "range",
+        "id": "per_row",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "default": 4,
+        "label": "t:sections.aether-featured-products.settings.per_row.label"
+      },
+      {
+        "type": "range",
+        "id": "rows",
+        "min": 1,
+        "max": 2,
+        "step": 1,
+        "default": 1,
+        "label": "t:sections.aether-featured-products.settings.rows.label"
+      },
+      {
+        "type": "text",
+        "id": "view_all_label",
+        "label": "t:sections.aether-featured-products.settings.view_all_label.label",
+        "default": "View All Products",
+        "info": "t:sections.aether-featured-products.settings.view_all_label.info"
+      },
+      {
+        "type": "url",
+        "id": "view_all_link",
+        "label": "t:sections.aether-featured-products.settings.view_all_link.label",
+        "default": "/collections/all"
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.aether-featured-products.presets.default.name",
+        "category": "t:sections.categories.products",
+        "settings": {
+          "label": "Bestsellers",
+          "title": "Most Loved",
+          "subtitle": "The shoes everyone's talking about. Tried, tested, and obsessed over.",
+          "per_row": 4,
+          "rows": 1,
+          "view_all_label": "View All Products",
+          "view_all_link": "/collections/all"
+        }
+      }
+    ],
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    }
+  }
+{% endschema %}

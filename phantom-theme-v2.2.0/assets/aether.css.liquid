@@ -975,3 +975,429 @@
     padding: 56px 0 0;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   AETHER — Featured products (plan Task 5 Step 4)
+   Frozen refs: section header style.css:632-661; btn family 359-391 +
+   4068-4131 + 1792-1800 + 2128-2131; product card 1008-1141 + 2077-2126;
+   responsive.css:231-237 (2-col ≤1024), 670-702 (1-col + horizontal card
+   ≤768), 1158-1164 (vertical 1-col + 4/3 image ≤576).
+   ─────────────────────────────────────────────────────────────────── */
+.aether-featured-products {
+  padding: 90px 0;
+}
+
+.aether-featured-products__container {
+  width: 100%;
+  max-width: var(--aether-container-max);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Section header (frozen .section-header 632-661) */
+.aether-section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.aether-section-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--aether-accent);
+  margin-bottom: 15px;
+}
+
+.aether-section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--aether-text);
+  margin-bottom: 12px;
+}
+
+.aether-section-subtitle {
+  font-size: 1rem;
+  color: var(--aether-muted);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.aether-section-cta {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.aether-section-cta__arrow {
+  width: 16px;
+  height: 16px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+/* Buttons (frozen .btn family) */
+.aether-btn {
+  position: relative;
+  display: inline-block;
+  padding: 16px 40px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  overflow: hidden;
+  text-decoration: none;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.aether-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transition: left 0.5s ease;
+  z-index: 1;
+}
+
+.aether-btn:hover::before {
+  left: 100%;
+}
+
+.aether-btn-primary {
+  background-color: var(--aether-accent);
+  color: var(--aether-bg);
+}
+
+.aether-btn-primary:hover {
+  background-color: #D4A574;
+  box-shadow: 0 8px 30px rgba(200, 149, 108, 0.35);
+  transform: translateY(-2px);
+}
+
+.aether-btn-primary:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 4px 15px rgba(200, 149, 108, 0.25);
+}
+
+.aether-btn-outline {
+  background-color: transparent;
+  color: var(--aether-text);
+  border: 1px solid var(--aether-text);
+  z-index: 1;
+}
+
+.aether-btn-outline::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--aether-text);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+
+.aether-btn-outline:hover {
+  color: var(--aether-bg);
+  border-color: var(--aether-text);
+}
+
+.aether-btn-outline:hover::after {
+  transform: scaleX(1);
+}
+
+.aether-btn-sm {
+  padding: 10px 24px;
+  font-size: 0.8rem;
+}
+
+.aether-btn-lg {
+  padding: 18px 44px;
+  font-size: 0.9rem;
+}
+
+/* Products grid (frozen .products-grid 1002-1006) */
+.aether-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* Product card (frozen .product-card 1008-1141, rich index.html:400-425) */
+.aether-product-card {
+  border: 1px solid var(--aether-surface);
+  transition: all 0.3s ease;
+  background: var(--aether-bg);
+  cursor: pointer;
+  position: relative;
+}
+
+.aether-product-card:hover {
+  border-color: var(--aether-accent);
+  box-shadow: 0 8px 40px rgba(200, 149, 108, 0.08);
+  transform: translateY(-4px);
+}
+
+.aether-product-image {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+}
+
+.aether-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.aether-product-image__placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--aether-surface);
+}
+
+.aether-product-card:hover .aether-product-image img {
+  transform: scale(1.05);
+}
+
+.aether-product-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: var(--aether-accent);
+  color: var(--aether-bg);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  z-index: 1;
+}
+
+.aether-badge-new {
+  background-color: #4CAF50;
+}
+
+.aether-badge-limited {
+  background-color: #9C27B0;
+}
+
+.aether-badge-sale {
+  background-color: #C44;
+}
+
+.aether-badge-soldout {
+  background-color: var(--aether-muted);
+  color: var(--aether-bg);
+}
+
+.aether-product-actions {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.aether-product-card:hover .aether-product-actions {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.aether-product-action-btn {
+  width: 36px;
+  height: 36px;
+  background: rgba(9, 9, 11, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--aether-text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  text-decoration: none;
+}
+
+.aether-product-action-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.aether-product-action-btn:hover {
+  border-color: var(--aether-accent);
+  color: var(--aether-accent);
+}
+
+.aether-product-info {
+  padding: 20px;
+}
+
+.aether-product-rating {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-bottom: 10px;
+  color: var(--aether-accent);
+  font-size: 0.75rem;
+}
+
+.aether-star {
+  width: 14px;
+  height: 14px;
+}
+
+.aether-star--empty {
+  color: var(--aether-muted);
+  opacity: 0.5;
+}
+
+.aether-product-rating span {
+  color: var(--aether-muted);
+  font-size: 0.8rem;
+  margin-left: 6px;
+}
+
+.aether-product-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--aether-text);
+  margin-bottom: 6px;
+}
+
+.aether-product-tagline {
+  font-size: 0.8rem;
+  color: var(--aether-muted);
+  margin-bottom: 15px;
+}
+
+.aether-product-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.aether-product-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--aether-accent);
+}
+
+.aether-price-old {
+  text-decoration: line-through;
+  color: var(--aether-muted);
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin-right: 8px;
+}
+
+/* Empty state (frozen none — D-list record) */
+.aether-featured-products__empty {
+  text-align: center;
+  color: var(--aether-muted);
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Responsive (frozen responsive.css:231-237, 670-702, 1158-1164) */
+@media (max-width: 1024px) {
+  .aether-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .aether-featured-products {
+    padding: 70px 0;
+  }
+
+  .aether-products-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .aether-product-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .aether-product-image {
+    aspect-ratio: 1;
+  }
+
+  .aether-product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .aether-product-name {
+    font-size: 0.95rem;
+  }
+
+  .aether-product-price {
+    font-size: 1.1rem;
+  }
+
+  .aether-product-actions {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .aether-featured-products {
+    padding: 50px 0;
+  }
+
+  .aether-section-title {
+    font-size: clamp(1.4rem, 5vw, 1.8rem);
+  }
+
+  .aether-section-label {
+    font-size: 0.6rem;
+  }
+
+  .aether-product-card {
+    grid-template-columns: 1fr;
+  }
+
+  .aether-product-image {
+    aspect-ratio: 4/3;
+  }
+
+  .aether-product-info {
+    padding: 14px;
+  }
+
+  .aether-product-name {
+    font-size: 0.9rem;
+  }
+
+  .aether-product-price {
+    font-size: 1rem;
+  }
+
+  .aether-product-rating {
+    font-size: 0.75rem;
+  }
+}

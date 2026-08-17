@@ -445,6 +445,32 @@ import { loadScript, loadCSS } from 'theme-resource-loader'
     }
   }
 
+  CONTROLLERS['aether-featured-products'] = {
+    init(el) {
+      this._el = el
+      // Whole-card click (frozen main.js:121-126): navigate to the product
+      // URL unless the click landed on an anchor or button (ATC / actions).
+      this._onClick = this._onCardClick.bind(this)
+      this._el.addEventListener('click', this._onClick)
+    },
+    destroy() {
+      if (this._el && this._onClick) this._el.removeEventListener('click', this._onClick)
+      this._el = null
+      this._onClick = null
+    },
+    refresh() {
+      this.destroy()
+      this.init(this._el)
+    },
+    _onCardClick(e) {
+      var card = e.target.closest('[data-aether-card]')
+      if (!card) return
+      if (e.target.closest('a') || e.target.closest('button')) return
+      var url = card.getAttribute('data-aether-card-url')
+      if (url) window.location.href = url
+    }
+  }
+
   window.AetherRuntime = window.AetherRuntime || AetherRuntime
 
   window.addEventListener(EVENTS.themeReady, function () {

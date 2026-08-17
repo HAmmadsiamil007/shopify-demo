@@ -1,0 +1,196 @@
+{% comment %}
+  AETHER product card (plan Task 5 Step 2) — frozen .product-card patterns:
+  rich = index.html:390-515 (badge, actions, rating, name, tagline, price row
+  + ATC), simple = shop.html:244-312 (image, badge, name, price row, ATC).
+  Whole-card click ported from main.js:121-126: the controller (aether-
+  featured-products) navigates to the product URL unless the click target is
+  inside an <a> or <button>.
+
+  Arguments:
+  - product: product object
+  - variant: 'rich' (default) | 'simple'
+  - per_row: number of grid columns (drives responsive image sizes)
+  - collection: collection object (optional, for future use / parity with
+    PHANTOM product-grid-item)
+{% endcomment %}
+
+{%- liquid
+  unless variant
+    assign variant = 'rich'
+  endunless
+
+  assign per_row = per_row | default: 4
+
+  assign prod_variant = product.selected_or_first_available_variant
+  assign price = prod_variant.price
+  assign compare_at_price = prod_variant.compare_at_price
+  assign on_sale = false
+  if compare_at_price > price
+    assign on_sale = true
+  endif
+
+  # Badge: custom label wins (theme.label metafield or `_label_` tag per
+  # PHANTOM product-grid-item precedent), then tag badges, then status badges.
+  assign badge_text = ''
+  assign badge_class = ''
+  assign has_custom_label = false
+  if product.metafields.theme.label != blank
+    assign has_custom_label = true
+    assign badge_text = product.metafields.theme.label.value
+  elsif product.tags contains '_label_'
+    for tag in product.tags
+      if tag contains '_label_'
+        assign tag_starts_with = tag | slice: 0
+        if tag_starts_with == '_'
+          assign has_custom_label = true
+          assign badge_text = tag | replace: '_label_', ''
+        endif
+      endif
+    endfor
+  endif
+
+  unless has_custom_label
+    if variant == 'simple'
+      if on_sale
+        assign badge_text = 'products.general.sale' | t
+        assign badge_class = 'aether-badge-sale'
+      elsif product.available == false
+        assign badge_text = 'products.product.sold_out' | t
+        assign badge_class = 'aether-badge-soldout'
+      elsif product.tags contains 'bestseller'
+        assign badge_text = 'aether.product_card.bestseller' | t
+        assign badge_class = 'aether-badge-bestseller'
+      elsif product.tags contains 'new'
+        assign badge_text = 'aether.product_card.new' | t
+        assign badge_class = 'aether-badge-new'
+      elsif product.tags contains 'limited'
+        assign badge_text = 'aether.product_card.limited' | t
+        assign badge_class = 'aether-badge-limited'
+      endif
+    else
+      if product.available == false
+        assign badge_text = 'products.product.sold_out' | t
+        assign badge_class = 'aether-badge-soldout'
+      elsif product.tags contains 'bestseller'
+        assign badge_text = 'aether.product_card.bestseller' | t
+        assign badge_class = 'aether-badge-bestseller'
+      elsif product.tags contains 'new'
+        assign badge_text = 'aether.product_card.new' | t
+        assign badge_class = 'aether-badge-new'
+      elsif product.tags contains 'limited'
+        assign badge_text = 'aether.product_card.limited' | t
+        assign badge_class = 'aether-badge-limited'
+      endif
+    endif
+  endunless
+
+  # Tagline: aether.tagline metafield, else first option values (plan).
+  assign tagline = ''
+  if product.metafields.aether.tagline != blank and product.metafields.aether.tagline.value != blank
+    assign tagline = product.metafields.aether.tagline.value
+  elsif product.options_with_values.first != blank
+    assign tagline = product.options_with_values.first.values | join: ' · '
+  endif
+
+  # Rating (D-rating): row is OMITTED unless the Reviews app exposed data
+  # (metafields.reviews.rating_count > 0); star fill from rating.value.
+  assign rating_count = product.metafields.reviews.rating_count.value | default: 0
+  assign rating_value = product.metafields.reviews.rating.value | default: ''
+  assign show_rating = false
+  if rating_count != blank and rating_count > 0 and rating_value != blank and rating_value != ''
+    assign show_rating = true
+  endif
+
+  assign card_image = product.featured_image
+  assign image_alt = card_image.alt | default: product.title | escape
+-%}
+
+<div
+  class="aether-product-card aether-product-card--{{ variant }}"
+  data-aether-card
+  data-aether-card-url="{{ product.url }}"
+  data-aether-reveal-item
+  data-aether-tilt
+>
+  <div class="aether-product-image" data-aether-image-zoom>
+    {%- if badge_text != '' -%}
+      <span class="aether-product-badge {{ badge_class }}">{{ badge_text }}</span>
+    {%- endif -%}
+
+    {%- if variant == 'rich' -%}
+      <div class="aether-product-actions">
+        <a
+          href="{{ routes.root_url }}pages/wishlist"
+          class="aether-product-action-btn"
+          aria-label="{{ 'aether.product_card.wishlist' | t }}"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </a>
+        <a
+          href="{{ product.url }}"
+          class="aether-product-action-btn"
+          aria-label="{{ 'aether.product_card.quick_view' | t }}"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </a>
+      </div>
+    {%- endif -%}
+
+    {%- if card_image != blank -%}
+      <img
+        src="{{ card_image | image_url: width: 400 }}"
+        srcset="{{ card_image | image_url: width: 200 }} 200w, {{ card_image | image_url: width: 300 }} 300w, {{ card_image | image_url: width: 400 }} 400w, {{ card_image | image_url: width: 600 }} 600w"
+        sizes="(min-width: 1025px) calc((100vw - {{ per_row | times: 24 }}px) / {{ per_row }}), (min-width: 769px) calc((100vw - 48px) / 2), 100vw"
+        alt="{{ image_alt }}"
+        loading="lazy"
+        width="{{ card_image.width }}"
+        height="{{ card_image.height }}"
+      >
+    {%- else -%}
+      {{ 'image' | placeholder_svg_tag: 'aether-product-image__placeholder' }}
+    {%- endif -%}
+  </div>
+
+  <div class="aether-product-info">
+    {%- if variant == 'rich' and show_rating -%}
+      <div class="aether-product-rating" role="img" aria-label="{{ 'aether.product_card.rating_label' | t: value: rating_value, count: rating_count }}">
+        {%- assign rating_num = rating_value | plus: 0 -%}
+        {%- for i in (1..5) -%}
+          {%- assign star_full = i | times: 1.0 -%}
+          {%- assign star_half = star_full | minus: 0.5 -%}
+          {%- if rating_num >= star_full -%}
+            <svg class="aether-star aether-star--full" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          {%- elsif rating_num >= star_half -%}
+            <svg class="aether-star aether-star--half" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/><path d="M12 2v15.27L5.82 21l1.64-7.03L2 9.24l7.19-.61L12 2z" fill="rgba(200,149,108,0.35)"/></svg>
+          {%- else -%}
+            <svg class="aether-star aether-star--empty" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          {%- endif -%}
+        {%- endfor -%}
+        <span>({{ rating_count }})</span>
+      </div>
+    {%- endif -%}
+
+    <h3 class="aether-product-name">{{ product.title | escape }}</h3>
+
+    {%- if variant == 'rich' and tagline != '' -%}
+      <p class="aether-product-tagline">{{ tagline | escape }}</p>
+    {%- endif -%}
+
+    <div class="aether-product-price-row">
+      <span class="aether-product-price">
+        {%- if on_sale -%}
+          <s class="aether-price-old">{{ compare_at_price | money }}</s>
+        {%- endif -%}
+        {{ price | money }}
+      </span>
+      <a href="{{ product.url }}" class="aether-btn aether-btn-sm aether-btn-primary" data-aether-magnetic="0.12">
+        {{ 'products.product.add_to_cart' | t }}
+      </a>
+    </div>
+  </div>
+</div>

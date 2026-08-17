@@ -582,6 +582,17 @@
         "header": {
             "shop_now": "Shop Now"
         },
+        "featured_products": {
+            "empty": "No products available in this collection yet."
+        },
+        "product_card": {
+            "bestseller": "Bestseller",
+            "limited": "Limited",
+            "new": "New",
+            "quick_view": "Quick view",
+            "rating_label": "Rated {{ value }} out of 5, based on {{ count }} reviews",
+            "wishlist": "Add to wishlist"
+        },
         "footer": {
             "all_rights_reserved": "All Rights Reserved.",
             "privacy": "Privacy",

@@ -582,6 +582,17 @@
         "header": {
             "shop_now": "Acheter maintenant"
         },
+        "featured_products": {
+            "empty": "Aucun produit disponible dans cette collection pour le moment."
+        },
+        "product_card": {
+            "bestseller": "Meilleure vente",
+            "limited": "Édition limitée",
+            "new": "Nouveau",
+            "quick_view": "Aperçu rapide",
+            "rating_label": "Noté {{ value }} sur 5, basé sur {{ count }} avis",
+            "wishlist": "Ajouter à la liste de souhaits"
+        },
         "footer": {
             "all_rights_reserved": "Tous droits réservés.",
             "privacy": "Confidentialité",

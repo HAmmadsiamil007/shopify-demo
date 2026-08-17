@@ -1,0 +1,27 @@
+{% comment %}
+  AETHER section header (plan Task 5 Step 1) — frozen .section-header pattern
+  (style.css:632-661): centered label + title + subtitle. Renders nothing when
+  all three args are blank. Section-level motion is driven by the containing
+  section's data-aether-motion-enabled gate; aether-motion auto-assigns the
+  reveal (frozen data-motion-text="words|lines" -> aether-motion text reveal,
+  see aether-motion.js attribute mapping).
+
+  Arguments:
+  - label: small uppercase kicker (frozen .section-label)
+  - title: heading (frozen .section-title)
+  - subtitle: muted paragraph (frozen .section-subtitle)
+{% endcomment %}
+
+{%- if label != blank or title != blank or subtitle != blank -%}
+  <div class="aether-section-header" data-aether-reveal>
+    {%- if label != blank -%}
+      <span class="aether-section-label" data-aether-motion-text>{{ label }}</span>
+    {%- endif -%}
+    {%- if title != blank -%}
+      <h2 class="aether-section-title" data-aether-motion-text>{{ title }}</h2>
+    {%- endif -%}
+    {%- if subtitle != blank -%}
+      <p class="aether-section-subtitle" data-aether-motion-text>{{ subtitle }}</p>
+    {%- endif -%}
+  </div>
+{%- endif -%}
