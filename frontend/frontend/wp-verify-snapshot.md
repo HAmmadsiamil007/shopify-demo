@@ -1,0 +1,218 @@
+- generic [active]:
+  - link "Skip to content" [ref=f16e1] [cursor=pointer]:
+    - /url: "#content"
+  - generic [ref=f16e2]:
+    - navigation "Toolbar":
+      - menu:
+        - group [ref=f16e3]:
+          - menuitem "About WordPress" [ref=f16e4] [cursor=pointer]:
+            - generic [ref=f16e6]: About WordPress
+        - group [ref=f16e7]:
+          - menuitem "Claudia Kids Collection" [ref=f16e8] [cursor=pointer]
+        - group [ref=f16e9]:
+          - menuitem "Live" [ref=f16e10] [cursor=pointer]
+        - group [ref=f16e11]:
+          - menuitem "Customize" [ref=f16e12] [cursor=pointer]
+        - group [ref=f16e13]:
+          - menuitem "5 updates available" [ref=f16e14] [cursor=pointer]:
+            - generic [ref=f16e16]: "5"
+            - generic [ref=f16e17]: 5 updates available
+        - group [ref=f16e18]:
+          - menuitem "0 Comments in moderation" [ref=f16e19] [cursor=pointer]:
+            - generic [ref=f16e21]: "0"
+            - generic [ref=f16e22]: 0 Comments in moderation
+        - group [ref=f16e23]:
+          - menuitem "New" [ref=f16e24] [cursor=pointer]:
+            - generic [ref=f16e26]: New
+      - menu [ref=f16e27]:
+        - group [ref=f16e28]:
+          - menuitem "Howdy, admin" [ref=f16e29] [cursor=pointer]
+        - group [ref=f16e30]:
+          - menuitem "Search" [ref=f16e31]:
+            - generic [ref=f16e32]:
+              - textbox "Search" [ref=f16e33] [cursor=pointer]
+              - generic [ref=f16e34]: Search
+  - link "Skip to content" [ref=f16e35] [cursor=pointer]:
+    - /url: "#main"
+  - generic [ref=f16e36]:
+    - generic [ref=f16e39]:
+      - paragraph [ref=f16e41]:
+        - text: Summer sale discount off
+        - generic [ref=f16e42]: 60%
+        - text: on all of your orders!
+      - generic [ref=f16e44]:
+        - generic [ref=f16e46] [cursor=pointer]:
+          - img "EN" [ref=f16e47]
+          - text: EN
+          - img "dropdown" [ref=f16e48]
+        - generic [ref=f16e50] [cursor=pointer]:
+          - text: USD
+          - img "dropdown" [ref=f16e51]
+    - banner [ref=f16e52]:
+      - navigation "Primary" [ref=f16e54]:
+        - link [ref=f16e55] [cursor=pointer]:
+          - /url: http://localhost:8080/
+          - figure [ref=f16e56]:
+            - img "Claudia Kids Collection" [ref=f16e57]
+        - list [ref=f16e59]:
+          - listitem [ref=f16e60]:
+            - link "Home" [ref=f16e61] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=f16e62]:
+            - link "About" [ref=f16e63] [cursor=pointer]:
+              - /url: /about/
+          - listitem [ref=f16e64]:
+            - link "Shop" [ref=f16e65] [cursor=pointer]:
+              - /url: /shop/
+          - listitem [ref=f16e66]:
+            - button "Blog" [ref=f16e67] [cursor=pointer]
+          - listitem [ref=f16e68]:
+            - button "Pages" [ref=f16e69] [cursor=pointer]
+          - listitem [ref=f16e70]:
+            - link "Contact" [ref=f16e71] [cursor=pointer]:
+              - /url: /contact/
+        - generic [ref=f16e72]:
+          - link "Search" [ref=f16e73] [cursor=pointer]:
+            - /url: "#search"
+            - img "Search" [ref=f16e74]
+          - link "Cart" [ref=f16e75] [cursor=pointer]:
+            - /url: http://localhost:8080/cart-2/
+            - img "Cart" [ref=f16e76]
+            - generic [ref=f16e77]: "1"
+          - link "My account" [ref=f16e78] [cursor=pointer]:
+            - /url: http://localhost:8080/my-account/
+            - img "My account" [ref=f16e79]
+    - main:
+      - generic [ref=f16e80]:
+        - figure:
+          - img "image" [ref=f16e81]
+        - figure:
+          - img "image" [ref=f16e82]
+        - generic [ref=f16e84]:
+          - generic [ref=f16e85]:
+            - figure [ref=f16e86]:
+              - img "vector" [ref=f16e87]
+            - generic [ref=f16e88]: Claudia Kids Collection
+            - heading "Little Treasures, Big Smiles!" [level=1] [ref=f16e89]:
+              - text: Little Treasures,
+              - text: Big Smiles!
+            - paragraph [ref=f16e90]: Discover a world of fun and joy with our toys, clothes, and essentials that bring smiles.
+            - link "Shop Now " [ref=f16e91] [cursor=pointer]:
+              - /url: http://localhost:8080/shop/
+              - text: Shop Now
+              - generic [ref=f16e92]: 
+          - link [ref=f16e94] [cursor=pointer]:
+            - /url: "#promotion"
+            - figure [ref=f16e95]:
+              - img "buttondown" [ref=f16e96]
+            - figure [ref=f16e97]:
+              - img "buttondown" [ref=f16e98]
+      - link "View All " [ref=f16e160] [cursor=pointer]:
+        - /url: http://localhost:8080/shop/
+        - text: View All
+        - generic [ref=f16e161]: 
+      - generic [ref=f16e162]:
+        - figure:
+          - img "vector" [ref=f16e163]
+        - figure:
+          - img "vector" [ref=f16e164]
+        - figure:
+          - img "vector" [ref=f16e165]
+      - link "View All " [ref=f16e219] [cursor=pointer]:
+        - /url: http://localhost:8080/shop/
+        - text: View All
+        - generic [ref=f16e220]: 
+      - generic [ref=f16e227]:
+        - figure
+        - figure
+    - contentinfo [ref=f16e254]:
+      - generic [ref=f16e257]:
+        - generic [ref=f16e259]:
+          - link [ref=f16e260] [cursor=pointer]:
+            - /url: http://localhost:8080/
+            - figure [ref=f16e261]:
+              - img "Claudia Kids Collection" [ref=f16e262]
+          - paragraph [ref=f16e263]: Duis aute irure dolor in reprehenderit in voluptate velit cillum dolore eu fugiat nulla pariatur ccaecat cupidata proident, sunt in culpa officia deserunt mollit.
+          - list [ref=f16e264]:
+            - listitem [ref=f16e265]:
+              - link "Facebook" [ref=f16e266] [cursor=pointer]:
+                - /url: https://www.facebook.com/
+                - generic [ref=f16e267]: 
+            - listitem [ref=f16e268]:
+              - link "Instagram" [ref=f16e269] [cursor=pointer]:
+                - /url: https://www.instagram.com/
+                - generic [ref=f16e270]: 
+            - listitem [ref=f16e271]:
+              - link "YouTube" [ref=f16e272] [cursor=pointer]:
+                - /url: https://www.youtube.com/
+                - generic [ref=f16e273]: 
+        - generic [ref=f16e275]:
+          - heading "Navigation" [level=5] [ref=f16e276]
+          - list [ref=f16e277]:
+            - listitem [ref=f16e278]:
+              - generic [ref=f16e279] [cursor=pointer]: 
+              - link "Home" [ref=f16e280] [cursor=pointer]:
+                - /url: http://localhost:8080/
+            - listitem [ref=f16e281]:
+              - generic [ref=f16e282] [cursor=pointer]: 
+              - link "Shop" [ref=f16e283] [cursor=pointer]:
+                - /url: http://localhost:8080/shop/
+            - listitem [ref=f16e284]:
+              - generic [ref=f16e285] [cursor=pointer]: 
+              - link "About" [ref=f16e286] [cursor=pointer]:
+                - /url: http://localhost:8080/about/
+            - listitem [ref=f16e287]:
+              - generic [ref=f16e288] [cursor=pointer]: 
+              - link "Blog" [ref=f16e289] [cursor=pointer]:
+                - /url: http://localhost:8080/blog/
+            - listitem [ref=f16e290]:
+              - generic [ref=f16e291] [cursor=pointer]: 
+              - link "Contact" [ref=f16e292] [cursor=pointer]:
+                - /url: http://localhost:8080/contact/
+        - generic [ref=f16e294]:
+          - heading "Support" [level=5] [ref=f16e295]
+          - list [ref=f16e296]:
+            - listitem [ref=f16e297]:
+              - generic [ref=f16e298] [cursor=pointer]: 
+              - link "Term of use" [ref=f16e299] [cursor=pointer]:
+                - /url: http://localhost:8080/term-of-use/
+            - listitem [ref=f16e300]:
+              - generic [ref=f16e301] [cursor=pointer]: 
+              - link "Privacy policy" [ref=f16e302] [cursor=pointer]:
+                - /url: http://localhost:8080/privacy-policy/
+            - listitem [ref=f16e303]:
+              - generic [ref=f16e304] [cursor=pointer]: 
+              - link "Cookie policy" [ref=f16e305] [cursor=pointer]:
+                - /url: http://localhost:8080/cookie-policy/
+            - listitem [ref=f16e306]:
+              - generic [ref=f16e307] [cursor=pointer]: 
+              - link "Latest Posts" [ref=f16e308] [cursor=pointer]:
+                - /url: http://localhost:8080/single-blog/
+            - listitem [ref=f16e309]:
+              - generic [ref=f16e310] [cursor=pointer]: 
+              - link "Care Guide" [ref=f16e311] [cursor=pointer]:
+                - /url: http://localhost:8080/contact/
+        - generic [ref=f16e313]:
+          - heading "Contact Us" [level=5] [ref=f16e314]
+          - list [ref=f16e315]:
+            - listitem [ref=f16e316]:
+              - generic [ref=f16e317] [cursor=pointer]: 
+              - link "+1235 211 5236" [ref=f16e318] [cursor=pointer]:
+                - /url: tel:+12352115236
+            - listitem [ref=f16e319]:
+              - generic [ref=f16e320] [cursor=pointer]: 
+              - link "hello@claudia.com" [ref=f16e321] [cursor=pointer]:
+                - /url: mailto:hello@claudia.com
+            - listitem [ref=f16e322]:
+              - generic [ref=f16e323] [cursor=pointer]: 
+              - link "121 King Street Melbourne, 3000, Australia" [ref=f16e324] [cursor=pointer]:
+                - /url: https://www.google.com/maps/place/21+King+St,+Melbourne+VIC+3000,+Australia/@-37.8199805,144.9529083,18z/data=!4m6!3m5!1s0x6ad65d52754eaecb:0x22f367daf52cbd47!8m2!3d-37.819936!4d144.9570765!16s%2Fg%2F11c2dj2n2c?entry=ttu
+                - text: 121 King Street Melbourne,
+                - text: 3000, Australia
+      - generic [ref=f16e327]:
+        - paragraph [ref=f16e328]: © 2026 Optix Framework. All rights reserved.
+        - img "Payment methods" [ref=f16e329]
+  - generic [ref=f16e334]:
+    - text: This site uses cookies.
+    - button "Accept" [ref=f16e335] [cursor=pointer]
+  - status [ref=f16e336]

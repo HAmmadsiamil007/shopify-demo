@@ -1,0 +1,8 @@
+# Frozen visual source of truth — spec §15 Wave 0 step 1.
+# This directory is the committed reference copy of the client-approved external
+# frontend (DESIGN FREEZE gate, docs/design-packs/conversion-contract.md §2).
+# Tooling / transient artifacts are excluded; everything else is reference material.
+# .playwright-mcp/ and .serena/ are already ignored repo-wide (root .gitignore).
+frontend/
+docs/
+scripts/

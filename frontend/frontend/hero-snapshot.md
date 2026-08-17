@@ -1,0 +1,126 @@
+- generic [active] [ref=f47e1]:
+  - link "Skip to main content" [ref=f47e2] [cursor=pointer]:
+    - /url: "#main"
+  - generic [ref=f47e3]:
+    - text:     
+    - generic [ref=f47e5]:
+      - generic [ref=f47e6]:
+        - generic [ref=f47e7]: 
+        - text: Free Shipping On Orders Over $200
+      - text: "|"
+      - generic [ref=f47e8]:
+        - generic [ref=f47e9]: 
+        - text: New Collection Dropping Soon
+      - text: "|"
+      - generic [ref=f47e10]:
+        - generic [ref=f47e11]: 
+        - text: 30-Day Free Returns
+    - banner [ref=f47e12]:
+      - generic [ref=f47e13]:
+        - link "AETHER" [ref=f47e14] [cursor=pointer]:
+          - /url: index.html
+        - navigation [ref=f47e15]:
+          - list [ref=f47e16]:
+            - listitem [ref=f47e17]:
+              - link "Home" [ref=f47e18] [cursor=pointer]:
+                - /url: index.html
+            - listitem [ref=f47e19]:
+              - link "Collection " [ref=f47e20] [cursor=pointer]:
+                - /url: shop.html
+                - text: Collection
+                - generic [ref=f47e21]: 
+            - listitem [ref=f47e22]:
+              - link "About" [ref=f47e23] [cursor=pointer]:
+                - /url: about.html
+            - listitem [ref=f47e24]:
+              - link "Blog" [ref=f47e25] [cursor=pointer]:
+                - /url: blog.html
+            - listitem [ref=f47e26]:
+              - link "Contact" [ref=f47e27] [cursor=pointer]:
+                - /url: contact.html
+          - text:    
+        - generic [ref=f47e28]:
+          - link "Search" [ref=f47e29] [cursor=pointer]:
+            - /url: shop.html
+            - generic [ref=f47e30]: 
+          - link "Wishlist" [ref=f47e31] [cursor=pointer]:
+            - /url: wishlist.html
+            - generic [ref=f47e32]: 
+          - link "Cart" [ref=f47e33] [cursor=pointer]:
+            - /url: cart.html
+            - generic [ref=f47e34]: 
+            - generic [ref=f47e35]: "0"
+          - link "Account" [ref=f47e36] [cursor=pointer]:
+            - /url: login.html
+            - generic [ref=f47e37]: 
+    - main [ref=f47e39]:
+      - generic [ref=f47e40]:
+        - generic [ref=f47e41]:
+          - generic [ref=f47e42]:
+            - group "1 / 3":
+              - generic:
+                - img "AETHER Void Runner"
+              - generic:
+                - generic:
+                  - heading "AETHER Void Runner" [level=1]:
+                    - text: AETHER
+                    - generic: Void Runner
+                  - paragraph: Born from the silence between stars. Carbon-fiber exoskeleton meets adaptive cushioning that learns your stride. The benchmark has been reset.
+                  - generic:
+                    - link "Shop Now — $449":
+                      - /url: shop.html
+                    - link "Explore Tech":
+                      - /url: about.html
+            - group "2 / 3" [ref=f47e191]:
+              - img "AETHER Cloud Stride" [ref=f47e193]
+              - generic [ref=f47e196]:
+                - generic [ref=f47e197]: Performance
+                - heading "Cloud Stride" [level=1] [ref=f47e198]:
+                  - text: Cloud
+                  - generic [ref=f47e199]: Stride
+                - paragraph [ref=f47e200]: Float above the pavement. Zero-gravity foam compounds deliver infinite energy return with every step. Running has never felt this light.
+                - generic [ref=f47e201]:
+                  - link "Shop Collection" [ref=f47e202] [cursor=pointer]:
+                    - /url: shop.html
+                  - link "Our Story" [ref=f47e203] [cursor=pointer]:
+                    - /url: about.html
+            - group "3 / 3":
+              - generic:
+                - img "AETHER Midnight Edition"
+              - generic:
+                - generic:
+                  - generic: Limited Edition
+                  - heading "Midnight Edition" [level=1]:
+                    - text: Midnight
+                    - generic: Edition
+                  - paragraph: Darkness refined. A stealth-black silhouette with phosphorescent accents that ignite after sunset. Only 2,500 pairs exist. Once they are gone, the night reclaims them.
+                  - generic:
+                    - link "Get Yours":
+                      - /url: shop.html
+                    - link "View Details":
+                      - /url: about.html
+          - generic [ref=f47e53]:
+            - button "Previous slide" [ref=f47e54] [cursor=pointer]:
+              - generic [ref=f47e55]: 
+            - generic [ref=f47e56]: 02 / 03
+            - button "Next slide" [ref=f47e57] [cursor=pointer]:
+              - generic [ref=f47e58]: 
+        - paragraph [ref=f47e63]: Scroll to explore
+      - generic [ref=f47e204]:
+        - generic "Shop by Category" [ref=f47e205]:
+          - generic [ref=f47e207]: Shop
+          - generic [ref=f47e209]: by
+          - generic [ref=f47e211]: Category
+        - heading "Find Your Fit" [level=2] [ref=f47e212]:
+          - generic [ref=f47e214]: Find
+          - generic [ref=f47e216]: Your
+          - generic [ref=f47e218]: Fit
+      - generic [ref=f47e161]:
+        - generic [ref=f47e162]:
+          - group "1 / 4" [ref=f47e163]
+          - group "2 / 4" [ref=f47e164]
+          - group "3 / 4" [ref=f47e165]
+          - group "4 / 4" [ref=f47e166]
+        - generic [ref=f47e167]:
+          - button "Go to slide 1" [ref=f47e168] [cursor=pointer]
+          - button "Go to slide 2" [ref=f47e169] [cursor=pointer]
