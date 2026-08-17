@@ -104,14 +104,65 @@
     "aether-footer": {
       "name": "Footer (AETHER)",
       "settings": {
-        "menu": {
-          "label": "Menu"
-        },
         "show_payment_icons": {
           "label": "Show payment icons"
         },
         "copyright_text": {
           "label": "Copyright text"
+        }
+      },
+      "blocks": {
+        "brand": {
+          "name": "Brand",
+          "settings": {
+            "logo_text": {
+              "label": "Logo text",
+              "info": "Leave blank to use the store name"
+            },
+            "logo_image": {
+              "label": "Logo image"
+            },
+            "tagline": {
+              "label": "Tagline"
+            },
+            "social_heading": {
+              "label": "Social links"
+            },
+            "social_instagram_url": {
+              "label": "Instagram URL"
+            },
+            "social_twitter_url": {
+              "label": "Twitter URL"
+            },
+            "social_tiktok_url": {
+              "label": "TikTok URL"
+            },
+            "social_youtube_url": {
+              "label": "YouTube URL"
+            }
+          }
+        },
+        "menu": {
+          "name": "Menu",
+          "settings": {
+            "heading": {
+              "label": "Heading"
+            },
+            "link_list": {
+              "label": "Menu"
+            }
+          }
+        },
+        "newsletter": {
+          "name": "Newsletter",
+          "settings": {
+            "heading": {
+              "label": "Heading"
+            },
+            "copy": {
+              "label": "Copy"
+            }
+          }
         }
       },
       "presets": {
@@ -4037,7 +4088,7 @@
       "settings": {
         "favicon": {
           "label": "Favicon image",
-          "info": "32 Ãƒâ€” 32px PNG or larger recommended"
+          "info": "32 × 32px PNG or larger recommended"
         }
       }
     },
@@ -4594,7 +4645,7 @@
         "product_title": "Product title",
         "product_description": "A thoughtfully designed product made with quality materials and attention to detail. Versatile, reliable, and built to last, it's made to fit seamlessly into your everyday routine.",
         "collection_title": "Collection",
-        "no_content": "This section doesnÃ¢â‚¬â„¢t currently include any content. Add content to this section using the sidebar."
+        "no_content": "This section doesn’t currently include any content. Add content to this section using the sidebar."
       }
     },
     "layout": {

@@ -430,6 +430,21 @@ import { loadScript, loadCSS } from 'theme-resource-loader'
     }
   }
 
+  CONTROLLERS['aether-footer'] = {
+    init(el) {
+      // Footer is static content + PHANTOM newsletter-form (own state).
+      // No JS behavior needed — registered so the runtime mounts/unmounts
+      // consistently and future motion hooks have a home (plan Task 4).
+      this._el = el
+    },
+    destroy() {
+      this._el = null
+    },
+    refresh() {
+      this.init(this._el)
+    }
+  }
+
   window.AetherRuntime = window.AetherRuntime || AetherRuntime
 
   window.addEventListener(EVENTS.themeReady, function () {

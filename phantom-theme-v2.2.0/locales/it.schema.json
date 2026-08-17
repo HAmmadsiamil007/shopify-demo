@@ -102,16 +102,67 @@
       }
     },
     "aether-footer": {
-      "name": "PiÃ¨ di pagina (AETHER)",
+      "name": "Piè di pagina (AETHER)",
       "settings": {
-        "menu": {
-          "label": "Menu"
-        },
         "show_payment_icons": {
           "label": "Mostra icone di pagamento"
         },
         "copyright_text": {
           "label": "Testo sul copyright"
+        }
+      },
+      "blocks": {
+        "brand": {
+          "name": "Marchio",
+          "settings": {
+            "logo_text": {
+              "label": "Testo del logo",
+              "info": "Lascia vuoto per usare il nome del negozio"
+            },
+            "logo_image": {
+              "label": "Immagine del logo"
+            },
+            "tagline": {
+              "label": "Slogan"
+            },
+            "social_heading": {
+              "label": "Link social"
+            },
+            "social_instagram_url": {
+              "label": "URL Instagram"
+            },
+            "social_twitter_url": {
+              "label": "URL Twitter"
+            },
+            "social_tiktok_url": {
+              "label": "URL TikTok"
+            },
+            "social_youtube_url": {
+              "label": "URL YouTube"
+            }
+          }
+        },
+        "menu": {
+          "name": "Menu",
+          "settings": {
+            "heading": {
+              "label": "Intestazione"
+            },
+            "link_list": {
+              "label": "Menu"
+            }
+          }
+        },
+        "newsletter": {
+          "name": "Newsletter",
+          "settings": {
+            "heading": {
+              "label": "Intestazione"
+            },
+            "copy": {
+              "label": "Testo"
+            }
+          }
         }
       },
       "presets": {
@@ -123,7 +174,7 @@
     "aether-popup-group": {
       "name": "Popup (AETHER)"
     },    "footer-group": {
-      "name": "Gruppo piÃƒÂ¨ di pagina"
+      "name": "Gruppo piè di pagina"
     },
     "popup-group": {
       "name": "Gruppo pop-up"
@@ -223,7 +274,7 @@
       "settings": {
         "image_hero": {
           "label": "Usa l'immagine in primo piano come hero a tutta larghezza",
-          "info": "(se l'immagine dell'articolo ÃƒÂ¨ impostata)"
+          "info": "(se l'immagine dell'articolo è impostata)"
         },
         "blog_show_tags": {
           "label": "Mostra i tag"
@@ -355,7 +406,7 @@
         },
         "video_url": {
           "label": "Link al video in background",
-          "info": "Supporta YouTube, .MP4 e Vimeo. Non tutte le caratteristiche sono supportate da Vimeo. Per saperne di piÃƒÂ¹"
+          "info": "Supporta YouTube, .MP4 e Vimeo. Non tutte le caratteristiche sono supportate da Vimeo. Per saperne di più"
         },
         "color_border": {
           "label": "Colore bordo mobile"
@@ -518,7 +569,7 @@
     "contact-form": {
       "name": "Modulo di contatto",
       "settings": {
-        "content": "Tutti gli invii sono inviati all'indirizzo email del cliente del tuo negozio. [Per saperne di piÃƒÂ¹](https://help.shopify.com/en/manual/using-themes/change-the-layout/add-contact-form#view-contact-form-submissions).",
+        "content": "Tutti gli invii sono inviati all'indirizzo email del cliente del tuo negozio. [Per saperne di più](https://help.shopify.com/en/manual/using-themes/change-the-layout/add-contact-form#view-contact-form-submissions).",
         "title": {
           "label": "Titolo"
         },
@@ -795,7 +846,7 @@
       }
     },
     "footer-promotions": {
-      "name": "Promozioni a piÃƒÂ¨ di pagina",
+      "name": "Promozioni a piè di pagina",
       "settings": {
         "hide_homepage": {
           "label": "Non mostrare in home page"
@@ -850,7 +901,7 @@
     "footer": {
       "name": "Footer",
       "settings": {
-        "header_additional_footer_content": "Contenuto aggiuntivo a piÃƒÂ¨ di pagina",
+        "header_additional_footer_content": "Contenuto aggiuntivo a piè di pagina",
         "show_payment_icons": {
           "label": "Mostra le icone di pagamento"
         },
@@ -896,7 +947,7 @@
             },
             "menu": {
               "label": "Scegli un menu",
-              "info": "Questo menu non mostrerÃƒÂ  gli elementi a discesa"
+              "info": "Questo menu non mostrer�?  gli elementi a discesa"
             },
             "container_width": {
               "label": "Larghezza della colonna"
@@ -955,7 +1006,7 @@
         },
         "mobile_logo_width": {
           "label": "Larghezza logo mobile",
-          "info": "Impostato come larghezza massima, puÃƒÂ² apparire piÃƒÂ¹ piccolo"
+          "info": "Impostato come larghezza massima, può apparire più piccolo"
         }
       }
     },
@@ -1014,7 +1065,7 @@
         },
         "sticky_collection": {
           "label": "Intestazione sovrapposta alla collezione",
-          "info": "(se l'immagine della collezione ÃƒÂ¨ abilitata)"
+          "info": "(se l'immagine della collezione è abilitata)"
         },
         "header_announcement_bar": "Barra degli annunci",
         "announcement_compact": {
@@ -1026,7 +1077,7 @@
         "header_toolbar": "Barra degli strumenti",
         "toolbar_menu": {
           "label": "Navigazione",
-          "info": "Questo menu non mostrerÃƒÂ  gli elementi a discesa"
+          "info": "Questo menu non mostrer�?  gli elementi a discesa"
         },
         "toolbar_social": {
           "label": "Show social icons"
@@ -1048,7 +1099,7 @@
             },
             "mobile_logo_width": {
               "label": "Larghezza logo mobile",
-              "info": "Impostato come larghezza massima, puÃƒÂ² apparire piÃƒÂ¹ piccolo"
+              "info": "Impostato come larghezza massima, può apparire più piccolo"
             }
           }
         },
@@ -1115,7 +1166,7 @@
         },
         "video_url": {
           "label": "Link al video in background",
-          "info": "Supporta YouTube, .MP4 e Vimeo. Non tutte le caratteristiche sono supportate da Vimeo. Per saperne di piÃƒÂ¹"
+          "info": "Supporta YouTube, .MP4 e Vimeo. Non tutte le caratteristiche sono supportate da Vimeo. Per saperne di più"
         },
         "overlay_opacity": {
           "label": "Protezione del testo",
@@ -1261,7 +1312,7 @@
         },
         "sort": {
           "label": "Ordina le collezioni per:",
-          "info": "L'ordinamento si applica solo quando ÃƒÂ¨ selezionato \"Tutti\".",
+          "info": "L'ordinamento si applica solo quando è selezionato \"Tutti\".",
           "options": {
             "products_high": {
               "label": "Conteggio prodotti decrescente"
@@ -1276,10 +1327,10 @@
               "label": "In ordine alfabetico, Z-A"
             },
             "date": {
-              "label": "Data, da meno a piÃƒÂ¹ recente"
+              "label": "Data, da meno a più recente"
             },
             "date_reversed": {
-              "label": "Data, da piÃƒÂ¹ a meno recente"
+              "label": "Data, da più a meno recente"
             }
           }
         },
@@ -1336,7 +1387,7 @@
           }
         },
         "speed": {
-          "label": "VelocitÃƒÂ ",
+          "label": "Velocit�? ",
           "options": {
             "fast": {
               "label": "Veloce"
@@ -1415,7 +1466,7 @@
               "label": "Punto"
             },
             "plus": {
-              "label": "PiÃƒÂ¹"
+              "label": "Più"
             },
             "bag": {
               "label": "Borsa"
@@ -1479,7 +1530,7 @@
           "label": "Titolo"
         },
         "logo_opacity": {
-          "label": "OpacitÃƒÂ  del logo"
+          "label": "Opacit�?  del logo"
         },
         "divider": {
           "label": "Mostra il divisore di sezione"
@@ -1517,7 +1568,7 @@
         "header_filtering_and_sorting": "Filtri e ordinamento",
         "enable_sidebar": {
           "label": "Abilita filtro",
-          "info": "Permetti ai tuoi clienti di filtrare le collezioni e i risultati della ricerca in base alla disponibilitÃƒÂ  del prodotto, al prezzo, al colore e altro. Personalizza filtri"
+          "info": "Permetti ai tuoi clienti di filtrare le collezioni e i risultati della ricerca in base alla disponibilit�?  del prodotto, al prezzo, al colore e altro. Personalizza filtri"
         },
         "collapsed": {
           "label": "Comprimere i filtri"
@@ -1568,7 +1619,7 @@
         "subcollections": {
           "name": "Sottocollezioni",
           "settings": {
-            "content": "I collegamenti alle collezioni dal tuo menu appariranno qui. Per saperne di piÃƒÂ¹",
+            "content": "I collegamenti alle collezioni dal tuo menu appariranno qui. Per saperne di più",
             "subcollections_per_row": {
               "label": "Sottocollezioni per riga"
             }
@@ -1631,7 +1682,7 @@
         },
         "thumbnail_height": {
           "label": "Altezza anteprima",
-          "info": "Si applica solo quando la posizione dellÃ¢â‚¬â„¢Anteprima ÃƒÂ¨ impostata su Ã¢â‚¬Å“Accanto ai multimedialiÃ¢â‚¬Â.",
+          "info": "Si applica solo quando la posizione dell’Anteprima è impostata su “Accanto ai multimediali”.",
           "options": {
             "fixed": {
               "label": "Fissa"
@@ -1678,7 +1729,7 @@
         "header_filtering_and_sorting": "Filtri e ordinamento",
         "enable_sidebar": {
           "label": "Abilita filtro",
-          "info": "Permetti ai tuoi clienti di filtrare le collezioni e i risultati della ricerca in base alla disponibilitÃƒÂ  del prodotto, al prezzo, al colore e altro. Personalizza filtri"
+          "info": "Permetti ai tuoi clienti di filtrare le collezioni e i risultati della ricerca in base alla disponibilit�?  del prodotto, al prezzo, al colore e altro. Personalizza filtri"
         },
         "collapsed": {
           "label": "Comprimere i filtri"
@@ -1723,7 +1774,7 @@
         },
         "map_address": {
           "label": "Indirizzo della mappa",
-          "info": "Google Maps troverÃƒÂ  la posizione esatta"
+          "info": "Google Maps trover�?  la posizione esatta"
         },
         "api_key": {
           "label": "Chiave API di Google Maps",
@@ -1785,11 +1836,11 @@
         },
         "disable_for_account_holders": {
           "label": "Disabilita per i proprietari di un account",
-          "info": "Non verrÃƒÂ  mostrata ai clienti che hanno creato un account nel tuo negozio."
+          "info": "Non verr�?  mostrata ai clienti che hanno creato un account nel tuo negozio."
         },
         "popup_seconds": {
           "label": "Ritardo",
-          "info": "Il ritardo ÃƒÂ¨ disabilitato nell'editor del tema per la visibilitÃƒÂ "
+          "info": "Il ritardo è disabilitato nell'editor del tema per la visibilit�? "
         },
         "popup_days": {
           "label": "Frequenza",
@@ -1821,7 +1872,7 @@
           "label": "Testo del pulsante di chiusura"
         },
         "header_newsletter": "Bollettino",
-        "content": "Ogni registrazione creerÃƒÂ  un Cliente nel tuo negozio. [Visualizza clienti](/admin/customers?query=&accepts_marketing=1).",
+        "content": "Ogni registrazione creer�?  un Cliente nel tuo negozio. [Visualizza clienti](/admin/customers?query=&accepts_marketing=1).",
         "enable_newsletter": {
           "label": "Attiva il bollettino"
         },
@@ -1995,7 +2046,7 @@
       "settings": {
         "content": "Per le linee di prodotto con lunghe descrizioni, ti consigliamo di posizionare la tua descrizione e le schede all'interno di questa sezione.",
         "max_width": {
-          "label": "Ottimizza per la leggibilitÃƒÂ ",
+          "label": "Ottimizza per la leggibilit�? ",
           "info": "Applica una larghezza massima"
         }
       },
@@ -2042,7 +2093,7 @@
         "contact_form": {
           "name": "Modulo di contatto",
           "settings": {
-            "content": "Tutti gli invii sono inviati all'indirizzo email del cliente del tuo negozio. [Per saperne di piÃƒÂ¹](https://help.shopify.com/en/manual/using-themes/change-the-layout/add-contact-form#view-contact-form-submissions).",
+            "content": "Tutti gli invii sono inviati all'indirizzo email del cliente del tuo negozio. [Per saperne di più](https://help.shopify.com/en/manual/using-themes/change-the-layout/add-contact-form#view-contact-form-submissions).",
             "title": {
               "label": "Titolo"
             },
@@ -2942,14 +2993,14 @@
       }
     },
     "age-verification-popup": {
-      "name": "Popup di verifica dell'etÃƒÂ ",
+      "name": "Popup di verifica dell'et�? ",
       "settings": {
         "enable_age_verification_popup": {
-          "label": "Mostra il popup di verifica dell'etÃƒÂ "
+          "label": "Mostra il popup di verifica dell'et�? "
         },
         "enable_test_mode": {
-          "label": "Abilita la modalitÃƒÂ  di prova",
-          "info": "Forza la verifica a ogni aggiornamento e dovrebbe essere utilizzata solo per modificare il pop-up. Assicurati che la 'ModalitÃƒÂ  test' sia disabilitata all'avvio del tuo negozio."
+          "label": "Abilita la modalit�?  di prova",
+          "info": "Forza la verifica a ogni aggiornamento e dovrebbe essere utilizzata solo per modificare il pop-up. Assicurati che la 'Modalit�?  test' sia disabilitata all'avvio del tuo negozio."
         },
         "header_background_image": "Immagine di sfondo",
         "image": {
@@ -2959,12 +3010,12 @@
         "blur_image": {
           "label": "Sfoca l'immagine"
         },
-        "header_age_verification_question": "Domanda di verifica dell'etÃƒÂ ",
+        "header_age_verification_question": "Domanda di verifica dell'et�? ",
         "heading": {
           "label": "Titolo"
         },
         "text": {
-          "label": "Domanda di verifica dell'etÃƒÂ "
+          "label": "Domanda di verifica dell'et�? "
         },
         "decline_button_label": {
           "label": "Rifiuta il testo del pulsante"
@@ -2973,7 +3024,7 @@
           "label": "Approva il testo del pulsante"
         },
         "header_declined": "Declined",
-        "content": "Questo contenuto verrÃƒÂ  visualizzato se l'utente non soddisfa i requisiti di verifica.",
+        "content": "Questo contenuto verr�?  visualizzato se l'utente non soddisfa i requisiti di verifica.",
         "decline_heading": {
           "label": "Titolo"
         },
@@ -3008,7 +3059,7 @@
         },
         "background_color": {
           "label": "Colore di sfondo",
-          "info": "Utilizzato quando non ÃƒÂ¨ selezionata alcuna immagine di sfondo."
+          "info": "Utilizzato quando non è selezionata alcuna immagine di sfondo."
         },
         "header_background_image": "Immagine di sfondo",
         "background_image": {
@@ -3018,7 +3069,7 @@
           "label": "Sovrapposizione"
         },
         "overlay_opacity": {
-          "label": "OpacitÃƒÂ  di sovrapposizione"
+          "label": "Opacit�?  di sovrapposizione"
         },
         "mobile_image": {
           "label": "Immagine mobile"
@@ -3594,10 +3645,10 @@
           "label": "Sovrapposizione"
         },
         "ph_color_image_overlay_opacity": {
-          "label": "OpacitÃƒÂ  della sovrapposizione"
+          "label": "Opacit�?  della sovrapposizione"
         },
         "ph_color_image_overlay_text_shadow": {
-          "label": "QuantitÃƒÂ  di ombra del testo"
+          "label": "Quantit�?  di ombra del testo"
         }
       }
     },
@@ -3807,7 +3858,7 @@
         },
         "product_grid_image_fill": {
           "label": "Zoom dell'immagine per riempire lo spazio",
-          "info": "Nessun effetto quando la dimensione dell'immagine della griglia ÃƒÂ¨ impostata su \"Naturale\"."
+          "info": "Nessun effetto quando la dimensione dell'immagine della griglia è impostata su \"Naturale\"."
         },
         "product_hover_image": {
           "label": "Passa con il mouse per rivelare la seconda immagine"
@@ -3912,7 +3963,7 @@
           "label": "Tinta"
         },
         "collection_grid_opacity": {
-          "label": "OpacitÃƒÂ  della tinta"
+          "label": "Opacit�?  della tinta"
         },
         "collection_grid_gutter": {
           "label": "Aggiungi spaziatura"
@@ -4037,7 +4088,7 @@
       "settings": {
         "favicon": {
           "label": "Immagine favicon",
-          "info": "32 Ãƒâ€” 32 px PNG o piÃƒÂ¹ consigliato"
+          "info": "32 × 32 px PNG o più consigliato"
         }
       }
     },
@@ -4070,7 +4121,7 @@
         "header_predictive_search": "Ricerca predittiva",
         "predictive_search_enabled": {
           "label": "Abilita la ricerca predittiva",
-          "info": "Risultati della ricerca dal vivo. Non disponibile in tutte le lingue. [Per saperne di piÃƒÂ¹](https://help.shopify.com/en/themes/development/search/predictive-search#general-requirements-and-limitations)"
+          "info": "Risultati della ricerca dal vivo. Non disponibile in tutte le lingue. [Per saperne di più](https://help.shopify.com/en/themes/development/search/predictive-search#general-requirements-and-limitations)"
         },
         "predictive_search_show_vendor": {
           "label": "Mostra fornitore"
@@ -4328,7 +4379,7 @@
         "skip_to_content": "Vai direttamente ai contenuti",
         "close_modal": "Chiudi (esc)",
         "close": "Chiudi",
-        "learn_more": "Impara di piÃƒÂ¹"
+        "learn_more": "Impara di più"
       },
       "meta": {
         "tags": "Contrassegnato da tag \"{{ tag }}\"",
@@ -4347,7 +4398,7 @@
         "signup_form_success": "Ti invieremo un'e-mail appena prima dell'apertura!",
         "admin_link_html": "Sei il proprietario di un negozio? <a href=\"/admin\" class=\"text-link\">Entra qui</a>",
         "password_link": "Password",
-        "powered_by_shopify_html": "Questo negozio sarÃƒÂ  ospitato su {{ shopify }}"
+        "powered_by_shopify_html": "Questo negozio sar�?  ospitato su {{ shopify }}"
       },
       "breadcrumbs": {
         "home": "Inizio",
@@ -4369,7 +4420,7 @@
         "submit": "Iscriviti"
       },
       "search": {
-        "view_more": "Vedi di piÃƒÂ¹",
+        "view_more": "Vedi di più",
         "collections": "Collezioni:",
         "pages": "Pagine:",
         "articles": "Articoli:",
@@ -4396,7 +4447,7 @@
         "address_error": "Errore nella ricerca di questo indirizzo",
         "address_no_results": "Nessun risultato per questo indirizzo",
         "address_query_limit_html": "Hai superato il limite di utilizzo delle API di Google. Considera l'aggiornamento ad un <a href=\"https://developers.google.com/maps/premium/usage-limits\">Piano Premium</a>.",
-        "auth_error_html": "Si ÃƒÂ¨ verificato un problema durante l'autenticazione del tuo account Google Maps. Crea e attiva i permessi <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">JavaScript API</a> e <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">Geocoding API</a> della tua applicazione."
+        "auth_error_html": "Si è verificato un problema durante l'autenticazione del tuo account Google Maps. Crea e attiva i permessi <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">JavaScript API</a> e <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">Geocoding API</a> della tua applicazione."
       },
       "slideshow": {
         "play_slideshow": "Avvia presentazione",
@@ -4422,8 +4473,8 @@
         "message": "Messaggio",
         "post": "Pubblica commento",
         "moderated": "Attenzione, i commenti devono essere approvati prima di essere pubblicati",
-        "success_moderated": "Il tuo commento ÃƒÂ¨ stato pubblicato. Lo pubblicheremo fra poco, il nostro blog ÃƒÂ¨ soggetto a moderazione.",
-        "success": "Il tuo commento ÃƒÂ¨ stato pubblicato! Grazie!",
+        "success_moderated": "Il tuo commento è stato pubblicato. Lo pubblicheremo fra poco, il nostro blog è soggetto a moderazione.",
+        "success": "Il tuo commento è stato pubblicato! Grazie!",
         "with_count": {
           "one": "{{ count }} commento",
           "other": "{{ count }} commenti"
@@ -4440,18 +4491,18 @@
         "shipping_at_checkout": "Spedizione, tasse e codici sconto calcolati alla cassa.",
         "update": "Aggiorna il carrello",
         "checkout": "Check-out",
-        "empty": "Il tuo carrello ÃƒÂ¨ attualmente vuoto.",
+        "empty": "Il tuo carrello è attualmente vuoto.",
         "continue_browsing_html": "<a href='{{ url }}'>Continua a comprare</a>",
         "close_cart": "Chiudi il carrello",
-        "reduce_quantity": "Riduci la quantitÃƒÂ  dell'articolo di uno",
-        "increase_quantity": "Aumenta la quantitÃƒÂ  di un articolo",
+        "reduce_quantity": "Riduci la quantit�?  dell'articolo di uno",
+        "increase_quantity": "Aumenta la quantit�?  di un articolo",
         "terms": "Sono d'accordo con i termini e le condizioni",
         "terms_html": "Sono d'accordo con i <a href='{{ url }}' target='_blank'>termini e condizioni</a>",
         "terms_confirm": "Devi accettare i termini e le condizioni di vendita per procedere al pagamento"
       },
       "label": {
         "price": "Prezzo",
-        "quantity": "QuantitÃƒÂ ",
+        "quantity": "Quantit�? ",
         "total": "Totale"
       }
     },
@@ -4460,7 +4511,7 @@
         "catalog_title": "Catalogo",
         "all_of_collection": "Visualizza tutto",
         "view_all_products_html": "Visualizza tutti i<br>{{ count }} prodotti",
-        "see_more": "Mostra di piÃƒÂ¹",
+        "see_more": "Mostra di più",
         "see_less": "Mostra di meno",
         "no_matches": "Siamo spiacenti, non ci sono prodotti in questa collezione.",
         "items_with_count": {
@@ -4512,7 +4563,7 @@
         "company": "Azienda",
         "address1": "Indirizzo1",
         "address2": "Indirizzo2",
-        "city": "CittÃƒÂ ",
+        "city": "Citt�? ",
         "country": "Paese",
         "province": "Provincia",
         "zip": "Codice postale",
@@ -4559,7 +4610,7 @@
         "product": "Prodotto",
         "sku": "SKU",
         "price": "Prezzo",
-        "quantity": "QuantitÃƒÂ ",
+        "quantity": "Quantit�? ",
         "total": "Totale",
         "fulfilled_at_html": "Evaso il {{ date }}",
         "subtotal": "Subtotale"
@@ -4592,7 +4643,7 @@
     "home_page": {
       "onboarding": {
         "product_title": "Titolo del prodotto",
-        "product_description": "Un prodotto progettato con cura, realizzato con materiali di qualitÃƒÂ  e attenzione ai dettagli. Versatile, affidabile e fatto per durare, si integra perfettamente nella tua routine quotidiana.",
+        "product_description": "Un prodotto progettato con cura, realizzato con materiali di qualit�?  e attenzione ai dettagli. Versatile, affidabile e fatto per durare, si integra perfettamente nella tua routine quotidiana.",
         "collection_title": "Collezione",
         "no_content": "Questa sezione non include attualmente alcun contenuto. Aggiungi contenuti a questa sezione utilizzando la barra laterale."
       }
@@ -4635,7 +4686,7 @@
         },
         "sold_out": "Esaurito",
         "unavailable": "Non disponibile",
-        "quantity": "QuantitÃƒÂ ",
+        "quantity": "Quantit�? ",
         "add_to_cart": "Aggiungi al carrello",
         "preorder": "Pre-ordine",
         "include_taxes": "Imposte incluse.",
@@ -4644,13 +4695,13 @@
         "will_be_in_stock_after": "Di nuovo in magazzino {{ date }}",
         "waiting_for_stock": "Inventario in arrivo",
         "view_in_space": "Visualizza nel tuo spazio",
-        "view_in_space_label": "Visualizza nel tuo spazio, carica l'articolo nella finestra della realtÃƒÂ  aumentata"
+        "view_in_space_label": "Visualizza nel tuo spazio, carica l'articolo nella finestra della realt�?  aumentata"
       }
     },
     "store_availability": {
       "general": {
         "view_store_info": "Visualizza i dettagli del negozio",
-        "check_other_stores": "Verifica la disponibilitÃƒÂ  in altri negozi",
+        "check_other_stores": "Verifica la disponibilit�?  in altri negozi",
         "pick_up_available": "Ritiro disponibile",
         "pick_up_currently_unavailable": "Ritiro attualmente non disponibile",
         "pick_up_available_at_html": "Ritiro disponibile a <strong>{{ location_name }}</strong>",
@@ -4679,7 +4730,7 @@
       "name": "Prezzo"
     },
     "quantity_selector": {
-      "name": "Selettore di quantitÃƒÂ "
+      "name": "Selettore di quantit�? "
     },
     "size_chart": {
       "name": "Grafico dimensioni",
@@ -4731,8 +4782,8 @@
           "info": "Consenti ai clienti di effettuare il check-out direttamente tramite un metodo di pagamento familiare. [Maggiori informazioni](https://help.shopify.com/it/manual/online-store/dynamic-checkout)"
         },
         "surface_pickup_enable": {
-          "label": "Abilita disponibilitÃƒÂ  per il ritiro",
-          "info": "Scopri come configurare questa funzionalitÃƒÂ  [qui](https://help.shopify.com/it/manual/shipping/setting-up-and-managing-your-shipping/local-methods/local-pickup)"
+          "label": "Abilita disponibilit�?  per il ritiro",
+          "info": "Scopri come configurare questa funzionalit�?  [qui](https://help.shopify.com/it/manual/shipping/setting-up-and-managing-your-shipping/local-methods/local-pickup)"
         }
       }
     },
@@ -4839,7 +4890,7 @@
     "contact_form": {
       "name": "Modulo di contatto",
       "settings": {
-        "content": "Tutti gli invii sono inviati all'indirizzo email del cliente del tuo negozio. [Per saperne di piÃƒÂ¹](https://help.shopify.com/en/manual/using-themes/change-the-layout/add-contact-form#view-contact-form-submissions).",
+        "content": "Tutti gli invii sono inviati all'indirizzo email del cliente del tuo negozio. [Per saperne di più](https://help.shopify.com/en/manual/using-themes/change-the-layout/add-contact-form#view-contact-form-submissions).",
         "title": {
           "label": "Titolo"
         },
@@ -4894,7 +4945,7 @@
         "settings": {
           "show_dynamic_checkout": {
             "label": "Mostra pulsante di checkout accelerato",
-            "info": "Ogni cliente vedrÃƒÂ  il suo metodo di pagamento preferito tra quelli disponibili nel tuo negozio, come PayPal o Apple Pay. [Scopri di piÃƒÂ¹](https://help.shopify.com/en/manual/online-store/dynamic-checkout)"
+            "info": "Ogni cliente vedr�?  il suo metodo di pagamento preferito tra quelli disponibili nel tuo negozio, come PayPal o Apple Pay. [Scopri di più](https://help.shopify.com/en/manual/online-store/dynamic-checkout)"
           }
         },
         "presets": {
@@ -4912,7 +4963,7 @@
       "installments": {
         "name": "Pagamenti rateali",
         "settings": {
-          "content": "Per visualizzare i pagamenti rateali, il tuo negozio deve supportare Pagamenti Rateali Shop Pay. [Scopri di piÃƒÂ¹](https://help.shopify.com/en/manual/payments/shop-pay-installments)."
+          "content": "Per visualizzare i pagamenti rateali, il tuo negozio deve supportare Pagamenti Rateali Shop Pay. [Scopri di più](https://help.shopify.com/en/manual/payments/shop-pay-installments)."
         }
       },
       "inventory": {
@@ -4949,7 +5000,7 @@
           },
           "enable_video_autoplay": {
             "label": "Riproduzione automatica del video",
-            "info": "I video con riproduzione automatica sono muti per l'accessibilitÃƒÂ ."
+            "info": "I video con riproduzione automatica sono muti per l'accessibilit�? ."
           }
         }
       },
@@ -4978,14 +5029,14 @@
           },
           "enable_video_autoplay": {
             "label": "Riproduzione automatica del video",
-            "info": "I video con riproduzione automatica sono muti per l'accessibilitÃƒÂ ."
+            "info": "I video con riproduzione automatica sono muti per l'accessibilit�? ."
           }
         }
       },
       "pick_up": {
-        "name": "DisponibilitÃƒÂ  ritiro",
+        "name": "Disponibilit�?  ritiro",
         "settings": {
-          "content": "Mostra la disponibilitÃƒÂ  al dettaglio quando il ritiro locale ÃƒÂ¨ abilitato. [Scopri di piÃƒÂ¹](https://help.shopify.com/en/manual/fulfillment/setup/delivery-methods/pickup-in-store)."
+          "content": "Mostra la disponibilit�?  al dettaglio quando il ritiro locale è abilitato. [Scopri di più](https://help.shopify.com/en/manual/fulfillment/setup/delivery-methods/pickup-in-store)."
         }
       },
       "policies": {
@@ -4998,7 +5049,7 @@
         "name": "Prezzo"
       },
       "quantity_picker": {
-        "name": "Selettore quantitÃƒÂ ",
+        "name": "Selettore quantit�? ",
         "settings": {
           "show_inventory_status": {
             "label": "Mostra stato inventario"
@@ -5059,7 +5110,7 @@
     },
     "lazyload_images": {
       "label": "Caricamento pigro delle immagini",
-      "info": "Il caricamento lento dovrebbe essere abilitato quando le immagini della sezione sono below the fold. Per saperne di piÃƒÂ¹"
+      "info": "Il caricamento lento dovrebbe essere abilitato quando le immagini della sezione sono below the fold. Per saperne di più"
     },
     "subheading": {
       "label": "Sottotitolo"
@@ -5337,7 +5388,7 @@
                   "label": "Carrello"
                 },
                 "charity": {
-                  "label": "CaritÃƒÂ "
+                  "label": "Carit�? "
                 },
                 "chat": {
                   "label": "Chat"
@@ -5510,7 +5561,7 @@
           },
           "alt_image": {
             "label": "Immagine",
-            "info": "L'immagine verrÃƒÂ  visualizzata se il video non viene caricato"
+            "info": "L'immagine verr�?  visualizzata se il video non viene caricato"
           }
         },
         "image": {

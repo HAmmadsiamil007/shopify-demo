@@ -1,33 +1,33 @@
 {
   "general": {
     "404": {
-      "title": "404 PÃƒÂ¡gina no encontrada",
-      "subtext_html": "La pÃƒÂ¡gina que ha solicitado no existe. Haga clic <a href='{{ url }}'>aquÃƒÂ­</a> para continuar la compra."
+      "title": "404 Página no encontrada",
+      "subtext_html": "La página que ha solicitado no existe. Haga clic <a href='{{ url }}'>aquí</a> para continuar la compra."
     },
     "accessibility": {
       "skip_to_content": "Ir directamente al contenido",
       "close_modal": "Cerrar (esc)",
       "close": "Cerrar",
-      "learn_more": "Aprende mÃƒÂ¡s"
+      "learn_more": "Aprende más"
     },
     "meta": {
       "tags": "Etiquetado \"{{ tags }}\"",
-      "page": "PÃƒÂ¡gina {{ page }}"
+      "page": "Página {{ page }}"
     },
     "pagination": {
       "previous": "Anterior",
       "next": "Siguiente"
     },
     "password_page": {
-      "login_form_heading": "Entrar a la tienda usando contraseÃƒÂ±a:",
-      "login_form_password_label": "ContraseÃƒÂ±a",
-      "login_form_password_placeholder": "Tu contraseÃƒÂ±a",
+      "login_form_heading": "Entrar a la tienda usando contraseña:",
+      "login_form_password_label": "Contraseña",
+      "login_form_password_placeholder": "Tu contraseña",
       "login_form_submit": "Ingresar",
-      "signup_form_email_label": "Correo ElectrÃƒÂ³nico",
-      "signup_form_success": "Ã‚Â¡Te enviaremos un correo electrÃƒÂ³nico antes de inaugurar!",
-      "admin_link_html": "Ã‚Â¿Eres el dueÃƒÂ±o de la tienda? <a href=\"/admin\" class=\"text-link\">RegÃƒÂ­strate aquÃƒÂ­</a>",
-      "password_link": "ContraseÃƒÂ±a",
-      "powered_by_shopify_html": "Esta tienda estarÃƒÂ¡ impulsada por {{ shopify }}"
+      "signup_form_email_label": "Correo Electrónico",
+      "signup_form_success": "¡Te enviaremos un correo electrónico antes de inaugurar!",
+      "admin_link_html": "¿Eres el dueño de la tienda? <a href=\"/admin\" class=\"text-link\">Regístrate aquí</a>",
+      "password_link": "Contraseña",
+      "powered_by_shopify_html": "Esta tienda estará impulsada por {{ shopify }}"
     },
     "breadcrumbs": {
       "home": "Inicio",
@@ -44,7 +44,7 @@
       }
     },
     "newsletter_form": {
-      "newsletter_email": "SuscrÃƒÂ­bete a nuestra lista de correo",
+      "newsletter_email": "Suscríbete a nuestra lista de correo",
       "newsletter_confirmation": "Gracias por suscribirse",
       "submit": "Suscribir"
     },
@@ -53,25 +53,25 @@
       "products": "Productos",
       "suggestions": "Sugerencias",
       "collections": "Colecciones",
-      "pages": "PÃƒÂ¡ginas",
-      "articles": "ArtÃƒÂ­culos",
-      "no_results_html": "BÃƒÂºsqueda de \"{{ terms }}\"",
-      "results_for_html": "Su bÃƒÂºsqueda de \"{{ terms }}\" muestra lo siguiente:",
+      "pages": "Páginas",
+      "articles": "Artículos",
+      "no_results_html": "Búsqueda de \"{{ terms }}\"",
+      "results_for_html": "Su búsqueda de \"{{ terms }}\" muestra lo siguiente:",
       "title": "Buscar",
       "placeholder": "Buscar",
       "submit": "Buscar",
       "cancel": "Cancelar",
-      "search_title": "MÃƒÂ¡s buscadas",
+      "search_title": "Más buscadas",
       "result_count": {
         "one": "{{ count }} resultado",
         "other": "{{ count }} resultados"
       }
     },
     "drawers": {
-      "navigation": "NavegaciÃƒÂ³n",
-      "close_menu": "Cerrar menÃƒÂº",
-      "expand_submenu": "Expandir menÃƒÂº",
-      "collapse_submenu": "Colapsar menÃƒÂº"
+      "navigation": "Navegación",
+      "close_menu": "Cerrar menú",
+      "expand_submenu": "Expandir menú",
+      "collapse_submenu": "Colapsar menú"
     },
     "ph_loader": {
       "loading": "Loading"
@@ -80,10 +80,10 @@
   "sections": {
     "map": {
       "get_directions": "Obtener las direcciones",
-      "address_error": "No se puede encontrar esa direcciÃƒÂ³n",
+      "address_error": "No se puede encontrar esa dirección",
       "address_no_results": "No results for that address",
-      "address_query_limit_html": "Se ha excedido el lÃƒÂ­mite de uso de la API de Google . Considere la posibilidad de actualizar a un <a href=\"https://developers.google.com/maps/premium/usage-limits\">Plan Premium</a>.",
-      "auth_error_html": "Hubo un problema de autenticaciÃƒÂ³n con su cuenta de Google Maps. Crear y habilitar la <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">API de JavaScript</a> y <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">API de geocodificaciÃƒÂ³n</a> permiso para su aplicaciÃƒÂ³n."
+      "address_query_limit_html": "Se ha excedido el límite de uso de la API de Google . Considere la posibilidad de actualizar a un <a href=\"https://developers.google.com/maps/premium/usage-limits\">Plan Premium</a>.",
+      "auth_error_html": "Hubo un problema de autenticación con su cuenta de Google Maps. Crear y habilitar la <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">API de JavaScript</a> y <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">API de geocodificación</a> permiso para su aplicación."
     },
     "slideshow": {
       "play_slideshow": "Juego de diapositivas",
@@ -264,18 +264,18 @@
     "article": {
       "view_all": "Ver todo",
       "tags": "Etiquetas",
-      "read_more": "Leer mÃƒÂ¡s",
+      "read_more": "Leer más",
       "back_to_blog": "Volver a {{ title }}"
     },
     "comments": {
       "title": "Dejar un comentario",
       "name": "Nombre",
-      "email": "Correo electrÃƒÂ³nico",
+      "email": "Correo electrónico",
       "message": "Mensaje",
       "post": "Publicar comentario",
       "moderated": "Por favor tenga en cuenta que los comentarios deben ser aprobados antes de ser publicados",
-      "success_moderated": "Su comentario se ha compartido con ÃƒÂ©xito. Lo publicaremos en un momento, en tanto nuestro blog sea moderado.",
-      "success": "Ã‚Â¡Su comentario se ha compartido con ÃƒÂ©xito! Ã‚Â¡Gracias!",
+      "success_moderated": "Su comentario se ha compartido con éxito. Lo publicaremos en un momento, en tanto nuestro blog sea moderado.",
+      "success": "¡Su comentario se ha compartido con éxito! ¡Gracias!",
       "with_count": {
         "one": "{{ count }} comentario",
         "other": "{{ count }} comentarios"
@@ -289,17 +289,17 @@
       "note": "Instrucciones especiales para el vendedor",
       "subtotal": "Subtotal",
       "discounts": "Descuentos",
-      "shipping_at_checkout": "Los cÃƒÂ³digos de descuento, los costes de envÃƒÂ­o y los impuestos se aÃƒÂ±aden durante el pago.",
+      "shipping_at_checkout": "Los códigos de descuento, los costes de envío y los impuestos se añaden durante el pago.",
       "update": "Actualizar carrito",
       "checkout": "Finalizar pedido",
-      "empty": "Su carrito actualmente estÃƒÂ¡ vacÃƒÂ­o.",
-      "continue_browsing_html": "ContinÃƒÂºe explorando <a href='{{ url }}'>aquÃƒÂ­</a>.",
+      "empty": "Su carrito actualmente está vacío.",
+      "continue_browsing_html": "Continúe explorando <a href='{{ url }}'>aquí</a>.",
       "close_cart": "Cerrar carrito",
-      "reduce_quantity": "Quitar uno a la cantidad de artÃƒÂ­culos",
-      "increase_quantity": "Aumentar uno a la cantidad de artÃƒÂ­culos",
-      "terms": "Acepto los tÃƒÂ©rminos y condiciones",
-      "terms_html": "Acepto los <a href='{{ url }}' target='_blank'>tÃƒÂ©rminos y condiciones</a>",
-      "terms_confirm": "Debe aceptar los tÃƒÂ©rminos y condiciones de venta para pagar",
+      "reduce_quantity": "Quitar uno a la cantidad de artículos",
+      "increase_quantity": "Aumentar uno a la cantidad de artículos",
+      "terms": "Acepto los términos y condiciones",
+      "terms_html": "Acepto los <a href='{{ url }}' target='_blank'>términos y condiciones</a>",
+      "terms_confirm": "Debe aceptar los términos y condiciones de venta para pagar",
       "max_quantity": "Solo puedes tener {{ quantity }} de {{ title }} en tu carrito."
     },
     "label": {
@@ -310,15 +310,15 @@
   },
   "collections": {
     "general": {
-      "catalog_title": "CatÃƒÂ¡logo",
+      "catalog_title": "Catálogo",
       "all_of_collection": "Todos",
       "view_all_products_html": "ver los<br>{{ count }} productos",
-      "see_more": "Mostrar mÃƒÂ¡s",
+      "see_more": "Mostrar más",
       "see_less": "Muestra menos",
-      "no_matches": "Lo sentimos, no hay productos que coincidan con su bÃƒÂºsqueda.",
+      "no_matches": "Lo sentimos, no hay productos que coincidan con su búsqueda.",
       "items_with_count": {
-        "one": "{{ count }} artÃƒÂ­culo",
-        "other": "{{ count }} artÃƒÂ­culos"
+        "one": "{{ count }} artículo",
+        "other": "{{ count }} artículos"
       }
     },
     "sorting": {
@@ -327,14 +327,14 @@
     "filters": {
       "title_tags": "Filtrar",
       "all_tags": "Todos los productos",
-      "categories_title": "CategorÃƒÂ­as"
+      "categories_title": "Categorías"
     }
   },
   "contact": {
     "form": {
       "name": "Nombre",
-      "email": "Correo electrÃƒÂ³nico",
-      "phone": "NÃƒÂºmero de telÃƒÂ©fono",
+      "email": "Correo electrónico",
+      "phone": "Número de teléfono",
       "message": "Mensaje",
       "send": "Enviar",
       "post_success": "Gracias por contactarnos. Le responderemos lo antes posible."
@@ -349,40 +349,40 @@
     },
     "activate_account": {
       "title": "Activar cuenta",
-      "subtext": "Cree su contraseÃƒÂ±a para activar su cuenta.",
-      "password": "ContraseÃƒÂ±a",
-      "password_confirm": "Confirmar contraseÃƒÂ±a",
+      "subtext": "Cree su contraseña para activar su cuenta.",
+      "password": "Contraseña",
+      "password_confirm": "Confirmar contraseña",
       "submit": "Activar cuenta",
-      "cancel": "Rechazar invitaciÃƒÂ³n"
+      "cancel": "Rechazar invitación"
     },
     "addresses": {
       "title": "Sus direcciones",
       "default": "Por defecto",
-      "add_new": "Agregar una nueva direcciÃƒÂ³n",
-      "edit_address": "Editar direcciÃƒÂ³n",
+      "add_new": "Agregar una nueva dirección",
+      "edit_address": "Editar dirección",
       "first_name": "Nombre",
       "last_name": "Apellido",
-      "company": "CompaÃƒÂ±ÃƒÂ­a",
-      "address1": "DirecciÃƒÂ³n1",
-      "address2": "DirecciÃƒÂ³n2",
+      "company": "Compa??a",
+      "address1": "Dirección1",
+      "address2": "Dirección2",
       "city": "Ciudad",
-      "country": "PaÃƒÂ­s",
+      "country": "País",
       "province": "Provincia",
-      "zip": "CÃƒÂ³digo postal",
-      "phone": "TelÃƒÂ©fono",
-      "set_default": "Fijar como direcciÃƒÂ³n por defecto",
-      "add": "Agregar direcciÃƒÂ³n",
-      "update": "Actualizar direcciÃƒÂ³n",
+      "zip": "Código postal",
+      "phone": "Teléfono",
+      "set_default": "Fijar como dirección por defecto",
+      "add": "Agregar dirección",
+      "update": "Actualizar dirección",
       "cancel": "Cancelar",
       "edit": "Editar",
       "delete": "Eliminar",
-      "delete_confirm": "Ã‚Â¿EstÃƒÂ¡ seguro de que desea eliminar esta direcciÃƒÂ³n?"
+      "delete_confirm": "¿Está seguro de que desea eliminar esta dirección?"
     },
     "login": {
       "title": "Ingresar",
-      "email": "Correo electrÃƒÂ³nico",
-      "password": "ContraseÃƒÂ±a",
-      "forgot_password": "Ã‚Â¿OlvidÃƒÂ³ su contraseÃƒÂ±a?",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "forgot_password": "¿Olvidó su contraseña?",
       "sign_in": "Registrarse",
       "cancel": "Volver a la tienda",
       "guest_title": "Continuar como invitado",
@@ -393,21 +393,21 @@
       "order_number": "Pedido",
       "date": "Fecha",
       "payment_status": "Estado del pago",
-      "fulfillment_status": "Estado de finalizaciÃƒÂ³n",
+      "fulfillment_status": "Estado de finalización",
       "total": "Total",
-      "none": "No ha realizado algÃƒÂºn pedido aÃƒÂºn."
+      "none": "No ha realizado algún pedido aún."
     },
     "order": {
       "title": "Pedido {{ name }}",
       "date_html": "Realizado en {{ date }}",
       "cancelled_html": "Pedido cancelado en {{ date }}",
       "cancelled_reason": "Motivo: {{ reason }}",
-      "billing_address": "DirecciÃƒÂ³n de facturaciÃƒÂ³n",
+      "billing_address": "Dirección de facturación",
       "payment_status": "Estado del pago",
-      "shipping_address": "DirecciÃƒÂ³n de envÃƒÂ­o",
-      "fulfillment_status": "Estado de finalizaciÃƒÂ³n",
+      "shipping_address": "Dirección de envío",
+      "fulfillment_status": "Estado de finalización",
       "discount": "Descuento",
-      "shipping": "EnvÃƒÂ­o",
+      "shipping": "Envío",
       "tax": "Impuesto",
       "product": "Producto",
       "sku": "SKU",
@@ -418,36 +418,36 @@
       "subtotal": "Subtotal"
     },
     "recover_password": {
-      "title": "Restablecer su contraseÃƒÂ±a",
-      "email": "Correo electrÃƒÂ³nico",
+      "title": "Restablecer su contraseña",
+      "email": "Correo electrónico",
       "submit": "Enviar",
       "cancel": "Cancelar",
-      "subtext": "Le enviaremos un correo electrÃƒÂ³nico para restablecer su contraseÃƒÂ±a.",
-      "success": "Hemos enviado un correo electrÃƒÂ³nico con un enlace para actualizar su contraseÃƒÂ±a."
+      "subtext": "Le enviaremos un correo electrónico para restablecer su contraseña.",
+      "success": "Hemos enviado un correo electrónico con un enlace para actualizar su contraseña."
     },
     "reset_password": {
-      "title": "Restablecer contraseÃƒÂ±a de cuenta",
-      "subtext": "Ingrese una nueva contraseÃƒÂ±a para {{ email }}",
-      "password": "ContraseÃƒÂ±a",
-      "password_confirm": "Confirmar contraseÃƒÂ±a",
-      "submit": "Restablecer contraseÃƒÂ±a"
+      "title": "Restablecer contraseña de cuenta",
+      "subtext": "Ingrese una nueva contraseña para {{ email }}",
+      "password": "Contraseña",
+      "password_confirm": "Confirmar contraseña",
+      "submit": "Restablecer contraseña"
     },
     "register": {
       "title": "Crear cuenta",
       "first_name": "Nombre",
       "last_name": "Apellido",
-      "email": "Correo electrÃƒÂ³nico",
-      "password": "ContraseÃƒÂ±a",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
       "submit": "Crear",
       "cancel": "Volver a la tienda"
     }
   },
   "home_page": {
     "onboarding": {
-      "product_title": "TÃƒÂ­tulo del producto",
-      "product_description": "Un producto diseÃƒÂ±ado con cuidado, fabricado con materiales de calidad y atenciÃƒÂ³n al detalle. VersÃƒÂ¡til, fiable y hecho para durar, se integra perfectamente en tu dÃƒÂ­a a dÃƒÂ­a.",
-      "collection_title": "ColecciÃƒÂ³n",
-      "no_content": "Esta secÃƒÂ§ÃƒÂ£o nÃƒÂ£o inclui de momento qualquer conteÃƒÂºdo. Adicione conteÃƒÂºdo a esta secÃƒÂ§ÃƒÂ£o atravÃƒÂ©s da barra lateral."
+      "product_title": "Título del producto",
+      "product_description": "Un producto diseñado con cuidado, fabricado con materiales de calidad y atención al detalle. Versátil, fiable y hecho para durar, se integra perfectamente en tu día a día.",
+      "collection_title": "Colección",
+      "no_content": "Esta sec??o não inclui de momento qualquer conteúdo. Adicione conteúdo a esta sec??o através da barra lateral."
     }
   },
   "layout": {
@@ -456,7 +456,7 @@
     },
     "customer": {
       "account": "Cuenta",
-      "log_out": "Cerrar sesiÃƒÂ³n",
+      "log_out": "Cerrar sesión",
       "log_in": "Ingresar",
       "create_account": "Crear cuenta"
     },
@@ -467,7 +467,7 @@
   "products": {
     "general": {
       "color_swatch_trigger": "Color",
-      "size_trigger": "TamaÃƒÂ±o",
+      "size_trigger": "Tamaño",
       "size_chart": "Tabla de tallas",
       "save_html": "Guardar {{ saved_amount }}",
       "collection_return": "Volver a {{ collection }}",
@@ -480,7 +480,7 @@
       "reviews": "Comentarios"
     },
     "product": {
-      "description": "DescripciÃƒÂ³n",
+      "description": "Descripción",
       "in_stock_label": "En stock",
       "stock_label": {
         "one": "{{ count }} artículo en stock",
@@ -492,47 +492,47 @@
       "add_to_cart": "Agregar al carrito",
       "preorder": "Hacer un pedido",
       "include_taxes": "Impuesto incluido.",
-      "shipping_policy_html": "Los <a href='{{ link }}'>gastos de envÃƒÂ­o</a> se calculan en la pantalla de pagos.",
-      "will_not_ship_until": "SerÃƒÂ¡ enviado despuÃƒÂ©s {{ date }}",
-      "will_be_in_stock_after": "EstarÃƒÂ¡ disponible despuÃƒÂ©s {{ date }}",
-      "waiting_for_stock": "Pedido pendiente, envÃƒÂ­o pronto",
+      "shipping_policy_html": "Los <a href='{{ link }}'>gastos de envío</a> se calculan en la pantalla de pagos.",
+      "will_not_ship_until": "Será enviado después {{ date }}",
+      "will_be_in_stock_after": "Estará disponible después {{ date }}",
+      "waiting_for_stock": "Pedido pendiente, envío pronto",
       "view_in_space": "Ver en tu espacio",
-      "view_in_space_label": "Ver en tu espacio, carga el artÃƒÂ­culo en la ventana de realidad aumentada"
+      "view_in_space_label": "Ver en tu espacio, carga el artículo en la ventana de realidad aumentada"
     }
   },
   "store_availability": {
     "general": {
-      "view_store_info": "InformaciÃƒÂ³n de la tienda",
+      "view_store_info": "Información de la tienda",
       "check_other_stores": "Consulte la disponibilidad en otras tiendas",
       "pick_up_available": "Recogida en la",
       "pick_up_currently_unavailable": "Recogida disponible en este momento",
       "pick_up_available_at_html": "Recogida disponible en <strong> {{location_name}} </strong>",
-      "pick_up_unavailable_at_html": "Recogida estÃƒÂ¡ disponible en <strong> {{location_name}} </strong>"
+      "pick_up_unavailable_at_html": "Recogida está disponible en <strong> {{location_name}} </strong>"
     }
   },
   "gift_cards": {
     "issued": {
-      "title_html": "Ã‚Â¡AquÃƒÂ­ estÃƒÂ¡ su tarjeta de regalo de {{ value }} para {{ shop }}!",
-      "subtext": "Ã‚Â¡AquÃƒÂ­ estÃƒÂ¡ su tarjeta de regalo!",
+      "title_html": "¡Aquí está su tarjeta de regalo de {{ value }} para {{ shop }}!",
+      "subtext": "¡Aquí está su tarjeta de regalo!",
       "disabled": "Inhabilitada",
-      "expired": "ExpirÃƒÂ³ en {{ expiry }}",
+      "expired": "Expiró en {{ expiry }}",
       "active": "Expira en {{ expiry }}",
-      "redeem": "Use este cÃƒÂ³digo al terminar la comprar para canjear su tarjeta de regalo",
+      "redeem": "Use este código al terminar la comprar para canjear su tarjeta de regalo",
       "shop_link": "Empezar a comprar",
       "print": "Imprimir",
-      "add_to_apple_wallet": "AÃƒÂ±adir a Apple Wallet"
+      "add_to_apple_wallet": "Añadir a Apple Wallet"
     }
   },
   "recipient": {
     "form": {
       "checkbox": "Quiero enviar esto como un regalo.",
-      "email_label": "Correo electrÃƒÂ³nico de la persona destinataria",
-      "email": "Correo electrÃƒÂ³nico",
+      "email_label": "Correo electrónico de la persona destinataria",
+      "email": "Correo electrónico",
       "name_label": "Nombre de la persona destinataria (opcional)",
       "name": "Nombre",
       "message_label": "Mensaje (opcional)",
       "message": "Mensaje",
-      "max_characters": "{{ max_chars }} caracteres mÃƒÂ¡x.",
+      "max_characters": "{{ max_chars }} caracteres máx.",
       "send_on_label": "Enviar (opcional)"
     }
   },
@@ -540,18 +540,18 @@
     "month_day_year": "%d de %B, %Y"
   },
   "info": {
-    "unable_to_add_item_to_cart": "No se puede agregar el artÃƒÂ­culo al carrito",
-    "item_added_to_cart_html": "Ã‚Â¡{{ product_title }} agregado al carrito!",
+    "unable_to_add_item_to_cart": "No se puede agregar el artículo al carrito",
+    "item_added_to_cart_html": "¡{{ product_title }} agregado al carrito!",
     "low_stock_count": {
-      "one": "Stock bajo - {{ count }} artÃƒÂ­culo restante",
-      "other": "Stock bajo - {{ count }} artÃƒÂ­culos restantes"
+      "one": "Stock bajo - {{ count }} artículo restante",
+      "other": "Stock bajo - {{ count }} artículos restantes"
     },
     "back_in_stock_on": "De vuelta en stock {{ date }}",
-    "backordered": "Pedido pendiente, envÃƒÂ­o pronto",
+    "backordered": "Pedido pendiente, envío pronto",
     "in_stock": "En stock",
     "sold_out": "Agotado",
     "tax_included": "Impuestos incluidos.",
-    "shipping_policy_html": "<a href='{{ link }}'>EnvÃƒÂ­o</a> calculado en el checkout.",
+    "shipping_policy_html": "<a href='{{ link }}'>Envío</a> calculado en el checkout.",
     "pick_up_available": "Recogida disponible",
     "pick_up_currently_unavailable": "Recogida actualmente no disponible",
     "pick_up_available_at_html": "Recogida disponible en <strong>{{ location_name }}</strong>",
@@ -564,7 +564,7 @@
     "search": "Buscar",
     "close": "Cerrar",
     "get_directions": "Obtener direcciones",
-    "view_store_info": "Ver informaciÃƒÂ³n de la tienda",
+    "view_store_info": "Ver información de la tienda",
     "check_availability": "Verificar disponibilidad en otras tiendas",
     "show_all_results": "Mostrar todos los resultados para \"{{ terms }}\"",
     "from_price": "desde {{ price }}"
@@ -573,7 +573,7 @@
     "add_to_cart": "Agregar al carrito",
     "close": "Cerrar",
     "get_directions": "Obtener direcciones",
-    "view_store_info": "Ver informaciÃƒÂ³n de la tienda",
+    "view_store_info": "Ver información de la tienda",
     "check_availability": "Verificar disponibilidad en otras tiendas",
     "show_all_results": "Mostrar todos los resultados para \"{{ terms }}\""
   }
@@ -581,5 +581,12 @@
     "aether": {
         "header": {
             "shop_now": "Comprar ahora"
+        },
+        "footer": {
+            "all_rights_reserved": "Todos los derechos reservados.",
+            "privacy": "Privacidad",
+            "social_heading": "Enlaces a redes sociales",
+            "terms": "Términos"
         }
-    }}
+    }
+}

@@ -9,7 +9,7 @@
       "storytelling": "Storytelling"
     },
     "aether-announcement-bar": {
-      "name": "Barra de anÃºncios (AETHER)",
+      "name": "Barra de anúncios (AETHER)",
       "settings": {
         "show_mobile_rotation": {
           "label": "Rotacionar mensagens no celular"
@@ -41,12 +41,12 @@
       },
       "presets": {
         "default": {
-          "name": "PadrÃ£o"
+          "name": "Padrão"
         }
       }
     },
     "aether-header": {
-      "name": "CabeÃ§alho (AETHER)",
+      "name": "Cabeçalho (AETHER)",
       "settings": {
         "logo_text": {
           "label": "Texto do logotipo",
@@ -56,10 +56,10 @@
           "label": "Menu"
         },
         "show_search": {
-          "label": "Mostrar Ã­cone de pesquisa"
+          "label": "Mostrar ícone de pesquisa"
         },
         "show_cart": {
-          "label": "Mostrar Ã­cone do carrinho"
+          "label": "Mostrar ícone do carrinho"
         },
         "logo_image": {
           "label": "Imagem do logótipo"
@@ -73,7 +73,7 @@
         "header": {
           "icons": "Ícones",
           "mobile": "Telemóvel",
-          "socials": "Ligações sociais"
+          "socials": "Liga??es sociais"
         },
         "mobile_announcement_enable": {
           "label": "Mostrar texto de anúncio rotativo no telemóvel"
@@ -97,26 +97,77 @@
       },
       "presets": {
         "default": {
-          "name": "PadrÃ£o"
+          "name": "Padrão"
         }
       }
     },
     "aether-footer": {
-      "name": "RodapÃ© (AETHER)",
+      "name": "Rodapé (AETHER)",
       "settings": {
-        "menu": {
-          "label": "Menu"
-        },
         "show_payment_icons": {
-          "label": "Mostrar Ã­cones de pagamento"
+          "label": "Mostrar ícones de pagamento"
         },
         "copyright_text": {
           "label": "Texto de direitos autorais"
         }
       },
+      "blocks": {
+        "brand": {
+          "name": "Marca",
+          "settings": {
+            "logo_text": {
+              "label": "Texto do logótipo",
+              "info": "Deixe em branco para usar o nome da loja"
+            },
+            "logo_image": {
+              "label": "Imagem do logótipo"
+            },
+            "tagline": {
+              "label": "Slogan"
+            },
+            "social_heading": {
+              "label": "Ligações sociais"
+            },
+            "social_instagram_url": {
+              "label": "URL do Instagram"
+            },
+            "social_twitter_url": {
+              "label": "URL do Twitter"
+            },
+            "social_tiktok_url": {
+              "label": "URL do TikTok"
+            },
+            "social_youtube_url": {
+              "label": "URL do YouTube"
+            }
+          }
+        },
+        "menu": {
+          "name": "Menu",
+          "settings": {
+            "heading": {
+              "label": "Título"
+            },
+            "link_list": {
+              "label": "Menu"
+            }
+          }
+        },
+        "newsletter": {
+          "name": "Boletim informativo",
+          "settings": {
+            "heading": {
+              "label": "Título"
+            },
+            "copy": {
+              "label": "Texto"
+            }
+          }
+        }
+      },
       "presets": {
         "default": {
-          "name": "PadrÃ£o"
+          "name": "Padrão"
         }
       }
     },
@@ -3390,7 +3441,7 @@
       "settings": {
         "enable": "Ativar Barra de Portes Grátis",
         "display_mode": {
-          "label": "Modo de exibição",
+          "label": "Modo de exibi??o",
           "options": {
             "floating": "Flutuante",
             "inline": "Em linha",
@@ -3398,7 +3449,7 @@
           }
         },
         "animation_style": {
-          "label": "Estilo de animação",
+          "label": "Estilo de anima??o",
           "options": {
             "smooth": "Suave",
             "bounce": "Salto",
@@ -3406,7 +3457,7 @@
           }
         },
         "floating_position": {
-          "label": "Posição flutuante",
+          "label": "Posi??o flutuante",
           "options": {
             "bottom": "Inferior",
             "top": "Superior"
@@ -3432,7 +3483,7 @@
           "settings": {
             "threshold": "Limiar ($)",
             "label": "Rótulo",
-            "description": "Descrição",
+            "description": "Descri??o",
             "fill_color": "Cor de preenchimento da barra"
           }
         }
@@ -4037,7 +4088,7 @@
       "settings": {
         "favicon": {
           "label": "Favicon image",
-          "info": "32 Ãƒâ€” 32px PNG or larger recommended"
+          "info": "32 × 32px PNG or larger recommended"
         }
       }
     },
@@ -4595,7 +4646,7 @@
         "product_title": "Product title",
         "product_description": "A thoughtfully designed product made with quality materials and attention to detail. Versatile, reliable, and built to last, it's made to fit seamlessly into your everyday routine.",
         "collection_title": "Collection",
-        "no_content": "This section doesnÃ¢â‚¬â„¢t currently include any content. Add content to this section using the sidebar."
+        "no_content": "This section doesn’t currently include any content. Add content to this section using the sidebar."
       }
     },
     "layout": {

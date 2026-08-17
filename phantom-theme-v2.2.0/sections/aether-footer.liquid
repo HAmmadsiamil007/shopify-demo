@@ -1,32 +1,95 @@
-<footer class="aether-footer ph-client ph-client--aether" data-section-type="aether-footer">
-  <div class="aether-footer__inner">
-    {%- if section.settings.menu != blank -%}
-      <nav class="aether-footer__nav" aria-label="{{ 'general.drawers.navigation' | t }}">
-        <ul>
-          {%- for link in section.settings.menu.links -%}
-            <li>
-              <a href="{{ link.url }}">{{ link.title | escape }}</a>
-            </li>
-          {%- endfor -%}
-        </ul>
-      </nav>
-    {%- endif -%}
+<footer class="aether-footer ph-client ph-client--aether" data-section-type="aether-footer" role="contentinfo" aria-label="{{ 'aether.footer.social_heading' | t }}">
+  <div class="aether-footer__container">
+    <div class="aether-footer__top">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'brand' -%}
+            <div class="aether-footer__brand" {{ block.shopify_attributes }}>
+              {%- if block.settings.logo_image != blank -%}
+                <a href="{{ routes.root_url }}" class="aether-footer__logo aether-footer__logo--image" aria-label="{{ shop.name | escape }}">
+                  {{ block.settings.logo_image | image_url: width: 220 | image_tag: widths: '110,165,220,330', class: 'aether-footer__logo-image', alt: shop.name }}
+                </a>
+              {%- else -%}
+                <a href="{{ routes.root_url }}" class="aether-footer__logo">
+                  {{- block.settings.logo_text | default: shop.name | escape -}}
+                </a>
+              {%- endif -%}
+              {%- if block.settings.tagline != blank -%}
+                <p class="aether-footer__tagline">{{ block.settings.tagline | escape }}</p>
+              {%- endif -%}
+              <div class="aether-footer__social" aria-label="{{ 'aether.footer.social_heading' | t }}">
+                {%- if block.settings.social_instagram_url != blank -%}
+                  <a href="{{ block.settings.social_instagram_url }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    {%- render 'aether-icon', name: 'instagram', class: 'aether-footer__social-icon' -%}
+                  </a>
+                {%- endif -%}
+                {%- if block.settings.social_twitter_url != blank -%}
+                  <a href="{{ block.settings.social_twitter_url }}" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                    {%- render 'aether-icon', name: 'twitter', class: 'aether-footer__social-icon' -%}
+                  </a>
+                {%- endif -%}
+                {%- if block.settings.social_tiktok_url != blank -%}
+                  <a href="{{ block.settings.social_tiktok_url }}" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                    {%- render 'aether-icon', name: 'tiktok', class: 'aether-footer__social-icon' -%}
+                  </a>
+                {%- endif -%}
+                {%- if block.settings.social_youtube_url != blank -%}
+                  <a href="{{ block.settings.social_youtube_url }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                    {%- render 'aether-icon', name: 'youtube', class: 'aether-footer__social-icon' -%}
+                  </a>
+                {%- endif -%}
+              </div>
+            </div>
 
-    {%- if section.settings.show_payment_icons -%}
-      {%- unless shop.enabled_payment_types == empty -%}
-        <div class="aether-footer__payments">
-          {%- for type in shop.enabled_payment_types -%}
-            {{ type | payment_type_svg_tag: class: 'aether-footer__payment-icon' }}
-          {%- endfor -%}
-        </div>
-      {%- endunless -%}
-    {%- endif -%}
+          {%- when 'menu' -%}
+            <nav class="aether-footer__links" {{ block.shopify_attributes }}>
+              <h4 class="aether-footer__heading">{{ block.settings.heading | escape }}</h4>
+              {%- if block.settings.link_list != blank -%}
+                <ul>
+                  {%- for link in block.settings.link_list.links -%}
+                    <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </nav>
 
-    {%- if section.settings.copyright_text != blank -%}
-      <p class="aether-footer__copyright">{{ section.settings.copyright_text | escape }}</p>
-    {%- else -%}
-      <p class="aether-footer__copyright">© {{ 'now' | date: '%Y' }} {{ shop.name | escape }}</p>
-    {%- endif -%}
+          {%- when 'newsletter' -%}
+            <div class="aether-footer__newsletter" {{ block.shopify_attributes }}>
+              <h4 class="aether-footer__heading">{{ block.settings.heading | escape }}</h4>
+              {%- if block.settings.copy != blank -%}
+                <p>{{ block.settings.copy }}</p>
+              {%- endif -%}
+              {%- render 'newsletter-form', section_id: section.id, snippet_context: 'footer' -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="aether-footer__bottom">
+      <div class="aether-footer__legal">
+        {%- if section.settings.copyright_text != blank -%}
+          <span>{{ section.settings.copyright_text }}</span>
+        {%- else -%}
+          <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name | escape }}. {{ 'aether.footer.all_rights_reserved' | t }}</span>
+        {%- endif -%}
+        {%- if shop.privacy_policy != blank -%}
+          <a href="{{ shop.privacy_policy.url }}">{{ 'aether.footer.privacy' | t }}</a>
+        {%- endif -%}
+        {%- if shop.terms_of_service != blank -%}
+          <a href="{{ shop.terms_of_service.url }}">{{ 'aether.footer.terms' | t }}</a>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.show_payment_icons -%}
+        {%- unless shop.enabled_payment_types == empty -%}
+          <div class="aether-footer__payments">
+            {%- for type in shop.enabled_payment_types -%}
+              {{ type | payment_type_svg_tag: class: 'aether-footer__payment-icon' }}
+            {%- endfor -%}
+          </div>
+        {%- endunless -%}
+      {%- endif -%}
+    </div>
   </div>
 </footer>
 
@@ -35,26 +98,141 @@
     "name": "t:sections.aether-footer.name",
     "settings": [
       {
-        "type": "link_list",
-        "id": "menu",
-        "label": "t:sections.aether-footer.settings.menu.label",
-        "default": "footer"
+        "type": "text",
+        "id": "copyright_text",
+        "label": "t:sections.aether-footer.settings.copyright_text.label"
       },
       {
         "type": "checkbox",
         "id": "show_payment_icons",
         "label": "t:sections.aether-footer.settings.show_payment_icons.label",
         "default": true
+      }
+    ],
+    "max_blocks": 6,
+    "blocks": [
+      {
+        "type": "brand",
+        "name": "t:sections.aether-footer.blocks.brand.name",
+        "settings": [
+          {
+            "type": "text",
+            "id": "logo_text",
+            "label": "t:sections.aether-footer.blocks.brand.settings.logo_text.label",
+            "info": "t:sections.aether-footer.blocks.brand.settings.logo_text.info"
+          },
+          {
+            "type": "image_picker",
+            "id": "logo_image",
+            "label": "t:sections.aether-footer.blocks.brand.settings.logo_image.label"
+          },
+          {
+            "type": "text",
+            "id": "tagline",
+            "label": "t:sections.aether-footer.blocks.brand.settings.tagline.label"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.aether-footer.blocks.brand.settings.social_heading.label"
+          },
+          {
+            "type": "url",
+            "id": "social_instagram_url",
+            "label": "t:sections.aether-footer.blocks.brand.settings.social_instagram_url.label"
+          },
+          {
+            "type": "url",
+            "id": "social_twitter_url",
+            "label": "t:sections.aether-footer.blocks.brand.settings.social_twitter_url.label"
+          },
+          {
+            "type": "url",
+            "id": "social_tiktok_url",
+            "label": "t:sections.aether-footer.blocks.brand.settings.social_tiktok_url.label"
+          },
+          {
+            "type": "url",
+            "id": "social_youtube_url",
+            "label": "t:sections.aether-footer.blocks.brand.settings.social_youtube_url.label"
+          }
+        ]
       },
       {
-        "type": "text",
-        "id": "copyright_text",
-        "label": "t:sections.aether-footer.settings.copyright_text.label"
+        "type": "menu",
+        "name": "t:sections.aether-footer.blocks.menu.name",
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "t:sections.aether-footer.blocks.menu.settings.heading.label"
+          },
+          {
+            "type": "link_list",
+            "id": "link_list",
+            "label": "t:sections.aether-footer.blocks.menu.settings.link_list.label",
+            "default": "footer"
+          }
+        ]
+      },
+      {
+        "type": "newsletter",
+        "name": "t:sections.aether-footer.blocks.newsletter.name",
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "t:sections.aether-footer.blocks.newsletter.settings.heading.label"
+          },
+          {
+            "type": "textarea",
+            "id": "copy",
+            "label": "t:sections.aether-footer.blocks.newsletter.settings.copy.label"
+          }
+        ]
       }
     ],
     "presets": [
       {
-        "name": "t:sections.aether-footer.presets.default.name"
+        "name": "t:sections.aether-footer.presets.default.name",
+        "settings": {
+          "show_payment_icons": true
+        },
+        "blocks": [
+          {
+            "type": "brand",
+            "settings": {
+              "tagline": "Step Into The Void"
+            }
+          },
+          {
+            "type": "menu",
+            "settings": {
+              "heading": "Shop",
+              "link_list": "main-menu"
+            }
+          },
+          {
+            "type": "menu",
+            "settings": {
+              "heading": "Support",
+              "link_list": "footer"
+            }
+          },
+          {
+            "type": "menu",
+            "settings": {
+              "heading": "Company",
+              "link_list": "footer"
+            }
+          },
+          {
+            "type": "newsletter",
+            "settings": {
+              "heading": "Stay in the Loop",
+              "copy": "Get exclusive drops, early access, and AETHER news."
+            }
+          }
+        ]
       }
     ],
     "disabled_on": {

@@ -447,7 +447,7 @@
             "product_title": "Product title",
             "product_description": "A thoughtfully designed product made with quality materials and attention to detail. Versatile, reliable, and built to last, it's made to fit seamlessly into your everyday routine.",
             "collection_title": "Collection",
-            "no_content": "This section doesnÃ¢â‚¬â„¢t currently include any content. Add content to this section using the sidebar."
+            "no_content": "This section doesn’t currently include any content. Add content to this section using the sidebar."
         }
     },
     "layout": {
@@ -581,5 +581,12 @@
     "aether": {
         "header": {
             "shop_now": "Shop Now"
+        },
+        "footer": {
+            "all_rights_reserved": "All Rights Reserved.",
+            "privacy": "Privacy",
+            "social_heading": "Social media links",
+            "terms": "Terms"
         }
-    }}
+    }
+}

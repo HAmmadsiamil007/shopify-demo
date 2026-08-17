@@ -8,7 +8,7 @@
       "skip_to_content": "Vai direttamente ai contenuti",
       "close_modal": "Chiudi (esc)",
       "close": "Chiudi",
-      "learn_more": "Impara di piÃƒÂ¹"
+      "learn_more": "Impara di più"
     },
     "meta": {
       "tags": "Contrassegnato da tag \"{{ tag }}\"",
@@ -27,7 +27,7 @@
       "signup_form_success": "Ti invieremo un'e-mail appena prima dell'apertura!",
       "admin_link_html": "Sei il proprietario di un negozio? <a href=\"/admin\" class=\"text-link\">Entra qui</a>",
       "password_link": "Password",
-      "powered_by_shopify_html": "Questo negozio sarÃƒÂ  ospitato su {{ shopify }}"
+      "powered_by_shopify_html": "Questo negozio sarà ospitato su {{ shopify }}"
     },
     "breadcrumbs": {
       "home": "Inizio",
@@ -61,7 +61,7 @@
       "placeholder": "Cerca",
       "submit": "Cerca",
       "cancel": "Annulla",
-      "search_title": "PiÃƒÂ¹ cercati",
+      "search_title": "Più cercati",
       "result_count": {
         "one": "{{ count }} risultato",
         "other": "{{ count }} risultati"
@@ -83,7 +83,7 @@
       "address_error": "Errore nella ricerca di questo indirizzo",
       "address_no_results": "Nessun risultato per questo indirizzo",
       "address_query_limit_html": "Hai superato il limite di utilizzo delle API di Google. Considera l'aggiornamento ad un <a href=\"https://developers.google.com/maps/premium/usage-limits\">Piano Premium</a>.",
-      "auth_error_html": "Si ÃƒÂ¨ verificato un problema durante l'autenticazione del tuo account Google Maps. Crea e attiva i permessi <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">JavaScript API</a> e <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">Geocoding API</a> della tua applicazione."
+      "auth_error_html": "Si è verificato un problema durante l'autenticazione del tuo account Google Maps. Crea e attiva i permessi <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">JavaScript API</a> e <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">Geocoding API</a> della tua applicazione."
     },
     "slideshow": {
       "play_slideshow": "Avvia presentazione",
@@ -274,8 +274,8 @@
       "message": "Messaggio",
       "post": "Pubblica commento",
       "moderated": "Attenzione, i commenti devono essere approvati prima di essere pubblicati",
-      "success_moderated": "Il tuo commento ÃƒÂ¨ stato pubblicato. Lo pubblicheremo fra poco, il nostro blog ÃƒÂ¨ soggetto a moderazione.",
-      "success": "Il tuo commento ÃƒÂ¨ stato pubblicato! Grazie!",
+      "success_moderated": "Il tuo commento è stato pubblicato. Lo pubblicheremo fra poco, il nostro blog è soggetto a moderazione.",
+      "success": "Il tuo commento è stato pubblicato! Grazie!",
       "with_count": {
         "one": "{{ count }} commento",
         "other": "{{ count }} commenti"
@@ -292,11 +292,11 @@
       "shipping_at_checkout": "Spedizione, tasse e codici sconto calcolati alla cassa.",
       "update": "Aggiorna il carrello",
       "checkout": "Check-out",
-      "empty": "Il tuo carrello ÃƒÂ¨ attualmente vuoto.",
+      "empty": "Il tuo carrello è attualmente vuoto.",
       "continue_browsing_html": "<a href='{{ url }}'>Continua a comprare</a>",
       "close_cart": "Chiudi il carrello",
-      "reduce_quantity": "Riduci la quantitÃƒÂ  dell'articolo di uno",
-      "increase_quantity": "Aumenta la quantitÃƒÂ  di un articolo",
+      "reduce_quantity": "Riduci la quantità dell'articolo di uno",
+      "increase_quantity": "Aumenta la quantità di un articolo",
       "terms": "Sono d'accordo con i termini e le condizioni",
       "terms_html": "Sono d'accordo con i <a href='{{ url }}' target='_blank'>termini e condizioni</a>",
       "terms_confirm": "Devi accettare i termini e le condizioni di vendita per procedere al pagamento",
@@ -304,7 +304,7 @@
     },
     "label": {
       "price": "Prezzo",
-      "quantity": "QuantitÃƒÂ ",
+      "quantity": "Quantità",
       "total": "Totale"
     }
   },
@@ -313,7 +313,7 @@
       "catalog_title": "Catalogo",
       "all_of_collection": "Visualizza tutto",
       "view_all_products_html": "Visualizza tutti i<br>{{ count }} prodotti",
-      "see_more": "Mostra di piÃƒÂ¹",
+      "see_more": "Mostra di più",
       "see_less": "Mostra di meno",
       "no_matches": "Siamo spiacenti, non ci sono prodotti in questa collezione.",
       "items_with_count": {
@@ -365,7 +365,7 @@
       "company": "Azienda",
       "address1": "Indirizzo1",
       "address2": "Indirizzo2",
-      "city": "CittÃƒÂ ",
+      "city": "Città",
       "country": "Paese",
       "province": "Provincia",
       "zip": "Codice postale",
@@ -412,7 +412,7 @@
       "product": "Prodotto",
       "sku": "SKU",
       "price": "Prezzo",
-      "quantity": "QuantitÃƒÂ ",
+      "quantity": "Quantità",
       "total": "Totale",
       "fulfilled_at_html": "Evaso il {{ date }}",
       "subtotal": "Subtotale"
@@ -445,7 +445,7 @@
   "home_page": {
     "onboarding": {
       "product_title": "Titolo del prodotto",
-      "product_description": "Un prodotto progettato con cura, realizzato con materiali di qualitÃƒÂ  e attenzione ai dettagli. Versatile, affidabile e fatto per durare, si integra perfettamente nella tua routine quotidiana.",
+      "product_description": "Un prodotto progettato con cura, realizzato con materiali di qualità e attenzione ai dettagli. Versatile, affidabile e fatto per durare, si integra perfettamente nella tua routine quotidiana.",
       "collection_title": "Collezione",
       "no_content": "Questa sezione non include attualmente alcun contenuto. Aggiungi contenuti a questa sezione utilizzando la barra laterale."
     }
@@ -488,7 +488,7 @@
       },
       "sold_out": "Esaurito",
       "unavailable": "Non disponibile",
-      "quantity": "QuantitÃƒÂ ",
+      "quantity": "Quantità",
       "add_to_cart": "Aggiungi al carrello",
       "preorder": "Pre-ordine",
       "include_taxes": "Imposte incluse.",
@@ -497,13 +497,13 @@
       "will_be_in_stock_after": "Di nuovo in magazzino {{ date }}",
       "waiting_for_stock": "In arretrato, spedizione a breve",
       "view_in_space": "Visualizza nel tuo spazio",
-      "view_in_space_label": "Visualizza nel tuo spazio, carica l'articolo nella finestra della realtÃƒÂ  aumentata"
+      "view_in_space_label": "Visualizza nel tuo spazio, carica l'articolo nella finestra della realtà aumentata"
     }
   },
   "store_availability": {
     "general": {
       "view_store_info": "Visualizza i dettagli del negozio",
-      "check_other_stores": "Verifica la disponibilitÃƒÂ  in altri negozi",
+      "check_other_stores": "Verifica la disponibilità in altri negozi",
       "pick_up_available": "Ritiro disponibile",
       "pick_up_currently_unavailable": "Ritiro attualmente non disponibile",
       "pick_up_available_at_html": "Ritiro disponibile a <strong>{{ location_name }}</strong>",
@@ -560,12 +560,12 @@
     "max_characters": "Fino a {{ max_chars }} caratteri"
   },
   "labels": {
-    "quantity": "QuantitÃƒÂ ",
+    "quantity": "Quantità",
     "search": "Cerca",
     "close": "Chiudi",
     "get_directions": "Ottieni indicazioni",
     "view_store_info": "Visualizza informazioni del negozio",
-    "check_availability": "Verifica disponibilitÃƒÂ  in altri negozi",
+    "check_availability": "Verifica disponibilità in altri negozi",
     "show_all_results": "Mostra tutti i risultati per \"{{ terms }}\"",
     "from_price": "da {{ price }}"
   },
@@ -574,12 +574,19 @@
     "close": "Chiudi",
     "get_directions": "Ottieni indicazioni",
     "view_store_info": "Visualizza informazioni del negozio",
-    "check_availability": "Verifica disponibilitÃƒÂ  in altri negozi",
+    "check_availability": "Verifica disponibilità in altri negozi",
     "show_all_results": "Mostra tutti i risultati per \"{{ terms }}\""
   }
 ,
     "aether": {
         "header": {
             "shop_now": "Acquista ora"
+        },
+        "footer": {
+            "all_rights_reserved": "Tutti i diritti riservati.",
+            "privacy": "Privacy",
+            "social_heading": "Link ai social",
+            "terms": "Termini"
         }
-    }}
+    }
+}
