@@ -4,9 +4,7 @@
   "sections": {
     "aether-announcement": {
       "type": "aether-announcement-bar",
-      "settings": {
-        "text": "Free shipping on orders over $100"
-      }
+      "settings": {}
     },
     "aether-header": {
       "type": "aether-header",

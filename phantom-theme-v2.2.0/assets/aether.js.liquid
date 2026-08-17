@@ -256,6 +256,180 @@ import { loadScript, loadCSS } from 'theme-resource-loader'
     }
   }
 
+  CONTROLLERS['aether-header'] = {
+    init(el) {
+      this._el = el
+      this._clear()
+      this._lastScrollY = window.scrollY || 0
+      this._nav = el.querySelector('[data-aether-nav]')
+      this._menuBtn = el.querySelector('[data-aether-menu-toggle]')
+      this._mobileHamburger = el.querySelector('[data-aether-mobile-open]')
+      this._mobileOverlay = el.querySelector('[data-aether-mobile-overlay]')
+      this._mobileClose = el.querySelector('[data-aether-mobile-close]')
+      this._searchUrl = el.getAttribute('data-aether-search-url') || '/search'
+
+      this._onScroll = this._updateScrollState.bind(this)
+      this._onKeydown = this._onKeydown.bind(this)
+      window.addEventListener('scroll', this._onScroll, { passive: true })
+      document.addEventListener('keydown', this._onKeydown)
+      this._updateScrollState()
+
+      if (this._menuBtn && this._nav) {
+        this._menuBtn.addEventListener('click', this._toggleOverlayNav.bind(this))
+      }
+      if (this._nav) {
+        this._nav.addEventListener('click', this._onNavClick.bind(this))
+      }
+      if (this._mobileHamburger) {
+        this._mobileHamburger.addEventListener('click', this._openDrawer.bind(this))
+      }
+      if (this._mobileClose) {
+        this._mobileClose.addEventListener('click', this._closeDrawer.bind(this))
+      }
+      if (this._mobileOverlay) {
+        this._mobileOverlay.addEventListener('click', this._onOverlayClick.bind(this))
+      }
+      el.querySelectorAll('[data-aether-search]').forEach(btn => {
+        btn.addEventListener('click', this._onSearchClick.bind(this))
+      })
+      el.querySelectorAll(
+        '.aether-nav__link, .aether-nav__dropdown-link, .aether-nav__mobile-icons a, ' +
+        '.aether-mobile-nav__link, .aether-mobile-cta'
+      ).forEach(link => {
+        link.addEventListener('click', this._closeMenus.bind(this))
+      })
+      this._bindAnnouncementRotation()
+    },
+    destroy() {
+      if (this._onScroll) window.removeEventListener('scroll', this._onScroll)
+      if (this._onKeydown) document.removeEventListener('keydown', this._onKeydown)
+      this._clear()
+      document.body.style.overflow = ''
+    },
+    refresh() {
+      this.destroy()
+      this.init(this._el)
+    },
+    _clear() {
+      if (this._rotationTimer) {
+        clearInterval(this._rotationTimer)
+        this._rotationTimer = null
+      }
+      this._nav = null
+      this._menuBtn = null
+      this._mobileHamburger = null
+      this._mobileOverlay = null
+      this._mobileClose = null
+    },
+    // Smart sticky header (frozen main.js:13-50): scrolled > 80px;
+    // hide on scroll down / show on scroll up past a page-type
+    // threshold; skipped on ≤ 768px where the mobile header takes over.
+    _updateScrollState() {
+      var el = this._el
+      if (!el) return
+      var scrollY = window.scrollY
+      if (!(window.innerWidth > 768)) return
+      el.classList.toggle('aether-header--scrolled', scrollY > 80)
+      var hideStart = el.classList.contains('aether-header--home') ? 600 : 100
+      if (scrollY > hideStart) {
+        var delta = scrollY - this._lastScrollY
+        if (delta > 10) {
+          el.classList.add('aether-header--hidden')
+        } else if (-delta > 10) {
+          el.classList.remove('aether-header--hidden')
+        }
+      } else {
+        el.classList.remove('aether-header--hidden')
+      }
+      this._lastScrollY = scrollY
+    },
+    // ≤ 1024px full-screen overlay nav (frozen main.js:52-77)
+    _toggleOverlayNav() {
+      var active = !this._nav.classList.contains('active')
+      this._nav.classList.toggle('active', active)
+      if (this._menuBtn) {
+        this._menuBtn.classList.toggle('active', active)
+        this._menuBtn.setAttribute('aria-expanded', String(active))
+      }
+      document.body.style.overflow = active ? 'hidden' : ''
+    },
+    // Dropdown accordion ≤ 991px (frozen main.js:128-135; frozen CSS
+    // toggled `.active` while JS toggled `.open` — pack uses `.open`
+    // consistently, D-list record)
+    _onNavClick(e) {
+      if (window.innerWidth > 991) return
+      var link = e.target.closest('.aether-nav__item--dropdown > .aether-nav__link')
+      if (link) {
+        e.preventDefault()
+        link.parentElement.classList.toggle('open')
+      }
+    },
+    _openDrawer() {
+      if (this._mobileOverlay) this._mobileOverlay.classList.add('active')
+      if (this._mobileHamburger) {
+        this._mobileHamburger.classList.add('active')
+        this._mobileHamburger.setAttribute('aria-expanded', 'true')
+      }
+      document.body.style.overflow = 'hidden'
+    },
+    _closeDrawer() {
+      if (this._mobileOverlay) this._mobileOverlay.classList.remove('active')
+      if (this._mobileHamburger) {
+        this._mobileHamburger.classList.remove('active')
+        this._mobileHamburger.setAttribute('aria-expanded', 'false')
+      }
+      document.body.style.overflow = ''
+    },
+    _onOverlayClick(e) {
+      if (e.target === this._mobileOverlay) this._closeDrawer()
+    },
+    _onKeydown(e) {
+      if (e.key !== 'Escape') return
+      this._closeDrawer()
+      if (this._nav && this._nav.classList.contains('active')) this._toggleOverlayNav()
+    },
+    // Search trigger (plan Task 3 Step 5, VERIFIED): PHANTOM's
+    // theme.js:4698 dispatches CustomEvent 'predictive-search:open'
+    // with detail.context 'header'; its predictive-search element
+    // (theme.js:4033) listens with data-context='header' (rendered by
+    // sections/header.liquid:176). AETHER pages render the aether
+    // header group, so the PHANTOM predictive section is usually
+    // absent → fall back to navigating routes.search_url.
+    _onSearchClick() {
+      if (document.querySelector('predictive-search[data-context="header"]')) {
+        document.dispatchEvent(new CustomEvent('predictive-search:open', {
+          detail: { context: 'header' },
+          bubbles: true
+        }))
+      } else {
+        window.location.href = this._searchUrl
+      }
+    },
+    _closeMenus() {
+      if (this._nav) this._nav.classList.remove('active')
+      if (this._menuBtn) {
+        this._menuBtn.classList.remove('active')
+        this._menuBtn.setAttribute('aria-expanded', 'false')
+      }
+      this._closeDrawer()
+    },
+    _bindAnnouncementRotation() {
+      var items = this._el.querySelectorAll('.aether-mobile-announcement__text')
+      if (!(items.length > 1) || !this._motionEnabled()) return
+      var idx = 0
+      this._rotationTimer = setInterval(() => {
+        items.forEach((t, i) => t.classList.toggle('active', i === idx))
+        idx = (idx + 1) % items.length
+      }, 5000)
+    },
+    _motionEnabled() {
+      var attr = this._el && this._el.getAttribute('data-aether-motion-enabled')
+      if (attr !== null && attr !== 'true') return false
+      var runtime = window.__aetherRuntime
+      return !runtime || typeof runtime._motionEnabled !== 'function' || runtime._motionEnabled()
+    }
+  }
+
   window.AetherRuntime = window.AetherRuntime || AetherRuntime
 
   window.addEventListener(EVENTS.themeReady, function () {

@@ -60,7 +60,40 @@
         },
         "show_cart": {
           "label": "Warenkorbsymbol anzeigen"
+        },
+        "logo_image": {
+          "label": "Logo-Bild"
+        },
+        "show_wishlist": {
+          "label": "Wunschlisten-Symbol anzeigen"
+        },
+        "show_account": {
+          "label": "Kontosymbol anzeigen"
+        },
+        "header": {
+          "icons": "Symbole",
+          "mobile": "Mobil",
+          "socials": "Social-Media-Links"
+        },
+        "mobile_announcement_enable": {
+          "label": "Rotierenden Ankündigungstext auf Mobilgeräten anzeigen"
+        },
+        "mobile_announcement_1": {
+          "label": "Ankündigungstext 1"
+        },
+        "mobile_announcement_2": {
+          "label": "Ankündigungstext 2"
+        },
+        "social_instagram_url": {
+          "label": "Instagram-URL"
+        },
+        "social_facebook_url": {
+          "label": "Facebook-URL"
+        },
+        "social_tiktok_url": {
+          "label": "TikTok-URL"
         }
+
       },
       "presets": {
         "default": {

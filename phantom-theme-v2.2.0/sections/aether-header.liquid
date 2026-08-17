@@ -1,32 +1,216 @@
-<header class="aether-header ph-client ph-client--aether" data-section-type="aether-header">
+<header
+  class="aether-header ph-client ph-client--aether{% if template.name == 'index' %} aether-header--home{% endif %}"
+  data-section-type="aether-header"
+  data-aether-search-url="{{ routes.search_url }}"
+  data-aether-motion-enabled="{{ settings.aether_motion_enable }}"
+>
   <div class="aether-header__bar">
-    <a class="aether-header__logo" href="{{ routes.root_url }}">
-      {%- if section.settings.logo_text != blank -%}
-        {{ section.settings.logo_text | escape }}
-      {%- else -%}
-        {{ shop.name | escape }}
-      {%- endif -%}
-    </a>
+    <div class="aether-header__container">
+      <a class="aether-header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
+        {%- if section.settings.logo_image != blank -%}
+          {{
+            section.settings.logo_image
+            | image_url: width: 220
+            | image_tag: widths: '110, 165, 220, 330', class: 'aether-header__logo-image', alt: shop.name
+          }}
+        {%- else -%}
+          {{ section.settings.logo_text | default: shop.name | escape }}
+        {%- endif -%}
+      </a>
 
-    {%- if section.settings.menu != blank -%}
-      <nav class="aether-header__nav" aria-label="{{ 'general.drawers.navigation' | t }}">
-        <ul>
-          {%- for link in section.settings.menu.links -%}
-            <li>
-              <a href="{{ link.url }}">{{ link.title | escape }}</a>
-            </li>
-          {%- endfor -%}
-        </ul>
-      </nav>
-    {%- endif -%}
+      {%- if section.settings.menu != blank -%}
+        <nav class="aether-header__nav" id="aetherMainNav" data-aether-nav aria-label="{{ 'general.drawers.navigation' | t }}">
+          <div class="aether-nav__mobile-logo">
+            <a href="{{ routes.root_url }}" class="aether-header__logo">
+              {%- if section.settings.logo_image != blank -%}
+                {{
+                  section.settings.logo_image
+                  | image_url: width: 220
+                  | image_tag: widths: '110, 165, 220, 330', class: 'aether-header__logo-image', alt: shop.name
+                }}
+              {%- else -%}
+                {{ section.settings.logo_text | default: shop.name | escape }}
+              {%- endif -%}
+            </a>
+          </div>
+          <ul class="aether-nav__links">
+            {%- for link in section.settings.menu.links -%}
+              <li class="aether-nav__item{% if link.links != blank %} aether-nav__item--dropdown{% endif %}">
+                <a
+                  href="{{ link.url }}"
+                  class="aether-nav__link{% if link.active %} active{% endif %}"
+                >
+                  {{ link.title | escape }}
+                  {%- if link.links != blank -%}
+                    {%- render 'aether-icon', name: 'chevron-down', class: 'aether-nav__caret' -%}
+                  {%- endif -%}
+                </a>
+                {%- if link.links != blank -%}
+                  <ul class="aether-nav__dropdown">
+                    {%- for child_link in link.links -%}
+                      <li>
+                        <a href="{{ child_link.url }}" class="aether-nav__dropdown-link{% if child_link.active %} active{% endif %}">
+                          {{ child_link.title | escape }}
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+          <div class="aether-nav__mobile-icons">
+            {%- if section.settings.show_search -%}
+              <button type="button" class="aether-header__icon" data-aether-search aria-label="{{ 'general.search.submit' | t }}">
+                {%- render 'aether-icon', name: 'search' -%}
+              </button>
+            {%- endif -%}
+            {%- if section.settings.show_wishlist -%}
+              <a href="{{ routes.root_url }}/pages/wishlist" class="aether-header__icon" aria-label="Wishlist">
+                {%- render 'aether-icon', name: 'heart' -%}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.show_cart -%}
+              <a href="{{ routes.cart_url }}" class="aether-header__icon" aria-label="{{ 'cart.general.title' | t }}">
+                {%- render 'aether-icon', name: 'shopping-bag' -%}
+                <span class="aether-cart-count">{{ cart.item_count }}</span>
+              </a>
+            {%- endif -%}
+            {%- if section.settings.show_account -%}
+              <a href="{{ routes.account_url }}" class="aether-header__icon" aria-label="Account">
+                {%- render 'aether-icon', name: 'user' -%}
+              </a>
+            {%- endif -%}
+          </div>
+        </nav>
+      {%- endif -%}
 
-    <div class="aether-header__actions">
-      {%- if section.settings.show_search -%}
-        <a href="{{ routes.search_url }}">{{ 'general.search.submit' | t }}</a>
+      <div class="aether-header__actions">
+        {%- if section.settings.show_search -%}
+          <button type="button" class="aether-header__icon" data-aether-search aria-label="{{ 'general.search.submit' | t }}">
+            {%- render 'aether-icon', name: 'search' -%}
+          </button>
+        {%- endif -%}
+        {%- if section.settings.show_wishlist -%}
+          <a href="{{ routes.root_url }}/pages/wishlist" class="aether-header__icon" aria-label="Wishlist">
+            {%- render 'aether-icon', name: 'heart' -%}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.show_cart -%}
+          <a href="{{ routes.cart_url }}" class="aether-header__icon" aria-label="{{ 'cart.general.title' | t }}">
+            {%- render 'aether-icon', name: 'shopping-bag' -%}
+            <span class="aether-cart-count">{{ cart.item_count }}</span>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.show_account -%}
+          <a href="{{ routes.account_url }}" class="aether-header__icon" aria-label="Account">
+            {%- render 'aether-icon', name: 'user' -%}
+          </a>
+        {%- endif -%}
+        <button
+          type="button"
+          class="aether-menu-btn"
+          data-aether-menu-toggle
+          aria-label="{{ 'general.drawers.close_menu' | t }}"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%}
+    Mobile header row (≤ 768px, frozen index.html:105-116). Replaces the
+    announcement bar on mobile — the rotating texts live here per the frozen
+    layout; the section owns the texts because Shopify sections cannot read
+    another section's blocks (plan D2, section isolation).
+  {%- endcomment -%}
+  <div class="aether-mobile-header">
+    <button
+      type="button"
+      class="aether-mobile-hamburger"
+      data-aether-mobile-open
+      aria-label="Open menu"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="aether-mobile-announcement" aria-hidden="true">
+      {%- if section.settings.mobile_announcement_enable -%}
+        {%- if section.settings.mobile_announcement_1 != blank -%}
+          <span class="aether-mobile-announcement__text active">{{ section.settings.mobile_announcement_1 | escape }}</span>
+        {%- endif -%}
+        {%- if section.settings.mobile_announcement_2 != blank -%}
+          <span class="aether-mobile-announcement__text">{{ section.settings.mobile_announcement_2 | escape }}</span>
+        {%- endif -%}
       {%- endif -%}
-      {%- if section.settings.show_cart -%}
-        <a href="{{ routes.cart_url }}">{{ 'cart.general.title' | t }}</a>
-      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="aether-mobile-menu-overlay" data-aether-mobile-overlay>
+    <div class="aether-mobile-menu" data-aether-mobile-menu>
+      <div class="aether-mobile-menu__header">
+        <button type="button" class="aether-mobile-menu__close" data-aether-mobile-close aria-label="{{ 'general.drawers.close_menu' | t }}">
+          {%- render 'aether-icon', name: 'times' -%}
+        </button>
+        <a href="{{ routes.root_url }}" class="aether-mobile-menu__logo">
+          {{ section.settings.logo_text | default: shop.name | escape }}
+        </a>
+        <span class="aether-mobile-menu__spacer" aria-hidden="true"></span>
+      </div>
+      <div class="aether-mobile-menu__body">
+        <form class="aether-mobile-search" action="{{ routes.search_url }}" method="get" role="search">
+          {%- render 'aether-icon', name: 'search', class: 'aether-mobile-search__icon' -%}
+          <input
+            type="search"
+            name="q"
+            value="{{ search.terms | escape }}"
+            placeholder="{{ 'general.search.placeholder' | t }}"
+            autocomplete="off"
+          >
+        </form>
+        <nav class="aether-mobile-nav" aria-label="{{ 'general.drawers.navigation' | t }}">
+          {%- if section.settings.menu != blank -%}
+            {%- for link in section.settings.menu.links -%}
+              <a href="{{ link.url }}" class="aether-mobile-nav__link{% if link.active %} active{% endif %}">
+                {{ link.title | escape }}
+              </a>
+            {%- endfor -%}
+          {%- endif -%}
+        </nav>
+        <div class="aether-mobile-divider" aria-hidden="true"></div>
+        <nav class="aether-mobile-nav" aria-label="Account">
+          <a href="{{ routes.account_url }}" class="aether-mobile-nav__link">Account</a>
+          <a href="{{ routes.root_url }}/pages/wishlist" class="aether-mobile-nav__link">Wishlist</a>
+          <a href="{{ routes.cart_url }}" class="aether-mobile-nav__link">{{ 'cart.general.title' | t }}</a>
+        </nav>
+        <div class="aether-mobile-divider" aria-hidden="true"></div>
+        <a href="{{ routes.all_products_collection_url }}" class="aether-mobile-cta">
+          {{ 'aether.header.shop_now' | t }}
+        </a>
+        <div class="aether-mobile-socials">
+          {%- if section.settings.social_instagram_url != blank -%}
+            <a href="{{ section.settings.social_instagram_url }}" aria-label="Instagram" target="_blank" rel="noopener">
+              {%- render 'aether-icon', name: 'instagram' -%}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.social_facebook_url != blank -%}
+            <a href="{{ section.settings.social_facebook_url }}" aria-label="Facebook" target="_blank" rel="noopener">
+              {%- render 'aether-icon', name: 'facebook-f' -%}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.social_tiktok_url != blank -%}
+            <a href="{{ section.settings.social_tiktok_url }}" aria-label="TikTok" target="_blank" rel="noopener">
+              {%- render 'aether-icon', name: 'tiktok' -%}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
     </div>
   </div>
 </header>
@@ -42,10 +226,19 @@
         "info": "t:sections.aether-header.settings.logo_text.info"
       },
       {
+        "type": "image_picker",
+        "id": "logo_image",
+        "label": "t:sections.aether-header.settings.logo_image.label"
+      },
+      {
         "type": "link_list",
         "id": "menu",
         "label": "t:sections.aether-header.settings.menu.label",
         "default": "main-menu"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.aether-header.settings.header.icons"
       },
       {
         "type": "checkbox",
@@ -55,9 +248,62 @@
       },
       {
         "type": "checkbox",
+        "id": "show_wishlist",
+        "label": "t:sections.aether-header.settings.show_wishlist.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
         "id": "show_cart",
         "label": "t:sections.aether-header.settings.show_cart.label",
         "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_account",
+        "label": "t:sections.aether-header.settings.show_account.label",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "t:sections.aether-header.settings.header.mobile"
+      },
+      {
+        "type": "checkbox",
+        "id": "mobile_announcement_enable",
+        "label": "t:sections.aether-header.settings.mobile_announcement_enable.label",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "mobile_announcement_1",
+        "label": "t:sections.aether-header.settings.mobile_announcement_1.label",
+        "default": "Free shipping on orders over $200"
+      },
+      {
+        "type": "text",
+        "id": "mobile_announcement_2",
+        "label": "t:sections.aether-header.settings.mobile_announcement_2.label",
+        "default": "Free shipping on all orders"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.aether-header.settings.header.socials"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram_url",
+        "label": "t:sections.aether-header.settings.social_instagram_url.label"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook_url",
+        "label": "t:sections.aether-header.settings.social_facebook_url.label"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok_url",
+        "label": "t:sections.aether-header.settings.social_tiktok_url.label"
       }
     ],
     "presets": [

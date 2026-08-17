@@ -577,4 +577,9 @@
         "check_availability": "Check availability at other stores",
         "show_all_results": "Show all results for \"{{ terms }}\""
     }
-}
+,
+    "aether": {
+        "header": {
+            "shop_now": "Shop Now"
+        }
+    }}

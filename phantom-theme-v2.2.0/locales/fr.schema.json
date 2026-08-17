@@ -60,7 +60,40 @@
         },
         "show_cart": {
           "label": "Afficher l'icÃ´ne du panier"
+        },
+        "logo_image": {
+          "label": "Image du logo"
+        },
+        "show_wishlist": {
+          "label": "Afficher l'icône de liste de souhaits"
+        },
+        "show_account": {
+          "label": "Afficher l'icône de compte"
+        },
+        "header": {
+          "icons": "Icônes",
+          "mobile": "Mobile",
+          "socials": "Liens sociaux"
+        },
+        "mobile_announcement_enable": {
+          "label": "Afficher le texte d'annonce rotatif sur mobile"
+        },
+        "mobile_announcement_1": {
+          "label": "Texte d'annonce 1"
+        },
+        "mobile_announcement_2": {
+          "label": "Texte d'annonce 2"
+        },
+        "social_instagram_url": {
+          "label": "URL Instagram"
+        },
+        "social_facebook_url": {
+          "label": "URL Facebook"
+        },
+        "social_tiktok_url": {
+          "label": "URL TikTok"
         }
+
       },
       "presets": {
         "default": {
@@ -118,7 +151,7 @@
             },
             "alignment": {
               "label": "Alignement vertical",
-              "info": "S'aligne ÃƒÂ  cÃƒÂ´tÃƒÂ© d'autres contenus personnalisÃƒÂ©s",
+              "info": "S'aligne ÃƒÂ  cÃƒÂ´tÃƒÂ© d'autres contenus personnalisÃƒÂ©s",
               "options": {
                 "top-middle": {
                   "label": "Haut"
@@ -147,7 +180,7 @@
             },
             "alignment": {
               "label": "Alignement vertical",
-              "info": "S'aligne ÃƒÂ  cÃƒÂ´tÃƒÂ© d'autres contenus personnalisÃƒÂ©s",
+              "info": "S'aligne ÃƒÂ  cÃƒÂ´tÃƒÂ© d'autres contenus personnalisÃƒÂ©s",
               "options": {
                 "top-middle": {
                   "label": "Haut"
@@ -235,13 +268,13 @@
           "info": "UtilisÃƒÂ© pour garder le sujet de votre photo en vue.",
           "options": {
             "20_0": {
-              "label": "En haut ÃƒÂ  gauche"
+              "label": "En haut ÃƒÂ  gauche"
             },
             "top": {
               "label": "Haut"
             },
             "80_0": {
-              "label": "En haut ÃƒÂ  droite"
+              "label": "En haut ÃƒÂ  droite"
             },
             "20_50": {
               "label": "Gauche"
@@ -253,13 +286,13 @@
               "label": "Droite"
             },
             "20_100": {
-              "label": "En bas ÃƒÂ  gauche"
+              "label": "En bas ÃƒÂ  gauche"
             },
             "bottom": {
               "label": "Bas"
             },
             "80_100": {
-              "label": "En bas ÃƒÂ  droite"
+              "label": "En bas ÃƒÂ  droite"
             }
           }
         },
@@ -267,10 +300,10 @@
           "label": "Mise en page",
           "options": {
             "left": {
-              "label": "Texte ÃƒÂ  gauche"
+              "label": "Texte ÃƒÂ  gauche"
             },
             "right": {
-              "label": "Texte ÃƒÂ  droite"
+              "label": "Texte ÃƒÂ  droite"
             }
           }
         },
@@ -331,10 +364,10 @@
           "label": "Mise en page",
           "options": {
             "left": {
-              "label": "Texte ÃƒÂ  gauche"
+              "label": "Texte ÃƒÂ  gauche"
             },
             "right": {
-              "label": "Texte ÃƒÂ  droite"
+              "label": "Texte ÃƒÂ  droite"
             }
           }
         },
@@ -480,12 +513,12 @@
       }
     },
     "collection-return": {
-      "name": "Retour ÃƒÂ  la collection"
+      "name": "Retour ÃƒÂ  la collection"
     },
     "contact-form": {
       "name": "Formulaire de contact",
       "settings": {
-        "content": "Toutes les soumissions sont envoyÃƒÂ©es ÃƒÂ  l'adresse e-mail du client de votre magasin. [En savoir plus](https://help.shopify.com/en/manual/using-themes/change-the-layout/add-contact-form#view-contact-form-submissions).",
+        "content": "Toutes les soumissions sont envoyÃƒÂ©es ÃƒÂ  l'adresse e-mail du client de votre magasin. [En savoir plus](https://help.shopify.com/en/manual/using-themes/change-the-layout/add-contact-form#view-contact-form-submissions).",
         "title": {
           "label": "Titre"
         },
@@ -621,13 +654,13 @@
               "info": "UtilisÃƒÂ© pour garder le sujet de votre photo en vue.",
               "options": {
                 "20_0": {
-                  "label": "En haut ÃƒÂ  gauche"
+                  "label": "En haut ÃƒÂ  gauche"
                 },
                 "top_center": {
                   "label": "En haut au centre"
                 },
                 "80_0": {
-                  "label": "En haut ÃƒÂ  droite"
+                  "label": "En haut ÃƒÂ  droite"
                 },
                 "20_50": {
                   "label": "Gauche"
@@ -639,13 +672,13 @@
                   "label": "Droite"
                 },
                 "20_100": {
-                  "label": "En bas ÃƒÂ  gauche"
+                  "label": "En bas ÃƒÂ  gauche"
                 },
                 "bottom_center": {
                   "label": "En bas au centre"
                 },
                 "80_100": {
-                  "label": "En bas ÃƒÂ  droite"
+                  "label": "En bas ÃƒÂ  droite"
                 }
               }
             }
@@ -713,7 +746,7 @@
           "label": "Mise en page sur mobile",
           "options": {
             "partial": {
-              "label": "Largeur de 75Ã‚Â %"
+              "label": "Largeur de 75Ã‚Â %"
             },
             "full": {
               "label": "Pleine largeur"
@@ -943,16 +976,16 @@
           "label": "Disposition de l'en-tÃƒÂªte",
           "options": {
             "left": {
-              "label": "Logo ÃƒÂ  gauche, menu ÃƒÂ  gauche"
+              "label": "Logo ÃƒÂ  gauche, menu ÃƒÂ  gauche"
             },
             "left-center": {
-              "label": "Logo ÃƒÂ  gauche, menu au centre"
+              "label": "Logo ÃƒÂ  gauche, menu au centre"
             },
             "left-drawer": {
-              "label": "Logo ÃƒÂ  gauche, menu dÃƒÂ©roulant"
+              "label": "Logo ÃƒÂ  gauche, menu dÃƒÂ©roulant"
             },
             "center-left": {
-              "label": "Logo au centre, menu ÃƒÂ  gauche"
+              "label": "Logo au centre, menu ÃƒÂ  gauche"
             },
             "center-split": {
               "label": "Logo au centre, menu sÃƒÂ©parÃƒÂ©"
@@ -1070,13 +1103,13 @@
               "label": "Centre droite"
             },
             "vertical-bottom_horizontal-left": {
-              "label": "En bas ÃƒÂ  gauche"
+              "label": "En bas ÃƒÂ  gauche"
             },
             "vertical-bottom_horizontal-center": {
               "label": "En bas au centre"
             },
             "vertical-bottom_horizontal-right": {
-              "label": "En bas ÃƒÂ  droite"
+              "label": "En bas ÃƒÂ  droite"
             }
           }
         },
@@ -1216,7 +1249,7 @@
         },
         "content": "Toutes vos collections sont listÃƒÂ©es par dÃƒÂ©faut. Pour personnaliser votre liste, choisissez Ã‚Â« SÃƒÂ©lectionnÃƒÂ© Ã‚Â» et ajoutez des collections.",
         "display_type": {
-          "label": "SÃƒÂ©lectionnez les collections ÃƒÂ  afficher",
+          "label": "SÃƒÂ©lectionnez les collections ÃƒÂ  afficher",
           "options": {
             "all": {
               "label": "Tout"
@@ -1227,7 +1260,7 @@
           }
         },
         "sort": {
-          "label": "Trier les collections parÃ‚Â :",
+          "label": "Trier les collections parÃ‚Â :",
           "info": "Le tri s'applique uniquement lorsque Ã‚Â« Tout Ã‚Â» est sÃƒÂ©lectionnÃƒÂ©.",
           "options": {
             "products_high": {
@@ -1237,16 +1270,16 @@
               "label": "Nombre de produits, par ordre croissant"
             },
             "alphabetical": {
-              "label": "AlphabÃƒÂ©tique, de A ÃƒÂ  Z"
+              "label": "AlphabÃƒÂ©tique, de A ÃƒÂ  Z"
             },
             "alphabetical_reversed": {
-              "label": "AlphabÃƒÂ©tique, de Z ÃƒÂ  A"
+              "label": "AlphabÃƒÂ©tique, de Z ÃƒÂ  A"
             },
             "date": {
-              "label": "Date, de la plus ancienne ÃƒÂ  la plus rÃƒÂ©cente"
+              "label": "Date, de la plus ancienne ÃƒÂ  la plus rÃƒÂ©cente"
             },
             "date_reversed": {
-              "label": "Date, de la plus rÃƒÂ©cente ÃƒÂ  la plus ancienne"
+              "label": "Date, de la plus rÃƒÂ©cente ÃƒÂ  la plus ancienne"
             }
           }
         },
@@ -1484,7 +1517,7 @@
         "header_filtering_and_sorting": "Filtrage et tri",
         "enable_sidebar": {
           "label": "Activer le filtre",
-          "info": "Permettez ÃƒÂ  vos clients de filtrer les collections et les rÃƒÂ©sultats de recherche en fonction de la disponibilitÃƒÂ© des produits, du prix, de la couleur, etc. Personnalisez les filtres"
+          "info": "Permettez ÃƒÂ  vos clients de filtrer les collections et les rÃƒÂ©sultats de recherche en fonction de la disponibilitÃƒÂ© des produits, du prix, de la couleur, etc. Personnalisez les filtres"
         },
         "collapsed": {
           "label": "RÃƒÂ©duire les filtres"
@@ -1615,7 +1648,7 @@
           "label": "Mise en page sur mobile",
           "options": {
             "partial": {
-              "label": "Largeur de 75Ã‚Â %"
+              "label": "Largeur de 75Ã‚Â %"
             },
             "full": {
               "label": "Pleine largeur"
@@ -1645,7 +1678,7 @@
         "header_filtering_and_sorting": "Filtrage et tri",
         "enable_sidebar": {
           "label": "Activer le filtre",
-          "info": "Permettez ÃƒÂ  vos clients de filtrer les collections et les rÃƒÂ©sultats de recherche en fonction de la disponibilitÃƒÂ© des produits, du prix, de la couleur, etc. Personnalisez les filtres"
+          "info": "Permettez ÃƒÂ  vos clients de filtrer les collections et les rÃƒÂ©sultats de recherche en fonction de la disponibilitÃƒÂ© des produits, du prix, de la couleur, etc. Personnalisez les filtres"
         },
         "collapsed": {
           "label": "RÃƒÂ©duire les filtres"
@@ -1701,37 +1734,37 @@
         },
         "background_image": {
           "label": "Image",
-          "info": "Ãƒâ‚¬ utiliser ÃƒÂ  la place d'une clÃƒÂ© API"
+          "info": "Ãƒâ‚¬ utiliser ÃƒÂ  la place d'une clÃƒÂ© API"
         },
         "background_image_position": {
           "label": "Point focal de l'image",
           "options": {
             "top_left": {
-              "label": "En haut ÃƒÂ  gauche"
+              "label": "En haut ÃƒÂ  gauche"
             },
             "top_center": {
               "label": "En haut au centre"
             },
             "top_right": {
-              "label": "En haut ÃƒÂ  droite"
+              "label": "En haut ÃƒÂ  droite"
             },
             "center_left": {
-              "label": "CentrÃƒÂ© ÃƒÂ  gauche"
+              "label": "CentrÃƒÂ© ÃƒÂ  gauche"
             },
             "center_center": {
               "label": "CentrÃƒÂ© au milieu"
             },
             "center_right": {
-              "label": "Au milieu ÃƒÂ  droite"
+              "label": "Au milieu ÃƒÂ  droite"
             },
             "bottom_left": {
-              "label": "En bas ÃƒÂ  gauche"
+              "label": "En bas ÃƒÂ  gauche"
             },
             "bottom_center": {
               "label": "En bas au centre"
             },
             "bottom_right": {
-              "label": "En bas ÃƒÂ  droite"
+              "label": "En bas ÃƒÂ  droite"
             }
           },
           "info": "UtilisÃƒÂ© pour garder le sujet de votre photo en vue."
@@ -1785,7 +1818,7 @@
           "label": "Texte"
         },
         "header_newsletter": "Bulletin d'information",
-        "content": "Les clients qui s'inscrivent verront leur adresse e-mail ajoutÃƒÂ©e ÃƒÂ  la [liste des clients] qui acceptent le marketing (/admin/customers?query=&accepts_marketing=1).",
+        "content": "Les clients qui s'inscrivent verront leur adresse e-mail ajoutÃƒÂ©e ÃƒÂ  la [liste des clients] qui acceptent le marketing (/admin/customers?query=&accepts_marketing=1).",
         "enable_newsletter": {
           "label": "Activer le bulletin d'information"
         },
@@ -1817,7 +1850,7 @@
       }
     },
     "newsletter": {
-      "name": "Inscription ÃƒÂ  la liste de diffusion",
+      "name": "Inscription ÃƒÂ  la liste de diffusion",
       "blocks": {
         "title": {
           "name": "Titre",
@@ -1843,7 +1876,7 @@
         }
       },
       "settings": {
-        "content": "Les clients qui s'inscrivent verront leur adresse e-mail ajoutÃƒÂ©e ÃƒÂ  la [liste des clients] qui acceptent le marketing (/admin/customers?query=&accepts_marketing=1).",
+        "content": "Les clients qui s'inscrivent verront leur adresse e-mail ajoutÃƒÂ©e ÃƒÂ  la [liste des clients] qui acceptent le marketing (/admin/customers?query=&accepts_marketing=1).",
         "color_scheme": {
           "label": "Combinaison de couleurs",
           "options": {
@@ -1936,7 +1969,7 @@
       },
       "presets": {
         "email_signup": {
-          "name": "Inscription ÃƒÂ  la liste de diffusion"
+          "name": "Inscription ÃƒÂ  la liste de diffusion"
         }
       }
     },
@@ -2000,7 +2033,7 @@
         "share_on_social": {
           "name": "Partager sur les rÃƒÂ©seaux sociaux",
           "settings": {
-            "content": "Choisissez les plates-formes ÃƒÂ  partager dans les paramÃƒÂ¨tres globaux du thÃƒÂ¨me."
+            "content": "Choisissez les plates-formes ÃƒÂ  partager dans les paramÃƒÂ¨tres globaux du thÃƒÂ¨me."
           }
         },
         "separator": {
@@ -2009,7 +2042,7 @@
         "contact_form": {
           "name": "Formulaire de contact",
           "settings": {
-            "content": "Toutes les soumissions sont envoyÃƒÂ©es ÃƒÂ  l'adresse e-mail du client de votre magasin. [En savoir plus](https://help.shopify.com/en/manual/using-themes/change-the-layout/add-contact-form#view-contact-form-submissions).",
+            "content": "Toutes les soumissions sont envoyÃƒÂ©es ÃƒÂ  l'adresse e-mail du client de votre magasin. [En savoir plus](https://help.shopify.com/en/manual/using-themes/change-the-layout/add-contact-form#view-contact-form-submissions).",
             "title": {
               "label": "Titre"
             },
@@ -2039,7 +2072,7 @@
           "label": "En-tÃƒÂªte"
         },
         "complementary_count": {
-          "label": "Max produits ÃƒÂ  afficher"
+          "label": "Max produits ÃƒÂ  afficher"
         },
         "per_slide": {
           "label": "Nombre de produits par slide"
@@ -2156,13 +2189,13 @@
               "label": "Alignement du texte",
               "options": {
                 "vertical-top_horizontal-left": {
-                  "label": "En haut ÃƒÂ  gauche"
+                  "label": "En haut ÃƒÂ  gauche"
                 },
                 "vertical-top_horizontal-center": {
                   "label": "En haut au centre"
                 },
                 "vertical-top_horizontal-right": {
-                  "label": "En haut ÃƒÂ  droite"
+                  "label": "En haut ÃƒÂ  droite"
                 },
                 "vertical-center_horizontal-left": {
                   "label": "Centre gauche"
@@ -2174,13 +2207,13 @@
                   "label": "Centre droite"
                 },
                 "vertical-bottom_horizontal-left": {
-                  "label": "En bas ÃƒÂ  gauche"
+                  "label": "En bas ÃƒÂ  gauche"
                 },
                 "vertical-bottom_horizontal-center": {
                   "label": "En bas au centre"
                 },
                 "vertical-bottom_horizontal-right": {
-                  "label": "En bas ÃƒÂ  droite"
+                  "label": "En bas ÃƒÂ  droite"
                 }
               }
             },
@@ -2188,13 +2221,13 @@
               "label": "Point focal de l'image",
               "options": {
                 "20_0": {
-                  "label": "En haut ÃƒÂ  gauche"
+                  "label": "En haut ÃƒÂ  gauche"
                 },
                 "top": {
                   "label": "En haut au centre"
                 },
                 "80_0": {
-                  "label": "En haut ÃƒÂ  droite"
+                  "label": "En haut ÃƒÂ  droite"
                 },
                 "20_50": {
                   "label": "Centre gauche"
@@ -2206,13 +2239,13 @@
                   "label": "Centre droite"
                 },
                 "20_100": {
-                  "label": "En bas ÃƒÂ  gauche"
+                  "label": "En bas ÃƒÂ  gauche"
                 },
                 "bottom": {
                   "label": "En bas au centre"
                 },
                 "80_100": {
-                  "label": "En bas ÃƒÂ  droite"
+                  "label": "En bas ÃƒÂ  droite"
                 }
               }
             },
@@ -2571,7 +2604,7 @@
           "label": "Changement automatique des diapositives"
         },
         "autoplay_speed": {
-          "label": "Changer d'image ÃƒÂ  chaque fois"
+          "label": "Changer d'image ÃƒÂ  chaque fois"
         }
       },
       "blocks": {
@@ -2618,13 +2651,13 @@
                   "label": "Centre droite"
                 },
                 "vertical-bottom_horizontal-left": {
-                  "label": "En bas ÃƒÂ  gauche"
+                  "label": "En bas ÃƒÂ  gauche"
                 },
                 "vertical-bottom_horizontal-center": {
                   "label": "En bas au centre"
                 },
                 "vertical-bottom_horizontal-right": {
-                  "label": "En bas ÃƒÂ  droite"
+                  "label": "En bas ÃƒÂ  droite"
                 }
               }
             },
@@ -2643,13 +2676,13 @@
               "info": "UtilisÃƒÂ© pour garder le sujet de votre photo en vue.",
               "options": {
                 "20_0": {
-                  "label": "En haut ÃƒÂ  gauche"
+                  "label": "En haut ÃƒÂ  gauche"
                 },
                 "top_center": {
                   "label": "En haut au centre"
                 },
                 "80_0": {
-                  "label": "En haut ÃƒÂ  droite"
+                  "label": "En haut ÃƒÂ  droite"
                 },
                 "20_50": {
                   "label": "Gauche"
@@ -2661,13 +2694,13 @@
                   "label": "Droite"
                 },
                 "20_100": {
-                  "label": "En bas ÃƒÂ  gauche"
+                  "label": "En bas ÃƒÂ  gauche"
                 },
                 "bottom_center": {
                   "label": "En bas au centre"
                 },
                 "80_100": {
-                  "label": "En bas ÃƒÂ  droite"
+                  "label": "En bas ÃƒÂ  droite"
                 }
               }
             },
@@ -2827,10 +2860,10 @@
           "label": "Mise en page",
           "options": {
             "left": {
-              "label": "Image ÃƒÂ  gauche"
+              "label": "Image ÃƒÂ  gauche"
             },
             "right": {
-              "label": "Image ÃƒÂ  droite"
+              "label": "Image ÃƒÂ  droite"
             }
           }
         },
@@ -2916,7 +2949,7 @@
         },
         "enable_test_mode": {
           "label": "Activer le mode test",
-          "info": "Force la vÃƒÂ©rification ÃƒÂ  s'afficher ÃƒÂ  chaque actualisation et ne doit ÃƒÂªtre utilisÃƒÂ©e que pour modifier la fenÃƒÂªtre contextuelle. Assurez-vous que le Ã‚Â« mode test Ã‚Â» est dÃƒÂ©sactivÃƒÂ© lors du lancement de votre boutique."
+          "info": "Force la vÃƒÂ©rification ÃƒÂ  s'afficher ÃƒÂ  chaque actualisation et ne doit ÃƒÂªtre utilisÃƒÂ©e que pour modifier la fenÃƒÂªtre contextuelle. Assurez-vous que le Ã‚Â« mode test Ã‚Â» est dÃƒÂ©sactivÃƒÂ© lors du lancement de votre boutique."
         },
         "header_background_image": "Image de fond",
         "image": {
@@ -2953,7 +2986,7 @@
       }
     },
     "countdown": {
-      "name": "Compte ÃƒÂ  rebours",
+      "name": "Compte ÃƒÂ  rebours",
       "settings": {
         "layout": {
           "label": "Mise en page de la section",
@@ -3123,7 +3156,7 @@
               "label": "Minute"
             },
             "hide_timer": {
-              "label": "Masquer la minuterie ÃƒÂ  la fin"
+              "label": "Masquer la minuterie ÃƒÂ  la fin"
             },
             "text": {
               "label": "Message de fin de minuterie"
@@ -3194,7 +3227,7 @@
       },
       "presets": {
         "countdown": {
-          "name": "Compte ÃƒÂ  rebours"
+          "name": "Compte ÃƒÂ  rebours"
         }
       }
     },
@@ -3847,13 +3880,13 @@
           "label": "Alignement du texte",
           "options": {
             "top-left": {
-              "label": "En haut ÃƒÂ  gauche"
+              "label": "En haut ÃƒÂ  gauche"
             },
             "top-center": {
               "label": "En haut au centre"
             },
             "top-right": {
-              "label": "En haut ÃƒÂ  droite"
+              "label": "En haut ÃƒÂ  droite"
             },
             "left": {
               "label": "Gauche"
@@ -3865,13 +3898,13 @@
               "label": "Droite"
             },
             "bottom-left": {
-              "label": "En bas ÃƒÂ  gauche"
+              "label": "En bas ÃƒÂ  gauche"
             },
             "bottom-center": {
               "label": "En bas au centre"
             },
             "bottom-right": {
-              "label": "En bas ÃƒÂ  droite"
+              "label": "En bas ÃƒÂ  droite"
             }
           }
         },
@@ -3923,7 +3956,7 @@
           "label": "Activer les notes de commande"
         },
         "cart_terms_conditions_enable": {
-          "label": "Activer la case ÃƒÂ  cocher des conditions gÃƒÂ©nÃƒÂ©rales"
+          "label": "Activer la case ÃƒÂ  cocher des conditions gÃƒÂ©nÃƒÂ©rales"
         },
         "cart_terms_conditions_page": {
           "label": "Page des conditions gÃƒÂ©nÃƒÂ©rales"
@@ -4074,10 +4107,10 @@
           "label": "Direction du texte",
           "options": {
             "ltr": {
-              "label": "De gauche ÃƒÂ  droite"
+              "label": "De gauche ÃƒÂ  droite"
             },
             "rtl": {
-              "label": "De droite ÃƒÂ  gauche"
+              "label": "De droite ÃƒÂ  gauche"
             }
           }
         },
@@ -4289,7 +4322,7 @@
     "general": {
       "404": {
         "title": "404 Page non trouvÃƒÂ©e",
-        "subtext_html": "<p>La page que vous recherchiez n'existe pas. </p><p><a href='{{ url }}'>Continuer ÃƒÂ  acheter</a></p>>"
+        "subtext_html": "<p>La page que vous recherchiez n'existe pas. </p><p><a href='{{ url }}'>Continuer ÃƒÂ  acheter</a></p>>"
       },
       "accessibility": {
         "skip_to_content": "Ignorer et passer au contenu",
@@ -4318,7 +4351,7 @@
       },
       "breadcrumbs": {
         "home": "Accueil",
-        "home_link_title": "Retour ÃƒÂ  la page d'accueil"
+        "home_link_title": "Retour ÃƒÂ  la page d'accueil"
       },
       "social": {
         "share_on_facebook": "Partager",
@@ -4346,8 +4379,8 @@
         "placeholder": "Rechercher dans notre boutique",
         "submit": "Recherche",
         "result_count": {
-          "one": "{{ count }}Ã‚Â rÃƒÂ©sultat",
-          "other": "{{ count }}Ã‚Â rÃƒÂ©sultats"
+          "one": "{{ count }}Ã‚Â rÃƒÂ©sultat",
+          "other": "{{ count }}Ã‚Â rÃƒÂ©sultats"
         }
       },
       "drawers": {
@@ -4362,7 +4395,7 @@
         "get_directions": "Obtenir un itinÃƒÂ©raire",
         "address_error": "Erreur dans la recherche de cette adresse",
         "address_no_results": "Aucun rÃƒÂ©sultat pour cette adresse",
-        "address_query_limit_html": "Vous avez dÃƒÂ©passÃƒÂ© la limite d'utilisation de l'API Google. Envisagez de passer ÃƒÂ  un <a href=\"https://developers.google.com/maps/premium/usage-limits\">Plan Premium</a>.",
+        "address_query_limit_html": "Vous avez dÃƒÂ©passÃƒÂ© la limite d'utilisation de l'API Google. Envisagez de passer ÃƒÂ  un <a href=\"https://developers.google.com/maps/premium/usage-limits\">Plan Premium</a>.",
         "auth_error_html": "Un problÃƒÂ¨me est survenu lors de l'authentification de votre compte Google Maps. CrÃƒÂ©ez et activez les autorisations <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">JavaScript API</a> et <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">Geocoding API</a> de votre application."
       },
       "slideshow": {
@@ -4380,7 +4413,7 @@
         "view_all": "Tout afficher",
         "tags": "Ãƒâ€°tiquettes",
         "read_more": "Continuer la lecture",
-        "back_to_blog": "Retour ÃƒÂ  {{ title }}"
+        "back_to_blog": "Retour ÃƒÂ  {{ title }}"
       },
       "comments": {
         "title": "Laisser un commentaire",
@@ -4390,10 +4423,10 @@
         "post": "Publier le commentaire",
         "moderated": "Veuillez noter que les commentaires doivent ÃƒÂªtre approuvÃƒÂ©s avant d'ÃƒÂªtre publiÃƒÂ©s",
         "success_moderated": "Votre commentaire a bien ÃƒÂ©tÃƒÂ© publiÃƒÂ©. Nous le publierons sous peu, conformÃƒÂ©ment au processus de modÃƒÂ©ration de notre blog.",
-        "success": "Votre commentaire a bien ÃƒÂ©tÃƒÂ© publiÃƒÂ©Ã‚Â ! MerciÃ‚Â !",
+        "success": "Votre commentaire a bien ÃƒÂ©tÃƒÂ© publiÃƒÂ©Ã‚Â ! MerciÃ‚Â !",
         "with_count": {
-          "one": "{{ count }}Ã‚Â commentaire",
-          "other": "{{ count }}Ã‚Â commentaires"
+          "one": "{{ count }}Ã‚Â commentaire",
+          "other": "{{ count }}Ã‚Â commentaires"
         }
       }
     },
@@ -4404,17 +4437,17 @@
         "note": "Note de commande",
         "subtotal": "Sous-total",
         "discounts": "Remises",
-        "shipping_at_checkout": "ExpÃƒÂ©dition, taxes et codes de rÃƒÂ©duction calculÃƒÂ©s ÃƒÂ  la caisse.",
-        "update": "Mettre ÃƒÂ  jour le panier",
+        "shipping_at_checkout": "ExpÃƒÂ©dition, taxes et codes de rÃƒÂ©duction calculÃƒÂ©s ÃƒÂ  la caisse.",
+        "update": "Mettre ÃƒÂ  jour le panier",
         "checkout": "ProcÃƒÂ©der au paiement",
         "empty": "Votre panier est actuellement vide.",
-        "continue_browsing_html": "<a href='{{ url }}'>Continuer ÃƒÂ  acheter</a>",
+        "continue_browsing_html": "<a href='{{ url }}'>Continuer ÃƒÂ  acheter</a>",
         "close_cart": "Fermer le panier",
         "reduce_quantity": "RÃƒÂ©duire la quantitÃƒÂ© d'articles d'une unitÃƒÂ©",
         "increase_quantity": "Augmenter la quantitÃƒÂ© d'articles d'une unitÃƒÂ©",
         "terms": "J'accepte les conditions gÃƒÂ©nÃƒÂ©rales",
         "terms_html": "J'accepte les <a href='{{ url }}' target='_blank'>conditions gÃƒÂ©nÃƒÂ©rales</a>",
-        "terms_confirm": "Vous devez accepter les conditions gÃƒÂ©nÃƒÂ©rales de vente pour passer ÃƒÂ  la caisse."
+        "terms_confirm": "Vous devez accepter les conditions gÃƒÂ©nÃƒÂ©rales de vente pour passer ÃƒÂ  la caisse."
       },
       "label": {
         "price": "Prix",
@@ -4431,8 +4464,8 @@
         "see_less": "Afficher moins",
         "no_matches": "DÃƒÂ©solÃƒÂ©, il n'y a aucun produit dans cette collection.",
         "items_with_count": {
-          "one": "{{ count }}Ã‚Â produit",
-          "other": "{{ count }}Ã‚Â produits"
+          "one": "{{ count }}Ã‚Â produit",
+          "other": "{{ count }}Ã‚Â produits"
         }
       },
       "sorting": {
@@ -4486,11 +4519,11 @@
         "phone": "TÃƒÂ©lÃƒÂ©phone",
         "set_default": "DÃƒÂ©finir comme adresse par dÃƒÂ©faut",
         "add": "Ajouter l'adresse",
-        "update": "Mettre ÃƒÂ  jour l'adresse",
+        "update": "Mettre ÃƒÂ  jour l'adresse",
         "cancel": "Annuler",
         "edit": "Modifier",
         "delete": "Supprimer",
-        "delete_confirm": "ÃƒÅ tes-vous certain(e) de vouloir supprimer cette adresseÃ‚Â ?"
+        "delete_confirm": "ÃƒÅ tes-vous certain(e) de vouloir supprimer cette adresseÃ‚Â ?"
       },
       "login": {
         "title": "Connexion",
@@ -4498,7 +4531,7 @@
         "password": "Mot de passe",
         "forgot_password": "Mot de passe oubliÃƒÂ© ?",
         "sign_in": "Se connecter",
-        "cancel": "Retourner ÃƒÂ  la boutique",
+        "cancel": "Retourner ÃƒÂ  la boutique",
         "guest_title": "Continuer en tant qu'invitÃƒÂ©(e)",
         "guest_continue": "Continuer"
       },
@@ -4515,7 +4548,7 @@
         "title": "Commande {{ name }}",
         "date_html": "PassÃƒÂ©e le {{ date }}",
         "cancelled_html": "Commande annulÃƒÂ©e le {{ date }}",
-        "cancelled_reason": "MotifÃ‚Â : {{ reason }}",
+        "cancelled_reason": "MotifÃ‚Â : {{ reason }}",
         "billing_address": "Adresse de facturation",
         "payment_status": "Statut des paiements",
         "shipping_address": "Adresse d'expÃƒÂ©dition",
@@ -4537,7 +4570,7 @@
         "submit": "Envoyer",
         "cancel": "Annuler",
         "subtext": "Nous vous enverrons un e-mail pour rÃƒÂ©initialiser votre mot de passe.",
-        "success": "Nous vous avons envoyÃƒÂ© un e-mail contenant un lien pour mettre ÃƒÂ  jour votre mot de passe."
+        "success": "Nous vous avons envoyÃƒÂ© un e-mail contenant un lien pour mettre ÃƒÂ  jour votre mot de passe."
       },
       "reset_password": {
         "title": "RÃƒÂ©initialiser le mot de passe du compte",
@@ -4553,15 +4586,15 @@
         "email": "E-mail",
         "password": "Mot de passe",
         "submit": "CrÃƒÂ©er",
-        "cancel": "Retourner ÃƒÂ  la boutique"
+        "cancel": "Retourner ÃƒÂ  la boutique"
       }
     },
     "home_page": {
       "onboarding": {
         "product_title": "Titre du produit",
-        "product_description": "Un produit conÃƒÂ§u avec soin, rÃƒÂ©alisÃƒÂ© avec des matÃƒÂ©riaux de qualitÃƒÂ© et une attention aux dÃƒÂ©tails. Polyvalent, fiable et fait pour durer, il s'intÃƒÂ¨gre parfaitement ÃƒÂ  votre quotidien.",
+        "product_description": "Un produit conÃƒÂ§u avec soin, rÃƒÂ©alisÃƒÂ© avec des matÃƒÂ©riaux de qualitÃƒÂ© et une attention aux dÃƒÂ©tails. Polyvalent, fiable et fait pour durer, il s'intÃƒÂ¨gre parfaitement ÃƒÂ  votre quotidien.",
         "collection_title": "Collection",
-        "no_content": "Cette section ne contient actuellement aucun contenu. Ajoutez du contenu ÃƒÂ  cette section en utilisant la barre latÃƒÂ©rale."
+        "no_content": "Cette section ne contient actuellement aucun contenu. Ajoutez du contenu ÃƒÂ  cette section en utilisant la barre latÃƒÂ©rale."
       }
     },
     "layout": {
@@ -4584,18 +4617,18 @@
         "size_trigger": "Taille",
         "size_chart": "Tableau des tailles",
         "save_html": "Sauvegarder {{ saved_amount }}",
-        "collection_return": "Retour ÃƒÂ  {{ collection }}",
+        "collection_return": "Retour ÃƒÂ  {{ collection }}",
         "next_product": "Suivant : {{ title }}",
         "sale": "Vente",
         "sale_price": "Prix soldÃƒÂ©",
         "regular_price": "Prix habituel",
-        "from_text_html": "ÃƒÂ  partir de {{ price }}",
+        "from_text_html": "ÃƒÂ  partir de {{ price }}",
         "recent_products": "Produits rÃƒÂ©cemment consultÃƒÂ©s",
         "reviews": "Critiques"
       },
       "product": {
         "description": "Description",
-        "in_stock_label": "En stock, prÃƒÂªt ÃƒÂ  ÃƒÂªtre expÃƒÂ©diÃƒÂ©",
+        "in_stock_label": "En stock, prÃƒÂªt ÃƒÂ  ÃƒÂªtre expÃƒÂ©diÃƒÂ©",
         "stock_label": {
           "one": "Rupture de stock : {{ count }} article restant",
           "other": "Rupture de stock : {{ count }} articles restants"
@@ -4606,8 +4639,8 @@
         "add_to_cart": "Ajouter au panier",
         "preorder": "PrÃƒÂ©-commande",
         "include_taxes": "Taxes incluses.",
-        "shipping_policy_html": "<a href='{{ link }}'>Envoi</a> calculÃƒÂ© ÃƒÂ  la caisse.",
-        "will_not_ship_until": "PrÃƒÂªt ÃƒÂ  ÃƒÂªtre expÃƒÂ©diÃƒÂ© {{ date }}",
+        "shipping_policy_html": "<a href='{{ link }}'>Envoi</a> calculÃƒÂ© ÃƒÂ  la caisse.",
+        "will_not_ship_until": "PrÃƒÂªt ÃƒÂ  ÃƒÂªtre expÃƒÂ©diÃƒÂ© {{ date }}",
         "will_be_in_stock_after": "De retour en stock {{ date }}",
         "waiting_for_stock": "Inventaire en cours de livraison",
         "view_in_space": "Afficher dans son espace",
@@ -4620,21 +4653,21 @@
         "check_other_stores": "VÃƒÂ©rifier la disponibilitÃƒÂ© dans d'autres boutiques",
         "pick_up_available": "Service de retrait disponible",
         "pick_up_currently_unavailable": "EnlÃƒÂ¨vement actuellement indisponible",
-        "pick_up_available_at_html": "EnlÃƒÂ¨vement disponible ÃƒÂ  <strong>{{ location_name }}</strong>",
-        "pick_up_unavailable_at_html": "Retrait actuellement non disponible ÃƒÂ  <strong>{{ localisation_name }}</strong>"
+        "pick_up_available_at_html": "EnlÃƒÂ¨vement disponible ÃƒÂ  <strong>{{ location_name }}</strong>",
+        "pick_up_unavailable_at_html": "Retrait actuellement non disponible ÃƒÂ  <strong>{{ localisation_name }}</strong>"
       }
     },
     "gift_cards": {
       "issued": {
-        "title_html": "Voici votre carte-cadeau {{ shop }} d'une valeur de {{ value }}Ã‚Â !",
+        "title_html": "Voici votre carte-cadeau {{ shop }} d'une valeur de {{ value }}Ã‚Â !",
         "subtext": "Voici votre carte cadeau !",
         "disabled": "DÃƒÂ©sactivÃƒÂ©",
         "expired": "ExpirÃƒÂ© le {{ expiry }}",
         "active": "Expire le {{ expiry }}",
-        "redeem": "Utilisez ce code ÃƒÂ  la caisse pour ÃƒÂ©changer votre carte cadeau",
+        "redeem": "Utilisez ce code ÃƒÂ  la caisse pour ÃƒÂ©changer votre carte cadeau",
         "shop_link": "DÃƒÂ©but des achats",
         "print": "Imprimer",
-        "add_to_apple_wallet": "Ajouter ÃƒÂ  Apple Wallet"
+        "add_to_apple_wallet": "Ajouter ÃƒÂ  Apple Wallet"
       }
     },
     "date_formats": {
@@ -4675,7 +4708,7 @@
         },
         "color_swatches": {
           "label": "Activer les ÃƒÂ©chantillons de couleur",
-          "info": "Le type doit ÃƒÂªtre dÃƒÂ©fini sur Ã‚Â« Boutons Ã‚Â». Apprenez ÃƒÂ  mettre en place des ÃƒÂ©chantillons"
+          "info": "Le type doit ÃƒÂªtre dÃƒÂ©fini sur Ã‚Â« Boutons Ã‚Â». Apprenez ÃƒÂ  mettre en place des ÃƒÂ©chantillons"
         },
         "product_dynamic_variants_enable": {
           "label": "Activer les options de produit dynamiques"
@@ -4699,7 +4732,7 @@
         },
         "surface_pickup_enable": {
           "label": "Activer la fonction de disponibilitÃƒÂ© de la collecte",
-          "info": "Apprenez ÃƒÂ  installer cette fonction [ici](https://help.shopify.com/en/manual/shipping/setting-up-and-managing-your-shipping/local-methods/local-pickup)"
+          "info": "Apprenez ÃƒÂ  installer cette fonction [ici](https://help.shopify.com/en/manual/shipping/setting-up-and-managing-your-shipping/local-methods/local-pickup)"
         }
       }
     },
@@ -4711,7 +4744,7 @@
         },
         "inventory_transfers_enable": {
           "label": "Affichez l'avis de transfert de stock",
-          "info": "Apprenez ÃƒÂ  crÃƒÂ©er des transferts de stock [ici](https://help.shopify.com/en/manual/products/inventory/transfers/create-transfer)"
+          "info": "Apprenez ÃƒÂ  crÃƒÂ©er des transferts de stock [ici](https://help.shopify.com/en/manual/products/inventory/transfers/create-transfer)"
         }
       }
     },
@@ -4797,7 +4830,7 @@
     "share_on_social": {
       "name": "Partager sur les rÃƒÂ©seaux sociaux",
       "settings": {
-        "content": "Choisissez les plates-formes ÃƒÂ  partager dans les paramÃƒÂ¨tres globaux du thÃƒÂ¨me."
+        "content": "Choisissez les plates-formes ÃƒÂ  partager dans les paramÃƒÂ¨tres globaux du thÃƒÂ¨me."
       }
     },
     "separator": {
@@ -4806,7 +4839,7 @@
     "contact_form": {
       "name": "Formulaire de contact",
       "settings": {
-        "content": "Toutes les soumissions sont envoyÃƒÂ©es ÃƒÂ  l'adresse e-mail du client de votre magasin. [En savoir plus](https://help.shopify.com/en/manual/using-themes/change-the-layout/add-contact-form#view-contact-form-submissions).",
+        "content": "Toutes les soumissions sont envoyÃƒÂ©es ÃƒÂ  l'adresse e-mail du client de votre magasin. [En savoir plus](https://help.shopify.com/en/manual/using-themes/change-the-layout/add-contact-form#view-contact-form-submissions).",
         "title": {
           "label": "Titre"
         },
@@ -4958,7 +4991,7 @@
       "policies": {
         "name": "Politiques",
         "settings": {
-          "content": "Affiche si les taxes sont incluses dans le prix et lie ÃƒÂ  votre politique d'expÃƒÂ©dition (si dÃƒÂ©finie). [Apprenez ÃƒÂ  configurer les prix avec taxes incluses](https://help.shopify.com/en/manual/taxes) et [apprenez ÃƒÂ  ajouter une politique d'expÃƒÂ©dition](https://help.shopify.com/en/manual/fulfillment/setup/shipping-profiles#create-a-shipping-policy)."
+          "content": "Affiche si les taxes sont incluses dans le prix et lie ÃƒÂ  votre politique d'expÃƒÂ©dition (si dÃƒÂ©finie). [Apprenez ÃƒÂ  configurer les prix avec taxes incluses](https://help.shopify.com/en/manual/taxes) et [apprenez ÃƒÂ  ajouter une politique d'expÃƒÂ©dition](https://help.shopify.com/en/manual/fulfillment/setup/shipping-profiles#create-a-shipping-policy)."
         }
       },
       "price": {
@@ -4994,7 +5027,7 @@
                 "label": "Listes dÃƒÂ©roulantes"
               }
             },
-            "info": "Affiche les options du produit comme boutons et ÃƒÂ©chantillons de couleur ou listes dÃƒÂ©roulantes. [Apprenez ÃƒÂ  configurer les ÃƒÂ©chantillons de couleur](https://help.shopify.com/en/manual/custom-data/metafields/category-metafields/using-category-metafields)."
+            "info": "Affiche les options du produit comme boutons et ÃƒÂ©chantillons de couleur ou listes dÃƒÂ©roulantes. [Apprenez ÃƒÂ  configurer les ÃƒÂ©chantillons de couleur](https://help.shopify.com/en/manual/custom-data/metafields/category-metafields/using-category-metafields)."
           }
         }
       },
@@ -5226,7 +5259,7 @@
     },
     "products": {
       "max_products": {
-        "label": "QuantitÃƒÂ© maximale de produits ÃƒÂ  afficher"
+        "label": "QuantitÃƒÂ© maximale de produits ÃƒÂ  afficher"
       }
     },
     "images": {
@@ -5243,7 +5276,7 @@
     "follow_on_shop": {
       "name": "Suivre sur Shop",
       "paragraph": {
-        "content": "Pour autoriser les clients ÃƒÂ  suivre votre boutique sur lÃ¢â‚¬â„¢application Shop depuis votre boutique en ligne, Shop Pay doit ÃƒÂªtre activÃƒÂ©. [En savoir plus](https://help.shopify.com/manual/online-store/themes/customizing-themes/follow-on-shop)"
+        "content": "Pour autoriser les clients ÃƒÂ  suivre votre boutique sur lÃ¢â‚¬â„¢application Shop depuis votre boutique en ligne, Shop Pay doit ÃƒÂªtre activÃƒÂ©. [En savoir plus](https://help.shopify.com/manual/online-store/themes/customizing-themes/follow-on-shop)"
       },
       "button": {
         "label": "Activer Suivre sur Shop"
@@ -5447,10 +5480,10 @@
         "label": "Disposition sur le bureau",
         "options": {
           "left": {
-            "label": "MÃƒÂ©dias ÃƒÂ  gauche"
+            "label": "MÃƒÂ©dias ÃƒÂ  gauche"
           },
           "right": {
-            "label": "MÃƒÂ©dias ÃƒÂ  droite"
+            "label": "MÃƒÂ©dias ÃƒÂ  droite"
           }
         }
       },

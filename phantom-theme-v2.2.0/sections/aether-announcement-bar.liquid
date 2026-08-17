@@ -1,5 +1,5 @@
 <div
-  class="aether-announcement-bar ph-client ph-client--aether{% if section.settings.show_mobile_rotation and section.blocks.size > 1 %} aether-announcement-bar--mobile-rotation{% endif %}"
+  class="aether-announcement-bar ph-client ph-client--aether"
   data-section-type="aether-announcement-bar"
   data-aether-motion-enabled="{{ settings.aether_motion_enable }}"
 >
@@ -9,32 +9,17 @@
         <span class="separator" aria-hidden="true">|</span>
       {%- endif -%}
       <span {{ block.shopify_attributes }}>
-        <i class="fas {{ block.settings.icon }}" aria-hidden="true"></i>
+        {%- render 'aether-icon', name: block.settings.icon, class: 'aether-announcement-bar__icon' -%}
         {{ block.settings.text | escape }}
       </span>
     {%- endfor -%}
   </div>
-
-  {%- if section.settings.show_mobile_rotation and section.blocks.size > 1 -%}
-    <div class="aether-mobile-announcement" aria-hidden="true">
-      {%- for block in section.blocks -%}
-        <span class="aether-mobile-announcement-text{% if forloop.first %} active{% endif %}">{{ block.settings.text | escape }}</span>
-      {%- endfor -%}
-    </div>
-  {%- endif -%}
 </div>
 
 {% schema %}
   {
     "name": "t:sections.aether-announcement-bar.name",
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "show_mobile_rotation",
-        "default": true,
-        "label": "t:sections.aether-announcement-bar.settings.show_mobile_rotation.label"
-      }
-    ],
+    "settings": [],
     "blocks": [
       {
         "type": "message",

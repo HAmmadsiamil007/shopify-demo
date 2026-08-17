@@ -60,7 +60,40 @@
         },
         "show_cart": {
           "label": "Show cart icon"
+        },
+        "logo_image": {
+          "label": "Logo image"
+        },
+        "show_wishlist": {
+          "label": "Show wishlist icon"
+        },
+        "show_account": {
+          "label": "Show account icon"
+        },
+        "header": {
+          "icons": "Icons",
+          "mobile": "Mobile",
+          "socials": "Social links"
+        },
+        "mobile_announcement_enable": {
+          "label": "Show rotating announcement text on mobile"
+        },
+        "mobile_announcement_1": {
+          "label": "Announcement text 1"
+        },
+        "mobile_announcement_2": {
+          "label": "Announcement text 2"
+        },
+        "social_instagram_url": {
+          "label": "Instagram URL"
+        },
+        "social_facebook_url": {
+          "label": "Facebook URL"
+        },
+        "social_tiktok_url": {
+          "label": "TikTok URL"
         }
+
       },
       "presets": {
         "default": {

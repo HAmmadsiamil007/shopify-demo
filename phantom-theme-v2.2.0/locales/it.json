@@ -577,4 +577,9 @@
     "check_availability": "Verifica disponibilitÃƒÂ  in altri negozi",
     "show_all_results": "Mostra tutti i risultati per \"{{ terms }}\""
   }
-}
+,
+    "aether": {
+        "header": {
+            "shop_now": "Acquista ora"
+        }
+    }}

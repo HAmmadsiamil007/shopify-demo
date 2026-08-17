@@ -60,7 +60,40 @@
         },
         "show_cart": {
           "label": "Mostrar icono del carrito"
+        },
+        "logo_image": {
+          "label": "Imagen del logotipo"
+        },
+        "show_wishlist": {
+          "label": "Mostrar icono de lista de deseos"
+        },
+        "show_account": {
+          "label": "Mostrar icono de cuenta"
+        },
+        "header": {
+          "icons": "Iconos",
+          "mobile": "Móvil",
+          "socials": "Enlaces sociales"
+        },
+        "mobile_announcement_enable": {
+          "label": "Mostrar texto de anuncio rotatorio en móviles"
+        },
+        "mobile_announcement_1": {
+          "label": "Texto de anuncio 1"
+        },
+        "mobile_announcement_2": {
+          "label": "Texto de anuncio 2"
+        },
+        "social_instagram_url": {
+          "label": "URL de Instagram"
+        },
+        "social_facebook_url": {
+          "label": "URL de Facebook"
+        },
+        "social_tiktok_url": {
+          "label": "URL de TikTok"
         }
+
       },
       "presets": {
         "default": {
@@ -713,7 +746,7 @@
           "label": "DiseÃƒÂ±o para mÃƒÂ³viles",
           "options": {
             "partial": {
-              "label": "75Ã‚Â % de ancho"
+              "label": "75Ã‚Â % de ancho"
             },
             "full": {
               "label": "Ancho completo"
@@ -1092,16 +1125,16 @@
           "label": "Altura del escritorio",
           "options": {
             "450px": {
-              "label": "450Ã‚Â px"
+              "label": "450Ã‚Â px"
             },
             "550px": {
-              "label": "550Ã‚Â px"
+              "label": "550Ã‚Â px"
             },
             "650px": {
-              "label": "650Ã‚Â px"
+              "label": "650Ã‚Â px"
             },
             "750px": {
-              "label": "750Ã‚Â px"
+              "label": "750Ã‚Â px"
             },
             "100vh": {
               "label": "Pantalla completa"
@@ -1115,16 +1148,16 @@
               "label": "Auto"
             },
             "250px": {
-              "label": "250Ã‚Â px"
+              "label": "250Ã‚Â px"
             },
             "300px": {
-              "label": "300Ã‚Â px"
+              "label": "300Ã‚Â px"
             },
             "400px": {
-              "label": "400Ã‚Â px"
+              "label": "400Ã‚Â px"
             },
             "500px": {
-              "label": "500Ã‚Â px"
+              "label": "500Ã‚Â px"
             },
             "100vh": {
               "label": "Pantalla completa"
@@ -1615,7 +1648,7 @@
           "label": "DiseÃƒÂ±o para mÃƒÂ³viles",
           "options": {
             "partial": {
-              "label": "75Ã‚Â % de ancho"
+              "label": "75Ã‚Â % de ancho"
             },
             "full": {
               "label": "Ancho completo"
@@ -2497,16 +2530,16 @@
               "label": "Natural"
             },
             "450px": {
-              "label": "450Ã‚Â px"
+              "label": "450Ã‚Â px"
             },
             "550px": {
-              "label": "550Ã‚Â px"
+              "label": "550Ã‚Â px"
             },
             "650px": {
-              "label": "650Ã‚Â px"
+              "label": "650Ã‚Â px"
             },
             "750px": {
-              "label": "750Ã‚Â px"
+              "label": "750Ã‚Â px"
             },
             "100vh": {
               "label": "Pantalla completa"
@@ -2520,16 +2553,16 @@
               "label": "Auto"
             },
             "250px": {
-              "label": "250Ã‚Â px"
+              "label": "250Ã‚Â px"
             },
             "300px": {
-              "label": "300Ã‚Â px"
+              "label": "300Ã‚Â px"
             },
             "400px": {
-              "label": "400Ã‚Â px"
+              "label": "400Ã‚Â px"
             },
             "500px": {
-              "label": "500Ã‚Â px"
+              "label": "500Ã‚Â px"
             },
             "100vh": {
               "label": "Pantalla completa"

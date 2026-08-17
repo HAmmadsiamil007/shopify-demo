@@ -60,7 +60,40 @@
         },
         "show_cart": {
           "label": "Mostrar Ã­cone do carrinho"
+        },
+        "logo_image": {
+          "label": "Imagem do logotipo"
+        },
+        "show_wishlist": {
+          "label": "Mostrar ícone da lista de desejos"
+        },
+        "show_account": {
+          "label": "Mostrar ícone da conta"
+        },
+        "header": {
+          "icons": "Ícones",
+          "mobile": "Celular",
+          "socials": "Links sociais"
+        },
+        "mobile_announcement_enable": {
+          "label": "Mostrar texto de anúncio rotativo no celular"
+        },
+        "mobile_announcement_1": {
+          "label": "Texto do anúncio 1"
+        },
+        "mobile_announcement_2": {
+          "label": "Texto do anúncio 2"
+        },
+        "social_instagram_url": {
+          "label": "URL do Instagram"
+        },
+        "social_facebook_url": {
+          "label": "URL do Facebook"
+        },
+        "social_tiktok_url": {
+          "label": "URL do TikTok"
         }
+
       },
       "presets": {
         "default": {
