@@ -600,7 +600,7 @@ controllers['aether-cart-items'] = {
 **Interfaces:**
 - Consumes: `aether-hero`, PHANTOM `promo-grid`, `aether-featured-products`, PHANTOM `background-image-text`, `aether-collection-grid` (fixed collection setting), PHANTOM `blog-posts` — the user-mandated coexistence test (AETHER → PHANTOM → AETHER → PHANTOM → AETHER)
 
-- [ ] **Step 1: Rebuild the template** — order + settings:
+- [x] **Step 1: Rebuild the template** — order + settings:
 
 ```json
 {
@@ -616,15 +616,15 @@ controllers['aether-cart-items'] = {
 }
 ```
 
-(promo-grid/image-text/blog-posts need their blocks — executor copies block JSON from the existing Wave 0 T3 file; document that replacing the T3 verbatim-mirror is the intentional Wave 1 step; `aether-collection-grid` on home uses `collection` setting default = main collection.)
-- [ ] **Step 2: Gate + commit** — theme-check 0 offenses (validate both `index.aether.json` parses; template references exist); commit.
+(promo-grid/image-text/blog-posts need their blocks — executor copies block JSON from the existing Wave 0 T3 file; document that replacing the T3 verbatim-mirror is the intentional Wave 1 step; `aether-collection-grid` on home uses `collection` setting default = main collection — implemented in Task 10: the section gained the `collection` setting with `grid_collection = collection | default: collections[section.settings.collection]` fallback.)
+- [x] **Step 2: Gate + commit** — theme-check 0 offenses (validate both `index.aether.json` parses; template references exist); commit. (theme-check 296 files 0 offenses; registry PASS; commit eead352.)
 
 ---
 
 ## Task 11: Locales — all 7 schema + 7 runtime files
 
 **Files:**
-- Modify: `locales/en.default.schema.json`, `de.schema.json`, `es.schema.json`, `fr.schema.json`, `it.schema.json`, `pt-BR.schema.json`, `pt-PT.schema.json` (extend `_scripts/add-locale-keys.ps1` — committed theme tooling, rerun it)
+- Modify: `locales/en.default.schema.json`, `de.schema.json`, `es.schema.json`, `fr.schema.json`, `it.schema.json`, `pt-BR.schema.json`, `pt-PT.schema.json` (extend `_scripts/add-locale-keys.ps1` — gitignored local tooling per repo policy (theme-local `_scripts/` is not tracked); rerun it)
 - Modify: `locales/en.default.json`, `de.json`, `es.json`, `fr.json`, `it.json`, `pt-BR.json`, `pt-PT.json` (add `t:aether.*` runtime strings)
 
 **Interfaces:**
