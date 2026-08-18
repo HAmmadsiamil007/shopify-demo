@@ -1,0 +1,55 @@
+{% comment %}
+  AETHER 404 (plan Task 12) — frozen 404.html
+  (.error-page 100vh flex centered void bg, .error-code clamp(6rem,15vw,12rem)
+  ghost white 0.05, .error-title, .error-description, .error-buttons flex
+  gap 20 btn-primary + btn-outline).
+{% endcomment %}
+
+<section class="aether-error" data-section-type="aether-404">
+  <div class="aether-error__content">
+    <span class="aether-error__code" aria-hidden="true">404</span>
+    <h1 class="aether-error__title">{{ section.settings.title }}</h1>
+    <p class="aether-error__description">{{ section.settings.description }}</p>
+    <div class="aether-error__buttons">
+      <a href="{{ routes.root_url }}" class="aether-btn aether-btn-primary">{{ section.settings.home_label }}</a>
+      <a href="{{ routes.all_products_collection_url }}" class="aether-btn aether-btn-outline">{{ section.settings.shop_label }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.aether-404.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.aether-404.settings.title.label",
+      "default": "Page Not Found"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "t:sections.aether-404.settings.description.label",
+      "default": "The page you're looking for doesn't exist or has been moved."
+    },
+    {
+      "type": "text",
+      "id": "home_label",
+      "label": "t:sections.aether-404.settings.home_label.label",
+      "default": "Return Home"
+    },
+    {
+      "type": "text",
+      "id": "shop_label",
+      "label": "t:sections.aether-404.settings.shop_label.label",
+      "default": "Back to Shop"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.aether-404.presets.default.name"
+    }
+  ]
+}
+{% endschema %}

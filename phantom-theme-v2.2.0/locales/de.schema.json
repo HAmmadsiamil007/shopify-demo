@@ -74,6 +74,57 @@
                 }
             }
         },
+        "aether-404": {
+            "name": "404 Fehler (AETHER)",
+            "settings": {
+                "title": {
+                    "label": "Titel"
+                },
+                "description": {
+                    "label": "Beschreibung"
+                },
+                "home_label": {
+                    "label": "Startseite-Schaltfläche"
+                },
+                "shop_label": {
+                    "label": "Shop-Schaltfläche"
+                }
+            },
+            "presets": {
+                "default": {
+                    "name": "404"
+                }
+            }
+        },
+        "aether-accordion": {
+            "name": "Accordion / FAQ (AETHER)",
+            "settings": {
+                "open_first": {
+                    "label": "Erstes Element öffnen"
+                },
+                "allow_multiple": {
+                    "label": "Mehrere öffnen erlauben"
+                }
+            },
+            "blocks": {
+                "question": {
+                    "name": "Frage",
+                    "settings": {
+                        "question": {
+                            "label": "Frage"
+                        },
+                        "answer": {
+                            "label": "Antwort"
+                        }
+                    }
+                }
+            },
+            "presets": {
+                "default": {
+                    "name": "FAQ"
+                }
+            }
+        },
         "aether-announcement-bar": {
             "name": "Ankündigungsleiste (AETHER)",
             "settings": {
@@ -185,6 +236,52 @@
             "presets": {
                 "default": {
                     "name": "Produktraster"
+                }
+            }
+        },
+        "aether-contact": {
+            "name": "Kontakt (AETHER)",
+            "settings": {
+                "map_embed_url": {
+                    "label": "Karten-Embed-URL"
+                },
+                "show_map": {
+                    "label": "Karte anzeigen"
+                },
+                "show_social": {
+                    "label": "Social-Media-Links anzeigen"
+                }
+            },
+            "blocks": {
+                "info": {
+                    "name": "Info-Karte",
+                    "settings": {
+                        "icon": {
+                            "label": "Symbol"
+                        },
+                        "title": {
+                            "label": "Titel"
+                        },
+                        "content": {
+                            "label": "Inhalt"
+                        }
+                    }
+                },
+                "social": {
+                    "name": "Social-Link",
+                    "settings": {
+                        "platform": {
+                            "label": "Plattform"
+                        },
+                        "url": {
+                            "label": "URL"
+                        }
+                    }
+                }
+            },
+            "presets": {
+                "default": {
+                    "name": "Kontakt"
                 }
             }
         },
@@ -422,6 +519,25 @@
                 }
             }
         },
+        "aether-newsletter": {
+            "name": "Newsletter (AETHER)",
+            "settings": {
+                "title": {
+                    "label": "Überschrift"
+                },
+                "text": {
+                    "label": "Text"
+                },
+                "note": {
+                    "label": "Hinweis"
+                }
+            },
+            "presets": {
+                "default": {
+                    "name": "Newsletter"
+                }
+            }
+        },
         "aether-page-hero": {
             "name": "Seiten-Hero (AETHER)",
             "settings": {
@@ -656,6 +772,164 @@
             "presets": {
                 "default": {
                     "name": "AETHER Produkt"
+                }
+            }
+        },
+        "aether-promo": {
+            "name": "Promo (AETHER)",
+            "settings": {
+                "layout": {
+                    "label": "Layout",
+                    "options": {
+                        "split": "Geteilt",
+                        "overlay": "Überlagert"
+                    }
+                },
+                "image": {
+                    "label": "Bild"
+                },
+                "label": {
+                    "label": "Label"
+                },
+                "title": {
+                    "label": "Titel"
+                },
+                "text": {
+                    "label": "Text"
+                },
+                "cta_label": {
+                    "label": "Schaltflächentext"
+                },
+                "cta_link": {
+                    "label": "Schaltflächen-Link"
+                },
+                "reverse": {
+                    "label": "Layout umkehren"
+                },
+                "overlay_opacity": {
+                    "label": "Overlay-Deckkraft"
+                }
+            },
+            "presets": {
+                "default": {
+                    "name": "Promo"
+                }
+            }
+        },
+        "aether-search": {
+            "name": "Suche (AETHER)",
+            "presets": {
+                "default": {
+                    "name": "Suche"
+                }
+            }
+        },
+        "aether-team": {
+            "name": "Team (AETHER)",
+            "settings": {
+                "grid_cols": {
+                    "label": "Raster-Spalten"
+                },
+                "show_bio": {
+                    "label": "Biografie anzeigen"
+                }
+            },
+            "blocks": {
+                "member": {
+                    "name": "Mitglied",
+                    "settings": {
+                        "image": {
+                            "label": "Bild"
+                        },
+                        "name": {
+                            "label": "Name"
+                        },
+                        "role": {
+                            "label": "Rolle"
+                        },
+                        "bio": {
+                            "label": "Biografie"
+                        }
+                    }
+                }
+            },
+            "presets": {
+                "default": {
+                    "name": "Team"
+                }
+            }
+        },
+        "aether-testimonials": {
+            "name": "Bewertungen (AETHER)",
+            "settings": {
+                "summary_score": {
+                    "label": "Bewertungspunktzahl"
+                },
+                "summary_count": {
+                    "label": "Bewertungsanzahl"
+                },
+                "bar_5_label": {
+                    "label": "5 Sterne Label"
+                },
+                "bar_5_percent": {
+                    "label": "5 Sterne %"
+                },
+                "bar_4_label": {
+                    "label": "4 Sterne Label"
+                },
+                "bar_4_percent": {
+                    "label": "4 Sterne %"
+                },
+                "bar_3_label": {
+                    "label": "3 Sterne Label"
+                },
+                "bar_3_percent": {
+                    "label": "3 Sterne %"
+                },
+                "bar_2_label": {
+                    "label": "2 Sterne Label"
+                },
+                "bar_2_percent": {
+                    "label": "2 Sterne %"
+                },
+                "bar_1_label": {
+                    "label": "1 Stern Label"
+                },
+                "bar_1_percent": {
+                    "label": "1 Stern %"
+                }
+            },
+            "blocks": {
+                "review": {
+                    "name": "Bewertung",
+                    "settings": {
+                        "title": {
+                            "label": "Titel"
+                        },
+                        "text": {
+                            "label": "Text"
+                        },
+                        "author": {
+                            "label": "Autor"
+                        },
+                        "date": {
+                            "label": "Datum"
+                        },
+                        "stars": {
+                            "label": "Sterne"
+                        },
+                        "verified": {
+                            "label": "Verifiziert"
+                        },
+                        "category": {
+                            "label": "Kategorie"
+                        }
+                    }
+                }
+            },
+            "presets": {
+                "default": {
+                    "name": "Bewertungen"
                 }
             }
         },

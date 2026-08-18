@@ -1,0 +1,132 @@
+{% comment %}
+  AETHER promo (plan Task 10) — derived from frozen index/shop promo +
+  footer-promotions (gold CTA, void surfaces, image + content split).
+
+  Settings: layout split|overlay, image, label, title, text, cta_label,
+  cta_link, reverse (split only), overlay_opacity (overlay only).
+{% endcomment %}
+
+<section class="aether-promo aether-promo--{{ section.settings.layout }}" data-section-type="aether-promo">
+  <div class="aether-container">
+    {%- if section.settings.layout == 'split' -%}
+      <div class="aether-promo__row{% if section.settings.reverse %} aether-promo__row--reverse{% endif %}">
+        {%- if section.settings.image != blank -%}
+          <div class="aether-promo__media">
+            <img
+              src="{{ section.settings.image | image_url: width: 1200 }}"
+              alt="{{ section.settings.image.alt | escape }}"
+              width="{{ section.settings.image.width }}"
+              height="{{ section.settings.image.height }}"
+              loading="lazy"
+            >
+          </div>
+        {%- endif -%}
+        <div class="aether-promo__content">
+          {%- if section.settings.label != blank -%}
+            <span class="aether-section-label">{{ section.settings.label }}</span>
+          {%- endif -%}
+          {%- if section.settings.title != blank -%}
+            <h2 class="aether-promo__title">{{ section.settings.title }}</h2>
+          {%- endif -%}
+          {%- if section.settings.text != blank -%}
+            <p class="aether-promo__text">{{ section.settings.text }}</p>
+          {%- endif -%}
+          {%- if section.settings.cta_label != blank -%}
+            <a href="{{ section.settings.cta_link }}" class="aether-btn aether-btn-primary">{{ section.settings.cta_label }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- else -%}
+      {%- comment -%} Overlay layout {%- endcomment -%}
+      <div class="aether-promo__overlay"{% if section.settings.image != blank %} style="background-image: url('{{ section.settings.image | image_url: width: 1600 }}')"{% endif %}>
+        {%- if section.settings.image != blank -%}
+          <div class="aether-promo__overlay-bg" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }}" aria-hidden="true"></div>
+        {%- endif -%}
+        <div class="aether-promo__content">
+          {%- if section.settings.label != blank -%}
+            <span class="aether-section-label">{{ section.settings.label }}</span>
+          {%- endif -%}
+          {%- if section.settings.title != blank -%}
+            <h2 class="aether-promo__title">{{ section.settings.title }}</h2>
+          {%- endif -%}
+          {%- if section.settings.text != blank -%}
+            <p class="aether-promo__text">{{ section.settings.text }}</p>
+          {%- endif -%}
+          {%- if section.settings.cta_label != blank -%}
+            <a href="{{ section.settings.cta_link }}" class="aether-btn aether-btn-primary">{{ section.settings.cta_label }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.aether-promo.name",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        { "value": "split", "label": "t:sections.aether-promo.settings.layout.options.split" },
+        { "value": "overlay", "label": "t:sections.aether-promo.settings.layout.options.overlay" }
+      ],
+      "default": "split",
+      "label": "t:sections.aether-promo.settings.layout.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.aether-promo.settings.image.label"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:sections.aether-promo.settings.label.label"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.aether-promo.settings.title.label",
+      "default": "Promotional heading"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "t:sections.aether-promo.settings.text.label"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "t:sections.aether-promo.settings.cta_label.label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "t:sections.aether-promo.settings.cta_link.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "reverse",
+      "default": false,
+      "label": "t:sections.aether-promo.settings.reverse.label"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 90,
+      "step": 10,
+      "default": 50,
+      "label": "t:sections.aether-promo.settings.overlay_opacity.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.aether-promo.presets.default.name"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,101 @@
+{% comment %}
+  AETHER team section (plan Task 6) — frozen team.html (team-grid 3-col,
+  team-card centered 30px padding 1px border, 120x120 circle image gold
+  border, name, role gold uppercase, bio chrome 0.85rem).
+{% endcomment %}
+
+<section class="aether-team" data-section-type="aether-team">
+  <div class="aether-container">
+    <div class="aether-team-grid aether-team-grid--cols-{{ section.settings.grid_cols }}">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'member' -%}
+          <div class="aether-team-card" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <div class="aether-team-card__image">
+                <img
+                  src="{{ block.settings.image | image_url: width: 300 }}"
+                  alt="{{ block.settings.name | escape }}"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                  loading="lazy"
+                >
+              </div>
+            {%- else -%}
+              <div class="aether-team-card__image aether-team-card__image--placeholder">
+                {{ 'image' | placeholder_svg_tag: 'aether-placeholder' }}
+              </div>
+            {%- endif -%}
+            <h3 class="aether-team-card__name">{{ block.settings.name }}</h3>
+            <span class="aether-team-card__role">{{ block.settings.role }}</span>
+            {%- if section.settings.show_bio and block.settings.bio != blank -%}
+              <p class="aether-team-card__bio">{{ block.settings.bio }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.aether-team.name",
+  "settings": [
+    {
+      "type": "range",
+      "id": "grid_cols",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3,
+      "label": "t:sections.aether-team.settings.grid_cols.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bio",
+      "default": true,
+      "label": "t:sections.aether-team.settings.show_bio.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "member",
+      "name": "t:sections.aether-team.blocks.member.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.aether-team.blocks.member.settings.image.label"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "t:sections.aether-team.blocks.member.settings.name.label",
+          "default": "Team member"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "t:sections.aether-team.blocks.member.settings.role.label",
+          "default": "Role"
+        },
+        {
+          "type": "textarea",
+          "id": "bio",
+          "label": "t:sections.aether-team.blocks.member.settings.bio.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.aether-team.presets.default.name",
+      "blocks": [
+        { "type": "member" },
+        { "type": "member" },
+        { "type": "member" }
+      ]
+    }
+  ]
+}
+{% endschema %}

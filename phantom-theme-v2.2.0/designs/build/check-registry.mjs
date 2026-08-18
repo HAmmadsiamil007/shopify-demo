@@ -106,7 +106,7 @@ if (lists.dp_header_groups) {
 // NOTE: intentionally FAILS mid-wave for sections not yet created (Tasks 5-9);
 // full green = Wave 1 end (Task 13 Step 5). Budget + vendor-asset checks below
 // must be green once Task 1 lands.
-const aetherSections = ['aether-announcement-bar','aether-header','aether-footer','aether-hero','aether-featured-products','aether-collection-grid','aether-page-hero','aether-product','aether-cart-items','aether-blog-posts','aether-article'];
+const aetherSections = ['aether-announcement-bar','aether-header','aether-footer','aether-hero','aether-featured-products','aether-collection-grid','aether-page-hero','aether-product','aether-cart-items','aether-blog-posts','aether-article','aether-accordion','aether-team','aether-testimonials','aether-contact','aether-newsletter','aether-promo','aether-search','aether-404'];
 for (const name of aetherSections) {
   const p = path.join(themeRoot, 'sections', name + '.liquid');
   check(`aether section exists ${name}.liquid`, fs.existsSync(p), p);

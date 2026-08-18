@@ -1,0 +1,86 @@
+{% comment %}
+  AETHER search (plan Task 11) — derived from frozen search + main-search.
+  Amendment 7: parity N/A; validate data correctness + AETHER visual
+  consistency + responsive + editor + functional behavior.
+{% endcomment %}
+
+<section class="aether-search" data-section-type="aether-search">
+  <div class="aether-container">
+
+    {%- comment -%} Search Form {%- endcomment -%}
+    <form class="aether-search__form" action="{{ routes.search_url }}" method="get" role="search">
+      <div class="aether-search__input-wrap">
+        <input type="search" name="q" class="aether-search__input"
+          value="{{ search.terms | escape }}"
+          placeholder="{{ 'aether.content.search.placeholder' | t }}"
+          aria-label="{{ 'aether.content.search.placeholder' | t }}">
+        <button type="submit" class="aether-search__btn" aria-label="{{ 'general.search.submit' | t }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+      </div>
+    </form>
+
+    {%- comment -%} Search Results {%- endcomment -%}
+    {%- if search.performed? -%}
+      {%- if search.results_count > 0 -%}
+        <p class="aether-search__count">{{ search.results_count }} {{ 'aether.content.search.results_count' | t: count: search.results_count }}</p>
+        <div class="aether-search__results-grid">
+          {%- for item in search.results -%}
+            {%- case item.object_type -%}
+              {%- when 'product' -%}
+                <a href="{{ item.url }}" class="aether-blog-card" data-reveal-item>
+                  {%- if item.featured_image -%}
+                    <div class="aether-blog-card__image">
+                      <img src="{{ item.featured_image | image_url: width: 600 }}" alt="{{ item.featured_image.alt | escape }}" width="{{ item.featured_image.width }}" height="{{ item.featured_image.height }}" loading="lazy">
+                    </div>
+                  {%- endif -%}
+                  <div class="aether-blog-card__content">
+                    <h3 class="aether-blog-card__title">{{ item.title }}</h3>
+                    <span class="aether-blog-card__price">{{ item.price | money }}</span>
+                  </div>
+                </a>
+              {%- when 'article' -%}
+                <a href="{{ item.url }}" class="aether-blog-card" data-reveal-item>
+                  {%- if item.image -%}
+                    <div class="aether-blog-card__image">
+                      <img src="{{ item.image | image_url: width: 600 }}" alt="{{ item.image.alt | escape }}" width="{{ item.image.width }}" height="{{ item.image.height }}" loading="lazy">
+                    </div>
+                  {%- endif -%}
+                  <div class="aether-blog-card__content">
+                    <h3 class="aether-blog-card__title">{{ item.title }}</h3>
+                    <p class="aether-blog-card__excerpt">{{ item.excerpt_or_content | strip_html | truncate: 120 }}</p>
+                  </div>
+                </a>
+              {%- when 'page' -%}
+                <a href="{{ item.url }}" class="aether-blog-card" data-reveal-item>
+                  <div class="aether-blog-card__content">
+                    <h3 class="aether-blog-card__title">{{ item.title }}</h3>
+                    <p class="aether-blog-card__excerpt">{{ item.content | strip_html | truncate: 120 }}</p>
+                  </div>
+                </a>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <div class="aether-search__empty">
+          <p>{{ 'aether.content.search.no_results' | t: terms: search.terms }}</p>
+          <a href="{{ routes.all_products_collection_url }}" class="aether-btn aether-btn-primary">{{ 'aether.content.search.clear' | t }}</a>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.aether-search.name",
+  "settings": [],
+  "presets": [
+    {
+      "name": "t:sections.aether-search.presets.default.name"
+    }
+  ]
+}
+{% endschema %}

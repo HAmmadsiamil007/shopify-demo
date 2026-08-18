@@ -611,6 +611,42 @@
             "blog": {
                 "empty": "Nenhum post do blog disponível",
                 "read_more": "Leia mais"
+            },
+            "contact": {
+                "email": "E-mail",
+                "email_placeholder": "seu@email.com",
+                "map_soon": "Mapa em breve",
+                "map_title": "Mapa de localização",
+                "message": "Mensagem",
+                "message_placeholder": "Sua mensagem...",
+                "name": "Nome",
+                "name_placeholder": "Seu nome",
+                "select_default": "Selecione um assunto",
+                "subject": "Assunto",
+                "subject_general": "Consulta geral",
+                "subject_order": "Suporte ao pedido",
+                "subject_partnership": "Parceria",
+                "subject_product": "Pergunta sobre produto",
+                "submit": "Enviar mensagem",
+                "success": "Obrigado por entrar em contato. Responderemos em breve."
+            },
+            "error": {
+                "back_to_shop": "Voltar à loja",
+                "return_home": "Voltar ao início"
+            },
+            "search": {
+                "clear": "Limpar pesquisa",
+                "no_results": "Nenhum resultado para \"{{ terms }}\"",
+                "placeholder": "Pesquisar",
+                "results_count": "resultados encontrados"
+            },
+            "testimonials": {
+                "all_reviews": "Todas as avaliações",
+                "based_on": "Com base em {{ count }} avaliações",
+                "five_stars": "5 Estrelas",
+                "four_stars": "4 Estrelas",
+                "verified": "Verificado",
+                "verified_only": "Apenas verificadas"
             }
         },
         "featured_products": {

@@ -611,6 +611,42 @@
             "blog": {
                 "empty": "Keine Blog-Beiträge verfügbar",
                 "read_more": "Weiterlesen"
+            },
+            "contact": {
+                "email": "E-Mail",
+                "email_placeholder": "ihre@email.de",
+                "map_soon": "Karte folgt",
+                "map_title": "Standortkarte",
+                "message": "Nachricht",
+                "message_placeholder": "Ihre Nachricht...",
+                "name": "Name",
+                "name_placeholder": "Ihr Name",
+                "select_default": "Betreff wählen",
+                "subject": "Betreff",
+                "subject_general": "Allgemeine Anfrage",
+                "subject_order": "Bestellunterstützung",
+                "subject_partnership": "Partnerschaft",
+                "subject_product": "Produktfrage",
+                "submit": "Nachricht senden",
+                "success": "Vielen Dank für Ihre Nachricht. Wir melden uns bald bei Ihnen."
+            },
+            "error": {
+                "back_to_shop": "Zurück zum Shop",
+                "return_home": "Zur Startseite"
+            },
+            "search": {
+                "clear": "Suche löschen",
+                "no_results": "Keine Ergebnisse für \"{{ terms }}\"",
+                "placeholder": "Suchen",
+                "results_count": "Ergebnisse gefunden"
+            },
+            "testimonials": {
+                "all_reviews": "Alle Bewertungen",
+                "based_on": "Basierend auf {{ count }} Bewertungen",
+                "five_stars": "5 Sterne",
+                "four_stars": "4 Sterne",
+                "verified": "Verifiziert",
+                "verified_only": "Nur verifizierte"
             }
         },
         "featured_products": {

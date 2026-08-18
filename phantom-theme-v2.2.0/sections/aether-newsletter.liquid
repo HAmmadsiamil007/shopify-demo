@@ -1,0 +1,59 @@
+{% comment %}
+  AETHER newsletter (plan Task 9) — frozen newsletter section
+  (100px/80px padding, radial gold glow, inner 580px centered, form 480,
+  input flex 1px border + backdrop blur, btn gold uppercase, note with
+  fa-lock, success hidden → is-visible).
+
+  D-notes:
+  - PHANTOM newsletter-form snippet = plumbing only; AETHER owns presentation.
+  - Amendment 5: selector audit proves zero PHANTOM visual leakage.
+{% endcomment %}
+
+<section class="aether-newsletter" data-section-type="aether-newsletter">
+  <div class="aether-newsletter__glow" aria-hidden="true"></div>
+  <div class="aether-container aether-newsletter__inner">
+    {%- if section.settings.title != blank -%}
+      <h2 class="aether-newsletter__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <p class="aether-newsletter__text">{{ section.settings.text }}</p>
+    {%- endif -%}
+    <div class="aether-newsletter__form">
+      {%- render 'newsletter-form', section_id: section.id, snippet_context: 'newsletter' -%}
+    </div>
+    {%- if section.settings.note != blank -%}
+      <p class="aether-newsletter__note"><i class="fas fa-lock" aria-hidden="true"></i> {{ section.settings.note }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.aether-newsletter.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.aether-newsletter.settings.title.label",
+      "default": "Stay in the Loop"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "t:sections.aether-newsletter.settings.text.label",
+      "default": "Be the first to know about new releases, exclusive offers, and behind-the-scenes content."
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "t:sections.aether-newsletter.settings.note.label",
+      "default": "No spam. Unsubscribe anytime."
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.aether-newsletter.presets.default.name"
+    }
+  ]
+}
+{% endschema %}

@@ -611,6 +611,42 @@
             "blog": {
                 "empty": "No hay publicaciones de blog disponibles",
                 "read_more": "Leer más"
+            },
+            "contact": {
+                "email": "Correo electrónico",
+                "email_placeholder": "tu@email.com",
+                "map_soon": "Mapa próximamente",
+                "map_title": "Mapa de ubicación",
+                "message": "Mensaje",
+                "message_placeholder": "Tu mensaje...",
+                "name": "Nombre",
+                "name_placeholder": "Tu nombre",
+                "select_default": "Selecciona un asunto",
+                "subject": "Asunto",
+                "subject_general": "Consulta general",
+                "subject_order": "Soporte de pedido",
+                "subject_partnership": "Asociación",
+                "subject_product": "Pregunta de producto",
+                "submit": "Enviar mensaje",
+                "success": "Gracias por contactarnos. Te responderemos pronto."
+            },
+            "error": {
+                "back_to_shop": "Volver a la tienda",
+                "return_home": "Volver al inicio"
+            },
+            "search": {
+                "clear": "Limpiar búsqueda",
+                "no_results": "No se encontraron resultados para \"{{ terms }}\"",
+                "placeholder": "Buscar",
+                "results_count": "resultados encontrados"
+            },
+            "testimonials": {
+                "all_reviews": "Todas las reseñas",
+                "based_on": "Basado en {{ count }} reseñas",
+                "five_stars": "5 Estrellas",
+                "four_stars": "4 Estrellas",
+                "verified": "Verificado",
+                "verified_only": "Solo verificadas"
             }
         },
         "featured_products": {

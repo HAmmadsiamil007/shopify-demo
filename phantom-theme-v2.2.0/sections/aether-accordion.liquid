@@ -1,0 +1,88 @@
+{% comment %}
+  AETHER accordion / FAQ (plan Task 5) — frozen faq.html (Bootstrap collapse
+  pattern: div.accordion > .accordion-item > h2.accordion-header >
+  button.accordion-button + div.accordion-collapse.collapse > .accordion-body).
+
+  D-notes:
+  - No Bootstrap dependency; enhancement-only JS controller (Task 14).
+  - All answers rendered visible without JS (amendment 3).
+  - CSS default: closed items collapse via [hidden]; JS toggles is-open + hidden.
+  - Server default: if open_first → first item is-open (no hidden).
+{% endcomment %}
+
+<section class="aether-accordion" data-section-type="aether-accordion"
+  data-allow-multiple="{{ section.settings.allow_multiple }}">
+  <div class="aether-container aether-accordion__list">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'question' -%}
+        <div class="aether-accordion__item{% if forloop.first and section.settings.open_first %} is-open{% endif %}" {{ block.shopify_attributes }}>
+          <h2 class="aether-accordion__header">
+            <button type="button" class="aether-accordion__button"
+              aria-expanded="{% if forloop.first and section.settings.open_first %}true{% else %}false{% endif %}"
+              aria-controls="aether-acc-{{ section.id }}-{{ forloop.index }}">
+              {{ block.settings.question }}
+              <span class="aether-accordion__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </span>
+            </button>
+          </h2>
+          <div id="aether-acc-{{ section.id }}-{{ forloop.index }}" class="aether-accordion__body"{% unless forloop.first and section.settings.open_first %} hidden{% endunless %}>
+            <div class="aether-accordion__answer">{{ block.settings.answer }}</div>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.aether-accordion.name",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "default": true,
+      "label": "t:sections.aether-accordion.settings.open_first.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "allow_multiple",
+      "default": false,
+      "label": "t:sections.aether-accordion.settings.allow_multiple.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "t:sections.aether-accordion.blocks.question.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "t:sections.aether-accordion.blocks.question.settings.question.label",
+          "default": "Frequently asked question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "t:sections.aether-accordion.blocks.question.settings.answer.label",
+          "default": "<p>Share useful information about your product with your customers.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.aether-accordion.presets.default.name",
+      "blocks": [
+        { "type": "question" },
+        { "type": "question" },
+        { "type": "question" }
+      ]
+    }
+  ]
+}
+{% endschema %}

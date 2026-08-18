@@ -611,6 +611,42 @@
             "blog": {
                 "empty": "No blog posts available",
                 "read_more": "Read more"
+            },
+            "contact": {
+                "email": "Email",
+                "email_placeholder": "your@email.com",
+                "map_soon": "Map coming soon",
+                "map_title": "Location map",
+                "message": "Message",
+                "message_placeholder": "Your message...",
+                "name": "Name",
+                "name_placeholder": "Your name",
+                "select_default": "Select a subject",
+                "subject": "Subject",
+                "subject_general": "General Inquiry",
+                "subject_order": "Order Support",
+                "subject_partnership": "Partnership",
+                "subject_product": "Product Question",
+                "submit": "Send Message",
+                "success": "Thanks for contacting us. We'll get back to you soon."
+            },
+            "error": {
+                "back_to_shop": "Back to Shop",
+                "return_home": "Return Home"
+            },
+            "search": {
+                "clear": "Clear search",
+                "no_results": "No results found for \"{{ terms }}\"",
+                "placeholder": "Search",
+                "results_count": "results found"
+            },
+            "testimonials": {
+                "all_reviews": "All Reviews",
+                "based_on": "Based on {{ count }} reviews",
+                "five_stars": "5 Stars",
+                "four_stars": "4 Stars",
+                "verified": "Verified",
+                "verified_only": "Verified Only"
             }
         },
         "featured_products": {

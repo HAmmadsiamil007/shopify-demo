@@ -1,0 +1,203 @@
+{% comment %}
+  AETHER contact section (plan Task 8) — frozen contact.html
+  (hero gradient bg, 7/5 row split, form wrap surface bg 50px padding,
+  4 form fields, submit gold, 5 info cards, social links, map placeholder).
+
+  D-notes:
+  - Form uses PHANTOM contact form mechanics (form 'contact').
+  - Map uses controlled iframe from map_embed_url (D21).
+{% endcomment %}
+
+{%- liquid
+  assign form_id = 'aether-contact-' | append: section.id
+-%}
+
+<section class="aether-contact" data-section-type="aether-contact">
+  <div class="aether-container">
+    <div class="aether-contact__row">
+
+      {%- comment -%} Contact Form {%- endcomment -%}
+      <div class="aether-contact__form-wrap">
+        {%- form 'contact', id: form_id -%}
+          {%- if form.posted_successfully? -%}
+            <div class="aether-contact-form__success" role="status">{{ 'aether.content.contact.success' | t }}</div>
+          {%- elsif form.errors -%}
+            <div class="aether-contact-form__errors" role="alert">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+
+          <div class="aether-form-group">
+            <label for="aether-contact-name-{{ section.id }}">{{ 'aether.content.contact.name' | t }}</label>
+            <input type="text" id="aether-contact-name-{{ section.id }}" name="contact[name]" placeholder="{{ 'aether.content.contact.name_placeholder' | t }}" required>
+          </div>
+
+          <div class="aether-form-group">
+            <label for="aether-contact-email-{{ section.id }}">{{ 'aether.content.contact.email' | t }}</label>
+            <input type="email" id="aether-contact-email-{{ section.id }}" name="contact[email]" placeholder="{{ 'aether.content.contact.email_placeholder' | t }}" required>
+          </div>
+
+          <div class="aether-form-group">
+            <label for="aether-contact-subject-{{ section.id }}">{{ 'aether.content.contact.subject' | t }}</label>
+            <select id="aether-contact-subject-{{ section.id }}" name="contact[subject]">
+              <option value="">{{ 'aether.content.contact.select_default' | t }}</option>
+              <option value="General Inquiry">{{ 'aether.content.contact.subject_general' | t }}</option>
+              <option value="Order Support">{{ 'aether.content.contact.subject_order' | t }}</option>
+              <option value="Product Question">{{ 'aether.content.contact.subject_product' | t }}</option>
+              <option value="Partnership">{{ 'aether.content.contact.subject_partnership' | t }}</option>
+            </select>
+          </div>
+
+          <div class="aether-form-group">
+            <label for="aether-contact-body-{{ section.id }}">{{ 'aether.content.contact.message' | t }}</label>
+            <textarea id="aether-contact-body-{{ section.id }}" name="contact[body]" rows="5" placeholder="{{ 'aether.content.contact.message_placeholder' | t }}" required></textarea>
+          </div>
+
+          <button type="submit" class="aether-btn aether-btn-primary">{{ 'aether.content.contact.submit' | t }}</button>
+        {%- endform -%}
+      </div>
+
+      {%- comment -%} Info Cards + Social + Map {%- endcomment -%}
+      <div class="aether-contact__info">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'info' -%}
+            <div class="aether-info-card" {{ block.shopify_attributes }}>
+              {%- if block.settings.icon != blank -%}
+                <div class="aether-info-card__icon">
+                  <i class="fas fa-{{ block.settings.icon }}" aria-hidden="true"></i>
+                </div>
+              {%- endif -%}
+              <div class="aether-info-card__content">
+                {%- if block.settings.title != blank -%}
+                  <h4 class="aether-info-card__title">{{ block.settings.title }}</h4>
+                {%- endif -%}
+                {%- if block.settings.content != blank -%}
+                  <div class="aether-info-card__value">{{ block.settings.content }}</div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- comment -%} Social Links {%- endcomment -%}
+        {%- if section.settings.show_social -%}
+          <div class="aether-social-links">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'social' and block.settings.url != blank -%}
+                <a href="{{ block.settings.url }}" class="aether-social-links__link" target="_blank" rel="noopener noreferrer" aria-label="{{ block.settings.platform }}">
+                  {%- case block.settings.platform -%}
+                    {%- when 'instagram' -%}<i class="fab fa-instagram" aria-hidden="true"></i>
+                    {%- when 'x-twitter' -%}<i class="fab fa-x-twitter" aria-hidden="true"></i>
+                    {%- when 'tiktok' -%}<i class="fab fa-tiktok" aria-hidden="true"></i>
+                  {%- endcase -%}
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Map (D21: controlled iframe) {%- endcomment -%}
+        {%- if section.settings.show_map -%}
+          {%- if section.settings.map_embed_url != blank -%}
+            <div class="aether-map">
+              <iframe class="aether-map__iframe" src="{{ section.settings.map_embed_url | escape }}" loading="lazy"
+                title="{{ 'aether.content.contact.map_title' | t }}" allowfullscreen></iframe>
+            </div>
+          {%- else -%}
+            <div class="aether-map aether-map--placeholder">
+              <i class="fas fa-map-location-dot" aria-hidden="true"></i>
+              <span>{{ 'aether.content.contact.map_soon' | t }}</span>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.aether-contact.name",
+  "settings": [
+    {
+      "type": "url",
+      "id": "map_embed_url",
+      "label": "t:sections.aether-contact.settings.map_embed_url.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_map",
+      "default": true,
+      "label": "t:sections.aether-contact.settings.show_map.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "default": true,
+      "label": "t:sections.aether-contact.settings.show_social.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "info",
+      "name": "t:sections.aether-contact.blocks.info.name",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "options": [
+            { "value": "location-dot", "label": "Location" },
+            { "value": "envelope", "label": "Email" },
+            { "value": "phone", "label": "Phone" },
+            { "value": "clock", "label": "Hours" },
+            { "value": "share-nodes", "label": "Share" }
+          ],
+          "default": "location-dot",
+          "label": "t:sections.aether-contact.blocks.info.settings.icon.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.aether-contact.blocks.info.settings.title.label"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "t:sections.aether-contact.blocks.info.settings.content.label"
+        }
+      ]
+    },
+    {
+      "type": "social",
+      "name": "t:sections.aether-contact.blocks.social.name",
+      "settings": [
+        {
+          "type": "select",
+          "id": "platform",
+          "options": [
+            { "value": "instagram", "label": "Instagram" },
+            { "value": "x-twitter", "label": "X (Twitter)" },
+            { "value": "tiktok", "label": "TikTok" }
+          ],
+          "default": "instagram",
+          "label": "t:sections.aether-contact.blocks.social.settings.platform.label"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "t:sections.aether-contact.blocks.social.settings.url.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.aether-contact.presets.default.name",
+      "blocks": [
+        { "type": "info", "settings": { "icon": "location-dot", "title": "Address", "content": "<p>123 Innovation Drive<br>Tech District, CA 90210</p>" } },
+        { "type": "info", "settings": { "icon": "envelope", "title": "Email", "content": "<p><a href='mailto:hello@aether.com'>hello@aether.com</a></p>" } },
+        { "type": "info", "settings": { "icon": "phone", "title": "Phone", "content": "<p><a href='tel:+18005551234'>+1 (800) 555-1234</a></p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,249 @@
+{% comment %}
+  AETHER testimonials (plan Task 7) — frozen testimonials.html
+  (summary flex 4.9 gold + stars, 5 bar rows, filter buttons, reviews grid 3-col,
+  review card: stars/title/text/author+verified+date).
+
+  No-JS: all reviews visible, filter is enhancement-only.
+{% endcomment %}
+
+<section class="aether-testimonials" data-section-type="aether-testimonials">
+  <div class="aether-container">
+
+    {%- comment -%} Rating Overview {%- endcomment -%}
+    {%- if section.settings.summary_score != blank -%}
+      <div class="aether-rating-overview">
+        <div class="aether-rating-overview__big">{{ section.settings.summary_score }}</div>
+        <div class="aether-rating-overview__details">
+          <div class="aether-rating-overview__stars" aria-label="{{ section.settings.summary_score }} out of 5">
+            {%- for i in (1..5) -%}
+              <i class="fas fa-star" aria-hidden="true"></i>
+            {%- endfor -%}
+          </div>
+          {%- if section.settings.summary_count != blank -%}
+            <span class="aether-rating-overview__count">{{ 'aether.content.testimonials.based_on' | t: count: section.settings.summary_count }}</span>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Rating Bars {%- endcomment -%}
+    {%- if section.settings.bar_5_label != blank -%}
+      <div class="aether-rating-bars">
+        {%- assign bars = '5,4,3,2,1' | split: ',' -%}
+        {%- for star in bars -%}
+          {%- assign label_key = 'bar_' | append: star | append: '_label' -%}
+          {%- assign pct_key = 'bar_' | append: star | append: '_percent' -%}
+          {%- assign label = section.settings[label_key] -%}
+          {%- assign pct = section.settings[pct_key] -%}
+          {%- if label != blank -%}
+            <div class="aether-rating-bars__row">
+              <span class="aether-rating-bars__label">{{ label }}</span>
+              <div class="aether-rating-bars__track">
+                <div class="aether-rating-bars__fill" style="width: {{ pct }}%"></div>
+              </div>
+              <span class="aether-rating-bars__percent">{{ pct }}%</span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Filter Buttons {%- endcomment -%}
+    <div class="aether-filter-bar">
+      <button type="button" class="aether-filter-bar__btn is-active" data-filter="all">{{ 'aether.content.testimonials.all_reviews' | t }}</button>
+      <button type="button" class="aether-filter-bar__btn" data-filter="5">{{ 'aether.content.testimonials.five_stars' | t }}</button>
+      <button type="button" class="aether-filter-bar__btn" data-filter="4">{{ 'aether.content.testimonials.four_stars' | t }}</button>
+      <button type="button" class="aether-filter-bar__btn" data-filter="verified">{{ 'aether.content.testimonials.verified_only' | t }}</button>
+    </div>
+
+    {%- comment -%} Reviews Grid {%- endcomment -%}
+    <div class="aether-reviews-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'review' -%}
+          <div class="aether-review-card" data-category="{{ block.settings.category }}" {{ block.shopify_attributes }}>
+            <div class="aether-review-card__stars" aria-label="{{ block.settings.stars }} out of 5 stars">
+              {%- for i in (1..block.settings.stars) -%}
+                <i class="fas fa-star" aria-hidden="true"></i>
+              {%- endfor -%}
+            </div>
+            {%- if block.settings.title != blank -%}
+              <h4 class="aether-review-card__title">{{ block.settings.title }}</h4>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="aether-review-card__text">{{ block.settings.text }}</p>
+            {%- endif -%}
+            <div class="aether-review-card__footer">
+              <span class="aether-review-card__author">
+                <strong>{{ block.settings.author }}</strong>
+                {%- if block.settings.verified -%}
+                  <i class="fas fa-check-circle" aria-label="{{ 'aether.content.testimonials.verified' | t }}"></i>
+                {%- endif -%}
+              </span>
+              {%- if block.settings.date != blank -%}
+                <span class="aether-review-card__date">{{ block.settings.date }}</span>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.aether-testimonials.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "summary_score",
+      "label": "t:sections.aether-testimonials.settings.summary_score.label",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "summary_count",
+      "label": "t:sections.aether-testimonials.settings.summary_count.label",
+      "default": "1,247"
+    },
+    {
+      "type": "text",
+      "id": "bar_5_label",
+      "label": "t:sections.aether-testimonials.settings.bar_5_label.label",
+      "default": "5 star"
+    },
+    {
+      "type": "range",
+      "id": "bar_5_percent",
+      "min": 0,
+      "max": 100,
+      "default": 85,
+      "label": "t:sections.aether-testimonials.settings.bar_5_percent.label"
+    },
+    {
+      "type": "text",
+      "id": "bar_4_label",
+      "label": "t:sections.aether-testimonials.settings.bar_4_label.label",
+      "default": "4 star"
+    },
+    {
+      "type": "range",
+      "id": "bar_4_percent",
+      "min": 0,
+      "max": 100,
+      "default": 10,
+      "label": "t:sections.aether-testimonials.settings.bar_4_percent.label"
+    },
+    {
+      "type": "text",
+      "id": "bar_3_label",
+      "label": "t:sections.aether-testimonials.settings.bar_3_label.label",
+      "default": "3 star"
+    },
+    {
+      "type": "range",
+      "id": "bar_3_percent",
+      "min": 0,
+      "max": 100,
+      "default": 3,
+      "label": "t:sections.aether-testimonials.settings.bar_3_percent.label"
+    },
+    {
+      "type": "text",
+      "id": "bar_2_label",
+      "label": "t:sections.aether-testimonials.settings.bar_2_label.label",
+      "default": "2 star"
+    },
+    {
+      "type": "range",
+      "id": "bar_2_percent",
+      "min": 0,
+      "max": 100,
+      "default": 1,
+      "label": "t:sections.aether-testimonials.settings.bar_2_percent.label"
+    },
+    {
+      "type": "text",
+      "id": "bar_1_label",
+      "label": "t:sections.aether-testimonials.settings.bar_1_label.label",
+      "default": "1 star"
+    },
+    {
+      "type": "range",
+      "id": "bar_1_percent",
+      "min": 0,
+      "max": 100,
+      "default": 1,
+      "label": "t:sections.aether-testimonials.settings.bar_1_percent.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "t:sections.aether-testimonials.blocks.review.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.aether-testimonials.blocks.review.settings.title.label"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "t:sections.aether-testimonials.blocks.review.settings.text.label"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "t:sections.aether-testimonials.blocks.review.settings.author.label"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "t:sections.aether-testimonials.blocks.review.settings.date.label"
+        },
+        {
+          "type": "range",
+          "id": "stars",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5,
+          "label": "t:sections.aether-testimonials.blocks.review.settings.stars.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "default": false,
+          "label": "t:sections.aether-testimonials.blocks.review.settings.verified.label"
+        },
+        {
+          "type": "select",
+          "id": "category",
+          "options": [
+            { "value": "all", "label": "All" },
+            { "value": "5", "label": "5 Stars" },
+            { "value": "4", "label": "4 Stars" },
+            { "value": "3", "label": "3 Stars" },
+            { "value": "2", "label": "2 Stars" },
+            { "value": "1", "label": "1 Star" },
+            { "value": "verified", "label": "Verified Only" }
+          ],
+          "default": "all",
+          "label": "t:sections.aether-testimonials.blocks.review.settings.category.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.aether-testimonials.presets.default.name",
+      "blocks": [
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" }
+      ]
+    }
+  ]
+}
+{% endschema %}
