@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact — AETHER Proof</title>
+<style>
+.ph-client--aether{--aether-primary:{{settings.aether_primary | default:'#D4A574'}
+
+
+
+.aether-page-hero{position:relative;overflow:hidden;text-align:center;padding:100px 0 80px}.aether-page-hero--compact{padding:60px 0 40px}.aether-page-hero__inner,.aether-page-hero__content{position:relative;z-index:1}.aether-page-hero__overlay{position:absolute;inset:0;background-color:#000}.aether-page-hero__label{display:inline-block;font-size:.75rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--aether-accent);margin-bottom:15px}.aether-page-hero__title{font-size:clamp(2.5rem,6vw,4rem);font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--aether-text);margin-bottom:15px}.aether-page-hero--compact .aether-page-hero__title{font-size:clamp(2.5rem,6vw,4.5rem);letter-spacing:.15em}.aether-page-hero__subtitle{font-size:1.1rem;color:var(--aether-muted);max-width:500px;margin:0 auto}
+
+
+.aether-blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}.aether-blog-grid--cols-2{grid-template-columns:repeat(2,1fr)}.aether-blog-grid--cols-4{grid-template-columns:repeat(4,1fr)}.aether-blog-card{display:block;border:1px solid var(--aether-border);border-radius:var(--aether-radius);overflow:hidden;text-decoration:none;color:inherit;transition:transform .3s,border-color .3s}.aether-blog-card:hover{transform:translateY(-4px);border-color:var(--aether-accent)}.aether-blog-card__image{position:relative;aspect-ratio:16/10;overflow:hidden}.aether-blog-card__image img{width:100%;height:100%;object-fit:cover;transition:transform .5s}.aether-blog-card:hover .aether-blog-card__image img{transform:scale(1.05)}.aether-blog-card__category{position:absolute;top:12px;left:12px;background:var(--aether-accent);color:#fff;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:4px}.aether-blog-card__content{padding:20px}.aether-blog-card__date{display:block;font-size:.75rem;color:var(--aether-muted);margin-bottom:8px}.aether-blog-card__title{font-size:1.1rem;font-weight:600;color:var(--aether-text);margin-bottom:8px;line-height:1.3}.aether-blog-card__excerpt{font-size:.85rem;color:var(--aether-muted);line-height:1.6;margin-bottom:12px}.aether-blog-card__read-more{font-size:.8rem;font-weight:500;color:var(--aether-accent);letter-spacing:.05em;text-transform:uppercase}.aether-blog-card__read-more i{margin-left:6px;transition:transform .3s}.aether-blog-card:hover .aether-blog-card__read-more i{transform:translateX(4px)}
+
+
+.aether-article-hero{position:relative;height:60vh;min-height:400px;overflow:hidden}.aether-article-hero__image{width:100%;height:100%;object-fit:cover}.aether-article-hero__overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(9,9,11,.9) 0%,rgba(9,9,11,.3) 100%);display:flex;align-items:flex-end;padding-bottom:60px}.aether-article-hero__content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:60px}.aether-article-hero__title{font-size:clamp(2rem,4vw,3rem);font-weight:800;color:var(--aether-text);max-width:700px}.aether-article-section{padding:60px 0 80px;background-color:var(--aether-void,var(--aether-bg))}.aether-article-meta{display:flex;gap:12px;align-items:center;justify-content:center;margin-bottom:50px;font-size:.85rem;color:var(--aether-muted)}.aether-article-meta__separator{opacity:.4}.aether-article-body{max-width:720px;margin:0 auto}.aether-article-body p{font-size:1.05rem;line-height:1.8;color:var(--aether-muted);margin-bottom:24px}.aether-article-body h2{font-size:1.6rem;font-weight:700;color:var(--aether-text);margin:40px 0 16px}.aether-article-body blockquote{border-left:3px solid var(--aether-accent);padding:20px 30px;margin:30px 0;background-color:var(--aether-surface);font-size:1.2rem;font-style:italic;color:var(--aether-text);line-height:1.6}.aether-article-body img{width:100%;margin:30px 0}.aether-article-author-bio{display:flex;gap:20px;align-items:center;padding:30px;background-color:var(--aether-surface);border:1px solid var(--aether-border);margin-top:50px}.aether-article-author-bio__avatar{width:60px;height:60px;border-radius:50%;background-color:var(--aether-bg,var(--aether-void,#09090B));border:1px solid var(--aether-accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--aether-accent)}.aether-article-author-bio__info strong{color:var(--aether-text)}.aether-related{padding:60px 0;background-color:var(--aether-bg,var(--aether-void,#09090B))}
+
+
+.aether-accordion__list{max-width:800px;margin:0 auto}.aether-accordion__item{border:1px solid var(--aether-border);margin-bottom:10px;background-color:var(--aether-surface)}.aether-accordion__header{margin:0}.aether-accordion__button{width:100%;display:flex;justify-content:space-between;align-items:center;padding:20px 24px;background:none;border:none;color:var(--aether-text);font-size:1rem;font-weight:500;cursor:pointer;text-align:left;transition:color .3s}.aether-accordion__button:hover{color:var(--aether-accent)}.aether-accordion__icon{flex-shrink:0;width:20px;height:20px;transition:transform .3s;color:var(--aether-muted)}.aether-accordion__item.is-open .aether-accordion__icon{transform:rotate(180deg)}.aether-accordion__body{overflow:hidden}.aether-accordion__body[hidden]{display:none}.aether-accordion__answer{padding:0 24px 20px;font-size:.95rem;line-height:1.7;color:var(--aether-muted)}
+
+
+.aether-team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}.aether-team-grid--cols-2{grid-template-columns:repeat(2,1fr)}.aether-team-grid--cols-4{grid-template-columns:repeat(4,1fr)}.aether-team-card{text-align:center;padding:30px;border:1px solid var(--aether-border)}.aether-team-card__image{width:120px;height:120px;border-radius:50%;overflow:hidden;margin:0 auto 20px;border:2px solid var(--aether-accent)}.aether-team-card__image img{width:100%;height:100%;object-fit:cover}.aether-team-card__image--placeholder{display:flex;align-items:center;justify-content:center;background:var(--aether-surface)}.aether-team-card__name{font-size:1.1rem;font-weight:600;color:var(--aether-text);margin-bottom:5px}.aether-team-card__role{display:block;font-size:.8rem;font-weight:500;color:var(--aether-accent);letter-spacing:.05em;text-transform:uppercase;margin-bottom:10px}.aether-team-card__bio{font-size:.85rem;color:var(--aether-muted);line-height:1.6}
+
+
+.aether-rating-overview{display:flex;gap:20px;align-items:center;margin-bottom:30px}.aether-rating-overview__big{font-size:4rem;font-weight:800;color:var(--aether-accent);line-height:1}.aether-rating-overview__stars{color:var(--aether-accent);font-size:1rem;margin-bottom:4px}.aether-rating-overview__count{font-size:.85rem;color:var(--aether-muted)}.aether-rating-bars{margin-bottom:30px}.aether-rating-bars__row{display:flex;align-items:center;gap:12px;margin-bottom:8px}.aether-rating-bars__label{font-size:.8rem;color:var(--aether-muted);min-width:50px}.aether-rating-bars__track{flex:1;height:8px;background:var(--aether-border);border-radius:4px;overflow:hidden}.aether-rating-bars__fill{height:100%;background:var(--aether-accent);border-radius:4px}.aether-rating-bars__percent{font-size:.8rem;color:var(--aether-muted);min-width:35px;text-align:right}.aether-filter-bar{display:flex;gap:10px;margin-bottom:30px;flex-wrap:wrap}.aether-filter-bar__btn{padding:8px 16px;border:1px solid var(--aether-border);border-radius:20px;background:none;color:var(--aether-muted);font-size:.8rem;cursor:pointer;transition:all .3s}.aether-filter-bar__btn:hover,.aether-filter-bar__btn.is-active{border-color:var(--aether-accent);color:var(--aether-accent)}.aether-reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.aether-review-card{padding:24px;border:1px solid var(--aether-border);background:var(--aether-surface)}.aether-review-card__stars{color:var(--aether-accent);font-size:.85rem;margin-bottom:12px}.aether-review-card__title{font-size:1rem;font-weight:600;color:var(--aether-text);margin-bottom:8px}.aether-review-card__text{font-size:.9rem;color:var(--aether-muted);line-height:1.6;margin-bottom:16px}.aether-review-card__footer{display:flex;justify-content:space-between;align-items:center;font-size:.8rem}.aether-review-card__author strong{color:var(--aether-text)}.aether-review-card__author i{color:var(--aether-accent);margin-left:4px}.aether-review-card__date{color:var(--aether-muted)}
+
+
+.aether-contact__row{display:grid;grid-template-columns:7fr 5fr;gap:40px}.aether-contact__form-wrap{background:var(--aether-surface);padding:50px}.aether-form-group{margin-bottom:20px}.aether-form-group label{display:block;font-size:.85rem;font-weight:500;color:var(--aether-text);margin-bottom:6px}.aether-form-group input,.aether-form-group select,.aether-form-group textarea{width:100%;padding:12px 16px;border:1px solid var(--aether-border);border-radius:var(--aether-radius);background:var(--aether-bg,var(--aether-void,#09090B));color:var(--aether-text);font-size:.9rem;transition:border-color .3s}.aether-form-group input:focus,.aether-form-group select:focus,.aether-form-group textarea:focus{outline:none;border-color:var(--aether-accent)}.aether-form-group textarea{resize:vertical;min-height:140px}.aether-contact-form__success{padding:16px;background:rgba(46,204,113,.1);border:1px solid #2ecc71;border-radius:var(--aether-radius);color:#2ecc71;margin-bottom:20px}.aether-contact-form__errors{padding:16px;background:rgba(231,76,60,.1);border:1px solid #e74c3c;border-radius:var(--aether-radius);color:#e74c3c;margin-bottom:20px}.aether-info-card{display:flex;gap:16px;align-items:flex-start;padding:20px 0;border-bottom:1px solid var(--aether-border)}.aether-info-card:last-of-type{border-bottom:none}.aether-info-card__icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;color:var(--aether-accent);flex-shrink:0}.aether-info-card__title{font-size:.9rem;font-weight:600;color:var(--aether-text);margin-bottom:4px}.aether-info-card__value{font-size:.85rem;color:var(--aether-muted);line-height:1.6}.aether-social-links{display:flex;gap:16px;padding:20px 0}.aether-social-links__link{color:var(--aether-muted);font-size:1.2rem;transition:color .3s}.aether-social-links__link:hover{color:var(--aether-accent)}.aether-map{margin-top:20px;border-radius:var(--aether-radius);overflow:hidden;min-height:300px}.aether-map__iframe{width:100%;height:300px;border:0}.aether-map--placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--aether-surface);border:1px solid var(--aether-border);color:var(--aether-muted);gap:12px}
+
+
+.aether-newsletter{position:relative;padding:100px 0 80px;text-align:center}.aether-newsletter__glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(200,149,108,0.06) 0%,transparent 70%);pointer-events:none}.aether-newsletter__inner{position:relative;max-width:580px;margin:0 auto}.aether-newsletter__title{font-size:2rem;font-weight:800;color:var(--aether-text);margin-bottom:12px}.aether-newsletter__text{font-size:1rem;color:var(--aether-muted);margin-bottom:30px;line-height:1.6}.aether-newsletter__form{max-width:480px;margin:0 auto}.aether-newsletter__note{font-size:.8rem;color:var(--aether-muted);margin-top:16px}.aether-newsletter__note i{margin-right:4px}.aether-newsletter__success{display:none;padding:20px;background:rgba(46,204,113,.1);border:1px solid #2ecc71;border-radius:var(--aether-radius);color:#2ecc71;margin-top:20px}.aether-newsletter__success.is-visible{display:block;animation:fadeIn .5s}
+
+
+.aether-promo--split .aether-promo__row{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}.aether-promo--split .aether-promo__row--reverse{direction:rtl}.aether-promo--split .aether-promo__row--reverse > *{direction:ltr}.aether-promo__media img{width:100%;border-radius:var(--aether-radius)}.aether-promo__title{font-size:2rem;font-weight:800;color:var(--aether-text);margin-bottom:12px}.aether-promo__text{font-size:1rem;color:var(--aether-muted);margin-bottom:24px;line-height:1.6}.aether-promo--overlay .aether-promo__overlay{position:relative;min-height:500px;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;border-radius:var(--aether-radius);overflow:hidden}.aether-promo__overlay-bg{position:absolute;inset:0;background:#000}.aether-promo--overlay .aether-promo__content{position:relative;z-index:1;text-align:center;max-width:600px;padding:40px}
+
+
+.aether-search__form{margin-bottom:40px}.aether-search__input-wrap{display:flex;border:1px solid var(--aether-border);border-radius:var(--aether-radius);overflow:hidden;backdrop-filter:blur(10px);transition:border-color .3s}.aether-search__input-wrap:focus-within{border-color:var(--aether-accent)}.aether-search__input{flex:1;padding:14px 20px;background:transparent;border:none;color:var(--aether-text);font-size:1rem;outline:none}.aether-search__btn{padding:14px 20px;background:var(--aether-accent);border:none;color:#fff;cursor:pointer;transition:opacity .3s}.aether-search__btn:hover{opacity:.8}.aether-search__btn svg{width:20px;height:20px}.aether-search__count{font-size:.9rem;color:var(--aether-muted);margin-bottom:20px}.aether-search__results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.aether-search__empty{text-align:center;padding:60px 0;color:var(--aether-muted)}.aether-blog-card__price{display:block;font-size:1rem;font-weight:600;color:var(--aether-accent);margin-top:8px}
+
+
+.aether-error{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--aether-bg,var(--aether-void,#09090B));text-align:center}.aether-error__content{max-width:600px;padding:40px}.aether-error__code{display:block;font-size:clamp(6rem,15vw,12rem);font-weight:800;color:rgba(255,255,255,0.05);line-height:1;margin-bottom:-20px}.aether-error__title{font-size:clamp(2rem, 4vw, 3rem);font-weight:700;color:var(--aether-text);margin-bottom:15px}.aether-error__description{font-size:1rem;color:var(--aether-muted);margin-bottom:30px;line-height:1.6}.aether-error__buttons{display:flex;gap:20px;justify-content:center}
+
+
+.aether-btn{display:inline-block;padding:14px 32px;font-size:.8rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;border-radius:var(--aether-radius);transition:all .3s;cursor:pointer;border:none}.aether-btn-primary{background:var(--aether-accent);color:#fff}.aether-btn-primary:hover{opacity:.85;transform:translateY(-2px)}.aether-btn-outline{background:transparent;border:1px solid var(--aether-accent);color:var(--aether-accent)}.aether-btn-outline:hover{background:var(--aether-accent);color:#fff}.aether-section-header{margin-bottom:40px}.aether-section-label{display:block;font-size:.75rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--aether-accent);margin-bottom:12px}.aether-container{max-width:var(--aether-container-max,1200px);margin:0 auto;padding:0 20px}
+
+
+@media(max-width:1024px){.aether-blog-grid{grid-template-columns:repeat(2,1fr)}.aether-reviews-grid{grid-template-columns:repeat(2,1fr)}.aether-team-grid{grid-template-columns:repeat(2,1fr)}.aether-search__results-grid{grid-template-columns:repeat(2,1fr)}.aether-contact__row{grid-template-columns:1fr}}
+@media(max-width:768px){.aether-promo--split .aether-promo__row{grid-template-columns:1fr}.aether-error__buttons{flex-direction:column;align-items:center}.aether-rating-overview{flex-direction:column;text-align:center}.aether-filter-bar{justify-content:center}}
+@media(max-width:576px){.aether-blog-grid{grid-template-columns:1fr}.aether-reviews-grid{grid-template-columns:1fr}.aether-team-grid{grid-template-columns:1fr}.aether-search__results-grid{grid-template-columns:1fr}.aether-article-meta{flex-wrap:wrap;justify-content:center}}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+body{margin:0;font-family:var(--aether-body-font,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif);background:var(--aether-bg,#09090B);color:var(--aether-text,#F2F2F2)}
+</style>
+</head>
+<body>
+<section class="aether-page-hero">
+  <div class="aether-container">
+    <h1 class="aether-page-hero__title">Contact</h1>
+  </div>
+</section>
+<section style="padding:60px 0">
+  <div class="aether-container">
+    <div class="aether-contact__row">
+      <div class="aether-contact__form-wrap">
+        <h2 style="font-size:1.5rem;font-weight:700;color:var(--aether-text);margin-bottom:24px;border-bottom:1px solid var(--aether-border);padding-bottom:12px">Send a Message</h2>
+        <div class="aether-form-group">
+          <label>Name</label>
+          <input type="text">
+        </div>
+        <div class="aether-form-group">
+          <label>Email</label>
+          <input type="email">
+        </div>
+        <div class="aether-form-group">
+          <label>Subject</label>
+          <select><option>General Inquiry</option><option>Order Support</option></select>
+        </div>
+        <div class="aether-form-group">
+          <label>Message</label>
+          <textarea rows="5"></textarea>
+        </div>
+        <button class="aether-btn aether-btn-primary">Send Message</button>
+      </div>
+      <div>
+        <div class="aether-info-card">
+          <div class="aether-info-card__icon">📍</div>
+          <div><h4 class="aether-info-card__title">Address</h4><div class="aether-info-card__value">123 Innovation Drive, Tech District, CA 90210</div></div>
+        </div>
+        <div class="aether-info-card">
+          <div class="aether-info-card__icon">📧</div>
+          <div><h4 class="aether-info-card__title">Email</h4><div class="aether-info-card__value">hello@aether.com</div></div>
+        </div>
+        <div class="aether-info-card">
+          <div class="aether-info-card__icon">📞</div>
+          <div><h4 class="aether-info-card__title">Phone</h4><div class="aether-info-card__value">+1 (800) 555-1234</div></div>
+        </div>
+        <div class="aether-info-card">
+          <div class="aether-info-card__icon">🕐</div>
+          <div><h4 class="aether-info-card__title">Hours</h4><div class="aether-info-card__value">Mon-Fri 9AM-6PM PST</div></div>
+        </div>
+        <div class="aether-social-links">
+          <a href="#" class="aether-social-links__link">📷</a>
+          <a href="#" class="aether-social-links__link">🐦</a>
+          <a href="#" class="aether-social-links__link">🎵</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body></html>
