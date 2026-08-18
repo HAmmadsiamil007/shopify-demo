@@ -1,0 +1,27 @@
+{
+  "sections": {
+    "hero": {
+      "type": "aether-page-hero",
+      "settings": {
+        "layout": "compact"
+      }
+    },
+    "article": {
+      "type": "aether-article",
+      "settings": {
+        "show_author": true,
+        "show_related": true,
+        "related_count": 3
+      }
+    },
+    "newsletter": {
+      "type": "aether-newsletter",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "article",
+    "newsletter"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "hero": {
+      "type": "aether-page-hero",
+      "settings": {
+        "label": "Search",
+        "title": "Search"
+      }
+    },
+    "search": {
+      "type": "aether-search",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "search"
+  ]
+}

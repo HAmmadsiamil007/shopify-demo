@@ -1263,13 +1263,18 @@
             }
         },
         "categories": {
+            "404": "404",
             "banners": "Banner",
             "collections": "Kollektionen",
             "forms": "Formulare",
             "info_trust": "Info & Vertrauen",
             "products": "Produkte",
             "storytelling": "Storytelling",
-            "cart": "Warenkorb"
+            "cart": "Warenkorb",
+            "blog": "Blog",
+            "article": "Article",
+            "page": "Page",
+            "search": "Search"
         },
         "client_demo_collection": {
             "name": "Demo — Kollektion",

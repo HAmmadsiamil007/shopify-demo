@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "hero": {
+      "type": "aether-page-hero",
+      "settings": {}
+    },
+    "content": {
+      "type": "rich-text",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "content"
+  ]
+}
