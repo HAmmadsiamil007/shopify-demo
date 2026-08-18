@@ -1,7 +1,93 @@
-{%- comment -%}
-AETHER content runtime — Wave 2. Enhancement-only, <= 20 KB, module.
-Controllers: aether-accordion, aether-testimonials, aether-contact,
-aether-newsletter, aether-article. Mount pattern mirrors aether.js.liquid:
-document.addEventListener('shopify:section:load', ...) + DATA_SECTION_TYPE
-lookup; strict-mode / reduced-motion / touch gating identical to Wave 1.
-{%- endcomment -%}
+/**
+ * AETHER content runtime — Wave 2.
+ * Enhancement-only, budget ≤ 20 KB, module.
+ * Controllers: aether-accordion, aether-testimonials, aether-contact,
+ * aether-newsletter, aether-article. All progressive enhancement.
+ * Mount: shopify:section:load + DATA_SECTION_TYPE.
+ */
+(function() {
+  'use strict';
+  var AetherContent = window.AetherContent = window.AetherContent || {};
+  AetherContent.controllers = AetherContent.controllers || {};
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Accordion */
+  AetherContent.controllers['aether-accordion'] = function(section) {
+    var allowMultiple = section.dataset.allowMultiple === 'true';
+    var buttons = section.querySelectorAll('.aether-accordion__button');
+    buttons.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        var itemId = btn.getAttribute('aria-controls');
+        var body = document.getElementById(itemId);
+        var item = btn.closest('.aether-accordion__item');
+        if (!allowMultiple && !expanded) {
+          buttons.forEach(function(otherBtn) {
+            if (otherBtn !== btn) {
+              var otherId = otherBtn.getAttribute('aria-controls');
+              var otherBody = document.getElementById(otherId);
+              var otherItem = otherBtn.closest('.aether-accordion__item');
+              otherBtn.setAttribute('aria-expanded', 'false');
+              if (otherBody) otherBody.hidden = true;
+              if (otherItem) otherItem.classList.remove('is-open');
+            }
+          });
+        }
+        btn.setAttribute('aria-expanded', String(!expanded));
+        if (body) body.hidden = expanded;
+        if (item) { if (expanded) item.classList.remove('is-open'); else item.classList.add('is-open'); }
+      });
+    });
+  };
+
+  /* Testimonials filter */
+  AetherContent.controllers['aether-testimonials'] = function(section) {
+    var buttons = section.querySelectorAll('.aether-filter-bar__btn');
+    var cards = section.querySelectorAll('.aether-review-card');
+    buttons.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var filter = btn.dataset.filter;
+        buttons.forEach(function(b) { b.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+        cards.forEach(function(card) {
+          var cat = card.dataset.category;
+          if (filter === 'all') card.hidden = false;
+          else if (filter === 'verified') card.hidden = cat !== 'verified';
+          else card.hidden = cat !== filter && cat !== 'all';
+        });
+      });
+    });
+  };
+
+  /* Contact form enhancement */
+  AetherContent.controllers['aether-contact'] = function(section) {
+    var form = section.querySelector('form');
+    if (!form) return;
+    form.addEventListener('submit', function() {
+      var btn = form.querySelector('[type="submit"]');
+      if (btn) { btn.setAttribute('aria-busy', 'true'); btn.disabled = true; }
+    });
+    var errors = section.querySelector('.aether-contact-form__errors');
+    if (errors) errors.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'center' });
+  };
+
+  /* Newsletter enhancement */
+  AetherContent.controllers['aether-newsletter'] = function(section) {
+    var success = section.querySelector('.newsletter-success, .aether-newsletter__success');
+    if (success) success.classList.add('is-visible');
+  };
+
+  /* Article (reserved) */
+  AetherContent.controllers['aether-article'] = function() {};
+
+  /* Mount */
+  function mountSection(section) {
+    var type = section.dataset.sectionType;
+    if (type && AetherContent.controllers[type]) AetherContent.controllers[type](section);
+  }
+  document.querySelectorAll('[data-section-type]').forEach(function(el) { mountSection(el); });
+  document.addEventListener('shopify:section:load', function(evt) {
+    var section = evt.detail ? evt.target || evt.detail.section : evt.target;
+    if (section) mountSection(section);
+  });
+})();
