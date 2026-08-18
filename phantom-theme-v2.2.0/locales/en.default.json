@@ -67,15 +67,15 @@
                 "other": "{{ count }} results"
             }
         },
-  "drawers": {
-    "navigation": "Site navigation",
-    "close_menu": "Close menu",
-    "expand_submenu": "Expand submenu",
-    "collapse_submenu": "Collapse submenu"
-  },
-  "ph_loader": {
-    "loading": "Loading"
-  }
+        "drawers": {
+            "navigation": "Site navigation",
+            "close_menu": "Close menu",
+            "expand_submenu": "Expand submenu",
+            "collapse_submenu": "Collapse submenu"
+        },
+        "ph_loader": {
+            "loading": "Loading"
+        }
     },
     "sections": {
         "map": {
@@ -576,15 +576,8 @@
         "view_store_info": "View store information",
         "check_availability": "Check availability at other stores",
         "show_all_results": "Show all results for \"{{ terms }}\""
-    }
-,
+    },
     "aether": {
-        "footer": {
-            "all_rights_reserved": "All Rights Reserved.",
-            "privacy": "Privacy",
-            "social_heading": "Social media links",
-            "terms": "Terms"
-        },
         "cart": {
             "checkout": "Checkout",
             "continue_shopping": "Continue shopping",
@@ -604,28 +597,32 @@
             "title": "Cart",
             "total": "Total"
         },
-        "header": {
-            "shop_now": "Shop Now"
-        },
         "collection_grid": {
             "label": "Collection",
             "pagination": "Pagination"
         },
-        "product_card": {
-            "bestseller": "Bestseller",
-            "limited": "Limited",
-            "new": "New",
-            "quick_view": "Quick view",
-            "rating_label": "Rated {{ value }} out of 5, based on {{ count }} reviews",
-            "wishlist": "Add to wishlist"
+        "content": {
+            "blog": {
+                "empty": "No blog posts available",
+                "read_more": "Read more"
+            }
+        },
+        "featured_products": {
+            "empty": "No products available in this collection yet."
+        },
+        "footer": {
+            "all_rights_reserved": "All Rights Reserved.",
+            "privacy": "Privacy",
+            "social_heading": "Social media links",
+            "terms": "Terms"
+        },
+        "header": {
+            "shop_now": "Shop Now"
         },
         "hero": {
             "next": "Next slide",
             "prev": "Previous slide",
             "scroll_hint": "Scroll to explore"
-        },
-        "featured_products": {
-            "empty": "No products available in this collection yet."
         },
         "product": {
             "based_on": "Based on {{ count }} reviews",
@@ -638,6 +635,14 @@
             "size_guide": "Size guide",
             "size_guide_tip": "Measure your foot from heel to toe and match your longest foot to the table below. If between sizes, we recommend sizing up.",
             "zoom_image": "Zoom image"
+        },
+        "product_card": {
+            "bestseller": "Bestseller",
+            "limited": "Limited",
+            "new": "New",
+            "quick_view": "Quick view",
+            "rating_label": "Rated {{ value }} out of 5, based on {{ count }} reviews",
+            "wishlist": "Add to wishlist"
         }
     }
 }

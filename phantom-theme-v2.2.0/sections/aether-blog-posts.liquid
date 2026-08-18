@@ -1,0 +1,89 @@
+<section class="aether-blog-posts" data-section-type="aether-blog-posts">
+  <div class="aether-container">
+    <div class="aether-blog-grid aether-blog-grid--cols-{{ section.settings.per_row }}">
+      {%- assign blog = blogs[section.settings.blog] -%}
+      {%- if blog != blank and blog.articles_count > 0 -%}
+        {%- paginate blog.articles by 6 -%}
+          {%- for article in blog.articles -%}
+            <a href="{{ article.url }}" class="aether-blog-card" data-reveal-item>
+              {%- if article.image -%}
+                <div class="aether-blog-card__image" data-image-zoom>
+                  <img
+                    src="{{ article.image | image_url: width: 1200 }}"
+                    alt="{{ article.image.alt | escape }}"
+                    width="{{ article.image.width }}"
+                    height="{{ article.image.height }}"
+                    loading="lazy"
+                  >
+                  {%- if article.tags.size > 0 and section.settings.show_category -%}
+                    <span class="aether-blog-card__category">{{ article.tags.first }}</span>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+              <div class="aether-blog-card__content">
+                {%- if section.settings.show_date -%}
+                  <span class="aether-blog-card__date">{{ article.published_at | date: format: 'month_day_year' }}</span>
+                {%- endif -%}
+                <h3 class="aether-blog-card__title">{{ article.title }}</h3>
+                {%- if section.settings.show_excerpt -%}
+                  <p class="aether-blog-card__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 120 }}</p>
+                {%- endif -%}
+                <span class="aether-blog-card__read-more">{{ 'aether.content.blog.read_more' | t }} <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+              </div>
+            </a>
+          {%- endfor -%}
+          {%- if paginate.pages > 1 -%}
+            {%- render 'aether-pagination', paginate: paginate -%}
+          {%- endif -%}
+        {%- endpaginate -%}
+      {%- else -%}
+        <p>{{ 'aether.content.blog.empty' | t }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.aether-blog-posts.name",
+  "settings": [
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "t:sections.aether-blog-posts.settings.blog.label"
+    },
+    {
+      "type": "range",
+      "id": "per_row",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3,
+      "label": "t:sections.aether-blog-posts.settings.per_row.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_category",
+      "default": true,
+      "label": "t:sections.aether-blog-posts.settings.show_category.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "default": true,
+      "label": "t:sections.aether-blog-posts.settings.show_date.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "default": true,
+      "label": "t:sections.aether-blog-posts.settings.show_excerpt.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.aether-blog-posts.presets.default.name"
+    }
+  ]
+}
+{% endschema %}
