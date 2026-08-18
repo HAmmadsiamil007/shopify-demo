@@ -172,6 +172,44 @@
         }
       }
     },
+    "aether-page-hero": {
+      "name": "",
+      "settings": {
+        "label": {
+          "label": ""
+        },
+        "title": {
+          "label": ""
+        },
+        "subtitle": {
+          "label": ""
+        },
+        "layout": {
+          "label": "",
+          "options": {
+            "default": "",
+            "compact": ""
+          }
+        },
+        "background_image": {
+          "label": ""
+        },
+        "overlay_opacity": {
+          "label": ""
+        },
+        "padding_top": {
+          "label": ""
+        },
+        "padding_bottom": {
+          "label": ""
+        }
+      },
+      "presets": {
+        "default": {
+          "name": ""
+        }
+      }
+    },
     "aether-collection-grid": {
       "name": "Grelha (AETHER)",
       "settings": {

@@ -172,6 +172,44 @@
         }
       }
     },
+    "aether-page-hero": {
+      "name": "Page hero (AETHER)",
+      "settings": {
+        "label": {
+          "label": "Label"
+        },
+        "title": {
+          "label": "Title"
+        },
+        "subtitle": {
+          "label": "Subtitle"
+        },
+        "layout": {
+          "label": "Layout",
+          "options": {
+            "default": "Default",
+            "compact": "Compact"
+          }
+        },
+        "background_image": {
+          "label": "Background image"
+        },
+        "overlay_opacity": {
+          "label": "Overlay opacity"
+        },
+        "padding_top": {
+          "label": "Padding top"
+        },
+        "padding_bottom": {
+          "label": "Padding bottom"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Page hero"
+        }
+      }
+    },
     "aether-collection-grid": {
       "name": "Collection grid (AETHER)",
       "settings": {

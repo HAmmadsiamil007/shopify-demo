@@ -1,0 +1,175 @@
+{% comment %}
+  AETHER page hero (plan Task 2) — frozen blog.html:203-224 (section.page-hero,
+  span.section-label, h1.page-hero-title, p.page-hero-subtitle) + cookie-policy.html:
+  206-226 (legal variant: div.hero-overlay + .page-hero-content, uppercase
+  letterspaced h1, reduced padding) + style.css:1803-1831 (legal), 1922-1944
+  (page hero), 637-645 (section-label).
+
+  D-notes:
+  - The frozen `.hero-fog` decoration is an animation artifact (GSAP fog
+    layers); AETHER does not replicate it.
+  - The frozen pages use Bootstrap's `.container` / `.section-label`; the theme
+    ships no global classes with those names, so this section uses the shared
+    AETHER `.aether-container` (aether.css.liquid:223) and `.aether-section-label`
+    (:145) — the same classes the aether-collection-grid page hero uses.
+  - `layout` setting: compact = legal variant (cookie-policy.html) — reduced
+    padding, uppercase letterspaced title, content wrapped in
+    `.aether-page-hero__content`, dark `.aether-page-hero__overlay` over the
+    background image (frozen div.hero-overlay).
+  - Background image renders as an id-scoped CSS background so the shared
+    `.aether-page-hero` gradient (aether.css.liquid:308) is replaced when set;
+    overlay opacity follows the aether-hero inline-opacity convention.
+{% endcomment %}
+
+{%- style -%}
+  #aether-page-hero-{{ section.id }} {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  #aether-page-hero-{{ section.id }}.aether-page-hero--compact {
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+  {%- if section.settings.background_image != blank -%}
+    #aether-page-hero-{{ section.id }} {
+      background-image: url('{{ section.settings.background_image | image_url: width: 1920 }}');
+      background-size: cover;
+      background-position: center;
+    }
+  {%- endif -%}
+  #aether-page-hero-{{ section.id }} .aether-page-hero__inner,
+  #aether-page-hero-{{ section.id }} .aether-page-hero__content {
+    position: relative;
+    z-index: 1;
+  }
+  #aether-page-hero-{{ section.id }} .aether-page-hero__overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+  }
+  #aether-page-hero-{{ section.id }} .aether-page-hero__label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--aether-accent);
+    margin-bottom: 15px;
+  }
+  #aether-page-hero-{{ section.id }} .aether-page-hero__title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--aether-text);
+    margin-bottom: 15px;
+  }
+  #aether-page-hero-{{ section.id }}.aether-page-hero--compact .aether-page-hero__title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    letter-spacing: 0.15em;
+  }
+  #aether-page-hero-{{ section.id }} .aether-page-hero__subtitle {
+    font-size: 1.1rem;
+    color: var(--aether-muted);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+{%- endstyle -%}
+
+<section
+  id="aether-page-hero-{{ section.id }}"
+  class="aether-page-hero{% if section.settings.layout == 'compact' %} aether-page-hero--compact{% endif %}"
+  data-section-type="aether-page-hero"
+>
+  {%- if section.settings.background_image != blank -%}
+    <div class="aether-page-hero__overlay" aria-hidden="true" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }}"></div>
+  {%- endif -%}
+  <div class="aether-container{% if section.settings.layout == 'compact' %} aether-page-hero__content{% else %} aether-page-hero__inner{% endif %}">
+    {%- if section.settings.label != blank -%}
+      <span class="aether-section-label aether-page-hero__label">{{ section.settings.label | escape }}</span>
+    {%- endif -%}
+    {%- if section.settings.title != blank -%}
+      <h1 class="aether-page-hero__title">{{ section.settings.title | escape }}</h1>
+    {%- endif -%}
+    {%- if section.settings.subtitle != blank -%}
+      <p class="aether-page-hero__subtitle">{{ section.settings.subtitle | escape }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "t:sections.aether-page-hero.name",
+    "settings": [
+      {
+        "type": "text",
+        "id": "label",
+        "label": "t:sections.aether-page-hero.settings.label.label"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "t:sections.aether-page-hero.settings.title.label"
+      },
+      {
+        "type": "textarea",
+        "id": "subtitle",
+        "label": "t:sections.aether-page-hero.settings.subtitle.label"
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "label": "t:sections.aether-page-hero.settings.layout.label",
+        "options": [
+          { "value": "default", "label": "t:sections.aether-page-hero.settings.layout.options.default" },
+          { "value": "compact", "label": "t:sections.aether-page-hero.settings.layout.options.compact" }
+        ],
+        "default": "default"
+      },
+      {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "t:sections.aether-page-hero.settings.background_image.label"
+      },
+      {
+        "type": "range",
+        "id": "overlay_opacity",
+        "min": 0,
+        "max": 90,
+        "step": 10,
+        "unit": "%",
+        "default": 50,
+        "label": "t:sections.aether-page-hero.settings.overlay_opacity.label"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 100,
+        "label": "t:sections.aether-page-hero.settings.padding_top.label"
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 80,
+        "label": "t:sections.aether-page-hero.settings.padding_bottom.label"
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.aether-page-hero.presets.default.name"
+      }
+    ]
+  }
+{% endschema %}

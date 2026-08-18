@@ -172,6 +172,44 @@
         }
       }
     },
+    "aether-page-hero": {
+      "name": "Herói da página (AETHER)",
+      "settings": {
+        "label": {
+          "label": "Rótulo"
+        },
+        "title": {
+          "label": "Título"
+        },
+        "subtitle": {
+          "label": "Subtítulo"
+        },
+        "layout": {
+          "label": "Disposição",
+          "options": {
+            "default": "Padrão",
+            "compact": "Compacto"
+          }
+        },
+        "background_image": {
+          "label": "Imagem de fundo"
+        },
+        "overlay_opacity": {
+          "label": "Opacidade da sobreposição"
+        },
+        "padding_top": {
+          "label": "Espaçamento superior"
+        },
+        "padding_bottom": {
+          "label": "Espaçamento inferior"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Herói da página"
+        }
+      }
+    },
     "aether-collection-grid": {
       "name": "Grade (AETHER)",
       "settings": {

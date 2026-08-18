@@ -172,6 +172,44 @@
         }
       }
     },
+    "aether-page-hero": {
+      "name": "Hero di pagina (AETHER)",
+      "settings": {
+        "label": {
+          "label": "Etichetta"
+        },
+        "title": {
+          "label": "Titolo"
+        },
+        "subtitle": {
+          "label": "Sottotitolo"
+        },
+        "layout": {
+          "label": "Layout",
+          "options": {
+            "default": "Predefinito",
+            "compact": "Compatto"
+          }
+        },
+        "background_image": {
+          "label": "Immagine di sfondo"
+        },
+        "overlay_opacity": {
+          "label": "Opacità sovrapposizione"
+        },
+        "padding_top": {
+          "label": "Spaziatura superiore"
+        },
+        "padding_bottom": {
+          "label": "Spaziatura inferiore"
+        }
+      },
+      "presets": {
+        "default": {
+          "name": "Hero di pagina"
+        }
+      }
+    },
     "aether-collection-grid": {
       "name": "Griglia prodotti (AETHER)",
       "settings": {
