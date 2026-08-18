@@ -579,30 +579,37 @@
   }
 ,
     "aether": {
-        "product": {
-            "based_on": "Basierend auf {{ count }} Bewertungen",
-            "breadcrumb_shop": "Shop",
-            "close_size_guide": "Größentabelle schließen",
-            "decrease_qty": "Menge verringern",
-            "increase_qty": "Menge erhöhen",
-            "reviews": "Bewertungen",
-            "select_size": "Größe auswählen",
-            "size_guide": "Größentabelle",
-            "size_guide_tip": "Messen Sie Ihren Fuß von der Ferse bis zur Spitze und gleichen Sie den längsten Fuß mit der Tabelle unten ab. Liegen Sie zwischen zwei Größen, empfehlen wir die größere.",
-            "zoom_image": "Bild vergrößern"
-        },
         "footer": {
             "all_rights_reserved": "Alle Rechte vorbehalten.",
             "privacy": "Datenschutz",
             "social_heading": "Social-Media-Links",
             "terms": "AGB"
         },
-        "collection_grid": {
-            "label": "Kollektion",
-            "pagination": "Seitennummerierung"
+        "cart": {
+            "checkout": "Zur Kasse",
+            "continue_shopping": "Weiter einkaufen",
+            "decrease_qty": "Menge verringern",
+            "empty_copy": "Sieht so aus, als hätten Sie noch nichts hinzugefügt.",
+            "empty_cta": "Jetzt einkaufen",
+            "empty_title": "Ihr Warenkorb ist leer",
+            "free": "Kostenlos",
+            "increase_qty": "Menge erhöhen",
+            "order_summary": "Bestellübersicht",
+            "price": "Preis",
+            "product": "Produkt",
+            "quantity": "Menge",
+            "remove": "{{ title }} entfernen",
+            "shipping": "Versand",
+            "subtotal": "Zwischensumme",
+            "title": "Warenkorb",
+            "total": "Gesamtsumme"
         },
         "header": {
             "shop_now": "Jetzt einkaufen"
+        },
+        "collection_grid": {
+            "label": "Kollektion",
+            "pagination": "Seitennummerierung"
         },
         "product_card": {
             "bestseller": "Bestseller",
@@ -619,6 +626,18 @@
         },
         "featured_products": {
             "empty": "In dieser Kollektion sind noch keine Produkte verfügbar."
+        },
+        "product": {
+            "based_on": "Basierend auf {{ count }} Bewertungen",
+            "breadcrumb_shop": "Shop",
+            "close_size_guide": "Größentabelle schließen",
+            "decrease_qty": "Menge verringern",
+            "increase_qty": "Menge erhöhen",
+            "reviews": "Bewertungen",
+            "select_size": "Größe auswählen",
+            "size_guide": "Größentabelle",
+            "size_guide_tip": "Messen Sie Ihren Fuß von der Ferse bis zur Spitze und gleichen Sie den längsten Fuß mit der Tabelle unten ab. Liegen Sie zwischen zwei Größen, empfehlen wir die größere.",
+            "zoom_image": "Bild vergrößern"
         }
     }
 }

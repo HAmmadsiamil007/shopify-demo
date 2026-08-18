@@ -6,7 +6,8 @@
       "forms": "Formulaires",
       "info_trust": "Info et confiance",
       "products": "Produits",
-      "storytelling": "Storytelling"
+      "storytelling": "Storytelling",
+      "cart": "Panier"
     },
     "aether-announcement-bar": {
       "name": "Barre d'annonce (AETHER)",
@@ -268,6 +269,14 @@
       "presets": {
         "default": {
           "name": "Hero"
+        }
+      }
+    },
+    "aether-cart-items": {
+      "name": "Panier (AETHER)",
+      "presets": {
+        "default": {
+          "name": "Panier"
         }
       }
     },

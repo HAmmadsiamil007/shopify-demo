@@ -1,0 +1,150 @@
+<section class="aether-cart-section" data-section-type="aether-cart-items">
+  {%- comment -%}
+    Frozen cart page hero (cart.html inline CSS: padding 160/60, h1 2.5rem
+    Cabinet 700, breadcrumb centered).
+  {%- endcomment -%}
+  <div class="aether-cart-hero">
+    <div class="aether-container">
+      <h1 class="aether-cart-hero-title">{{ 'aether.cart.title' | t }}</h1>
+      <nav class="aether-cart-breadcrumb" aria-label="{{ 'general.breadcrumbs.home' | t }}">
+        <a href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t }}</a>
+        <span class="aether-cart-breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="aether-cart-breadcrumb-current" aria-current="page">{{ 'aether.cart.title' | t }}</span>
+      </nav>
+    </div>
+  </div>
+
+  <div class="aether-container">
+    {%- if cart.item_count > 0 -%}
+      {%- comment -%}
+        Frozen cart.html:476-546 — row grid 2fr 1fr 1fr 1fr 50px, borders
+        #1A1A1A, padding 30/0. Quantity updates go through the canonical
+        PHANTOM cart:quantity bus (ui-quantity.js / theme.js CartForm) which
+        POSTs /cart/change.js and re-emits cart:updated.
+      {%- endcomment -%}
+      <div class="aether-cart-table-header" aria-hidden="true">
+        <span>{{ 'aether.cart.product' | t }}</span>
+        <span>{{ 'aether.cart.price' | t }}</span>
+        <span>{{ 'aether.cart.quantity' | t }}</span>
+        <span>{{ 'aether.cart.total' | t }}</span>
+        <span></span>
+      </div>
+
+      <form action="{{ routes.cart_url }}" method="post" class="aether-cart-form" data-aether-cart-form>
+        {%- for item in cart.items -%}
+          <div class="aether-cart-item" data-aether-cart-item data-aether-item-key="{{ item.key }}" data-line-index="{{ forloop.index }}">
+            <div class="aether-cart-item-info">
+              {%- if item.image != blank -%}
+                {{ item.image | image_url: width: 200 | image_tag: loading: 'lazy', class: 'aether-cart-item-img', alt: item.product.title | escape }}
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'aether-cart-item-img' }}
+              {%- endif -%}
+              <div>
+                <div class="aether-cart-item-name">{{ item.product.title | escape }}</div>
+                {%- unless item.variant.title == 'Default Title' -%}
+                  <div class="aether-cart-item-variant">{{ item.variant.title | escape }}</div>
+                {%- endunless -%}
+                {%- if item.selling_plan_allocation != blank -%}
+                  <div class="aether-cart-item-variant">{{ item.selling_plan_allocation.selling_plan.name }}</div>
+                {%- endif -%}
+                {%- if item.line_level_discount_allocations != blank -%}
+                  <div class="aether-cart-item-discounts">
+                    {%- for discount_allocation in item.line_level_discount_allocations -%}
+                      <span class="aether-cart-item-discount">{{ discount_allocation.discount_application.title }} (−{{ discount_allocation.amount | money }})</span>
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+
+            <div class="aether-cart-item-price">{{ item.final_price | money }}</div>
+
+            <div class="aether-cart-item-qty">
+              <div class="aether-qty" data-aether-qty>
+                <button type="button" class="aether-qty-btn" data-aether-qty-btn="-1" aria-label="{{ 'aether.cart.decrease_qty' | t }}">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
+                </button>
+                <input
+                  type="number"
+                  name="updates[]"
+                  value="{{ item.quantity }}"
+                  min="0"
+                  data-aether-qty-input
+                  class="aether-qty-value"
+                  aria-label="{{ 'aether.cart.quantity' | t }}"
+                >
+                <button type="button" class="aether-qty-btn" data-aether-qty-btn="1" aria-label="{{ 'aether.cart.increase_qty' | t }}">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="aether-cart-item-total" data-aether-line-total>{{ item.final_line_price | money }}</div>
+
+            <button type="button" class="aether-cart-item-remove" data-aether-cart-remove aria-label="{{ 'aether.cart.remove' | t: title: item.product.title | escape }}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+          </div>
+        {%- endfor -%}
+
+        <div class="aether-cart-continue">
+          <a href="{{ routes.all_products_collection_url }}" class="aether-continue-shopping">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m0 0l6 6m-6-6l6-6"/></svg>
+            {{ 'aether.cart.continue_shopping' | t }}
+          </a>
+        </div>
+      </form>
+
+      <div class="aether-cart-summary">
+        <h3>{{ 'aether.cart.order_summary' | t }}</h3>
+        <div class="aether-summary-row">
+          <span class="aether-summary-label">{{ 'aether.cart.subtotal' | t }}</span>
+          <span class="aether-summary-value" data-aether-subtotal>{{ cart.total_price | money }}</span>
+        </div>
+        {%- if cart.cart_level_discount_applications != blank -%}
+          {%- for cart_discount in cart.cart_level_discount_applications -%}
+            <div class="aether-summary-row">
+              <span class="aether-summary-label">{{ cart_discount.title }}</span>
+              <span class="aether-summary-value aether-summary-discount">−{{ cart_discount.total_allocated_amount | money }}</span>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+        <div class="aether-summary-row">
+          <span class="aether-summary-label">{{ 'aether.cart.shipping' | t }}</span>
+          <span class="aether-summary-value aether-summary-free">{{ 'aether.cart.free' | t }}</span>
+        </div>
+        <div class="aether-summary-row aether-summary-total">
+          <span class="aether-summary-label">{{ 'aether.cart.total' | t }}</span>
+          <span class="aether-summary-value" data-aether-cart-total>{{ cart.total_price | money }}</span>
+        </div>
+        <a href="{{ routes.checkout_url }}" class="aether-btn aether-btn-primary aether-checkout-btn">{{ 'aether.cart.checkout' | t }}</a>
+        <a href="{{ routes.all_products_collection_url }}" class="aether-continue-shopping aether-continue-shopping--summary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m0 0l6 6m-6-6l6-6"/></svg>
+          {{ 'aether.cart.continue_shopping' | t }}
+        </a>
+      </div>
+    {%- else -%}
+      <div class="aether-cart-empty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <h2>{{ 'aether.cart.empty_title' | t }}</h2>
+        <p>{{ 'aether.cart.empty_copy' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="aether-btn aether-btn-primary">{{ 'aether.cart.empty_cta' | t }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "t:sections.aether-cart-items.name",
+    "presets": [
+      {
+        "name": "t:sections.aether-cart-items.presets.default.name",
+        "category": "t:sections.categories.cart"
+      }
+    ],
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    }
+  }
+{% endschema %}

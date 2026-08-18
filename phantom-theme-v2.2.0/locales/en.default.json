@@ -579,30 +579,37 @@
     }
 ,
     "aether": {
-        "product": {
-            "based_on": "Based on {{ count }} reviews",
-            "breadcrumb_shop": "Shop",
-            "close_size_guide": "Close size guide",
-            "decrease_qty": "Decrease quantity",
-            "increase_qty": "Increase quantity",
-            "reviews": "reviews",
-            "select_size": "Select size",
-            "size_guide": "Size guide",
-            "size_guide_tip": "Measure your foot from heel to toe and match your longest foot to the table below. If between sizes, we recommend sizing up.",
-            "zoom_image": "Zoom image"
-        },
         "footer": {
             "all_rights_reserved": "All Rights Reserved.",
             "privacy": "Privacy",
             "social_heading": "Social media links",
             "terms": "Terms"
         },
-        "collection_grid": {
-            "label": "Collection",
-            "pagination": "Pagination"
+        "cart": {
+            "checkout": "Checkout",
+            "continue_shopping": "Continue shopping",
+            "decrease_qty": "Decrease quantity",
+            "empty_copy": "Looks like you have not added anything yet.",
+            "empty_cta": "Start shopping",
+            "empty_title": "Your cart is empty",
+            "free": "Free",
+            "increase_qty": "Increase quantity",
+            "order_summary": "Order summary",
+            "price": "Price",
+            "product": "Product",
+            "quantity": "Quantity",
+            "remove": "Remove {{ title }}",
+            "shipping": "Shipping",
+            "subtotal": "Subtotal",
+            "title": "Cart",
+            "total": "Total"
         },
         "header": {
             "shop_now": "Shop Now"
+        },
+        "collection_grid": {
+            "label": "Collection",
+            "pagination": "Pagination"
         },
         "product_card": {
             "bestseller": "Bestseller",
@@ -619,6 +626,18 @@
         },
         "featured_products": {
             "empty": "No products available in this collection yet."
+        },
+        "product": {
+            "based_on": "Based on {{ count }} reviews",
+            "breadcrumb_shop": "Shop",
+            "close_size_guide": "Close size guide",
+            "decrease_qty": "Decrease quantity",
+            "increase_qty": "Increase quantity",
+            "reviews": "reviews",
+            "select_size": "Select size",
+            "size_guide": "Size guide",
+            "size_guide_tip": "Measure your foot from heel to toe and match your longest foot to the table below. If between sizes, we recommend sizing up.",
+            "zoom_image": "Zoom image"
         }
     }
 }

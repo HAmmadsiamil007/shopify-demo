@@ -579,30 +579,37 @@
   }
 ,
     "aether": {
-        "product": {
-            "based_on": "Basé sur {{ count }} avis",
-            "breadcrumb_shop": "Boutique",
-            "close_size_guide": "Fermer le guide des tailles",
-            "decrease_qty": "Diminuer la quantité",
-            "increase_qty": "Augmenter la quantité",
-            "reviews": "avis",
-            "select_size": "Sélectionner la taille",
-            "size_guide": "Guide des tailles",
-            "size_guide_tip": "Mesurez votre pied du talon à l'orteil et faites correspondre le pied le plus long au tableau ci-dessous. Entre deux tailles, nous recommandons de prendre la taille au-dessus.",
-            "zoom_image": "Agrandir l'image"
-        },
         "footer": {
             "all_rights_reserved": "Tous droits réservés.",
             "privacy": "Confidentialité",
             "social_heading": "Liens vers les réseaux sociaux",
             "terms": "CGU"
         },
-        "collection_grid": {
-            "label": "Collection",
-            "pagination": "Pagination"
+        "cart": {
+            "checkout": "Passer à la caisse",
+            "continue_shopping": "Continuer les achats",
+            "decrease_qty": "Diminuer la quantité",
+            "empty_copy": "On dirait que vous n'avez encore rien ajouté.",
+            "empty_cta": "Commencer les achats",
+            "empty_title": "Votre panier est vide",
+            "free": "Gratuite",
+            "increase_qty": "Augmenter la quantité",
+            "order_summary": "Récapitulatif de la commande",
+            "price": "Prix",
+            "product": "Produit",
+            "quantity": "Quantité",
+            "remove": "Retirer {{ title }}",
+            "shipping": "Livraison",
+            "subtotal": "Sous-total",
+            "title": "Panier",
+            "total": "Total"
         },
         "header": {
             "shop_now": "Acheter maintenant"
+        },
+        "collection_grid": {
+            "label": "Collection",
+            "pagination": "Pagination"
         },
         "product_card": {
             "bestseller": "Meilleure vente",
@@ -619,6 +626,18 @@
         },
         "featured_products": {
             "empty": "Aucun produit disponible dans cette collection pour le moment."
+        },
+        "product": {
+            "based_on": "Basé sur {{ count }} avis",
+            "breadcrumb_shop": "Boutique",
+            "close_size_guide": "Fermer le guide des tailles",
+            "decrease_qty": "Diminuer la quantité",
+            "increase_qty": "Augmenter la quantité",
+            "reviews": "avis",
+            "select_size": "Sélectionner la taille",
+            "size_guide": "Guide des tailles",
+            "size_guide_tip": "Mesurez votre pied du talon à l'orteil et faites correspondre le pied le plus long au tableau ci-dessous. Entre deux tailles, nous recommandons de prendre la taille au-dessus.",
+            "zoom_image": "Agrandir l'image"
         }
     }
 }

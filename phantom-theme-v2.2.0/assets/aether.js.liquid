@@ -643,6 +643,129 @@ import { loadScript, loadCSS } from 'theme-resource-loader'
     }
   }
 
+  // Task 9 — cart items. Reuses the canonical PHANTOM bus (cart:quantity /
+  // cart:updated) and the theme.cart.changeItem helper (POST /cart/change.js)
+  // when present; falls back to a minimal fetch wrapper. Owns presentation only.
+  function aetherChangeCartItem(key, qty) {
+    if (window.theme && theme.cart && typeof theme.cart.changeItem === 'function') {
+      return theme.cart.changeItem(key, qty).then(function (text) {
+        try { return JSON.parse(text) } catch (e) { return null }
+      })
+    }
+    return fetch('/cart/change.js?t=' + Date.now(), {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({ id: key, quantity: qty })
+    }).then(function (r) { return r.json() })
+  }
+
+  CONTROLLERS['aether-cart-items'] = {
+    init(el) {
+      this._el = el
+      this._signal = new AbortController()
+      var signal = this._signal.signal
+
+      this._onQty = function (e) {
+        var btn = e.target.closest('[data-aether-qty-btn]')
+        if (!btn) return
+        var qtyEl = btn.closest('[data-aether-qty]')
+        var row = btn.closest('[data-aether-cart-item]')
+        if (!qtyEl || !row) return
+        var input = qtyEl.querySelector('[data-aether-qty-input]')
+        var step = parseInt(btn.getAttribute('data-aether-qty-btn'), 10)
+        var qty = (parseInt(input.value, 10) || 1) + step
+        qty = Math.max(0, qty)
+        input.value = String(qty)
+        var key = row.getAttribute('data-aether-item-key')
+        if (!key) return
+        this._pending(key, qty, row)
+      }.bind(this)
+
+      this._onRemove = function (e) {
+        var btn = e.target.closest('[data-aether-cart-remove]')
+        if (!btn) return
+        var row = btn.closest('[data-aether-cart-item]')
+        if (!row) return
+        var key = row.getAttribute('data-aether-item-key')
+        if (!key) return
+        this._pending(key, 0, row)
+      }.bind(this)
+
+      el.addEventListener('click', this._onQty, { signal: signal })
+      el.addEventListener('click', this._onRemove, { signal: signal })
+    },
+
+    _pending(key, qty, row) {
+      if (this._busy) return
+      this._busy = true
+      row.classList.add('aether-cart-item--loading')
+      aetherChangeCartItem(key, qty)
+        .then(function (cart) {
+          if (cart && cart.item_count > 0) {
+            // Re-render the changed line + summary from the canonical response.
+            var item = cart.items.find(function (i) { return i.key === key })
+            if (item && row.isConnected) {
+              var totalEl = row.querySelector('[data-aether-line-total]')
+              if (totalEl) totalEl.textContent = item.line_price ? this._money(item.line_price) : ''
+            }
+            this._renderSummary(cart)
+          } else if (cart && cart.item_count === 0 && this._el.isConnected) {
+            // Cart emptied: swap to the empty state (server-rendered copy).
+            window.location.href = window.Shopify && Shopify.routes && Shopify.routes.root
+              ? Shopify.routes.root + 'cart'
+              : '/cart'
+            return
+          }
+          // Canonical refresh bus: PHANTOM consumers (header count, drawer)
+          // react to cart:updated — fire it after our own mutation.
+          document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart: cart } }))
+        }.bind(this))
+        .catch(function () { /* transient — keep the row usable */ })
+        .finally(function () {
+          this._busy = false
+          if (row.isConnected) row.classList.remove('aether-cart-item--loading')
+        }.bind(this))
+    },
+
+    _renderSummary(cart) {
+      var subtotalEl = this._el.querySelector('[data-aether-subtotal]')
+      var totalEl = this._el.querySelector('[data-aether-cart-total]')
+      if (subtotalEl && cart.items_subtotal_price != null) {
+        subtotalEl.textContent = this._money(cart.items_subtotal_price)
+      }
+      if (totalEl && cart.total_price != null) {
+        totalEl.textContent = this._money(cart.total_price)
+      }
+    },
+
+    _money(cents) {
+      if (window.theme && theme.Currency && typeof theme.Currency.formatMoney === 'function') {
+        return theme.Currency.formatMoney(cents, theme.settings.moneyFormat)
+      }
+      if (window.Shopify && typeof Shopify.formatMoney === 'function') {
+        return Shopify.formatMoney(cents, Shopify.money_format || {% raw %}'{{amount}}'{% endraw %})
+      }
+      return '$' + (cents / 100).toFixed(2)
+    },
+
+    destroy() {
+      if (this._signal) this._signal.abort()
+      this._signal = null
+      this._el = null
+      this._busy = false
+    },
+
+    refresh(el) {
+      this.destroy()
+      this.init(el || this._el)
+    }
+  }
+
   window.AetherRuntime = window.AetherRuntime || AetherRuntime
 
   window.addEventListener(EVENTS.themeReady, function () {

@@ -6,7 +6,8 @@
       "forms": "Forms",
       "info_trust": "Info & trust",
       "products": "Products",
-      "storytelling": "Storytelling"
+      "storytelling": "Storytelling",
+      "cart": "Carrinho"
     },
     "aether-announcement-bar": {
       "name": "Barra de anúncios (AETHER)",
@@ -268,6 +269,14 @@
       "presets": {
         "default": {
           "name": "Hero"
+        }
+      }
+    },
+    "aether-cart-items": {
+      "name": "Carrinho (AETHER)",
+      "presets": {
+        "default": {
+          "name": "Carrinho"
         }
       }
     },
