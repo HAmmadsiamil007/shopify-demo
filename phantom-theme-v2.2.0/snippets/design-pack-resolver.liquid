@@ -2,7 +2,7 @@
 {% comment %}
   Design Pack Runtime — active design pack resolver (single registration point).
   PHANTOM Core contract: consumers read ONLY dp_active / dp_asset / dp_enabled /
-  dp_header_group / dp_footer_group / dp_popup_group.
+  dp_header_group / dp_footer_group / dp_popup_group / dp_content_asset.
   Never add pack-name conditionals here or in theme.liquid — extend the seven
   positional lists below (same index across all). check-registry.mjs gates
   integrity; the first entry is always the production default (aether).
@@ -62,3 +62,17 @@
 {%- assign dp_header_group = dp_header_groups[dp_index] -%}
 {%- assign dp_footer_group = dp_footer_groups[dp_index] -%}
 {%- assign dp_popup_group = dp_popup_groups[dp_index] -%}
+
+{%- comment -%}
+  Content asset gate (Wave 2 T1): dp_content_asset resolves to 'aether-content'
+  only for content templates (blog, article, page, search, 404, password) when
+  the pack is enabled; commerce templates emit no content assets. Consumers:
+  theme.liquid loader (stylesheet + module script) only.
+{%- endcomment -%}
+{%- assign dp_content_templates = 'blog,article,page,search,404,password' | split: ',' -%}
+{%- assign dp_content_asset = nil -%}
+{%- if dp_enabled -%}
+  {%- if dp_content_templates contains template.name -%}
+    {%- assign dp_content_asset = 'aether-content' -%}
+  {%- endif -%}
+{%- endif -%}

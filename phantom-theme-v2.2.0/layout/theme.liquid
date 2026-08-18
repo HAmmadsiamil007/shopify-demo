@@ -43,6 +43,11 @@
     {{ dp_asset | append: '.css.liquid' | asset_url | stylesheet_tag }}
   {%- endif -%}
   {%- # theme-check-enable UndefinedObject -%}
+  {%- # theme-check-disable UndefinedObject -%}
+  {%- if dp_content_asset -%}
+    {{ dp_content_asset | append: '.css.liquid' | asset_url | stylesheet_tag }}
+  {%- endif -%}
+  {%- # theme-check-enable UndefinedObject -%}
   {%- render 'css-variables' -%}
 
   <script>
@@ -376,6 +381,11 @@
   {%- # theme-check-disable UndefinedObject -%}
   {%- if dp_enabled -%}
     <script type="module" src="{{ dp_asset | append: '.js.liquid' | asset_url }}"></script>
+  {%- endif -%}
+  {%- # theme-check-enable UndefinedObject -%}
+  {%- # theme-check-disable UndefinedObject -%}
+  {%- if dp_content_asset -%}
+    <script type="module" src="{{ dp_content_asset | append: '.js.liquid' | asset_url }}" defer></script>
   {%- endif -%}
   {%- # theme-check-enable UndefinedObject -%}
 

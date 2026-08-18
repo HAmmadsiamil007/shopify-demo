@@ -221,6 +221,42 @@ for (const f of ['aether-swiper.min.js','aether-swiper.min.css','aether-gsap.min
   check(`aether asset exists ${f}`, fs.existsSync(path.join(THEME_DIR, 'assets', f)), '');
 }
 
+// ── AETHER CONTENT ASSETS (Wave 2 T1) ───────────────────────────────────────
+// Skeletons ship a comment ledger only; budget measured the same way as the
+// aether.css base (liquid tags + html comments stripped, UTF-8 bytes).
+const contentCssFile = path.join(THEME_DIR, 'assets', 'aether-content.css.liquid');
+const contentJsFile = path.join(THEME_DIR, 'assets', 'aether-content.js.liquid');
+const contentCssBytes = fs.existsSync(contentCssFile)
+  ? Buffer.byteLength(stripLiquidAndComments(fs.readFileSync(contentCssFile, 'utf8')), 'utf8')
+  : -1;
+const contentJsBytes = fs.existsSync(contentJsFile)
+  ? Buffer.byteLength(stripLiquidAndComments(fs.readFileSync(contentJsFile, 'utf8')), 'utf8')
+  : -1;
+check(`content asset exists aether-content.css.liquid`, fs.existsSync(contentCssFile), '');
+check(`content asset exists aether-content.js.liquid`, fs.existsSync(contentJsFile), '');
+check('BUDGET aether-content.css.liquid <= 40960 B', contentCssBytes >= 0 && contentCssBytes <= 40960, `${contentCssBytes} B`);
+check('BUDGET aether-content.js.liquid <= 20480 B', contentJsBytes >= 0 && contentJsBytes <= 20480, `${contentJsBytes} B`);
+
+// ── AETHER CONTENT GATE (Wave 2 T1) — mirrors design-pack-resolver.liquid ───
+// dp_content_asset: 'aether-content' on content templates when dp_enabled,
+// nil on commerce templates. The template list is parsed from the resolver
+// source so the gate test can never drift from the resolver.
+const contentListRe = /assign\s+dp_content_templates\s*=\s*'([^']*)'\s*\|\s*split:\s*','/;
+const contentListMatch = contentListRe.exec(resolver);
+const contentTemplates = contentListMatch ? contentListMatch[1].split(',') : [];
+check('resolver defines dp_content_templates', contentListMatch !== null && contentTemplates.length > 0,
+  contentListMatch ? contentListMatch[1] : 'gate missing from resolver');
+const contentAssetFor = (templateName) =>
+  contentTemplates.includes(templateName) ? 'aether-content' : null;
+for (const t of ['blog', 'article', 'page', 'search', '404', 'password']) {
+  const got = contentAssetFor(t);
+  check(`content gate emits on ${t}`, got === 'aether-content', `got=${JSON.stringify(got)}`);
+}
+for (const t of ['index', 'collection', 'product', 'cart', 'list-collections']) {
+  const got = contentAssetFor(t);
+  check(`content gate silent on ${t}`, got === null, `got=${JSON.stringify(got)}`);
+}
+
 const ok = results.length > 0 && results.every((r) => r.ok);
 console.log(`\nREGISTRY: ${ok ? 'PASS' : 'FAIL'}`);
 process.exit(ok ? 0 : 1);
