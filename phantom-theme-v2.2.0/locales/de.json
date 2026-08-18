@@ -602,6 +602,12 @@
             "pagination": "Seitennummerierung"
         },
         "content": {
+            "article": {
+                "continue_reading": "Weiterlesen",
+                "min_read": "Min. Lesezeit",
+                "related_posts": "Ähnliche Beiträge",
+                "written_by": "Geschrieben von"
+            },
             "blog": {
                 "empty": "Keine Blog-Beiträge verfügbar",
                 "read_more": "Weiterlesen"

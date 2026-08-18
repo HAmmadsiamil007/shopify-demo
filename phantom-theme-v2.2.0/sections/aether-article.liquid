@@ -1,0 +1,153 @@
+{% comment %}
+  AETHER article section (plan Task 4) — frozen single-blog.html:203-303
+  (blog-hero 60vh + overlay, article-meta author/date/read-time with — separators,
+  article-body 720px centered, author-bio flex, related-posts 3 blog cards).
+
+  D-notes:
+  - Fog layers (hero-fog) are animation artifacts; AETHER does not replicate.
+  - Read-time computed server-side (amendment 8): wordcount / 200, min 1.
+  - Related posts reuse aether-blog-card pattern (same as aether-blog-posts).
+  - article.content is rendered via Liquid's output (PHANTOM rich-text renderer
+    is NOT used here — this is article context, not page prose).
+{% endcomment %}
+
+{%- liquid
+  assign words = article.content | strip_html | split: ' ' | size
+  assign read_time = words | divided_by: 200 | at_least: 1
+-%}
+
+<section class="aether-article" data-section-type="aether-article">
+  {%- comment -%} Article Hero (blog-hero) — 60vh, full-bleed image + gradient overlay {%- endcomment -%}
+  {%- if article.image -%}
+    <div class="aether-article-hero">
+      <img
+        class="aether-article-hero__image"
+        src="{{ article.image | image_url: width: 1800 }}"
+        srcset="{{ article.image | image_url: width: 1000 }} 1000w, {{ article.image | image_url: width: 1400 }} 1400w, {{ article.image | image_url: width: 1800 }} 1800w"
+        sizes="100vw"
+        alt="{{ article.image.alt | escape }}"
+        width="{{ article.image.width }}"
+        height="{{ article.image.height }}"
+        loading="eager"
+      >
+      <div class="aether-article-hero__overlay" aria-hidden="true"></div>
+      <div class="aether-container aether-article-hero__content">
+        {%- if article.tags.size > 0 -%}
+          <span class="aether-blog-card__category">{{ article.tags.first }}</span>
+        {%- endif -%}
+        <h1 class="aether-article-hero__title">{{ article.title }}</h1>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} Article Content {%- endcomment -%}
+  <div class="aether-article-section">
+    <div class="aether-container">
+
+      {%- comment -%} Article Meta — author — date — read-time {%- endcomment -%}
+      {%- if section.settings.show_author or article.published_at != blank or read_time -%}
+        <div class="aether-article-meta">
+          {%- if section.settings.show_author -%}
+            <span class="aether-article-meta__author">{{ 'aether.content.article.written_by' | t }} {{ article.author }}</span>
+          {%- endif -%}
+          {%- if article.published_at != blank -%}
+            {%- if section.settings.show_author -%}<span class="aether-article-meta__separator" aria-hidden="true">—</span>{%- endif -%}
+            <span class="aether-article-meta__date">{{ article.published_at | date: format: 'month_day_year' }}</span>
+          {%- endif -%}
+          {%- if read_time > 0 -%}
+            <span class="aether-article-meta__separator" aria-hidden="true">—</span>
+            <span class="aether-article-meta__read-time">{{ read_time }} {{ 'aether.content.article.min_read' | t }}</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Article Body {%- endcomment -%}
+      <div class="aether-article-body">
+        {{ article.content }}
+      </div>
+
+      {%- comment -%} Author Bio {%- endcomment -%}
+      {%- if section.settings.show_author -%}
+        <div class="aether-article-author-bio">
+          <div class="aether-article-author-bio__avatar">
+            <i class="fas fa-user" aria-hidden="true"></i>
+          </div>
+          <div class="aether-article-author-bio__info">
+            <strong>{{ article.author }}</strong>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- comment -%} Related Posts {%- endcomment -%}
+  {%- if section.settings.show_related and blog.articles_count > 1 -%}
+    {%- assign related_count = 0 -%}
+    {%- assign max_related = section.settings.related_count -%}
+    <div class="aether-related">
+      <div class="aether-container">
+        <div class="aether-section-header">
+          <span class="aether-section-label">{{ 'aether.content.article.continue_reading' | t }}</span>
+        </div>
+        <div class="aether-blog-grid aether-blog-grid--cols-3">
+          {%- for blog_article in blog.articles -%}
+            {%- if blog_article.url != article.url and related_count < max_related -%}
+              {%- assign related_count = related_count | plus: 1 -%}
+              <a href="{{ blog_article.url }}" class="aether-blog-card" data-reveal-item>
+                {%- if blog_article.image -%}
+                  <div class="aether-blog-card__image" data-image-zoom>
+                    <img
+                      src="{{ blog_article.image | image_url: width: 1200 }}"
+                      alt="{{ blog_article.image.alt | escape }}"
+                      width="{{ blog_article.image.width }}"
+                      height="{{ blog_article.image.height }}"
+                      loading="lazy"
+                    >
+                    {%- if blog_article.tags.size > 0 -%}
+                      <span class="aether-blog-card__category">{{ blog_article.tags.first }}</span>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+                <div class="aether-blog-card__content">
+                  <span class="aether-blog-card__date">{{ blog_article.published_at | date: format: 'month_day_year' }}</span>
+                  <h3 class="aether-blog-card__title">{{ blog_article.title }}</h3>
+                  <p class="aether-blog-card__excerpt">{{ blog_article.excerpt_or_content | strip_html | truncate: 120 }}</p>
+                  <span class="aether-blog-card__read-more">{{ 'aether.content.blog.read_more' | t }} <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                </div>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.aether-article.name",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "default": true,
+      "label": "t:sections.aether-article.settings.show_author.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_related",
+      "default": true,
+      "label": "t:sections.aether-article.settings.show_related.label"
+    },
+    {
+      "type": "range",
+      "id": "related_count",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 3,
+      "label": "t:sections.aether-article.settings.related_count.label"
+    }
+  ]
+}
+{% endschema %}

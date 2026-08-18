@@ -602,6 +602,12 @@
             "pagination": "Pagination"
         },
         "content": {
+            "article": {
+                "continue_reading": "Continue Reading",
+                "min_read": "min read",
+                "related_posts": "Related Posts",
+                "written_by": "Written by"
+            },
             "blog": {
                 "empty": "No blog posts available",
                 "read_more": "Read more"

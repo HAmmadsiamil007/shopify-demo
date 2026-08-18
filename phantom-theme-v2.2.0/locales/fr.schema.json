@@ -111,6 +111,20 @@
                 }
             }
         },
+        "aether-article": {
+            "name": "Article (AETHER)",
+            "settings": {
+                "show_author": {
+                    "label": "Afficher l'auteur"
+                },
+                "show_related": {
+                    "label": "Afficher les articles similaires"
+                },
+                "related_count": {
+                    "label": "Nombre d'articles similaires"
+                }
+            }
+        },
         "aether-blog-posts": {
             "name": "Articles (AETHER)",
             "settings": {
