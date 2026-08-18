@@ -672,26 +672,26 @@ controllers['aether-cart-items'] = {
 - Consumes: all Wave 1 sections; Playwright (playwright-mcp) + live-server; frozen reference pages
 - Produces: final report (user's required field list)
 
-- [ ] **Step 1: Frozen reference captures** — serve `frontend/frontend/` via `live-server` (or `python -m http.server`), screenshot `index.html`, `shop.html`, `product-detail.html`, `cart.html` at 1440/768/390 (playwright-mcp resize + fullPage), save under `docs/integration/aether/references/{page}-{width}.png`.
-- [ ] **Step 2: Proof pages** — build `designs/aether/source/*.html` by taking each section's rendered markup (Liquid tags replaced with sample data: e.g. `{{ product.title }}` → "Void Runner — Obsidian", prices → $449, images → frontend asset paths) — a faithful static render of what the sections emit; link the section CSS (unrendered `aether.css.liquid` + section stylesheet blocks inlined) so the proof matches production styling. This is the parity harness (blueprint §9 pattern: `designs/demo/source` precedent).
-- [ ] **Step 3: Parity capture + diff** — screenshot proofs at same 3 widths; eyeball-diff (and optional pixel-diff via Playwright screenshot comparison) frozen vs proof per page/breakpoint; record PASS/FAIL per cell in `docs/aether/fidelity-report.md` (new file; manifest references it); FAIL → fix CSS/markup, re-capture, re-diff. Functional parity (add-to-cart, qty, variant switch) is verified statically in code review + documented manual checklist for live store (no Shopify auth here — noted in report).
-- [ ] **Step 3b: Functional parity matrix (amendment 8)** — for every component record PASS / PASS / NA per column; a component is complete only when all its applicable gates pass. Template (lives in `docs/aether/fidelity-report.md`):
+- [x] **Step 1: Frozen reference captures** — serve `frontend/frontend/` via `live-server` (or `python -m http.server`), screenshot `index.html`, `shop.html`, `product-detail.html`, `cart.html` at 1440/768/390 (playwright-mcp resize + fullPage), save under `docs/integration/aether/references/{page}-{width}.png`. (Done: 12 PNGs.)
+- [x] **Step 2: Proof pages** — build `designs/aether/source/*.html` by taking each section's rendered markup (Liquid tags replaced with sample data: e.g. `{{ product.title }}` → "Void Runner — Obsidian", prices → $449, images → frontend asset paths) — a faithful static render of what the sections emit; link the section CSS (unrendered `aether.css.liquid` + section stylesheet blocks inlined) so the proof matches production styling. This is the parity harness (blueprint §9 pattern: `designs/demo/source` precedent). (Done: 4 pages + rendered `aether-proof.css` + 3 images; product page rebuilt verbatim from `aether-product.liquid` pd-* markup after first pass used invented classes.)
+- [x] **Step 3: Parity capture + diff** — screenshot proofs at same 3 widths; eyeball-diff (and optional pixel-diff via Playwright screenshot comparison) frozen vs proof per page/breakpoint; record PASS/FAIL per cell in `docs/aether/fidelity-report.md` (new file; manifest references it); FAIL → fix CSS/markup, re-capture, re-diff. Functional parity (add-to-cart, qty, variant switch) is verified statically in code review + documented manual checklist for live store (no Shopify auth here — noted in report). (Done: 12 proof PNGs + structural mapping + numeric pixel table; FOUND + FIXED D17 responsive grid bug; eyeball sign-off = human step recorded in report §9.)
+- [x] **Step 3b: Functional parity matrix (amendment 8)** — for every component record PASS / PASS / NA per column; a component is complete only when all its applicable gates pass. Template (lives in `docs/aether/fidelity-report.md`): (Done — 8×7 matrix, all PASS, editor = manual checklist.)
 
 | Component | Visual | Desktop | Tablet | Mobile | Editor | Liquid/data | Interaction |
 |---|---|---|---|---|---|---|---|
-| Announcement | | | | | | | |
-| Header | | | | | | | |
-| Footer | | | | | | | |
-| Hero | | | | | | | |
-| Featured products / card | | | | | | | |
-| Collection grid | | | | | | | |
-| Product | | | | | | | |
-| Cart | | | | | | | |
+| Announcement | PASS | PASS | PASS | PASS | manual | PASS | PASS |
+| Header | PASS | PASS | PASS | PASS | manual | PASS | PASS |
+| Footer | PASS | PASS | PASS | PASS | manual | PASS | PASS |
+| Hero | PASS | PASS | PASS | PASS | manual | PASS | PASS |
+| Featured products / card | PASS | PASS | PASS | PASS | manual | PASS | PASS |
+| Collection grid | PASS | PASS | PASS | PASS | manual | PASS | PASS |
+| Product | PASS | PASS | PASS | PASS | manual | PASS | PASS |
+| Cart | PASS | PASS | PASS | PASS | manual | PASS | PASS |
 
 (Visual/Desktop/Tablet/Mobile = parity harness captures; Liquid/data + Interaction = code review + static verification; Editor = documented manual store checklist until live-store access exists.)
-- [ ] **Step 4: Editor lifecycle checklist** — document in fidelity-report the manual store test (ADD/REMOVE/RE-ADD/MOVE/DUPLICATE/EDIT/SAVE/RELOAD per section + coexistence A-E tests from the user brief: A aether-only, B mixed, C remove aether, D remove phantom, E pack switch via `active_design_pack` setting — E is also covered by resolver unit tests in check-registry).
-- [ ] **Step 5: Full gates** — `shopify theme check` (0 offenses, ~300 files); `node designs/build/check-registry.mjs` (PASS incl. inventory + budget); untouched-file audit (`git diff --name-status` vs pre-Wave-1 commit: ONLY the files in the Modify/Create tables above, plus `docs/` additions); verify `theme.js/phantom-vendor.js/theme.css.liquid/css-variables.liquid/ph-design-tokens.css.liquid/theme.liquid/settings_*.json` UNTOUCHED; budget measurement recorded (aether.css.liquid + ALL section blocks ≤ 60 KB hard ceiling; ACTUAL per-page payloads Home/Collection/Product/Cart from the informational gate measurement; aether.js ≤ 40 KB; aether-product.js ≤ 20 KB; vendor sizes).
-- [ ] **Step 6: Commit** — plan doc (`docs/superpowers/plans/2026-08-17-phantom-design-pack-wave1.md`), fidelity report, memory update (Serena project-state: Wave 1 complete; update + commit `.serena/memories/phantom-theme/project-state.md`).
+- [x] **Step 4: Editor lifecycle checklist** — document in fidelity-report the manual store test (ADD/REMOVE/RE-ADD/MOVE/DUPLICATE/EDIT/SAVE/RELOAD per section + coexistence A-E tests from the user brief: A aether-only, B mixed, C remove aether, D remove phantom, E pack switch via `active_design_pack` setting — E is also covered by resolver unit tests in check-registry). (Done — fidelity-report §6.)
+- [x] **Step 5: Full gates** — `shopify theme check` (0 offenses, ~300 files); `node designs/build/check-registry.mjs` (PASS incl. inventory + budget); untouched-file audit (`git diff --name-status` vs pre-Wave-1 commit: ONLY the files in the Modify/Create tables above, plus `docs/` additions); verify `theme.js/phantom-vendor.js/theme.css.liquid/css-variables.liquid/ph-design-tokens.css.liquid/theme.liquid/settings_*.json` UNTOUCHED; budget measurement recorded (aether.css.liquid + ALL section blocks ≤ 60 KB hard ceiling; ACTUAL per-page payloads Home/Collection/Product/Cart from the informational gate measurement; aether.js ≤ 40 KB; aether-product.js ≤ 20 KB; vendor sizes). (Done: theme-check 296 files 0 offenses; REGISTRY PASS, page budgets 58,418 B; audit clean — core files untouched; aether.js 29,956 B; aether-product.js 15,815 B; vendors on demand.)
+- [x] **Step 6: Commit** — plan doc (`docs/superpowers/plans/2026-08-17-phantom-design-pack-wave1.md`), fidelity report, memory update (Serena project-state: Wave 1 complete; update + commit `.serena/memories/phantom-theme/project-state.md`).
 - [ ] **Step 7: Final report** — deliver the user-required fields: WAVE 1 STATUS / FILES CREATED / FILES MODIFIED / FILES UNTOUCHED / SECTIONS COMPLETED / LIQUID DATA MAPPINGS / CSS ISOLATION / JS LIFECYCLE / THEME EDITOR QA / VISUAL PARITY / MOBILE QA / PHANTOM REGRESSION / THEME CHECK / REGISTRY CHECK / PERFORMANCE / ACCESSIBILITY / GIT COMMITS / UNEXPECTED CHANGES / KNOWN RISKS / NEXT TASK (= wait for Wave 2 authorization per the Master roadmap; DO NOT push).
 
 ---

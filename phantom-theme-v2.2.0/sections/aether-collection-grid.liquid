@@ -86,7 +86,7 @@
 
       {%- paginate grid_collection.products by section.settings.per_page -%}
         {%- if grid_collection.products.size > 0 -%}
-          <div class="aether-shop-grid" data-aether-reveal-group style="grid-template-columns: repeat({{ section.settings.per_row }}, 1fr)">
+          <div class="aether-shop-grid aether-shop-grid--cols-{{ section.settings.per_row }}" data-aether-reveal-group>
             {%- for product in grid_collection.products -%}
               {%- render 'aether-product-card', product: product, variant: 'simple', per_row: section.settings.per_row, collection: grid_collection -%}
             {%- endfor -%}
