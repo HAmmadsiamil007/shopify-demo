@@ -1,16 +1,72 @@
-# Design Pack Wave 1 — AETHER Commerce Core Implementation Plan
+# Design Pack Wave 1 — AETHER Commerce Core Implementation Plan (AETHER Master, Phase 1)
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Convert the approved frozen frontend (`frontend/frontend/`) into the first production AETHER commerce sections — announcement bar, header, footer, hero, featured products, collection grid, product, cart — preserving the approved visual design, while keeping PHANTOM Core untouched.
+**Goal:** Convert the approved frozen frontend (`frontend/frontend/`) into the first production AETHER commerce sections — announcement bar, header, footer, hero, featured products, collection grid, product, cart — preserving the approved visual design, while keeping PHANTOM Core untouched. This is Phase 1 of building the **AETHER MASTER** — the one reusable premium starter that every future client store is copied from.
 
-**Architecture:** AETHER is the active/default Design Pack. Sections are OS 2.0 section files rendered via `templates/*.aether.json` alternates + group alternates (`sections/header-group.aether.json` etc.). Pack JS = `window.__aetherRuntime` (extended `assets/aether.js.liquid`) mounting controllers `{ init, destroy, refresh }` keyed by `data-section-type="aether-*"`; motion via vendored GSAP; sliders via vendored Swiper; smooth scroll via vendored Lenis — all loaded on demand through `theme-resource-loader`. Visual fidelity is enforced by a parity gate: static proof pages built from the same markup the sections emit, screenshotted and compared against frozen-frontend references at 3 breakpoints.
+---
 
-**Tech Stack:** Shopify OS 2.0 Liquid sections + `{% schema %}`, Liquid templating, JS (ES modules, custom elements per PHANTOM convention), Swiper 11, GSAP 3.12.5 + ScrollTrigger, Lenis 1.1.18, Node (check-registry.mjs gate), Playwright (parity captures), theme-check.
+## Master Operating Model (business architecture — read first)
+
+The business objective is **NOT a multi-theme marketplace**. It is:
+
+> **ONE stable PHANTOM foundation + ONE premium AETHER Master frontend + MANY independent client copies.**
+
+```
+                        PHANTOM MASTER
+                              │
+               ┌──────────────┴──────────────┐
+               │                             │
+          PHANTOM CORE                  AETHER MASTER
+               │                             │
+        Shopify commerce              Premium starter UI
+        Theme runtime                 Liquid sections
+        Settings                      CSS
+        Adapters                      JS / motion
+        Cart / search                 Templates
+        Theme Editor                  Tokens / assets
+               │                             │
+               └──────────────┬──────────────┘
+                              │
+                    PROTECTED MASTER
+                              │
+          ┌───────────────────┼───────────────────┐
+          │                   │                   │
+          ▼                   ▼                   ▼
+      CLIENT A            CLIENT B            CLIENT C
+          │                   │                   │
+       modify               modify             modify
+       AETHER               AETHER             AETHER
+          │                   │                   │
+          ▼                   ▼                   ▼
+       Shopify             Shopify             Shopify
+```
+
+### Rules
+
+1. **Master immutability.** The PHANTOM + AETHER Master is the golden baseline. It is versioned/tagged (`PHANTOM-AETHER-MASTER-v1.0`, `v1.1`, …). New clients start from the latest approved master. **Never** modify the master for a client; **never** start a client from another client's customized theme.
+2. **Client copies.** Each client gets an independent copy of the master (own Git repo/branch, own Shopify theme, own assets, own build). The client's approved external frontend (HTML/CSS/JS premium design, built outside Shopify) is the visual source of truth for that copy.
+3. **AETHER transformation.** In the client copy, ONLY the AETHER presentation layer is transformed to the client's approved design: sections, snippets, templates, CSS, JS, motion, assets, tokens, composition. PHANTOM Core, commerce adapters, cart/search infrastructure, event systems, and the Theme Editor runtime are normally NOT touched.
+4. **Design freeze.** No Shopify conversion before client approval. After approval: no silent redesign; every structural deviation logged (`ORIGINAL → WHY → SHOPIFY CONSTRAINT → NEW → VISUAL IMPACT`); client changes become a new revision.
+5. **Backports are deliberate.** A client improvement is backported to the Master only when it is proven generic, reusable, safe, and explicitly approved — then it becomes a new master version. Existing clients stay independent.
+6. **No permanent design packs.** Do NOT build NOVA / LUXE / other permanent packs. The generic Design Pack runtime/resolver built in Wave 0 remains as future-proofing infrastructure (it already exists and is tested), but it is not the primary client workflow. AETHER is the reusable premium starter; each client's design lives inside that client's copy.
+7. **Conversion playbook.** After AETHER Master reaches a stable release, the next major engineering task is a *Client Conversion Playbook*: exact procedure for taking `frontend/`, freezing it, mapping components, transforming AETHER, preserving PHANTOM, and delivering a new client store repeatedly.
+
+### Master roadmap (this plan = Phase 1)
+
+- **Phase 1 (THIS plan, Wave 1):** AETHER commerce core — announcement bar, header, footer, hero, featured products, collection grid, product, cart. Gates: theme-check 0 offenses, registry PASS, CSS ≤ 60 KB hard ceiling, visual parity against the frozen frontend.
+- **Phase 1 (Wave 2):** AETHER content sections — blog, article, page, FAQ, team, testimonials, contact, newsletter, promo, 404, search, legal. Same gates.
+- **Phase 1 (Wave 3):** Customer account flow — login, register, account, addresses, password, wishlist — plus final QA.
+- **Phase 0/2 (Master hardening):** after Wave 3: full gates (theme-check, registry, visual + functional parity, editor + mobile + a11y + performance, PHANTOM regression), client-editability audit (replace header/hero/cards/product/collection/cart/footer/typography/color/motion without touching Core), tag `PHANTOM-AETHER-MASTER-v1.0`, document master version + known limitations, create the clean client-copy procedure.
+- **Phase 3+ (per client):** copy master → external client design → approval → DESIGN FREEZE → transform the copy's AETHER layer → Shopify data → QA → deliver. Never start from another client's theme.
+
+The rest of this plan is the unchanged Wave 1 execution detail. Full reference (15 phases, master-vs-client rules, DoD): `docs/superpowers/specs/2026-08-18-phantom-master-operating-model.md`.
+
+---
 
 ## Global Constraints
 
-- **AETHER is a reference implementation of the Design Pack API — the first complete pack. AETHER is NOT the Design Pack runtime/architecture. Future packs (NOVA, LUXE, client packs) must implement the same generic Design Pack contract (sections, templates, assets, settings, locales, controllers, manifest, visual source) without inheriting AETHER's settings, tokens, or visual assumptions. Nothing in this wave may hard-wire AETHER specifics into shared Core files.**
+- **AETHER is a reference implementation of the Design Pack API — the first complete pack, and the reusable premium starter (AETHER Master). AETHER is NOT the Design Pack runtime/architecture. Per the Master Operating Model, no additional permanent packs (NOVA, LUXE) are built; each future client receives an independent copy of the Master whose AETHER layer is transformed to that client's approved design. If a new pack is ever justified, it must implement the same generic Design Pack contract (sections, templates, assets, settings, locales, controllers, manifest, visual source) without inheriting AETHER's settings, tokens, or visual assumptions. Nothing in this wave may hard-wire AETHER specifics into shared Core files.**
 - **Visual source of truth:** `frontend/frontend/` is FROZEN. Do NOT redesign, simplify, or replace it. Every structural deviation must be documented as `ORIGINAL → WHY → SHOPIFY CONSTRAINT → NEW → VISUAL IMPACT` (see Task 12). No silent visual compromises.
 - **Liquid replaces DATA, never DESIGN:** map products/collections/variants/prices/images/menus/cart/URLs/settings into the approved markup. `data-phantom-*` attributes are inert WordPress-era hooks — strip them (data comes from Shopify objects now).
 - **Core is untouchable:** do NOT modify `assets/theme.js`, `assets/phantom-vendor.js`, `assets/theme.css.liquid`, `snippets/css-variables.liquid`, `assets/ph-design-tokens.css.liquid`, `layout/theme.liquid`, `config/settings_schema.json`, `config/settings_data.json`, or any non-`aether-*`/group/template/locale file, unless a task explicitly proves an unavoidable requirement (must be approved by the implementing reviewer).
@@ -568,7 +624,7 @@ controllers['aether-cart-items'] = {
 ## Task 11: Locales — all 7 schema + 7 runtime files
 
 **Files:**
-- Modify: `locales/en.default.schema.json`, `de.schema.json`, `es.schema.json`, `fr.schema.json`, `it.schema.json`, `pt-BR.schema.json`, `pt-PT.schema.json` (extend `_scripts/add-locale-keys.ps1` — gitignored tooling, rerun it)
+- Modify: `locales/en.default.schema.json`, `de.schema.json`, `es.schema.json`, `fr.schema.json`, `it.schema.json`, `pt-BR.schema.json`, `pt-PT.schema.json` (extend `_scripts/add-locale-keys.ps1` — committed theme tooling, rerun it)
 - Modify: `locales/en.default.json`, `de.json`, `es.json`, `fr.json`, `it.json`, `pt-BR.json`, `pt-PT.json` (add `t:aether.*` runtime strings)
 
 **Interfaces:**
@@ -597,7 +653,7 @@ controllers['aether-cart-items'] = {
   4. **Where render IS fine:** section-internal snippets (cards, headers, buttons) don't share state with the layout; `aether-product-card` etc. use `render` normally.
      5. Reference: `docs/superpowers/specs/2026-08-16-phantom-design-pack-architecture.md` §4, failure-register rows 1/19.
 
-- [ ] **Step 1b: Font strategy + terminology (amendments 7 + 9)** — update `docs/design-packs/design-pack-contract.md` with: (a) generic Design Pack font strategy — theme font picker OR theme-hosted font OR approved external font, with AETHER's Fontshare (Cabinet Grotesk + Satoshi) recorded as an AETHER implementation choice, not a pack requirement; (b) terminology — "AETHER is the first complete/reference implementation of the Design Pack API, NOT the Design Pack runtime; future packs (NOVA, LUXE, client packs) implement the same generic contract without inheriting AETHER's settings, tokens, or visual assumptions."
+- [ ] **Step 1b: Font strategy + terminology (amendments 7 + 9)** — update `docs/design-packs/design-pack-contract.md` with: (a) generic Design Pack font strategy — theme font picker OR theme-hosted font OR approved external font, with AETHER's Fontshare (Cabinet Grotesk + Satoshi) recorded as an AETHER implementation choice, not a pack requirement; (b) terminology per the Master Operating Model — "AETHER is the first complete/reference implementation of the Design Pack API and the reusable AETHER Master starter, NOT the Design Pack runtime; no permanent multi-pack ecosystem is built — clients receive independent copies of the Master whose AETHER layer is transformed per client design; if a new pack is ever justified it implements the same generic contract without inheriting AETHER's settings, tokens, or visual assumptions."
 
 - [ ] **Step 2: Deviations log** — materialize the pre-declared deviations table (D1-D11 above) into `docs/aether/manifest.md` (new "Wave 1 deviations" section); add any deviations discovered during implementation with the required 5-field format; any deviation NOT in the list requires the implementing reviewer to stop and flag it.
 - [ ] **Step 3: Update registry.md + manifest.md** — Wave 1 status table, component registry (8 shipped), measured budget sizes (from Task 13 QA).
@@ -636,7 +692,7 @@ controllers['aether-cart-items'] = {
 - [ ] **Step 4: Editor lifecycle checklist** — document in fidelity-report the manual store test (ADD/REMOVE/RE-ADD/MOVE/DUPLICATE/EDIT/SAVE/RELOAD per section + coexistence A-E tests from the user brief: A aether-only, B mixed, C remove aether, D remove phantom, E pack switch via `active_design_pack` setting — E is also covered by resolver unit tests in check-registry).
 - [ ] **Step 5: Full gates** — `shopify theme check` (0 offenses, ~300 files); `node designs/build/check-registry.mjs` (PASS incl. inventory + budget); untouched-file audit (`git diff --name-status` vs pre-Wave-1 commit: ONLY the files in the Modify/Create tables above, plus `docs/` additions); verify `theme.js/phantom-vendor.js/theme.css.liquid/css-variables.liquid/ph-design-tokens.css.liquid/theme.liquid/settings_*.json` UNTOUCHED; budget measurement recorded (aether.css.liquid + ALL section blocks ≤ 60 KB hard ceiling; ACTUAL per-page payloads Home/Collection/Product/Cart from the informational gate measurement; aether.js ≤ 40 KB; aether-product.js ≤ 20 KB; vendor sizes).
 - [ ] **Step 6: Commit** — plan doc (`docs/superpowers/plans/2026-08-17-phantom-design-pack-wave1.md`), fidelity report, memory update (Serena project-state: Wave 1 complete; update + commit `.serena/memories/phantom-theme/project-state.md`).
-- [ ] **Step 7: Final report** — deliver the user-required fields: WAVE 1 STATUS / FILES CREATED / FILES MODIFIED / FILES UNTOUCHED / SECTIONS COMPLETED / LIQUID DATA MAPPINGS / CSS ISOLATION / JS LIFECYCLE / THEME EDITOR QA / VISUAL PARITY / MOBILE QA / PHANTOM REGRESSION / THEME CHECK / REGISTRY CHECK / PERFORMANCE / ACCESSIBILITY / GIT COMMITS / UNEXPECTED CHANGES / KNOWN RISKS / NEXT TASK (= wait for Wave 2 authorization; DO NOT push).
+- [ ] **Step 7: Final report** — deliver the user-required fields: WAVE 1 STATUS / FILES CREATED / FILES MODIFIED / FILES UNTOUCHED / SECTIONS COMPLETED / LIQUID DATA MAPPINGS / CSS ISOLATION / JS LIFECYCLE / THEME EDITOR QA / VISUAL PARITY / MOBILE QA / PHANTOM REGRESSION / THEME CHECK / REGISTRY CHECK / PERFORMANCE / ACCESSIBILITY / GIT COMMITS / UNEXPECTED CHANGES / KNOWN RISKS / NEXT TASK (= wait for Wave 2 authorization per the Master roadmap; DO NOT push).
 
 ---
 
