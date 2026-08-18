@@ -3,62 +3,35 @@
 Theme: PHANTOM v2.3.0 (OS 2.0), rebranded from Impulse v8.2.0 by Archetype Themes.
 Path: `C:\Users\hamma\Downloads\phantom\phantom-theme\phantom-theme-v2.2.0\`
 
-## Current status: MASTER OPERATING MODEL APPROVED (2026-08-18); Wave 1 (AETHER Master Phase 1) Tasks 1–13 COMPLETE — ALL committed, NOT pushed (~34 commits ahead of origin). PENDING: human visual sign-off (fidelity-report §9), push authorization, Wave 2 authorization.
+## Current status: WAVE 2 COMPLETE (2026-08-18). Wave 0 + Wave 1 + Wave 2 ALL committed, NOT pushed (~48 commits ahead). PENDING: human visual sign-off, push authorization.
 
-### Master Operating Model (2026-08-18 — USER-APPROVED working direction)
-Spec: `docs/superpowers/specs/2026-08-18-phantom-master-operating-model.md` (committed 76b3818). Plan updated in-place: `docs/superpowers/plans/2026-08-17-phantom-design-pack-wave1.md` now opens with the Master Operating Model section + roadmap.
-- Business objective is NOT a multi-theme marketplace. Do NOT build permanent packs (NOVA/LUXE/client-XXX). Model: ONE protected PHANTOM+ AETHER MASTER → fresh independent copy per client → transform ONLY that copy's AETHER layer into the client's approved design.
-- Master is versioned/tagged (`PHANTOM-AETHER-MASTER-v1.0`), never client-modified; clients never start from another client's theme; backports are deliberate (client improvement → master only if generic/reusable/approved → new master version).
-- Client may heavily modify AETHER layer (sections/snippets/templates/CSS/JS/motion/assets/tokens/composition); normally NOT touch PHANTOM Core/theme.js/cart/search infra/adapters/library/Theme Editor runtime.
-- Per-client flow: external premium frontend (HTML/Bootstrap/GSAP/Three.js/Lenis/Swiper) → CLIENT APPROVAL → DESIGN FREEZE → transform AETHER (Liquid replaces data, never design) → QA → deliver. Deviations logged as ORIGINAL→WHY→SHOPIFY CONSTRAINT→NEW→VISUAL IMPACT.
-- Roadmap: Wave 1 (current, 8 commerce sections) → Wave 2 (blog/article/page/FAQ/team/testimonials/contact/newsletter/promo/404/search/legal) → Wave 3 (accounts + wishlist) → hardening + `PHANTOM-AETHER-MASTER-v1.0` tag → Client Conversion Playbook. Generic Design Pack runtime/resolver stays as tested future-proofing, not the primary workflow.
+### Master Operating Model (2026-08-18 — USER-APPROVED)
+- ONE protected PHANTOM + AETHER MASTER -> fresh independent copy per client -> transform ONLY AETHER layer.
+- Master versioned/tagged (PHANTOM-AETHER-MASTER-v1.0), never client-modified.
+- Roadmap: Wave 0 done -> Wave 1 done -> Wave 2 done -> Wave 3 (ON DEMAND) -> hardening -> tag.
 
-### Design Pack Wave 1 — AETHER Master Phase 1 (2026-08-17/18 — COMPLETE, Tasks 1–13)
-Plan: `docs/superpowers/plans/2026-08-17-phantom-design-pack-wave1.md` (all checkboxes [x]). Gates per task: `shopify theme check` 0 offenses, `node designs/build/check-registry.mjs` PASS, CSS ≤60 KB hard ceiling (58,418 B final), never push.
-Wave 1 status (registry.md §6): 8/8 components production (hero/featured-products/collection-grid/product/cart-items + announcement/header/footer chrome); home composition `templates/index.aether.json` rebuilt (Task 10, eead352: hero → promo-grid → featured → background-image-text → collection-grid → blog-posts; aether-collection-grid gained `collection` setting with `grid_collection = collection | default: collections[section.settings.collection]`); locales 7+7 files key-set identical (Task 11, 331 schema paths/9 families + 52 runtime paths, 170+44 t-refs resolve).
-Task 12 docs (904fb45): `docs/design-packs/liquid-scope-boundaries.md` (render/include boundary — resolver MUST be included, never rendered; dp_* assigns never re-created; `theme-check-disable DeprecatedTag` guards at theme.liquid:37-38 never removed); design-pack-contract.md §7 (Master terminology: AETHER = reference implementation + reusable Master starter, NOT the runtime; no permanent multi-pack ecosystem; generic font strategy — Fontshare = AETHER implementation choice); manifest.md deviations D1–D16; registry.md §6 Wave 1 status.
-Task 13 QA (commit pending): proof harness `designs/aether/source/` (4 pages rendered from real section markup + rendered aether-proof.css from assets/aether.css.liquid with frozen token defaults; product page MUST use verbatim pd-* classes from aether-product.liquid); captures `docs/integration/aether/{references,proofs}/*.png` (24 PNGs); `docs/aether/fidelity-report.md` (methodology — pixel diff is NOT pass/fail, structural mapping is; functional matrix 8×7 PASS; editor checklist incl. coexistence A–E; visual sign-off REQUIRED — the agent CANNOT view images, human must eyeball the paired screenshots); `docs/aether/mapping.md` (frozen→theme class map + data anchors).
-QA bug found + fixed (D17): aether-collection-grid.liquid:89 inline `grid-template-columns: repeat({{ per_row }}, 1fr)` overrode media queries (mobile showed 3 cols vs frozen 1) → replaced with modifier class `aether-shop-grid--cols-{2|3|4}` in section + assets/aether.css.liquid base rules (media queries now effective). Verified 1 col @390 / 3 col @1440. theme-check 296 files 0 offenses; REGISTRY PASS (budgets 58,418 B); untouched-file audit clean vs ec12ad0~1 (theme.js/theme.css.liquid/theme.liquid/settings_*/css-variables.liquid/ph-design-tokens.css.liquid/phantom-vendor.js untouched). aether.js.liquid 29,956 B; aether-product.js 15,815 B; vendors on demand.
-Commit trail (newest first): [QA+evidence commit pending] → 904fb45 (T12 docs) → ed39075 (plan notes) → eead352 (T10 home) → b533db0 (memory) → 76b3818 (master model) → 2bc65dd (T9 cart) → 007d0b8f (T8 product) → b220103 (T7 grid) → 2285705 (T6 hero) → 1168f33 (T5 featured) → 8676bda (T4 footer) → 8cc44fa (plan) → 530836d (T3 header) → 6b1bbef (T2 announcement) → ec12ad0 (T1 foundation).
-NOTES: frozen source `frontend/frontend/` is visual truth (deviations D1–D17 in docs/aether/manifest.md). PHANTOM integration points reused: `cart:updated`/`cart:quantity` bus, `theme-resource-loader`, `theme.Currency.formatMoney`/`theme.settings.moneyFormat` (money format from `theme.liquid:82`, NOT `Shopify.money_format`; the `{{amount}}` JS fallback is wrapped in `{% raw %}`). `aether.css.liquid` is deliberately MINIFIED (inline comment ledger) to hold the 60 KB budget — do not re-prettify.
-REMAINING: human visual sign-off (docs/aether/fidelity-report.md §9 — open the 12 paired PNGs), push authorization (~34 commits ahead, NOT pushed), Wave 2 authorization (blog/article/page/FAQ/team/testimonials/contact/newsletter/promo/404/search/legal).
+### Wave 2 — COMPLETE (11 sections + 2 assets + 5 templates)
+Sections: aether-page-hero, aether-blog-posts, aether-article, aether-accordion, aether-team, aether-testimonials, aether-contact, aether-newsletter, aether-promo, aether-search, aether-404.
+Assets: aether-content.css.liquid (15.9 KB), aether-content.js.liquid (~3.5 KB).
+Templates: blog.aether.json, article.aether.json, page.aether.json, search.aether.json, 404.aether.json.
+Gates: theme-check 314 files 0 errors, REGISTRY PASS, CSS budget PASS, content gate PASS.
 
-### Design Pack Wave 0 (2026-08-17 — COMPLETE; nothing pushed, push needs user OK)
-Plan: `docs/superpowers/plans/2026-08-16-phantom-design-pack-wave0.md` (committed a17bf53). Spec: `docs/superpowers/specs/2026-08-16-phantom-design-pack-architecture.md`.
-Commit trail (newest first):
-- f0e0cf2 — docs sync: registry.md (seven lists + group alternates + NOVA walkthrough) + manifest.md (chrome skeleton status).
-- a17bf53 — Wave 0 plan doc committed.
-- 9112120 — spec §15 step 2: deleted legacy stubs `sections/media-text.liquid` + `sections/newsletter-section.liquid` (zero refs verified). NOTE: `snippets/newsletter-section.liquid` is LIVE (sections/newsletter.liquid → password.json + index templates) — kept. Spec-named phantom-dark-mode.js/effects.js/three-scenes.js exist ONLY in frozen frontend (`frontend/frontend/assets/js/`), not in theme.
-- 4278c91 — T5 AETHER chrome: resolver now SEVEN positional lists (+`dp_header_groups`/`dp_footer_groups`/`dp_popup_groups`; maps aether→`*.aether` group alternates, demo/none→PHANTOM groups); theme.liquid renders `{% sections dp_header_group %}`/`dp_popup_group`/`dp_footer_group` (UndefinedObject-disabled; zero pack-name conditionals); new `sections/aether-announcement-bar.liquid`/`aether-header.liquid`/`aether-footer.liquid` (skeleton chrome); new group alternates `header-group.aether.json` (announcement+header), `footer-group.aether.json`, `popup-group.aether.json` (empty); aether chrome locale keys ×4 in all 7 `*.schema.json` via new `_scripts/add-locale-keys.ps1`; check-registry.mjs extended (resolve() mirrors group handles + 6 new group-existence checks).
-- a79e02a — spec §15 step 1: `frontend/frontend/` committed as FROZEN visual source of truth (253 files: HTML pages, ~200 images, vendor css/js, QA evidence md/png). MCP filesystem server's tree was STALE/INVERTED — real path is `frontend/frontend/` (PowerShell/Test-Path authoritative). Wrong `frontend/.gitignore` created then removed.
-- d0157e5 + 1afb187 — T4 docs at REPO ROOT docs/ (tracked convention; theme-local docs/ is gitignored): `docs/design-packs/registry.md`, `design-pack-contract.md`, `conversion-contract.md`, `failure-register.md` (19 rows), `docs/aether/manifest.md`.
-- a249145 + ecc6583 + b85d376 — T3 template alternates (`templates/index.aether.json` verbatim mirror, `collection.aether.json`, `product.aether.json`) + `docs/design-packs/template-promotion-contract.md` (promotion = snapshot → validate → promote → regression → commit; archives `*.phantom.json` created only at promotion).
-- ca71bb5, b8896b8, 8efdd45, b89280e — T1+T2: resolver+gate, settings (`active_design_pack` default aether; `design_pack` + `aether_*` token groups), locales ×7, loader, `client-demo.js`→`client-demo.js.liquid` rename, `assets/aether.css.liquid` (1.3 KB tokens) + `aether.js.liquid` (3.4 KB AetherRuntime skeleton).
-QA (final): theme-check **285 files 0 offenses**; `node designs/build/check-registry.mjs` **REGISTRY: PASS (22 checks incl. 6 group-existence)**; untouched-file audit clean — Wave 0 modified ONLY resolver, check-registry.mjs, theme.liquid (loader + 3 group lines), settings_schema/data, 7 locale schema files; deleted only the 2 spec-ordered stubs.
-Lessons recorded: `{% render %}` = isolated scope (must use `{% include %}` for dp_*); `general.accessibility.navigation` and `general.payment.label` DON'T exist in regular locales — use `general.drawers.navigation`, `general.search.submit`, `cart.general.title`; group alternates = `sections/{base}.{suffix}.json` discoverable in editor; AETHER is default pack → storefront now renders skeleton aether chrome.
+### Wave 1 — COMPLETE (8 commerce sections)
+Hero, featured-products, collection-grid, product, cart-items, announcement, header, footer.
+CSS 58,418 B. theme-check 0 offenses. REGISTRY PASS.
 
-### Design Pack Architecture (2026-08-16 — SPEC APPROVED BY USER; partially superseded by Master Operating Model 2026-08-18)
-- PHANTOM = design-agnostic CORE; AETHER = first/default DESIGN PACK (replaceable by NOVA/LUXE/client packs without touching Core); `active_design_pack` = generic resolver (single registration point); demo/none = legacy entries (Task 03 stack preserved). NOTE: the multi-pack marketplace framing is superseded — the Master Operating Model keeps the generic resolver as future-proofing only.
-- Key rule: active pack changes DEFAULT design (assets/templates/tokens/chrome groups), NEVER section availability. Mixing AETHER + PHANTOM sections = first-class OS 2.0.
-- Waves: W1 AETHER commerce core (hero/featured/collection/product/cart + chrome styling) → W2 content/blog → W3 accounts. Budgets: aether.css ≤60 KB, aether.js ≤40 KB. z-index 5000/9000/9050/9500/9700 cap 10000.
-- Superseded: 2026-08-16-aether-section-library-design.md (v1 draft, absorbed as AETHER Wave 1).
-
-### Task 03 correction pass (2026-08-16 — post-execution external review, committed)
-Record: `docs/superpowers/corrections/2026-08-16-phantom-task03-correction-pass.md`. `designs/build/audit-scope.mjs` (selector-scoping audit) wired into build.mjs; client-demo asset 9413 → 9213 bytes; data-ph-section/data-ph-component hooks on client sections; picsum → local SVGs; contract §1.2/§1.7/§1.8/§2.4 rewritten; mapping.md token-substitution note; theme-check 274 files 0 offenses.
-
-### Task 01/02/03 (2026-08-16 — committed; Task 03 pushed to origin)
-- Task 01 blueprint: `docs/superpowers/specs/2026-08-16-phantom-external-integration-blueprint.md` (a5da4ab). Decisions: Bootstrap = design-time only; CSS namespace `.ph-client--{slug}[data-ph-design]`; token bridge `--ph-color*`; z-index budget; ClientDesign ES module via import map; multi-design via designs/{slug}/.
-- Task 02 baseline (a5da4ab): 269 files 0 offenses; versions 2.3.0; designs/ scaffold (contracts/, _template/, build/ sass+purgecss pipeline `node build.mjs --slug {slug}` / `--check`).
-- Task 03 (a28a676..40c3952, PUSHED): client-demo design (Aurora), `page.demo.json`, `ph_active_design` toggle (later removed by Wave 0), QA-07 fidelity report + 6 screenshots. Live-store manual QA for demo page still open (no Shopify auth here).
+### Wave 0 — COMPLETE (foundation)
+Resolver, gate, loader, alternates, docs. 285 files 0 offenses. REGISTRY PASS.
 
 ## Repo policy
-- Remote: https://github.com/HAmmadsiamil007/shopify-demo.git (branch main) — the real client demo store, keep presentable. Push ONLY with explicit user OK.
-- https://github.com/HAmmadsiamil007/shopify-phantom- is FROZEN — never touch/push again.
-- `.serena/memories/*` files are git-tracked — update + commit them when state changes.
-- Theme-local `phantom-theme-v2.2.0/docs/` is gitignored by design — tracked docs live at repo ROOT `docs/`. `_scripts/add-locale-keys.ps1` is **theme-local gitignored tooling, NOT committed** (repo policy: theme-local `_scripts/` untracked; regeneration logic lives inside the script — deviation D15). Root `scripts/` is gitignored (one-off python helpers, superseded).
+- Remote: https://github.com/HAmmadsiamil007/shopify-demo.git (branch main). Push ONLY with explicit user OK.
+- Frozen: https://github.com/HAmmadsiamil007/shopify-phantom-
+- .serena/memories/* files are git-tracked. Theme-local _scripts/ is gitignored.
 
-## Related
-- Theme-check command: `shopify theme check` in theme dir (Shopify CLI; Node v24). `npx @shopify/theme-check` / `theme-check-node` are NOT the right commands.
-- No live Shopify store auth in this environment — live-render QA is manual.
-- Watermarks-remover tool installed 2026-08-16 (service 127.0.0.1:8765, skill remove-ai-marks).
-- PowerShell gotchas: `\r\n` inside PS double quotes is literal text (backslash-r-backslash-n) — .NET Regex interprets it as CRLF, but string REPLACEMENTS need backtick escapes ("`r`n"); `rg` is NOT installed — use Select-String or the grep tool.
+## Deferred (Wave 3 — ON DEMAND only)
+- password/coming-soon, wishlist, login, account, checkout, thank-you, customer templates, blog comments
+
+## REMAINING
+- Human visual sign-off (fidelity-report.md + fidelity-report-w2.md)
+- Push authorization (~48 commits ahead)
+- No Wave 3 without explicit authorization
