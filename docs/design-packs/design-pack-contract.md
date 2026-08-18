@@ -65,3 +65,27 @@ The resolver implements `pack_id` / `asset_base` / `status` / `version` as paral
 - **Per-pack token group** (e.g. "AETHER — Design Pack"), ids `{pack}_*`. Pack-owned settings are NOT a universal schema (spec §6 amendment 5): AETHER's controls do not imply NOVA ships the same; the runtime never assumes a pack's settings shape; each pack's CSS reads only its own `{{ settings.{pack}_* }}` keys — heterogeneous pack settings cannot leak or collide.
 - **Brand-level only:** colors/fonts/radius/motion/dark-light. Spacing scales, timing curves, elevation, shadows = fixed art-direction tokens in CSS (settings must not destroy art direction).
 - Locale keys `design_pack_*` + `{pack}_*` in **all 7 locales** (+ `.schema.json` label keys); theme-check `MatchingTranslations` is a QA gate.
+
+## 7. Amendments — Master Operating Model (2026-08-18)
+
+> Reframed per `docs/superpowers/specs/2026-08-18-phantom-master-operating-model.md`. The generic contract above remains the binding API definition; this section records the operating-model amendments (Task 12 Step 1b).
+
+### 7a. Terminology
+
+- **AETHER is the first complete/reference implementation of the Design Pack API and the reusable AETHER Master starter — NOT the Design Pack runtime.** The runtime is PHANTOM Core (`design-pack-resolver.liquid` + `theme.liquid` generic loader + registry gate).
+- **No permanent multi-pack ecosystem is built.** Clients receive independent copies of the Master (PHANTOM + AETHER Master UI); a client's AETHER layer is **transformed per client design** (settings, tokens, sections, locale labels) — there is no NOVA/LUXE-style second pack, no pack marketplace, no client pack IDs.
+- If a new pack is ever genuinely justified, it implements the **same generic contract** (§1-6) without inheriting AETHER's settings, tokens, or visual assumptions — AETHER stays the reference, not the template.
+
+### 7b. Font strategy (generic)
+
+A Design Pack's typography may use, in order of preference:
+
+1. **Theme font picker** — `font_picker` settings mapped to PHANTOM/theme font variables (AETHER's `aether_heading_font` / `aether_body_font` settings follow this contract and keep the PHANTOM font-picker convention).
+2. **Theme-hosted fonts** — font files uploaded with the theme (no external request).
+3. **Approved external fonts** — only with a documented CDN link, injected by pack JS via `loadCSS`, and recorded as an **implementation choice**, never a pack requirement.
+
+**AETHER's Fontshare use (Cabinet Grotesk + Satoshi, loaded via `aether.js` → `loadCSS`) is an AETHER implementation choice under option 3 — not a Design Pack requirement.** Clients may switch to options 1/2 without touching pack structure (see `docs/aether/manifest.md` — Wave 1 deviations, D8).
+
+### 7c. Registry walkthrough note
+
+The NOVA walkthrough in `docs/design-packs/registry.md` §3 is retained as **future-proofing documentation of the generic contract** — it is not a planned build under the Master Operating Model (7a).

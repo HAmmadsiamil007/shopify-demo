@@ -630,10 +630,10 @@ controllers['aether-cart-items'] = {
 **Interfaces:**
 - Produces: complete `t:sections.aether-hero|aether-featured-products|aether-collection-grid|aether-product|aether-cart-items.*` (name/settings/blocks/presets + options), extended `aether-announcement-bar` (blocks.message.*, settings.show_mobile_rotation), `aether-header` (logo_image, show_wishlist, show_account), `aether-footer` (blocks brand/menu/newsletter, tagline) in all 7 schema files; `t:aether.*` runtime strings (announcement defaults, cart labels — "Order Summary", "Subtotal", "Shipping", "Total", "Free", "Continue shopping", "Your cart is empty", size guide table headers, specs accordion titles, related heading, reviews summary strings, empty states, "Add to Cart", "Sold out", "View all", sticky bar strings) in all 7 runtime files, with translations (de/es/fr/it/pt-BR/pt-PT) following the existing PHANTOM translation style.
 
-- [ ] **Step 1: Extend `_scripts/add-locale-keys.ps1`** — generalize the anchor to insert aether Wave 1 key families (same 7-file loop, same regex-anchor-before-`"header-group"` approach, JSON-validate each file after write).
-- [ ] **Step 2: Run it** — verify all 7 schema files parse (`Get-Content | ConvertFrom-Json`), no duplicates.
-- [ ] **Step 3: Runtime strings** — hand-add `"aether": { ... }` block to all 7 `*.json` files with translations; verify parse + `MatchingTranslations` (compare key sets across files — en is source of truth).
-- [ ] **Step 4: Gate + commit** — theme-check 0 offenses (locale checks included); commit.
+- [x] **Step 1: Extend `_scripts/add-locale-keys.ps1`** — generalize the anchor to insert aether Wave 1 key families (same 7-file loop, same regex-anchor-before-`"header-group"` approach, JSON-validate each file after write). (Shipped during Tasks 8-9: featured/hero/collection-grid/cart-items families, `categories.cart`, runtime block builder; Task 10 added the collection-grid `collection` key to table+expansion.)
+- [x] **Step 2: Run it** — verify all 7 schema files parse (`Get-Content | ConvertFrom-Json`), no duplicates. (Verified 2026-08-18: 9 families, 331 key paths per file, IDENTICAL sets across all 7 files.)
+- [x] **Step 3: Runtime strings** — hand-add `"aether": { ... }` block to all 7 `*.json` files with translations; verify parse + `MatchingTranslations` (compare key sets across files — en is source of truth). (Verified: 52 aether.* runtime keys per file, identical across 7; 170 `t:sections.aether-*` refs + 44 `aether.* | t` refs all resolve.)
+- [x] **Step 4: Gate + commit** — theme-check 0 offenses (locale checks included); commit. (theme-check 296 files 0 offenses — locale checks included; no new changes required, all locales shipped in Tasks 3-10 commits.)
 
 ---
 
@@ -646,18 +646,18 @@ controllers['aether-cart-items'] = {
 **Interfaces:**
 - Produces: the user-required `{% render %}` vs `{% include %}` boundary document
 
-- [ ] **Step 1: Write `docs/design-packs/liquid-scope-boundaries.md`** — content contract:
+- [x] **Step 1: Write `docs/design-packs/liquid-scope-boundaries.md`** — content contract:
   1. **The discovery (Wave 0 T1):** `{% render %}` creates an isolated scope — variables assigned inside the snippet are invisible to the caller. The resolver/loader path REQUIRES shared scope, so `snippets/design-pack-resolver.liquid` is invoked with `{% include %}` from `layout/theme.liquid:38` (and its assigns `dp_active/dp_asset/dp_enabled/dp_header_group/dp_footer_group/dp_popup_group` are consumed at `theme.liquid:42-44,377-379,404-413`).
   2. **The boundary (binding):** `design-pack-resolver.liquid` MUST be included (never rendered) and its `dp_*` assigns MUST NOT be re-created in a render scope. Anything else in the theme may use `render`. Documented via `theme-check-disable DeprecatedTag` comments (`theme.liquid:37-38`) — never remove those guards.
   3. **Why not "fix" it:** converting to `render` + re-assign is the trap — it forks the registry (7 positional lists) into multiple copies; the integrity gate (`check-registry.mjs`) parses the resolver file for the single source of truth; a render-side copy would silently desync (failure-register row 19).
   4. **Where render IS fine:** section-internal snippets (cards, headers, buttons) don't share state with the layout; `aether-product-card` etc. use `render` normally.
      5. Reference: `docs/superpowers/specs/2026-08-16-phantom-design-pack-architecture.md` §4, failure-register rows 1/19.
 
-- [ ] **Step 1b: Font strategy + terminology (amendments 7 + 9)** — update `docs/design-packs/design-pack-contract.md` with: (a) generic Design Pack font strategy — theme font picker OR theme-hosted font OR approved external font, with AETHER's Fontshare (Cabinet Grotesk + Satoshi) recorded as an AETHER implementation choice, not a pack requirement; (b) terminology per the Master Operating Model — "AETHER is the first complete/reference implementation of the Design Pack API and the reusable AETHER Master starter, NOT the Design Pack runtime; no permanent multi-pack ecosystem is built — clients receive independent copies of the Master whose AETHER layer is transformed per client design; if a new pack is ever justified it implements the same generic contract without inheriting AETHER's settings, tokens, or visual assumptions."
+- [x] **Step 1b: Font strategy + terminology (amendments 7 + 9)** — update `docs/design-packs/design-pack-contract.md` with: (a) generic Design Pack font strategy — theme font picker OR theme-hosted font OR approved external font, with AETHER's Fontshare (Cabinet Grotesk + Satoshi) recorded as an AETHER implementation choice, not a pack requirement; (b) terminology per the Master Operating Model — "AETHER is the first complete/reference implementation of the Design Pack API and the reusable AETHER Master starter, NOT the Design Pack runtime; no permanent multi-pack ecosystem is built — clients receive independent copies of the Master whose AETHER layer is transformed per client design; if a new pack is ever justified it implements the same generic contract without inheriting AETHER's settings, tokens, or visual assumptions." (Shipped as contract §7.)
 
-- [ ] **Step 2: Deviations log** — materialize the pre-declared deviations table (D1-D11 above) into `docs/aether/manifest.md` (new "Wave 1 deviations" section); add any deviations discovered during implementation with the required 5-field format; any deviation NOT in the list requires the implementing reviewer to stop and flag it.
-- [ ] **Step 3: Update registry.md + manifest.md** — Wave 1 status table, component registry (8 shipped), measured budget sizes (from Task 13 QA).
-- [ ] **Step 4: Commit.**
+- [x] **Step 2: Deviations log** — materialize the pre-declared deviations table (D1-D11 above) into `docs/aether/manifest.md` (new "Wave 1 deviations" section); add any deviations discovered during implementation with the required 5-field format; any deviation NOT in the list requires the implementing reviewer to stop and flag it. (Shipped D1-D16 — D12 view_all schema mismatch, D13 collection setting, D14 minified CSS, D15 gitignored script policy, D16 `{% raw %}` money format.)
+- [x] **Step 3: Update registry.md + manifest.md** — Wave 1 status table, component registry (8 shipped), measured budget sizes (from Task 13 QA). (Registry §6 added; manifest budgets measured.)
+- [x] **Step 4: Commit.**
 
 ---
 

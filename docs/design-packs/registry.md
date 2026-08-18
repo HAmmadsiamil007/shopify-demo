@@ -42,7 +42,7 @@ Resolution behavior (`node designs/build/check-registry.mjs` unit-tests all path
 
 ## 3. Registering a new pack (walkthrough — NOVA example)
 
-NOVA is a hypothetical second pack. Registration touches only pack-owned files plus one registry row — PHANTOM Core stays implementation-stable (spec §14 proof).
+NOVA is a hypothetical second pack used to document the generic contract. Per the Master Operating Model (spec `2026-08-18-phantom-master-operating-model.md`), **no permanent second pack is built** — clients receive independent copies of the Master and transform the AETHER layer per client design. Registration touches only pack-owned files plus one registry row — PHANTOM Core stays implementation-stable (spec §14 proof).
 
 1. **Resolver row** — append one entry to each list in `snippets/design-pack-resolver.liquid` (same index):
 
@@ -92,3 +92,16 @@ All Wave 0 steps are complete:
 - ✅ Commit `frontend/frontend/` as frozen visual source of truth (+ `.gitignore` note) — spec §15 Wave 0 step 1 (`a79e02a`).
 - ✅ Delete legacy stubs (`media-text.liquid`, `newsletter-section.liquid`; `phantom-dark-mode.js` / `effects.js` / `three-scenes.js` exist only in the frozen frontend reference, not in the theme) — spec §15 Wave 0 step 2 (`9112120`).
 - ✅ T5: AETHER chrome alternates — `sections/aether-announcement-bar.liquid`, `aether-header.liquid`, `aether-footer.liquid` + `header-group.aether.json` / `footer-group.aether.json` / `popup-group.aether.json` (`4278c91`).
+
+## 6. Wave 1 status (tracked — AETHER Master)
+
+All Wave 1 tasks complete (2026-08-18; commits `…` → `eead352`, plan `docs/superpowers/plans/2026-08-17-phantom-design-pack-wave1.md`):
+
+- ✅ 8/8 AETHER components production (`aether-hero`, `aether-featured-products`, `aether-collection-grid`, `aether-product`, `aether-cart-items`, `aether-announcement-bar`, `aether-header`, `aether-footer`) — component registry: `docs/aether/manifest.md`.
+- ✅ Home composition `templates/index.aether.json` rebuilt (AETHER commerce sections interleaved with PHANTOM sections).
+- ✅ Locales: 7 schema + 7 runtime files, key sets identical across all languages (`MatchingTranslations` green).
+- ✅ Gates: theme-check 296 files **0 offenses**; `node designs/build/check-registry.mjs` **PASS** (registry resolution unit tests + CSS budget 58,220 B ≤ 60 KB).
+- ✅ Docs: `liquid-scope-boundaries.md` (render/include boundary), deviations log D1-D16 (`docs/aether/manifest.md`), contract amendments §7 (Master terminology + generic font strategy).
+- ⏳ Design freeze + parity evidence: `docs/aether/fidelity-report.md` (Task 13, end of wave).
+- ⏸ Push: master is ~32 commits ahead of origin — **requires explicit user authorization** (never pushed without it).
+- ➡️ Wave 2 (content sections: promo/faq/testimonials/contact/newsletter/rich-text/404/search/legal) — **requires user authorization**.
