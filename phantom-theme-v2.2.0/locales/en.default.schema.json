@@ -178,6 +178,11 @@
         "show_page_hero": {
           "label": "Show page hero"
         },
+        "collection": {
+          "label": "Collection",
+          "info": "Used when this section is placed outside a collection page (e.g. on the home page)."
+        },
+
         "filter_menu": {
           "label": "Filter menu",
           "info": "Links rendered as filter pills; the current collection is highlighted"

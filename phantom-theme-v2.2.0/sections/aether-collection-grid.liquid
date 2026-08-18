@@ -13,13 +13,16 @@
     no_matches), D-doc.
   - Frozen page-hero carries fog layers; AETHER page hero is gradient only
     (fog reserved for the hero slider), D-doc.
+  - Task 10: `collection` setting is a fallback for non-collection templates
+    (e.g. home); the template's own collection always wins on collection pages.
 {% endcomment %}
 
 {%- liquid
+  assign grid_collection = collection | default: collections[section.settings.collection]
   assign filter_menu = linklists[section.settings.filter_menu]
-  assign sort_by = collection.sort_by
-  assign default_sort_by = collection.default_sort_by
-  assign sort_options = collection.sort_options
+  assign sort_by = grid_collection.sort_by
+  assign default_sort_by = grid_collection.default_sort_by
+  assign sort_options = grid_collection.sort_options
 -%}
 
 <section
@@ -31,9 +34,9 @@
     <div class="aether-page-hero">
       <div class="aether-container">
         <span class="aether-section-label">{{ 'aether.collection_grid.label' | t }}</span>
-        <h1 class="aether-page-hero-title">{{ collection.title | escape }}</h1>
-        {%- if collection.description != blank -%}
-          <p class="aether-page-hero-subtitle">{{ collection.description | escape }}</p>
+        <h1 class="aether-page-hero-title">{{ grid_collection.title | escape }}</h1>
+        {%- if grid_collection.description != blank -%}
+          <p class="aether-page-hero-subtitle">{{ grid_collection.description | escape }}</p>
         {%- endif -%}
       </div>
     </div>
@@ -46,9 +49,9 @@
           {%- for link in filter_menu.links -%}
             {%- liquid
               assign is_active = false
-              if link.url == collection.url
+              if link.url == grid_collection.url
                 assign is_active = true
-              elsif link.object != blank and link.object.handle == collection.handle
+              elsif link.object != blank and link.object.handle == grid_collection.handle
                 assign is_active = true
               endif
             -%}
@@ -81,11 +84,11 @@
         </div>
       {%- endif -%}
 
-      {%- paginate collection.products by section.settings.per_page -%}
-        {%- if collection.products.size > 0 -%}
+      {%- paginate grid_collection.products by section.settings.per_page -%}
+        {%- if grid_collection.products.size > 0 -%}
           <div class="aether-shop-grid" data-aether-reveal-group style="grid-template-columns: repeat({{ section.settings.per_row }}, 1fr)">
-            {%- for product in collection.products -%}
-              {%- render 'aether-product-card', product: product, variant: 'simple', per_row: section.settings.per_row, collection: collection -%}
+            {%- for product in grid_collection.products -%}
+              {%- render 'aether-product-card', product: product, variant: 'simple', per_row: section.settings.per_row, collection: grid_collection -%}
             {%- endfor -%}
           </div>
           {%- render 'aether-pagination', paginate: paginate -%}
@@ -106,6 +109,13 @@
         "id": "show_page_hero",
         "default": true,
         "label": "t:sections.aether-collection-grid.settings.show_page_hero.label"
+      },
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "t:sections.aether-collection-grid.settings.collection.label",
+        "info": "t:sections.aether-collection-grid.settings.collection.info",
+        "default": "main"
       },
       {
         "type": "link_list",

@@ -178,6 +178,11 @@
         "show_page_hero": {
           "label": "Seiten-Hero anzeigen"
         },
+        "collection": {
+          "label": "Kollektion",
+          "info": "Wird verwendet, wenn dieser Abschnitt außerhalb einer Kollektionsseite platziert wird (z. B. auf der Startseite)."
+        },
+
         "filter_menu": {
           "label": "Filtermenü",
           "info": "Links werden als Filter-Pillen gerendert; die aktuelle Kollektion wird hervorgehoben"

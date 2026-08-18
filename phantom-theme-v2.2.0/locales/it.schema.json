@@ -178,6 +178,11 @@
         "show_page_hero": {
           "label": "Mostra hero di pagina"
         },
+        "collection": {
+          "label": "Collezione",
+          "info": "Utilizzata quando questa sezione è posizionata al di fuori di una pagina di collezione (es. nella home page)."
+        },
+
         "filter_menu": {
           "label": "Menu filtri",
           "info": "I link vengono mostrati come pillole di filtro; la collezione corrente viene evidenziata"
