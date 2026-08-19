@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Volt Pulse wireless earbuds">
+  <defs>
+    <linearGradient id="ebody" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#23232c"/>
+      <stop offset="1" stop-color="#101016"/>
+    </linearGradient>
+    <radialGradient id="ehalo" cx="0.5" cy="0.4" r="0.5">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="300" cy="330" rx="190" ry="170" fill="url(#ehalo)"/>
+  <rect x="180" y="300" width="240" height="90" rx="45" fill="url(#ebody)" stroke="#34343e" stroke-width="2"/>
+  <rect x="180" y="300" width="240" height="34" rx="17" fill="#0d0d13"/>
+  <circle cx="215" cy="330" r="16" fill="#22d3ee" opacity="0.12"/>
+  <circle cx="215" cy="330" r="6" fill="#22d3ee"/>
+  <circle cx="385" cy="330" r="16" fill="#22d3ee" opacity="0.12"/>
+  <circle cx="385" cy="330" r="6" fill="#22d3ee"/>
+  <path d="M300 300 v-44 l-18 10 18 -20 18 20 -18 -10 z" fill="#22d3ee" opacity="0.85"/>
+  <rect x="282" y="120" width="36" height="10" rx="5" fill="#2c2c36"/>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Volt 65W GaN Charger">
+  <defs>
+    <linearGradient id="cbody" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#23232c"/>
+      <stop offset="1" stop-color="#101016"/>
+    </linearGradient>
+    <radialGradient id="chalo" cx="0.5" cy="0.4" r="0.5">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="300" cy="330" rx="190" ry="170" fill="url(#chalo)"/>
+  <rect x="220" y="120" width="160" height="330" rx="26" fill="url(#cbody)" stroke="#34343e" stroke-width="2"/>
+  <rect x="240" y="160" width="120" height="60" rx="12" fill="#0d0d13" stroke="#2c2c38" stroke-width="1.5"/>
+  <circle cx="262" cy="190" r="7" fill="#22d3ee"/>
+  <rect x="260" y="290" width="80" height="16" rx="8" fill="#3a3a46"/>
+  <rect x="240" y="320" width="120" height="16" rx="8" fill="#3a3a46"/>
+  <rect x="248" y="348" width="104" height="16" rx="8" fill="#3a3a46"/>
+  <path d="M300 470 v52 M276 500 l48 0" stroke="#22d3ee" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <rect x="240" y="430" width="120" height="14" rx="7" fill="#1e1e26"/>
+</svg>

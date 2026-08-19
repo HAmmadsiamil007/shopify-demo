@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Volt blog cover — LTPO display explained">
+  <defs>
+    <linearGradient id="b3bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b2629"/>
+      <stop offset="0.5" stop-color="#081a1c"/>
+      <stop offset="1" stop-color="#050a0b"/>
+    </linearGradient>
+    <radialGradient id="b3halo" cx="0.5" cy="0.3" r="0.6">
+      <stop offset="0" stop-color="#5eead4" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#5eead4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#b3bg)"/>
+  <rect width="1200" height="675" fill="url(#b3halo)"/>
+  <g fill="none" stroke="#2c3a3c" stroke-width="2">
+    <circle cx="880" cy="330" r="210"/>
+    <circle cx="880" cy="330" r="150"/>
+    <circle cx="880" cy="330" r="90"/>
+  </g>
+  <circle cx="880" cy="330" r="18" fill="#5eead4"/>
+  <circle cx="880" cy="120" r="10" fill="#5eead4" opacity="0.7"/>
+  <circle cx="1070" cy="330" r="10" fill="#5eead4" opacity="0.7"/>
+  <circle cx="880" cy="540" r="10" fill="#5eead4" opacity="0.7"/>
+  <circle cx="690" cy="330" r="10" fill="#5eead4" opacity="0.7"/>
+  <text x="120" y="180" font-family="Segoe UI, system-ui, sans-serif" font-size="26" font-weight="700" fill="#5eead4" letter-spacing="8">DISPLAY LAB</text>
+  <text x="120" y="250" font-family="Segoe UI, system-ui, sans-serif" font-size="64" font-weight="700" fill="#f5f5f4">Why LTPO wins at</text>
+  <text x="120" y="330" font-family="Segoe UI, system-ui, sans-serif" font-size="64" font-weight="700" fill="#f5f5f4">1–120 Hz.</text>
+</svg>

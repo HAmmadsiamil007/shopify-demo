@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Volt blog cover — GaN charging explained">
+  <defs>
+    <linearGradient id="b2bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#161027"/>
+      <stop offset="0.5" stop-color="#0e0a1c"/>
+      <stop offset="1" stop-color="#070510"/>
+    </linearGradient>
+    <radialGradient id="b2halo" cx="0.25" cy="0.45" r="0.5">
+      <stop offset="0" stop-color="#a78bfa" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#a78bfa" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#b2bg)"/>
+  <rect width="1200" height="675" fill="url(#b2halo)"/>
+  <g fill="none" stroke-linecap="round">
+    <path d="M120 560 C 260 260, 420 260, 560 560" stroke="#3d2c52" stroke-width="10"/>
+    <path d="M480 560 C 640 220, 840 220, 1080 560" stroke="#a78bfa" stroke-width="12"/>
+    <circle cx="560" cy="560" r="14" fill="#a78bfa" stroke="none"/>
+    <circle cx="480" cy="560" r="10" fill="#3d2c52" stroke="none"/>
+  </g>
+  <text x="120" y="180" font-family="Segoe UI, system-ui, sans-serif" font-size="26" font-weight="700" fill="#a78bfa" letter-spacing="8">TECH EXPLAINED</text>
+  <text x="120" y="250" font-family="Segoe UI, system-ui, sans-serif" font-size="64" font-weight="700" fill="#f5f5f4">GaN: why your next</text>
+  <text x="120" y="330" font-family="Segoe UI, system-ui, sans-serif" font-size="64" font-weight="700" fill="#f5f5f4">charger is tiny.</text>
+</svg>

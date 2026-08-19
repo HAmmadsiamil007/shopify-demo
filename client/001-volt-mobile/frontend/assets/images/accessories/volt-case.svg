@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Volt AeroCase protective case">
+  <defs>
+    <linearGradient id="tbody" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#23232c"/>
+      <stop offset="1" stop-color="#101016"/>
+    </linearGradient>
+    <radialGradient id="thalo" cx="0.5" cy="0.4" r="0.5">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="300" cy="330" rx="190" ry="170" fill="url(#thalo)"/>
+  <rect x="215" y="90" width="170" height="420" rx="34" fill="url(#tbody)" stroke="#34343e" stroke-width="2"/>
+  <rect x="228" y="104" width="144" height="392" rx="26" fill="none" stroke="#1a1a22" stroke-width="6"/>
+  <rect x="248" y="130" width="60" height="76" rx="14" fill="#0d0d13" stroke="#2c2c38" stroke-width="1.5"/>
+  <circle cx="266" cy="148" r="8" fill="#22d3ee" opacity="0.85"/>
+  <rect x="240" y="430" width="120" height="14" rx="7" fill="#1e1e26"/>
+  <path d="M262 240 l-14 34 h14 l-8 26 22 -34 h-14 z" fill="#22d3ee" opacity="0.9"/>
+</svg>
