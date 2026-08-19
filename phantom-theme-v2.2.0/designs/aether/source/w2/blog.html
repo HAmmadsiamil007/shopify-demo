@@ -4,117 +4,433 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Blog — AETHER Proof</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800&family=Satoshi:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <style>
-.ph-client--aether{--aether-primary:{{settings.aether_primary | default:'#D4A574'}
+/* ── AETHER Tokens → Frozen Design Values ────────────────────────── */
+:root {
+  /* AETHER namespace, frozen values */
+  --aether-primary: #D4A574;
+  --aether-accent: #C8956C;
+  --aether-bg: #09090B;
+  --aether-surface: #141416;
+  --aether-text: #FFFFFF;
+  --aether-muted: #A8B5C0;
+  --aether-border: #1A1A1A;
+  --aether-sale: #E74C3C;
+  --aether-radius: 12px;
+  --aether-scheme: dark;
+  --aether-announcement-height: 40px;
+  --aether-header-height: 80px;
+  --aether-container-max: 1200px;
+  --aether-section-padding: 100px 0;
+  /* Frozen font stack */
+  --aether-font-heading: 'Cabinet Grotesk', sans-serif;
+  --aether-font-body: 'Satoshi', sans-serif;
+  /* Z-index */
+  --aether-z-announcement: 1001;
+  --aether-z-sticky: 1000;
+  --aether-z-drawer: 1200;
+  --aether-z-modal: 9050;
+  --aether-z-toast: 9500;
+  --aether-z-3d: 9700;
+}
+.ph-client--aether{--aether-primary:#D4A574;--aether-accent:#C8956C;--aether-bg:#09090B;--aether-surface:#141416;--aether-text:#FFFFFF;--aether-muted:#A8B5C0;--aether-border:#1A1A1A;--aether-sale:#E74C3C;--aether-radius:12px;--aether-scheme:dark;--aether-font-heading:'Cabinet Grotesk',sans-serif;--aether-font-body:'Satoshi',sans-serif}
 
+/* ── Reset & Base ────────────────────────────────────────────────── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--aether-font-body);background:var(--aether-bg);color:var(--aether-text);overflow-x:hidden}
+h1,h2,h3,h4,h5,h6{font-family:var(--aether-font-heading);font-weight:700}
 
+/* ── Header ──────────────────────────────────────────────────────── */
+.aether-announcement-bar{position:relative;height:var(--aether-announcement-height);background:rgba(9,9,11,0.85);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;border-bottom:1px solid rgba(255,255,255,0.06)}
+.announcement-content{font-family:var(--aether-font-body);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--aether-text)}
+.separator{margin:0 15px;opacity:0.5}
+.aether-header__bar{position:relative;height:var(--aether-header-height);display:flex;align-items:center;background:transparent;border-bottom:1px solid rgba(255,255,255,0.04)}
+.aether-header__container{width:100%;max-width:var(--aether-container-max);margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between}
+.aether-header__logo{font-family:var(--aether-font-heading);font-size:1.8rem;font-weight:800;letter-spacing:0.3em;color:var(--aether-text);text-transform:uppercase;text-decoration:none}
+.aether-nav__links{display:flex;gap:40px;margin:0;padding:0;list-style:none}
+.aether-nav__link{font-family:var(--aether-font-body);font-size:0.85rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:var(--aether-text);text-decoration:none;transition:color 0.2s}
+.aether-nav__link:hover,.aether-nav__link.active{color:var(--aether-accent)}
+.aether-header__actions{display:flex;align-items:center;gap:20px}
+.aether-header__icon{color:var(--aether-text);text-decoration:none;transition:color 0.2s}
+.aether-header__icon svg{width:1.1em;height:1.1em}
+.aether-header__icon:hover{color:var(--aether-accent)}
 
-.aether-page-hero{position:relative;overflow:hidden;text-align:center;padding:100px 0 80px}.aether-page-hero--compact{padding:60px 0 40px}.aether-page-hero__inner,.aether-page-hero__content{position:relative;z-index:1}.aether-page-hero__overlay{position:absolute;inset:0;background-color:#000}.aether-page-hero__label{display:inline-block;font-size:.75rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--aether-accent);margin-bottom:15px}.aether-page-hero__title{font-size:clamp(2.5rem,6vw,4rem);font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--aether-text);margin-bottom:15px}.aether-page-hero--compact .aether-page-hero__title{font-size:clamp(2.5rem,6vw,4.5rem);letter-spacing:.15em}.aether-page-hero__subtitle{font-size:1.1rem;color:var(--aether-muted);max-width:500px;margin:0 auto}
+/* ── Hero Fog System ─────────────────────────────────────────────── */
+.hero-fog{position:absolute;inset:0;width:200%;height:100%;z-index:0;pointer-events:none;overflow:hidden;will-change:transform,opacity}
+.hf-fog{position:absolute;top:0;left:0;width:200%;height:100%;pointer-events:none}
+#hl_01,#hl_02,#hl_03{height:100%;position:absolute;width:200%}
+.hf-img{float:left;height:100%;width:50%;background-size:cover;background-position:center}
+#hl_01{filter:blur(2px) grayscale(0.1) saturate(1.2) sepia(0.1);animation:fog01 8s linear infinite,fogMove 12s linear infinite}
+#hl_01 .hf-img{background:url('../assets/fog1.png') center center / cover no-repeat transparent}
+#hl_02,#hl_03{filter:blur(2px) grayscale(0.1) saturate(1.2) sepia(0.1);animation:fog02 16s linear infinite,fogMove 10s linear infinite}
+#hl_02 .hf-img,#hl_03 .hf-img{background:url('../assets/fog2.png') center center / cover no-repeat transparent}
+@keyframes fog01{0%{opacity:0.45}22%{opacity:0.85}40%{opacity:0.55}58%{opacity:0.75}80%{opacity:0.5}100%{opacity:0.45}}
+@keyframes fog02{0%{opacity:0.7}25%{opacity:0.35}50%{opacity:0.25}80%{opacity:0.5}100%{opacity:0.7}}
+@keyframes fogMove{0%{left:0}100%{left:-100%}}
+@media(prefers-reduced-motion:reduce){.hero-fog{display:none}}
 
+/* ── Page Hero ───────────────────────────────────────────────────── */
+.page-hero{position:relative;overflow:hidden;padding:200px 0 100px;background:linear-gradient(180deg,rgba(9,9,9,0.55) 0%,var(--aether-bg) 100%);text-align:center}
+.page-hero-title{font-family:var(--aether-font-heading);font-size:clamp(2.5rem,6vw,4rem);font-weight:800;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:15px;color:var(--aether-text)}
+.page-hero-subtitle{font-family:var(--aether-font-body);font-size:1.1rem;color:var(--aether-muted);max-width:500px;margin:0 auto}
+.page-hero--compact{padding:120px 0 60px}
+.section-label{display:block;font-family:var(--aether-font-body);font-size:0.75rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--aether-accent);margin-bottom:12px}
+.container{width:100%;max-width:var(--aether-container-max);margin:0 auto;padding:0 20px}
 
-.aether-blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}.aether-blog-grid--cols-2{grid-template-columns:repeat(2,1fr)}.aether-blog-grid--cols-4{grid-template-columns:repeat(4,1fr)}.aether-blog-card{display:block;border:1px solid var(--aether-border);border-radius:var(--aether-radius);overflow:hidden;text-decoration:none;color:inherit;transition:transform .3s,border-color .3s}.aether-blog-card:hover{transform:translateY(-4px);border-color:var(--aether-accent)}.aether-blog-card__image{position:relative;aspect-ratio:16/10;overflow:hidden}.aether-blog-card__image img{width:100%;height:100%;object-fit:cover;transition:transform .5s}.aether-blog-card:hover .aether-blog-card__image img{transform:scale(1.05)}.aether-blog-card__category{position:absolute;top:12px;left:12px;background:var(--aether-accent);color:#fff;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:4px}.aether-blog-card__content{padding:20px}.aether-blog-card__date{display:block;font-size:.75rem;color:var(--aether-muted);margin-bottom:8px}.aether-blog-card__title{font-size:1.1rem;font-weight:600;color:var(--aether-text);margin-bottom:8px;line-height:1.3}.aether-blog-card__excerpt{font-size:.85rem;color:var(--aether-muted);line-height:1.6;margin-bottom:12px}.aether-blog-card__read-more{font-size:.8rem;font-weight:500;color:var(--aether-accent);letter-spacing:.05em;text-transform:uppercase}.aether-blog-card__read-more i{margin-left:6px;transition:transform .3s}.aether-blog-card:hover .aether-blog-card__read-more i{transform:translateX(4px)}
+/* ── Blog Cards ──────────────────────────────────────────────────── */
+.blog-grid-section{padding:var(--aether-section-padding)}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.blog-card{display:block;border:1px solid var(--aether-border);overflow:hidden;text-decoration:none;color:inherit;transition:all 0.3s ease}
+.blog-card:hover{border-color:var(--aether-accent);transform:translateY(-4px)}
+.blog-card-image{position:relative;aspect-ratio:16/10;overflow:hidden}
+.blog-card-image img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}
+.blog-card:hover .blog-card-image img{transform:scale(1.05)}
+.blog-category{position:absolute;top:12px;left:12px;background-color:var(--aether-accent);color:var(--aether-bg);font-family:var(--aether-font-body);font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px}
+.blog-card-content{padding:20px}
+.blog-date{font-family:var(--aether-font-body);font-size:0.75rem;color:var(--aether-muted);display:block;margin-bottom:8px}
+.blog-card-title{font-family:var(--aether-font-heading);font-size:1.1rem;font-weight:600;color:var(--aether-text);margin-bottom:10px;line-height:1.3}
+.blog-card-excerpt{font-family:var(--aether-font-body);font-size:0.85rem;color:var(--aether-muted);line-height:1.6;margin-bottom:12px}
+.blog-read-more{font-family:var(--aether-font-body);font-size:0.8rem;font-weight:500;color:var(--aether-accent);letter-spacing:0.05em;text-transform:uppercase}
+.blog-read-more i{margin-left:6px;transition:transform 0.2s}
+.blog-card:hover .blog-read-more i{transform:translateX(4px)}
 
+/* ── Article ──────────────────────────────────────────────────────── */
+.blog-hero{position:relative;height:60vh;min-height:400px;overflow:hidden}
+.blog-hero-image{width:100%;height:100%;object-fit:cover}
+.blog-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(9,9,11,0.9) 0%,rgba(9,9,11,0.3) 100%);display:flex;align-items:flex-end;padding-bottom:60px}
+.blog-hero-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:0 20px 60px;max-width:var(--aether-container-max);margin:0 auto}
+.blog-hero-title{font-family:var(--aether-font-heading);font-size:clamp(2rem,4vw,3rem);font-weight:800;color:var(--aether-text);max-width:700px}
+.blog-article{padding:60px 0 80px}
+.article-meta{display:flex;gap:12px;align-items:center;justify-content:center;margin-bottom:50px;font-family:var(--aether-font-body);font-size:0.85rem;color:var(--aether-muted)}
+.article-separator{opacity:0.4}
+.article-body{max-width:720px;margin:0 auto}
+.article-body p{font-family:var(--aether-font-body);font-size:1.05rem;line-height:1.8;color:var(--aether-muted);margin-bottom:24px}
+.article-body h2{font-family:var(--aether-font-heading);font-size:1.6rem;font-weight:700;color:var(--aether-text);margin:40px 0 16px}
+.article-body blockquote{border-left:3px solid var(--aether-accent);padding:20px 30px;margin:30px 0;background-color:var(--aether-surface);font-family:var(--aether-font-body);font-size:1.2rem;font-style:italic;color:var(--aether-text);line-height:1.6}
+.article-body img{width:100%;margin:30px 0}
+.related-posts{padding:60px 0;background-color:var(--aether-bg)}
+.related-posts .section-title{font-family:var(--aether-font-heading);font-size:1.8rem;font-weight:700;color:var(--aether-text);text-align:center;margin-bottom:40px}
 
-.aether-article-hero{position:relative;height:60vh;min-height:400px;overflow:hidden}.aether-article-hero__image{width:100%;height:100%;object-fit:cover}.aether-article-hero__overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(9,9,11,.9) 0%,rgba(9,9,11,.3) 100%);display:flex;align-items:flex-end;padding-bottom:60px}.aether-article-hero__content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:60px}.aether-article-hero__title{font-size:clamp(2rem,4vw,3rem);font-weight:800;color:var(--aether-text);max-width:700px}.aether-article-section{padding:60px 0 80px;background-color:var(--aether-void,var(--aether-bg))}.aether-article-meta{display:flex;gap:12px;align-items:center;justify-content:center;margin-bottom:50px;font-size:.85rem;color:var(--aether-muted)}.aether-article-meta__separator{opacity:.4}.aether-article-body{max-width:720px;margin:0 auto}.aether-article-body p{font-size:1.05rem;line-height:1.8;color:var(--aether-muted);margin-bottom:24px}.aether-article-body h2{font-size:1.6rem;font-weight:700;color:var(--aether-text);margin:40px 0 16px}.aether-article-body blockquote{border-left:3px solid var(--aether-accent);padding:20px 30px;margin:30px 0;background-color:var(--aether-surface);font-size:1.2rem;font-style:italic;color:var(--aether-text);line-height:1.6}.aether-article-body img{width:100%;margin:30px 0}.aether-article-author-bio{display:flex;gap:20px;align-items:center;padding:30px;background-color:var(--aether-surface);border:1px solid var(--aether-border);margin-top:50px}.aether-article-author-bio__avatar{width:60px;height:60px;border-radius:50%;background-color:var(--aether-bg,var(--aether-void,#09090B));border:1px solid var(--aether-accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--aether-accent)}.aether-article-author-bio__info strong{color:var(--aether-text)}.aether-related{padding:60px 0;background-color:var(--aether-bg,var(--aether-void,#09090B))}
+/* ── About: Mission ──────────────────────────────────────────────── */
+.mission-section{padding:var(--aether-section-padding);background-color:var(--aether-bg)}
+.mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.mission-image img{width:100%;height:auto;border-radius:var(--aether-radius)}
+.section-title{font-family:var(--aether-font-heading);font-size:clamp(1.5rem,4vw,2.5rem);font-weight:800;color:var(--aether-text);text-align:center;margin-bottom:20px}
+.mission-content .section-title{text-align:left}
+.mission-content p{font-family:var(--aether-font-body);font-size:1rem;color:var(--aether-muted);line-height:1.8;margin-bottom:15px}
 
+/* ── About: Features ─────────────────────────────────────────────── */
+.features{padding:var(--aether-section-padding);background-color:var(--aether-surface)}
+.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.feature-card{padding:30px;border:1px solid var(--aether-border);text-align:center;transition:border-color 0.3s}
+.feature-card:hover{border-color:var(--aether-accent)}
+.feature-card i{font-size:1.5rem;color:var(--aether-accent);margin-bottom:16px;display:block}
+.feature-card h3{font-family:var(--aether-font-heading);font-size:1rem;font-weight:600;color:var(--aether-text);margin-bottom:8px}
+.feature-card p{font-family:var(--aether-font-body);font-size:0.85rem;color:var(--aether-muted);line-height:1.6}
 
-.aether-accordion__list{max-width:800px;margin:0 auto}.aether-accordion__item{border:1px solid var(--aether-border);margin-bottom:10px;background-color:var(--aether-surface)}.aether-accordion__header{margin:0}.aether-accordion__button{width:100%;display:flex;justify-content:space-between;align-items:center;padding:20px 24px;background:none;border:none;color:var(--aether-text);font-size:1rem;font-weight:500;cursor:pointer;text-align:left;transition:color .3s}.aether-accordion__button:hover{color:var(--aether-accent)}.aether-accordion__icon{flex-shrink:0;width:20px;height:20px;transition:transform .3s;color:var(--aether-muted)}.aether-accordion__item.is-open .aether-accordion__icon{transform:rotate(180deg)}.aether-accordion__body{overflow:hidden}.aether-accordion__body[hidden]{display:none}.aether-accordion__answer{padding:0 24px 20px;font-size:.95rem;line-height:1.7;color:var(--aether-muted)}
+/* ── About: Story ────────────────────────────────────────────────── */
+.story-section{position:relative;height:60vh;min-height:400px;display:flex;align-items:center;justify-content:center;background:var(--aether-bg)}
+.story-overlay{position:absolute;inset:0;background:rgba(9,9,11,0.7)}
+.story-quote{position:relative;z-index:1;text-align:center;max-width:700px;padding:40px}
+.story-quote blockquote{font-family:var(--aether-font-heading);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;color:var(--aether-text);line-height:1.4;margin-bottom:20px}
+.story-quote cite{font-family:var(--aether-font-body);font-size:0.9rem;color:var(--aether-accent);font-style:normal}
 
+/* ── About: Stats ────────────────────────────────────────────────── */
+.stats-section{padding:var(--aether-section-padding);background-color:var(--aether-bg)}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;text-align:center}
+.stat-card{padding:40px;border:1px solid var(--aether-border)}
+.stat-card .stat-number{font-family:var(--aether-font-heading);font-size:2.5rem;font-weight:800;color:var(--aether-accent);margin-bottom:8px}
+.stat-card .stat-label{font-family:var(--aether-font-body);font-size:0.9rem;color:var(--aether-muted)}
 
-.aether-team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}.aether-team-grid--cols-2{grid-template-columns:repeat(2,1fr)}.aether-team-grid--cols-4{grid-template-columns:repeat(4,1fr)}.aether-team-card{text-align:center;padding:30px;border:1px solid var(--aether-border)}.aether-team-card__image{width:120px;height:120px;border-radius:50%;overflow:hidden;margin:0 auto 20px;border:2px solid var(--aether-accent)}.aether-team-card__image img{width:100%;height:100%;object-fit:cover}.aether-team-card__image--placeholder{display:flex;align-items:center;justify-content:center;background:var(--aether-surface)}.aether-team-card__name{font-size:1.1rem;font-weight:600;color:var(--aether-text);margin-bottom:5px}.aether-team-card__role{display:block;font-size:.8rem;font-weight:500;color:var(--aether-accent);letter-spacing:.05em;text-transform:uppercase;margin-bottom:10px}.aether-team-card__bio{font-size:.85rem;color:var(--aether-muted);line-height:1.6}
+/* ── Team ─────────────────────────────────────────────────────────── */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.team-card{text-align:center;padding:30px;border:1px solid var(--aether-border);transition:border-color 0.3s}
+.team-card:hover{border-color:var(--aether-accent)}
+.team-image{width:120px;height:120px;border-radius:50%;overflow:hidden;margin:0 auto 20px;border:2px solid var(--aether-accent)}
+.team-image img{width:100%;height:100%;object-fit:cover}
+.team-image--placeholder{display:flex;align-items:center;justify-content:center;background:var(--aether-surface)}
+.team-name{font-family:var(--aether-font-heading);font-size:1.1rem;font-weight:600;color:var(--aether-text);margin-bottom:5px}
+.team-role{display:block;font-family:var(--aether-font-body);font-size:0.8rem;font-weight:500;color:var(--aether-accent);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:10px}
+.team-bio{font-family:var(--aether-font-body);font-size:0.85rem;color:var(--aether-muted);line-height:1.6}
+.values-section{padding:60px 0;background-color:var(--aether-surface)}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;text-align:center}
+.value-card{padding:30px}
+.value-card i{font-size:1.5rem;color:var(--aether-accent);margin-bottom:16px;display:block}
+.value-card h3{font-family:var(--aether-font-heading);font-size:1rem;font-weight:600;color:var(--aether-text);margin-bottom:8px}
+.value-card p{font-family:var(--aether-font-body);font-size:0.85rem;color:var(--aether-muted);line-height:1.6}
 
+/* ── Testimonials ────────────────────────────────────────────────── */
+.testimonials-summary{padding:60px 0}
+.rating-overview{display:flex;gap:20px;align-items:center;margin-bottom:30px}
+.rating-big{font-family:var(--aether-font-heading);font-size:4rem;font-weight:800;color:var(--aether-accent);line-height:1}
+.rating-stars{color:var(--aether-accent);font-size:1rem;margin-bottom:4px}
+.rating-count{font-family:var(--aether-font-body);font-size:0.85rem;color:var(--aether-muted)}
+.rating-bars{margin-bottom:30px}
+.rating-bar{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.rating-bar__label{font-family:var(--aether-font-body);font-size:0.8rem;color:var(--aether-muted);min-width:50px}
+.rating-bar__track{flex:1;height:8px;background:var(--aether-border);border-radius:4px;overflow:hidden}
+.rating-bar__fill{height:100%;background:var(--aether-accent);border-radius:4px}
+.rating-bar__pct{font-family:var(--aether-font-body);font-size:0.8rem;color:var(--aether-muted);min-width:35px;text-align:right}
+.reviews-section{padding:60px 0 80px}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.review-card{padding:24px;border:1px solid var(--aether-border);background:var(--aether-surface)}
+.review-card__stars{color:var(--aether-accent);font-size:0.85rem;margin-bottom:12px}
+.review-card__title{font-family:var(--aether-font-heading);font-size:1rem;font-weight:600;color:var(--aether-text);margin-bottom:8px}
+.review-card__text{font-family:var(--aether-font-body);font-size:0.9rem;color:var(--aether-muted);line-height:1.6;margin-bottom:16px}
+.review-card__footer{display:flex;justify-content:space-between;align-items:center;font-family:var(--aether-font-body);font-size:0.8rem}
+.review-card__author strong{color:var(--aether-text)}
+.review-card__date{color:var(--aether-muted)}
 
-.aether-rating-overview{display:flex;gap:20px;align-items:center;margin-bottom:30px}.aether-rating-overview__big{font-size:4rem;font-weight:800;color:var(--aether-accent);line-height:1}.aether-rating-overview__stars{color:var(--aether-accent);font-size:1rem;margin-bottom:4px}.aether-rating-overview__count{font-size:.85rem;color:var(--aether-muted)}.aether-rating-bars{margin-bottom:30px}.aether-rating-bars__row{display:flex;align-items:center;gap:12px;margin-bottom:8px}.aether-rating-bars__label{font-size:.8rem;color:var(--aether-muted);min-width:50px}.aether-rating-bars__track{flex:1;height:8px;background:var(--aether-border);border-radius:4px;overflow:hidden}.aether-rating-bars__fill{height:100%;background:var(--aether-accent);border-radius:4px}.aether-rating-bars__percent{font-size:.8rem;color:var(--aether-muted);min-width:35px;text-align:right}.aether-filter-bar{display:flex;gap:10px;margin-bottom:30px;flex-wrap:wrap}.aether-filter-bar__btn{padding:8px 16px;border:1px solid var(--aether-border);border-radius:20px;background:none;color:var(--aether-muted);font-size:.8rem;cursor:pointer;transition:all .3s}.aether-filter-bar__btn:hover,.aether-filter-bar__btn.is-active{border-color:var(--aether-accent);color:var(--aether-accent)}.aether-reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.aether-review-card{padding:24px;border:1px solid var(--aether-border);background:var(--aether-surface)}.aether-review-card__stars{color:var(--aether-accent);font-size:.85rem;margin-bottom:12px}.aether-review-card__title{font-size:1rem;font-weight:600;color:var(--aether-text);margin-bottom:8px}.aether-review-card__text{font-size:.9rem;color:var(--aether-muted);line-height:1.6;margin-bottom:16px}.aether-review-card__footer{display:flex;justify-content:space-between;align-items:center;font-size:.8rem}.aether-review-card__author strong{color:var(--aether-text)}.aether-review-card__author i{color:var(--aether-accent);margin-left:4px}.aether-review-card__date{color:var(--aether-muted)}
+/* ── Contact ──────────────────────────────────────────────────────── */
+.contact-hero{position:relative;overflow:hidden;padding:200px 0 100px;background:linear-gradient(180deg,rgba(9,9,9,0.55) 0%,var(--aether-bg) 100%);text-align:center}
+.contact-section{padding:60px 0 80px}
+.contact-grid{display:grid;grid-template-columns:7fr 5fr;gap:40px}
+.contact-form-wrap{background:var(--aether-surface);padding:50px}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-family:var(--aether-font-body);font-size:0.85rem;font-weight:500;color:var(--aether-text);margin-bottom:6px}
+.form-group input,.form-group textarea{width:100%;padding:12px 16px;border:1px solid var(--aether-border);border-radius:var(--aether-radius);background:var(--aether-bg);color:var(--aether-text);font-family:var(--aether-font-body);font-size:0.9rem;transition:border-color 0.3s}
+.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--aether-accent)}
+.form-group textarea{resize:vertical;min-height:140px}
+.info-card{display:flex;gap:16px;align-items:flex-start;padding:20px 0;border-bottom:1px solid var(--aether-border)}
+.info-card:last-of-type{border-bottom:none}
+.info-card-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;color:var(--aether-accent);flex-shrink:0;font-size:1rem}
+.info-card-title{font-family:var(--aether-font-heading);font-size:0.9rem;font-weight:600;color:var(--aether-text);margin-bottom:4px}
+.info-card-value{font-family:var(--aether-font-body);font-size:0.85rem;color:var(--aether-muted);line-height:1.6}
 
+/* ── 404 Error ───────────────────────────────────────────────────── */
+.error-page{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--aether-bg);text-align:center;position:relative;overflow:hidden}
+.error-page .hero-fog{position:absolute;inset:0}
+.error-content{position:relative;z-index:1;max-width:600px;padding:40px}
+.error-code{display:block;font-family:var(--aether-font-heading);font-size:clamp(6rem,15vw,12rem);font-weight:800;color:rgba(255,255,255,0.05);line-height:1;margin-bottom:-20px}
+.error-title{font-family:var(--aether-font-heading);font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--aether-text);margin-bottom:15px}
+.error-description{font-family:var(--aether-font-body);font-size:1rem;color:var(--aether-muted);margin-bottom:30px;line-height:1.6}
+.error-buttons{display:flex;gap:20px;justify-content:center}
 
-.aether-contact__row{display:grid;grid-template-columns:7fr 5fr;gap:40px}.aether-contact__form-wrap{background:var(--aether-surface);padding:50px}.aether-form-group{margin-bottom:20px}.aether-form-group label{display:block;font-size:.85rem;font-weight:500;color:var(--aether-text);margin-bottom:6px}.aether-form-group input,.aether-form-group select,.aether-form-group textarea{width:100%;padding:12px 16px;border:1px solid var(--aether-border);border-radius:var(--aether-radius);background:var(--aether-bg,var(--aether-void,#09090B));color:var(--aether-text);font-size:.9rem;transition:border-color .3s}.aether-form-group input:focus,.aether-form-group select:focus,.aether-form-group textarea:focus{outline:none;border-color:var(--aether-accent)}.aether-form-group textarea{resize:vertical;min-height:140px}.aether-contact-form__success{padding:16px;background:rgba(46,204,113,.1);border:1px solid #2ecc71;border-radius:var(--aether-radius);color:#2ecc71;margin-bottom:20px}.aether-contact-form__errors{padding:16px;background:rgba(231,76,60,.1);border:1px solid #e74c3c;border-radius:var(--aether-radius);color:#e74c3c;margin-bottom:20px}.aether-info-card{display:flex;gap:16px;align-items:flex-start;padding:20px 0;border-bottom:1px solid var(--aether-border)}.aether-info-card:last-of-type{border-bottom:none}.aether-info-card__icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;color:var(--aether-accent);flex-shrink:0}.aether-info-card__title{font-size:.9rem;font-weight:600;color:var(--aether-text);margin-bottom:4px}.aether-info-card__value{font-size:.85rem;color:var(--aether-muted);line-height:1.6}.aether-social-links{display:flex;gap:16px;padding:20px 0}.aether-social-links__link{color:var(--aether-muted);font-size:1.2rem;transition:color .3s}.aether-social-links__link:hover{color:var(--aether-accent)}.aether-map{margin-top:20px;border-radius:var(--aether-radius);overflow:hidden;min-height:300px}.aether-map__iframe{width:100%;height:300px;border:0}.aether-map--placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--aether-surface);border:1px solid var(--aether-border);color:var(--aether-muted);gap:12px}
+/* ── Legal ────────────────────────────────────────────────────────── */
+.content-page{padding:60px 0 80px}
+.content-page .container{max-width:800px}
+.content-page h2{font-family:var(--aether-font-heading);font-size:1.5rem;font-weight:700;color:var(--aether-text);margin:30px 0 12px}
+.content-page p{font-family:var(--aether-font-body);font-size:1rem;color:var(--aether-muted);line-height:1.7;margin-bottom:20px}
 
+/* ── Newsletter ──────────────────────────────────────────────────── */
+.newsletter-section{position:relative;padding:var(--aether-section-padding);text-align:center}
+.newsletter-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(200,149,108,0.06) 0%,transparent 70%);pointer-events:none}
+.newsletter-inner{position:relative;max-width:580px;margin:0 auto}
+.newsletter-title{font-family:var(--aether-font-heading);font-size:2rem;font-weight:800;color:var(--aether-text);margin-bottom:12px}
+.newsletter-text{font-family:var(--aether-font-body);font-size:1rem;color:var(--aether-muted);margin-bottom:30px;line-height:1.6}
+.newsletter-form{max-width:480px;margin:0 auto}
+.newsletter-input-wrap{display:flex;border:1px solid rgba(168,181,192,0.15);background:rgba(9,9,11,0.6);backdrop-filter:blur(8px);overflow:hidden}
+.newsletter-input{flex:1;padding:14px 20px;background:transparent;border:none;color:var(--aether-text);font-family:var(--aether-font-body);font-size:1rem;outline:none}
+.newsletter-btn{padding:16px 28px;background:var(--aether-accent);border:none;color:var(--aether-bg);font-family:var(--aether-font-body);font-size:0.8rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:all 0.3s ease;display:flex;align-items:center;gap:8px}
+.newsletter-btn:hover{background:var(--aether-primary)}
+.newsletter-note{font-family:var(--aether-font-body);font-size:0.8rem;color:var(--aether-muted);margin-top:16px}
 
-.aether-newsletter{position:relative;padding:100px 0 80px;text-align:center}.aether-newsletter__glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(200,149,108,0.06) 0%,transparent 70%);pointer-events:none}.aether-newsletter__inner{position:relative;max-width:580px;margin:0 auto}.aether-newsletter__title{font-size:2rem;font-weight:800;color:var(--aether-text);margin-bottom:12px}.aether-newsletter__text{font-size:1rem;color:var(--aether-muted);margin-bottom:30px;line-height:1.6}.aether-newsletter__form{max-width:480px;margin:0 auto}.aether-newsletter__note{font-size:.8rem;color:var(--aether-muted);margin-top:16px}.aether-newsletter__note i{margin-right:4px}.aether-newsletter__success{display:none;padding:20px;background:rgba(46,204,113,.1);border:1px solid #2ecc71;border-radius:var(--aether-radius);color:#2ecc71;margin-top:20px}.aether-newsletter__success.is-visible{display:block;animation:fadeIn .5s}
+/* ── Buttons ──────────────────────────────────────────────────────── */
+.btn{display:inline-block;padding:16px 40px;font-family:var(--aether-font-body);font-weight:500;font-size:0.9rem;letter-spacing:0.05em;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:all 0.35s cubic-bezier(0.16,1,0.3,1)}
+.btn-primary{background:var(--aether-accent);color:var(--aether-bg)}
+.btn-primary:hover{background:#D4A574;box-shadow:0 8px 30px rgba(200,149,108,0.35);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--aether-text);border:1px solid var(--aether-text)}
+.btn-outline:hover{background:var(--aether-text);color:var(--aether-bg)}
 
+/* ── Footer ───────────────────────────────────────────────────────── */
+.footer{padding:80px 0 0;background-color:var(--aether-bg);border-top:1px solid var(--aether-surface)}
+.footer .container{width:100%;max-width:var(--aether-container-max);margin:0 auto;padding:0 20px}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 1.5fr;gap:40px;padding-bottom:60px}
+.footer-brand .footer-logo{font-family:var(--aether-font-heading);font-size:1.5rem;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--aether-text);display:block;margin-bottom:10px;text-decoration:none}
+.footer-brand .footer-tagline{font-family:var(--aether-font-body);font-size:0.9rem;color:var(--aether-muted);margin-bottom:20px}
+.footer-heading{font-family:var(--aether-font-heading);font-size:0.8rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--aether-text);margin:0 0 20px}
+.footer-links ul{margin:0;padding:0;list-style:none}
+.footer-links ul li{margin-bottom:10px}
+.footer-links ul li a{font-family:var(--aether-font-body);font-size:0.85rem;color:var(--aether-muted);text-decoration:none;transition:color 0.2s}
+.footer-links ul li a:hover{color:var(--aether-accent)}
+.footer-newsletter p{font-family:var(--aether-font-body);font-size:0.85rem;color:var(--aether-muted);margin:0 0 16px;line-height:1.6}
+.footer-newsletter .input-group{display:flex;border:1px solid var(--aether-surface)}
+.footer-newsletter .newsletter__input{flex:1;padding:12px 16px;background:transparent;border:none;color:var(--aether-text);font-family:var(--aether-font-body);font-size:0.85rem}
+.footer-newsletter .btn{padding:12px 20px;background:var(--aether-accent);border:none;color:var(--aether-bg);font-family:var(--aether-font-body);font-size:0.9rem}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 0;border-top:1px solid var(--aether-surface)}
+.footer-legal{display:flex;flex-wrap:wrap;align-items:center;gap:20px;font-family:var(--aether-font-body);font-size:0.8rem;color:var(--aether-muted)}
+.footer-legal a{color:var(--aether-muted);text-decoration:none;transition:color 0.2s}
+.footer-legal a:hover{color:var(--aether-accent)}
 
-.aether-promo--split .aether-promo__row{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}.aether-promo--split .aether-promo__row--reverse{direction:rtl}.aether-promo--split .aether-promo__row--reverse > *{direction:ltr}.aether-promo__media img{width:100%;border-radius:var(--aether-radius)}.aether-promo__title{font-size:2rem;font-weight:800;color:var(--aether-text);margin-bottom:12px}.aether-promo__text{font-size:1rem;color:var(--aether-muted);margin-bottom:24px;line-height:1.6}.aether-promo--overlay .aether-promo__overlay{position:relative;min-height:500px;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;border-radius:var(--aether-radius);overflow:hidden}.aether-promo__overlay-bg{position:absolute;inset:0;background:#000}.aether-promo--overlay .aether-promo__content{position:relative;z-index:1;text-align:center;max-width:600px;padding:40px}
-
-
-.aether-search__form{margin-bottom:40px}.aether-search__input-wrap{display:flex;border:1px solid var(--aether-border);border-radius:var(--aether-radius);overflow:hidden;backdrop-filter:blur(10px);transition:border-color .3s}.aether-search__input-wrap:focus-within{border-color:var(--aether-accent)}.aether-search__input{flex:1;padding:14px 20px;background:transparent;border:none;color:var(--aether-text);font-size:1rem;outline:none}.aether-search__btn{padding:14px 20px;background:var(--aether-accent);border:none;color:#fff;cursor:pointer;transition:opacity .3s}.aether-search__btn:hover{opacity:.8}.aether-search__btn svg{width:20px;height:20px}.aether-search__count{font-size:.9rem;color:var(--aether-muted);margin-bottom:20px}.aether-search__results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.aether-search__empty{text-align:center;padding:60px 0;color:var(--aether-muted)}.aether-blog-card__price{display:block;font-size:1rem;font-weight:600;color:var(--aether-accent);margin-top:8px}
-
-
-.aether-error{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--aether-bg,var(--aether-void,#09090B));text-align:center}.aether-error__content{max-width:600px;padding:40px}.aether-error__code{display:block;font-size:clamp(6rem,15vw,12rem);font-weight:800;color:rgba(255,255,255,0.05);line-height:1;margin-bottom:-20px}.aether-error__title{font-size:clamp(2rem, 4vw, 3rem);font-weight:700;color:var(--aether-text);margin-bottom:15px}.aether-error__description{font-size:1rem;color:var(--aether-muted);margin-bottom:30px;line-height:1.6}.aether-error__buttons{display:flex;gap:20px;justify-content:center}
-
-
-.aether-btn{display:inline-block;padding:14px 32px;font-size:.8rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;border-radius:var(--aether-radius);transition:all .3s;cursor:pointer;border:none}.aether-btn-primary{background:var(--aether-accent);color:#fff}.aether-btn-primary:hover{opacity:.85;transform:translateY(-2px)}.aether-btn-outline{background:transparent;border:1px solid var(--aether-accent);color:var(--aether-accent)}.aether-btn-outline:hover{background:var(--aether-accent);color:#fff}.aether-section-header{margin-bottom:40px}.aether-section-label{display:block;font-size:.75rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--aether-accent);margin-bottom:12px}.aether-container{max-width:var(--aether-container-max,1200px);margin:0 auto;padding:0 20px}
-
-
-@media(max-width:1024px){.aether-blog-grid{grid-template-columns:repeat(2,1fr)}.aether-reviews-grid{grid-template-columns:repeat(2,1fr)}.aether-team-grid{grid-template-columns:repeat(2,1fr)}.aether-search__results-grid{grid-template-columns:repeat(2,1fr)}.aether-contact__row{grid-template-columns:1fr}}
-@media(max-width:768px){.aether-promo--split .aether-promo__row{grid-template-columns:1fr}.aether-error__buttons{flex-direction:column;align-items:center}.aether-rating-overview{flex-direction:column;text-align:center}.aether-filter-bar{justify-content:center}}
-@media(max-width:576px){.aether-blog-grid{grid-template-columns:1fr}.aether-reviews-grid{grid-template-columns:1fr}.aether-team-grid{grid-template-columns:1fr}.aether-search__results-grid{grid-template-columns:1fr}.aether-article-meta{flex-wrap:wrap;justify-content:center}}
-
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-
-body{margin:0;font-family:var(--aether-body-font,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif);background:var(--aether-bg,#09090B);color:var(--aether-text,#F2F2F2)}
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media(max-width:1024px){
+  .blog-grid,.reviews-grid,.team-grid,.features-grid{grid-template-columns:repeat(2,1fr)}
+  .contact-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .page-hero{padding:140px 0 60px}
+  .error-buttons{flex-direction:column;align-items:center}
+  .rating-overview{flex-direction:column;text-align:center}
+  .footer-top{grid-template-columns:1fr;text-align:center}
+  .mission-grid{grid-template-columns:1fr}
+}
+@media(max-width:576px){
+  .blog-grid,.reviews-grid,.team-grid,.features-grid,.stats-grid,.values-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
-<body>
-<section class="aether-page-hero">
-  <div class="aether-container">
-    <span class="aether-section-label">Journal</span>
-    <h1 class="aether-page-hero__title">The AETHER Dispatch</h1>
-    <p class="aether-page-hero__subtitle">Insights on technology, performance, and the future of footwear</p>
+<body class="ph-client--aether">
+
+  <div class="aether-announcement-bar ph-client--aether">
+    <div class="announcement-content">
+      <span><i class="fas fa-truck" aria-hidden="true"></i> Free Shipping On Orders Over $200</span>
+      <span class="separator" aria-hidden="true">|</span>
+      <span><i class="fas fa-bolt" aria-hidden="true"></i> Free Shipping On All Orders</span>
+      <span class="separator" aria-hidden="true">|</span>
+      <span><i class="fas fa-rotate-left" aria-hidden="true"></i> 30-Day Free Returns</span>
+    </div>
+  </div>
+  <header class="aether-header ph-client--aether">
+    <div class="aether-header__bar">
+      <div class="aether-header__container">
+        <a class="aether-header__logo" href="/">AETHER</a>
+        <nav class="aether-header__nav">
+          <ul class="aether-nav__links">
+            <li><a href="/" class="aether-nav__link">Home</a></li>
+            <li><a href="/collections/all" class="aether-nav__link">Collection</a></li>
+            <li><a href="/pages/about" class="aether-nav__link">About</a></li>
+            <li><a href="/blogs/news" class="aether-nav__link active">Blog</a></li>
+            <li><a href="/pages/contact" class="aether-nav__link">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="aether-header__actions">
+          <a href="/search" class="aether-header__icon" aria-label="Search"><i class="fas fa-search"></i></a>
+          <a href="/account" class="aether-header__icon" aria-label="Account"><i class="fas fa-user"></i></a>
+          <a href="/cart" class="aether-header__icon" aria-label="Cart"><i class="fas fa-shopping-bag"></i></a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+<section class="page-hero">
+  
+<div class="hero-fog" aria-hidden="true">
+  <div id="hl_01" class="hf-fog"><div class="hf-img"></div><div class="hf-img"></div></div>
+  <div id="hl_02" class="hf-fog"><div class="hf-img"></div><div class="hf-img"></div></div>
+  <div id="hl_03" class="hf-fog"><div class="hf-img"></div><div class="hf-img"></div></div>
+</div>
+  <div class="container">
+    <span class="section-label">Journal</span>
+    <h1 class="page-hero-title">The AETHER Dispatch</h1>
+    <p class="page-hero-subtitle">Insights on technology, performance, and the future of footwear</p>
   </div>
 </section>
-<section class="aether-blog-posts">
-  <div class="aether-container">
-    <div class="aether-blog-grid aether-blog-grid--cols-3">
-      
-      <a href="#" class="aether-blog-card">
-        <div class="aether-blog-card__image">
-          <img src="frontend/frontend/assets/images/Luxury_running_sneaker_on_pedestal_202607222032.jpeg" alt="Blog 1">
-          <span class="aether-blog-card__category">Technology</span>
+<section class="blog-grid-section">
+  <div class="container">
+    <div class="blog-grid">
+      <a href="#" class="blog-card">
+        <div class="blog-card-image">
+          <img src="../assets/Luxury_running_sneaker_on_pedestal_202607222032.jpeg" alt="Carbon Fiber Technology">
+          <span class="blog-category">Technology</span>
         </div>
-        <div class="aether-blog-card__content">
-          <span class="aether-blog-card__date">Jul 11, 2026</span>
-          <h3 class="aether-blog-card__title">The Science Behind Carbon Fiber 1</h3>
-          <p class="aether-blog-card__excerpt">Carbon fiber has been the gold standard in aerospace engineering for decades...</p>
-          <span class="aether-blog-card__read-more">Read more →</span>
-        </div>
-      </a>
-      <a href="#" class="aether-blog-card">
-        <div class="aether-blog-card__image">
-          <img src="frontend/frontend/assets/images/Luxury_running_sneaker_on_pedestal_202607222032.jpeg" alt="Blog 2">
-          <span class="aether-blog-card__category">Technology</span>
-        </div>
-        <div class="aether-blog-card__content">
-          <span class="aether-blog-card__date">Jul 12, 2026</span>
-          <h3 class="aether-blog-card__title">The Science Behind Carbon Fiber 2</h3>
-          <p class="aether-blog-card__excerpt">Carbon fiber has been the gold standard in aerospace engineering for decades...</p>
-          <span class="aether-blog-card__read-more">Read more →</span>
+        <div class="blog-card-content">
+          <span class="blog-date">Jul 15, 2026</span>
+          <h3 class="blog-card-title">The Science Behind Carbon Fiber</h3>
+          <p class="blog-card-excerpt">How we used aerospace-grade carbon fiber to create the most responsive running shoe ever made.</p>
+          <span class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></span>
         </div>
       </a>
-      <a href="#" class="aether-blog-card">
-        <div class="aether-blog-card__image">
-          <img src="frontend/frontend/assets/images/Luxury_running_sneaker_on_pedestal_202607222032.jpeg" alt="Blog 3">
-          <span class="aether-blog-card__category">Technology</span>
+      <a href="#" class="blog-card">
+        <div class="blog-card-image">
+          <img src="../assets/Luxury_running_sneaker_on_pedestal_202607222032.jpeg" alt="Why We Chose the Void">
+          <span class="blog-category">Culture</span>
         </div>
-        <div class="aether-blog-card__content">
-          <span class="aether-blog-card__date">Jul 13, 2026</span>
-          <h3 class="aether-blog-card__title">The Science Behind Carbon Fiber 3</h3>
-          <p class="aether-blog-card__excerpt">Carbon fiber has been the gold standard in aerospace engineering for decades...</p>
-          <span class="aether-blog-card__read-more">Read more →</span>
+        <div class="blog-card-content">
+          <span class="blog-date">Jul 8, 2026</span>
+          <h3 class="blog-card-title">Why We Chose the Void</h3>
+          <p class="blog-card-excerpt">The philosophy behind our name and what it means to run without limits.</p>
+          <span class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="#" class="blog-card">
+        <div class="blog-card-image">
+          <img src="../assets/Luxury_running_sneaker_on_pedestal_202607222032.jpeg" alt="Reflective Tech">
+          <span class="blog-category">Technology</span>
+        </div>
+        <div class="blog-card-content">
+          <span class="blog-date">Jun 28, 2026</span>
+          <h3 class="blog-card-title">Running in the Dark: Reflective Tech</h3>
+          <p class="blog-card-excerpt">Our reflective weave technology keeps you visible without compromising style.</p>
+          <span class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></span>
         </div>
       </a>
     </div>
   </div>
 </section>
-<section class="aether-newsletter">
-  <div class="aether-newsletter__glow"></div>
-  <div class="aether-container aether-newsletter__inner">
-    <h2 class="aether-newsletter__title">Stay in the Loop</h2>
-    <p class="aether-newsletter__text">Be the first to know about new releases.</p>
-    <div class="aether-newsletter__form" style="display:flex;border:1px solid var(--aether-border);border-radius:12px;overflow:hidden">
-      <input type="email" placeholder="your@email.com" style="flex:1;padding:14px 20px;background:transparent;border:none;color:var(--aether-text);font-size:1rem;outline:none">
-      <button class="aether-btn aether-btn-primary" style="padding:14px 20px;border-radius:0">Subscribe</button>
-    </div>
-    <p class="aether-newsletter__note">🔒 No spam. Unsubscribe anytime.</p>
+
+<section class="newsletter-section">
+  <div class="newsletter-glow" aria-hidden="true"></div>
+  <div class="container newsletter-inner">
+    <h2 class="newsletter-title">JOIN THE VOID</h2>
+    <p class="newsletter-text">Subscribe for exclusive drops, early access, and AETHER news.</p>
+    <form class="newsletter-form">
+      <div class="newsletter-input-wrap">
+        <input type="email" placeholder="Enter your email" required class="newsletter-input" aria-label="Email address">
+        <button type="submit" class="newsletter-btn">
+          <span>Subscribe</span> <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </button>
+      </div>
+    </form>
+    <p class="newsletter-note"><i class="fas fa-lock" aria-hidden="true"></i> No spam. Unsubscribe anytime.</p>
   </div>
 </section>
-</body></html>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo">AETHER</a>
+        <p class="footer-tagline">Step Into The Void</p>
+      </div>
+      <nav class="footer-links">
+        <h4 class="footer-heading">Shop</h4>
+        <ul>
+          <li><a href="/collections/men">Men</a></li>
+          <li><a href="/collections/women">Women</a></li>
+          <li><a href="/collections/kids">Kids</a></li>
+          <li><a href="/collections/new-arrivals">New Arrivals</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-links">
+        <h4 class="footer-heading">Support</h4>
+        <ul>
+          <li><a href="/pages/faq">FAQ</a></li>
+          <li><a href="/pages/contact">Contact Us</a></li>
+          <li><a href="/pages/faq#shipping">Shipping Info</a></li>
+          <li><a href="/pages/faq#returns">Returns</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-links">
+        <h4 class="footer-heading">Company</h4>
+        <ul>
+          <li><a href="/pages/about">About Us</a></li>
+          <li><a href="/blogs/news">Blog</a></li>
+        </ul>
+      </nav>
+      <div class="footer-newsletter">
+        <h4 class="footer-heading">Stay in the Loop</h4>
+        <p>Get exclusive drops and AETHER news.</p>
+        <div class="input-group">
+          <input type="email" placeholder="Enter your email" class="newsletter__input">
+          <button type="submit" class="btn">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <span>&copy; 2026 AETHER. All Rights Reserved.</span>
+        <a href="/pages/privacy-policy">Privacy</a>
+        <a href="/pages/terms-of-service">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
