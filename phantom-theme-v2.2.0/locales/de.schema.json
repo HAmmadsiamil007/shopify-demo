@@ -5071,6 +5071,15 @@
         },
         "aether_motion_enable": {
           "label": "Enable motion"
+        },
+        "aether_success": {
+          "label": "Erfolgsfarbe"
+        },
+        "aether_warning": {
+          "label": "Warnungsfarbe"
+        },
+        "aether_error": {
+          "label": "Fehlerfarbe"
         }
       }
     }

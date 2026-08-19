@@ -1088,13 +1088,34 @@
         "label": "t:settings_schema.ph_motion.settings.ph_motion_entrance_default.label",
         "default": "existing",
         "options": [
-          { "value": "existing", "label": "t:settings_schema.ph_motion.settings.ph_motion_entrance_default.options.existing.label" },
-          { "value": "ph-fade-up", "label": "t:settings_schema.ph_motion.settings.ph_motion_entrance_default.options.ph-fade-up.label" },
-          { "value": "ph-scale-in", "label": "t:settings_schema.ph_motion.settings.ph_motion_entrance_default.options.ph-scale-in.label" },
-          { "value": "ph-blur-in", "label": "t:settings_schema.ph_motion.settings.ph_motion_entrance_default.options.ph-blur-in.label" },
-          { "value": "ph-slide-left", "label": "t:settings_schema.ph_motion.settings.ph_motion_entrance_default.options.ph-slide-left.label" },
-          { "value": "ph-slide-right", "label": "t:settings_schema.ph_motion.settings.ph_motion_entrance_default.options.ph-slide-right.label" },
-          { "value": "ph-rotate-in", "label": "t:settings_schema.ph_motion.settings.ph_motion_entrance_default.options.ph-rotate-in.label" }
+          {
+            "value": "existing",
+            "label": "t:settings_schema.ph_motion.settings.ph_motion_entrance_default.options.existing.label"
+          },
+          {
+            "value": "ph-fade-up",
+            "label": "t:settings_schema.ph_motion.settings.ph_motion_entrance_default.options.ph-fade-up.label"
+          },
+          {
+            "value": "ph-scale-in",
+            "label": "t:settings_schema.ph_motion.settings.ph_motion_entrance_default.options.ph-scale-in.label"
+          },
+          {
+            "value": "ph-blur-in",
+            "label": "t:settings_schema.ph_motion.settings.ph_motion_entrance_default.options.ph-blur-in.label"
+          },
+          {
+            "value": "ph-slide-left",
+            "label": "t:settings_schema.ph_motion.settings.ph_motion_entrance_default.options.ph-slide-left.label"
+          },
+          {
+            "value": "ph-slide-right",
+            "label": "t:settings_schema.ph_motion.settings.ph_motion_entrance_default.options.ph-slide-right.label"
+          },
+          {
+            "value": "ph-rotate-in",
+            "label": "t:settings_schema.ph_motion.settings.ph_motion_entrance_default.options.ph-rotate-in.label"
+          }
         ]
       },
       {
@@ -1228,9 +1249,18 @@
         "label": "Elevation intensity",
         "default": "normal",
         "options": [
-          { "value": "subtle", "label": "Subtle" },
-          { "value": "normal", "label": "Normal" },
-          { "value": "pronounced", "label": "Pronounced" }
+          {
+            "value": "subtle",
+            "label": "Subtle"
+          },
+          {
+            "value": "normal",
+            "label": "Normal"
+          },
+          {
+            "value": "pronounced",
+            "label": "Pronounced"
+          }
         ]
       }
     ]
@@ -1248,11 +1278,26 @@
         "label": "t:settings_schema.ph_presets.settings.ph_style_preset.label",
         "default": "default",
         "options": [
-          { "value": "default", "label": "t:settings_schema.ph_presets.settings.ph_style_preset.options.default.label" },
-          { "value": "minimal", "label": "t:settings_schema.ph_presets.settings.ph_style_preset.options.minimal.label" },
-          { "value": "editorial", "label": "t:settings_schema.ph_presets.settings.ph_style_preset.options.editorial.label" },
-          { "value": "bold", "label": "t:settings_schema.ph_presets.settings.ph_style_preset.options.bold.label" },
-          { "value": "luxury", "label": "t:settings_schema.ph_presets.settings.ph_style_preset.options.luxury.label" }
+          {
+            "value": "default",
+            "label": "t:settings_schema.ph_presets.settings.ph_style_preset.options.default.label"
+          },
+          {
+            "value": "minimal",
+            "label": "t:settings_schema.ph_presets.settings.ph_style_preset.options.minimal.label"
+          },
+          {
+            "value": "editorial",
+            "label": "t:settings_schema.ph_presets.settings.ph_style_preset.options.editorial.label"
+          },
+          {
+            "value": "bold",
+            "label": "t:settings_schema.ph_presets.settings.ph_style_preset.options.bold.label"
+          },
+          {
+            "value": "luxury",
+            "label": "t:settings_schema.ph_presets.settings.ph_style_preset.options.luxury.label"
+          }
         ]
       }
     ]
@@ -1270,9 +1315,18 @@
         "label": "t:settings_schema.design_pack.settings.active_design_pack.label",
         "default": "aether",
         "options": [
-          { "value": "aether", "label": "t:settings_schema.design_pack.settings.active_design_pack.options.aether.label" },
-          { "value": "demo", "label": "t:settings_schema.design_pack.settings.active_design_pack.options.demo.label" },
-          { "value": "none", "label": "t:settings_schema.design_pack.settings.active_design_pack.options.none.label" }
+          {
+            "value": "aether",
+            "label": "t:settings_schema.design_pack.settings.active_design_pack.options.aether.label"
+          },
+          {
+            "value": "demo",
+            "label": "t:settings_schema.design_pack.settings.active_design_pack.options.demo.label"
+          },
+          {
+            "value": "none",
+            "label": "t:settings_schema.design_pack.settings.active_design_pack.options.none.label"
+          }
         ]
       }
     ]
@@ -1333,6 +1387,24 @@
         "default": "#E74C3C"
       },
       {
+        "type": "color",
+        "id": "aether_success",
+        "label": "t:settings_schema.aether.settings.aether_success.label",
+        "default": "#2ecc71"
+      },
+      {
+        "type": "color",
+        "id": "aether_warning",
+        "label": "t:settings_schema.aether.settings.aether_warning.label",
+        "default": "#f39c12"
+      },
+      {
+        "type": "color",
+        "id": "aether_error",
+        "label": "t:settings_schema.aether.settings.aether_error.label",
+        "default": "#e74c3c"
+      },
+      {
         "type": "font_picker",
         "id": "aether_heading_font",
         "label": "t:settings_schema.aether.settings.aether_heading_font.label",
@@ -1360,8 +1432,14 @@
         "label": "t:settings_schema.aether.settings.aether_dark_light.label",
         "default": "dark",
         "options": [
-          { "value": "dark", "label": "t:settings_schema.aether.settings.aether_dark_light.options.dark.label" },
-          { "value": "light", "label": "t:settings_schema.aether.settings.aether_dark_light.options.light.label" }
+          {
+            "value": "dark",
+            "label": "t:settings_schema.aether.settings.aether_dark_light.options.dark.label"
+          },
+          {
+            "value": "light",
+            "label": "t:settings_schema.aether.settings.aether_dark_light.options.light.label"
+          }
         ]
       },
       {
