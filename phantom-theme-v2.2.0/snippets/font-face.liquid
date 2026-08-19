@@ -4,6 +4,10 @@
 {%- assign base_font_italic = base_font | font_modify: 'style', 'italic' -%}
 {%- assign base_font_bold_italic = base_font_bold | font_modify: 'style', 'italic' -%}
 
+{%- comment -%} AETHER font loading — uses aether_heading_font / aether_body_font {%- endcomment -%}
+{%- assign aether_heading_font = settings.aether_heading_font -%}
+{%- assign aether_body_font = settings.aether_body_font -%}
+
 {%- style -%}
   {{ header_font | font_face: font_display: 'swap' }}
   {{ base_font | font_face: font_display: 'swap' }}
@@ -11,4 +15,7 @@
   {{ base_font_bold | font_face: font_display: 'swap' }}
   {{ base_font_italic | font_face: font_display: 'swap' }}
   {{ base_font_bold_italic | font_face: font_display: 'swap' }}
+
+  {{ aether_heading_font | font_face: font_display: 'swap' }}
+  {{ aether_body_font | font_face: font_display: 'swap' }}
 {%- endstyle -%}

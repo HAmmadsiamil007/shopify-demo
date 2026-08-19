@@ -22,9 +22,10 @@
         <nav class="aether-header__nav" id="aetherMainNav" data-aether-nav aria-label="{{ 'general.drawers.navigation' | t }}">
           <div class="aether-nav__mobile-logo">
             <a href="{{ routes.root_url }}" class="aether-header__logo">
-              {%- if section.settings.logo_image != blank -%}
+              {%- assign mobile_logo = section.settings.mobile_logo_image | default: section.settings.logo_image -%}
+              {%- if mobile_logo != blank -%}
                 {{
-                  section.settings.logo_image
+                  mobile_logo
                   | image_url: width: 220
                   | image_tag: widths: '110, 165, 220, 330', class: 'aether-header__logo-image', alt: shop.name
                 }}
@@ -229,6 +230,11 @@
         "type": "image_picker",
         "id": "logo_image",
         "label": "t:sections.aether-header.settings.logo_image.label"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile_logo_image",
+        "label": "t:sections.aether-header.settings.mobile_logo_image.label"
       },
       {
         "type": "link_list",
